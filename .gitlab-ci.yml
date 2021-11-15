@@ -1,0 +1,61 @@
+image: node:14.12.0
+
+cache:
+  paths:
+    - node_modules/
+
+stages:
+  - build
+  - deploy
+  - notify
+
+before_script:
+  - apt-get update -y
+  - 'which ssh-agent || ( apt-get install openssh-client -y )'
+  - eval $(ssh-agent -s)
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+  - PRIVATE_KEY_PATH=~/.ssh/mp-gitlab
+  - touch $PRIVATE_KEY_PATH && echo "$SSH_PRIVATE_KEY" >> $PRIVATE_KEY_PATH && chmod 600 $PRIVATE_KEY_PATH
+
+build:
+  stage: build
+  script:
+    - npm i
+    - npm run build
+  artifacts:
+    paths:
+      - build
+  only:
+    - development
+
+deploy_dev:
+  stage: deploy
+  environment: development
+  script:
+    - scp -i $PRIVATE_KEY_PATH -o StrictHostKeyChecking=no -r build/* root@$HOST:$DEV_TARGET_DIR_ON_HOST
+    - sh tg_notify.sh ✅
+  only:
+    - development
+  dependencies:
+    - build
+
+deploy_prod:
+  stage: deploy
+  environment: production
+  script:
+    - scp -i $PRIVATE_KEY_PATH -o StrictHostKeyChecking=no -r build/* root@$HOST:$PROD_TARGET_DIR_ON_HOST
+    - sh tg_notify.sh ✅
+  when: manual
+  only:
+    - main
+  dependencies:
+    - build
+
+fail_notify:
+  stage: notify
+  when: on_failure
+  script:
+    - sh tg_notify.sh ❌
+
