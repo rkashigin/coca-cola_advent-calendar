@@ -1,9 +1,11 @@
 import React from 'react';
 
+import styles from './MainPage.module.scss';
+
 const MainPage = () => {
 	return (
 		<main>
-            hello world!
+			<h1>kjbkbjb</h1>
 		</main>
 	);
 };

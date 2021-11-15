@@ -1,0 +1,23 @@
+// $width-desktop: 1440px;
+$width-mobile: 725px;
+
+:root{
+    --color-bg-green: hsl(63, 56%, 47%);
+    --color-bg-green-with-opacity: rgba(181, 187, 53, 0.2);
+    --color-pearl-white: hsl(45, 44%, 93%);
+    --color-carmine-pink: hsl(358, 85%, 52%);
+    --color-dark-grey: hsl(22, 6%, 27%);
+    --color-bg-white: #fff;
+
+
+    // section's paddings
+
+    --sectionPadding: 10rem;
+
+    // @media screen and (max-width: $width-desktop){
+    //     --sectionPadding: 7rem;
+    // }
+    // @media screen and (max-width: $width-mobile){
+    //     --sectionPadding: 6.25vw;
+    // }
+}
