@@ -1,0 +1,28 @@
+@import "../../../variables.scss";
+
+.calendarDay{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    mix-blend-mode: overlay;
+    cursor: pointer;
+}
+
+.calendarDay__date{
+    font-size: 7.2rem;
+    line-height: 5.6rem;
+    font-weight: 700;
+
+    color: white;
+
+    z-index: 2;
+}
+
+.calendarDay__img{
+    position: absolute;
+
+    z-index: 0;
+}

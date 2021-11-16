@@ -121,6 +121,8 @@
     width: 20.4rem;
     height: auto;
 
+    z-index: 5;
+
     @media screen and (max-width: $width-mobile){
         width: 52.3vw;
     }
