@@ -1,6 +1,4 @@
-// $width-desktop: 1440px;
 $width-mobile: 725px;
-// @import "./app/assets/fonts/fonts";
 
 :root{
 
@@ -17,15 +15,7 @@ $width-mobile: 725px;
 
     --section_padding: 3.2rem;
 
-
-    // section's paddings
-
-    --sectionPadding: 10rem;
-
-    // @media screen and (max-width: $width-desktop){
-    //     --sectionPadding: 7rem;
-    // }
-    // @media screen and (max-width: $width-mobile){
-    //     --sectionPadding: 6.25vw;
-    // }
+    @media screen and (max-width: $width-mobile){
+        --section_padding: 1.6rem;
+    }
 }
