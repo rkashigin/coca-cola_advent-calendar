@@ -3,6 +3,8 @@
 .calendar{
     background-color: var(--color_red);
 
+    overflow: hidden;
+
     display: grid;
     grid-template-rows: repeat(3, 12rem) 24.2rem;
     grid-template-columns: repeat(9, 1fr);
@@ -11,6 +13,19 @@
                          '. . . . . . . . sixthDay'
                          '. . . ninethDay ninethDay . . . .'
                          '. . . tenthDay tenthDay . . . .';
+
+    @media screen and (max-width: $width-mobile){
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 50vw repeat(5, 25vw) 42vw;
+
+        grid-template-areas: '. .'
+                             '. fourthDay'
+                             '. fivethDay'
+                             'sixthDay .'
+                             'seventhDay .'
+                             'ninethDay eleventhDay'
+                             'tenthDay twelfthDay';
+    }
 }
 
 .calendarDay_1{
@@ -23,6 +38,12 @@
         bottom: 0;
         right: 1rem;
     }
+
+    @media screen and (max-width: $width-mobile){
+        grid-column: span 1;
+        grid-row: span 1;
+
+    }
 }
 .calendarDay_2{
     grid-column: span 2;
@@ -33,6 +54,11 @@
     img{
         bottom: 1rem;
         right: 1rem;
+    }
+
+    @media screen and (max-width: $width-mobile){
+        grid-column: span 1;
+        grid-row: span 1;
     }
     
 }
@@ -47,6 +73,11 @@
         bottom: 0.5rem;
         right: 0.5rem;
     }
+
+    @media screen and (max-width: $width-mobile){
+        grid-column: span 1;
+        grid-row: span 2;
+    }
     
 }
 .calendarDay_4{
@@ -60,6 +91,13 @@
         bottom: 0.3rem;
         top: 0.3rem;
     }
+
+    @media screen and (max-width: $width-mobile){
+        grid-column: span 1;
+        grid-row: span 1;
+
+        grid-area: fourthDay;
+    }
     
 }
 .calendarDay_5{
@@ -72,6 +110,13 @@
     img{
         bottom: 0rem;
         right: 0.4rem;
+    }
+
+    @media screen and (max-width: $width-mobile){
+        grid-column: span 1;
+        grid-row: span 1;
+
+        grid-area: fivethDay;
     }
     
 }
@@ -94,6 +139,9 @@
         line-height: 2.4rem;
         font-weight: 500;
     }
+
+    @media screen and (max-width: $width-mobile){
+    }
 }
 .calendarDay_7{
     grid-column: span 1;
@@ -104,6 +152,13 @@
     img{
         bottom: 2rem;
         right: 0.5rem;
+    }
+
+    @media screen and (max-width: $width-mobile){
+        grid-column: span 1;
+        grid-row: span 1;
+
+        grid-area: seventhDay;
     }
 }
 .calendarDay_8{
@@ -116,6 +171,11 @@
     img{
         bottom: 3rem;
         right: 0.5rem;
+    }
+
+    @media screen and (max-width: $width-mobile){
+        grid-column: span 1;
+        grid-row: span 2;
     }
     
 }
@@ -133,6 +193,10 @@
         right: 0;
     }
     
+    @media screen and (max-width: $width-mobile){
+        grid-column: span 1;
+        grid-row: span 1;
+    }
 }
 .calendarDay_10{
 
@@ -148,6 +212,10 @@
         left: 0;
     }
     
+    @media screen and (max-width: $width-mobile){
+        grid-column: span 1;
+        grid-row: span 1;
+    }
 }
 .calendarDay_11{
 
@@ -159,6 +227,13 @@
     img{
         bottom: 3rem;
         right: 0.5rem;
+    }
+
+    @media screen and (max-width: $width-mobile){
+        grid-column: span 1;
+        grid-row: span 1;
+
+        grid-area: eleventhDay;
     }
     
 }
@@ -173,4 +248,10 @@
         left: 0;
     }
     
+    @media screen and (max-width: $width-mobile){
+        grid-column: span 1;
+        grid-row: span 1;
+
+        grid-area: twelfthDay;
+    }
 }

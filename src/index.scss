@@ -6,9 +6,6 @@
   font-size: calc(10 / 1440 * 100vw);
   font-family: var(--font_Roboto);
 
-  --font_Roboto: "Roboto", sans-serif;
-  --font_Montserrat: "Montserrat", sans-serif;
-
   @media screen and (max-width: $width-mobile) {
     font-size: calc(10 / 390 * 100vw);
   }
