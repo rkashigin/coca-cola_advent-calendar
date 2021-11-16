@@ -79,6 +79,15 @@
     }
 }
 
+.header__logoWrap{
+    overflow: hidden;
+    position: relative;
+    width: 100vw;
+    height: 20rem;
+    z-index: 50;
+    margin-left: calc(var(--section_padding) * (-1));
+}
+
 .header__band{
     position: absolute;
     top: -6rem;
@@ -95,7 +104,7 @@
     }
 }
 
-.header__logoWrap{
+.header__brand{
     z-index: 5;
 
     position: absolute;

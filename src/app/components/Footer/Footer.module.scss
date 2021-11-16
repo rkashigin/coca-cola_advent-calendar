@@ -35,6 +35,7 @@
     z-index: 0;
 
     @media screen and (max-width: $width-mobile){
+        top: -2rem;
     }
 }
 
@@ -57,7 +58,16 @@
     margin: 0 0 0 var(--section_padding);
 
     @media screen and (max-width: $width-mobile){
-        width: 100%;
+        width: auto;
+        height: 82vw;
+
+        background-color: white;
+
+        padding: 0;
+
+        margin: 0 var(--section_padding);
+
+        order: 1;
     }
 }
 
@@ -70,6 +80,16 @@
     }
 
     @media screen and (max-width: $width-mobile){
+        background-color: white;
+
+        margin: 0 var(--section_padding);
+        order: 3;
+
+        height: 128vw;
+
+        .footer__cardTitle{
+            color: #000;
+        }
     }
 }
 
@@ -85,6 +105,10 @@
     font-family: var(--font_Montserrat);
 
     @media screen and (max-width: $width-mobile){
+        margin: 6vw 0 0;
+
+        font-size: 6.1vw;
+        line-height: 7.1vw;
     }
 }
 
@@ -99,6 +123,10 @@
     margin: 1.8rem 0 0;
 
     @media screen and (max-width: $width-mobile){
+        font-size: 4.1vw;
+        line-height: 5.6vw;
+
+        color: #000;
     }
 }
 
@@ -111,6 +139,10 @@
     height: auto;
 
     @media screen and (max-width: $width-mobile){
+        width: 34vw;
+
+        top: 20vw;
+        right: 0;
     }
 }
 
@@ -121,8 +153,14 @@
 
     width: 35.7rem;
     height: auto;
+    transform: rotate(-9.46deg);
 
     @media screen and (max-width: $width-mobile){
+        width: 59vw;
+        top: 30vw;
+        left: 0;
+
+        transform: rotate(7.31deg);
     }
 }
 
@@ -136,6 +174,7 @@
     height: auto;
 
     @media screen and (max-width: $width-mobile){
+        display: none;
     }
 }
 
@@ -149,6 +188,7 @@
     height: auto;
 
     @media screen and (max-width: $width-mobile){
+        display: none;
     }
 }
 
@@ -161,7 +201,7 @@
     height: auto;
 
     @media screen and (max-width: $width-mobile){
-        width: 35rem;
+        width: 90vw;
     }
 }
 
@@ -178,6 +218,16 @@
     margin: 5rem 0 0;
 
     @media screen and (max-width: $width-mobile){
+        color: #000;
+
+        order: 2;
+
+        display: flex;
+        flex-direction: column;
+
+        margin: 0;
+
+        height: 90vw;
     }
 }
 
@@ -192,6 +242,8 @@
     height: auto;
 
     @media screen and (max-width: $width-mobile){
+        height: 20rem;
+        width: auto;
     }
 }
 
@@ -203,9 +255,14 @@
 
     width: 52.1rem;
     height: auto;
+    z-index: 5;
 
     @media screen and (max-width: $width-mobile){
-        width: 35rem;
+        width: 92vw;
+
+        position: static;
+
+        order: 2;
     }
 }
 
@@ -220,6 +277,15 @@
     transform: rotate(-2deg);
 
     @media screen and (max-width: $width-mobile){
+        margin: 5rem var(--section_padding) 0;
+        font-size: 6.1vw;
+        line-height: 7.1vw;
+
+        transform: rotate(-3deg);
+
+        color: white;
+
+        order: 1;
     }
 }
 
@@ -235,5 +301,13 @@
     margin: 0 0 0 4.8rem;
 
     @media screen and (max-width: $width-mobile){
+        margin: 0 var(--section_padding);
+
+        transform: rotate(0);
+
+        order: 3;
+
+        font-size: 4.1vw;
+        line-height: 5.1vw;
     }
 }

@@ -11,7 +11,7 @@ const Footer = () => {
 			<SnowDecoration className={styles.footer__decoration} />
 			<div className={styles.footer__card}>
 				<h3 className={styles.footer__cardTitle}>
-					Получайте яркие призы вместе <br /> с Coca-Cola и Delivery Club
+					Получайте яркие призы вместе с Coca-Cola и Delivery Club
 				</h3>
 				<img
 					className={styles.footer__cardPrize_ivi}
@@ -36,11 +36,11 @@ const Footer = () => {
 			</div>
 			<div className={classNames(styles.footer__card, styles.footer__card_red)}>
 				<h3 className={styles.footer__cardTitle}>
-					Пройдите календарь и участвуйте <br /> в розыгрыше главного приза!
+					Пройдите календарь и участвуйте в розыгрыше главного приза!
 				</h3>
 				<span className={styles.footer__cardSubTitle}>
 					Уникальный холодильник с запасом Coca-Cola
-					<br /> и промокод 3 500 ₽ на заказы в ресторанах!
+				 	и промокод 3 500 ₽ на заказы в ресторанах!
 				</span>
 
 				<img
@@ -63,10 +63,10 @@ const Footer = () => {
 					alt="Prize from Delivery"
 				/>
 				<h2 className={styles.footer__title}>
-					Розыгрыши больших призов <br /> для участников advent-кадендаря
+					Розыгрыши больших призов для участников advent-кадендаря
 				</h2>
 				<span className={styles.footer__subTitle}>
-					* Результаты розыгрыша будут опубликованына сайте <br /> 8 декабря, 15 декабря, 22
+					* Результаты розыгрыша будут опубликованына сайте 8 декабря, 15 декабря, 22
 					декабря и 10 января
 				</span>
 			</div>
