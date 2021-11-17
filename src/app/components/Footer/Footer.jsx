@@ -25,7 +25,7 @@ const Footer = () => {
 				/>
 				<img
 					className={styles.footer__cardband_bottom}
-					src={require('../../assets/images/Footer_card_band_bottom.png').default}
+					src={require('../../assets/images/Header_band_bottom.png').default}
 					alt="band"
 				/>
 				<img
@@ -52,6 +52,7 @@ const Footer = () => {
 				/>
 			</div>
 			<div className={styles.footer__intro}>
+				<div className={styles.footer__bgSnowFlakes} />
 				<img
 					className={styles.footer__band}
 					src={require('../../assets/images/Footer_band.png').default}
@@ -63,7 +64,7 @@ const Footer = () => {
 					alt="Prize from Delivery"
 				/>
 				<h2 className={styles.footer__title}>
-					Розыгрыши больших призов для участников advent-кадендаря
+					Розыгрыши больших призов для участников advent-календаря
 				</h2>
 				<span className={styles.footer__subTitle}>
 					* Результаты розыгрыша будут опубликованына сайте 8 декабря, 15 декабря, 22

@@ -1,313 +1,371 @@
 @import "../../../variables.scss";
 
+.footer {
+	position: relative;
 
-.footer{
-    position: relative;
+	box-sizing: border-box;
 
-    box-sizing: border-box;
+	// padding: 10rem var(--section_padding) var(--section_padding);
 
-    // padding: 10rem var(--section_padding) var(--section_padding);
+	display: grid;
 
-    display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(2, max-content);
+	gap: 0 3.2rem;
 
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, max-content);
-    gap: 0 3.2rem;
-
-    @media screen and (max-width: $width-mobile){
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-    }
-
+	@media screen and (max-width: $width-mobile) {
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+	}
 }
 
-.footer__decoration{
-    position: absolute;
+.footer__decoration {
+	position: absolute;
 
-    width: 100%;
-    height: auto;
+	width: 100%;
+	height: auto;
 
-    top: -5rem;
-    left: 0;
-    right: 0;
+	top: -5rem;
+	left: 0;
+	right: 0;
 
-    z-index: 0;
+	z-index: 0;
 
-    @media screen and (max-width: $width-mobile){
-        top: -2rem;
-    }
+	@media screen and (max-width: $width-mobile) {
+		top: -2rem;
+	}
 }
 
-.footer__card{
-    width: 67.2rem;
-    height: 39.2rem;
+.footer__card {
+	width: 67.2rem;
+	height: 39.2rem;
 
-    border-radius: 1.6rem;
+	border-radius: 1.6rem;
 
-    box-sizing: border-box;
+	box-sizing: border-box;
 
-    overflow: hidden;
+	overflow: hidden;
 
-    padding: 3.2rem;
+	padding: 3.2rem;
 
-    position: relative;
+	position: relative;
 
-    background-color: var(--color_light_grey);
+	background-color: var(--color_light_grey);
 
-    margin: 0 0 0 var(--section_padding);
+	margin: 0 0 0 var(--section_padding);
 
-    @media screen and (max-width: $width-mobile){
-        width: auto;
-        height: 82vw;
+	&::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
 
-        background-color: white;
+		width: 100%;
+		height: 100%;
 
-        padding: 0;
+		background-image: url("../../assets/images/Footer_stars_white_card.svg");
+		background-repeat: no-repeat;
+		background-size: 90%;
+		background-position: center;
 
-        margin: 0 var(--section_padding);
+		z-index: 0;
+		pointer-events: none;
+	}
 
-        order: 1;
-    }
+	@media screen and (max-width: $width-mobile) {
+		width: auto;
+		height: 82vw;
+
+		background-color: white;
+
+		padding: 0;
+
+		margin: 0 var(--section_padding);
+
+		order: 1;
+	}
 }
 
-.footer__card_red{
-    background-color: var(--color_red);
-    margin: 0 var(--section_padding) 0 0;
+.footer__card_red {
+	background-color: var(--color_red);
+	margin: 0 var(--section_padding) 0 0;
 
-    .footer__cardTitle{
-        color: white;
-    }
+	&::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
 
-    @media screen and (max-width: $width-mobile){
-        background-color: white;
+		width: 100%;
+		height: 100%;
 
-        margin: 0 var(--section_padding);
-        order: 3;
+		background-image: url("../../assets/images/Footer_stars_red_card.svg");
+		background-repeat: no-repeat;
+		background-size: 90%;
+		background-position: center;
 
-        height: 128vw;
+		z-index: 0;
+		pointer-events: none;
+	}
 
-        .footer__cardTitle{
-            color: #000;
-        }
-    }
+	.footer__cardTitle {
+		color: white;
+	}
+
+	@media screen and (max-width: $width-mobile) {
+		background-color: white;
+
+		margin: 0 var(--section_padding);
+		order: 3;
+
+		height: 128vw;
+
+		.footer__cardTitle {
+			color: #000;
+		}
+	}
 }
 
-.footer__cardTitle{
-    font-weight: 700;
-    font-size: var(--font_size_h3);
-    line-height: 2.8rem;
+.footer__cardTitle {
+	font-weight: 700;
+	font-size: var(--font_size_h3);
+	line-height: 2.8rem;
 
-    margin: 0;
+	margin: 0;
 
-    color: black;
+	color: black;
 
-    font-family: var(--font_Montserrat);
+	font-family: var(--font_Montserrat);
 
-    @media screen and (max-width: $width-mobile){
-        margin: 6vw 0 0;
+	@media screen and (max-width: $width-mobile) {
+		margin: 6vw 0 0;
 
-        font-size: 6.1vw;
-        line-height: 7.1vw;
-    }
+		font-size: 6.1vw;
+		line-height: 7.1vw;
+	}
 }
 
-.footer__cardSubTitle{
-    font-weight: 400;
-    font-size: 1.6rem;
-    line-height: 2.2rem;
+.footer__cardSubTitle {
+	font-weight: 400;
+	font-size: 1.6rem;
+	line-height: 2.2rem;
 
-    color: white;
-    display: block;
+	color: white;
+	display: block;
 
-    margin: 1.8rem 0 0;
+	margin: 1.8rem 0 0;
 
-    @media screen and (max-width: $width-mobile){
-        font-size: 4.1vw;
-        line-height: 5.6vw;
+	@media screen and (max-width: $width-mobile) {
+		font-size: 4.1vw;
+		line-height: 5.6vw;
 
-        color: #000;
-    }
+		color: #000;
+	}
 }
 
-.footer__cardPrize_ivi{
-    position: absolute;
-    top: 8.3rem;
-    right: 3rem;
+.footer__cardPrize_ivi {
+	position: absolute;
+	top: 8.3rem;
+	right: 3rem;
 
-    width: 20.7rem;
-    height: auto;
+	width: 20.7rem;
+	height: auto;
 
-    @media screen and (max-width: $width-mobile){
-        width: 34vw;
+	@media screen and (max-width: $width-mobile) {
+		width: 34vw;
 
-        top: 20vw;
-        right: 0;
-    }
+		top: 20vw;
+		right: 0;
+	}
 }
 
-.footer__cardPrize_delivery{
-    position: absolute;
-    top: 10.7rem;
-    left: 2.4rem;
+.footer__cardPrize_delivery {
+	position: absolute;
+	top: 10.7rem;
+	left: 2.4rem;
 
-    width: 35.7rem;
-    height: auto;
-    transform: rotate(-9.46deg);
+	width: 35.7rem;
+	height: auto;
+	transform: rotate(-9.46deg);
 
-    @media screen and (max-width: $width-mobile){
-        width: 59vw;
-        top: 30vw;
-        left: 0;
+	@media screen and (max-width: $width-mobile) {
+		width: 59vw;
+		top: 30vw;
+		left: 0;
 
-        transform: rotate(7.31deg);
-    }
+		transform: rotate(7.31deg);
+	}
 }
 
-.footer__cardband_bottom{
-    position: absolute;
+.footer__cardband_bottom {
+	position: absolute;
 
-    right: -4rem;
-    bottom: -3rem;
+	right: -4rem;
+	bottom: -3rem;
 
-    width: 20.4rem;
-    height: auto;
+	width: 20.4rem;
+	height: auto;
 
-    @media screen and (max-width: $width-mobile){
-        display: none;
-    }
+	@media screen and (max-width: $width-mobile) {
+		display: none;
+	}
 }
 
-.footer__cardband_left{
-    position: absolute;
+.footer__cardband_left {
+	position: absolute;
 
-    left: 0;
-    bottom: 1rem;
+	left: 0;
+	bottom: 1rem;
 
-    width: 16rem;
-    height: auto;
+	width: 16rem;
+	height: auto;
 
-    @media screen and (max-width: $width-mobile){
-        display: none;
-    }
+	@media screen and (max-width: $width-mobile) {
+		display: none;
+	}
 }
 
-.footer__cardPrize_multiple{
-    position: absolute;
-    bottom: 1rem;
-    right: 1rem;
+.footer__cardPrize_multiple {
+	position: absolute;
+	bottom: 1rem;
+	right: 1rem;
 
-    width: 40rem;
-    height: auto;
+	width: 40rem;
+	height: auto;
 
-    @media screen and (max-width: $width-mobile){
-        width: 90vw;
-    }
+	@media screen and (max-width: $width-mobile) {
+		width: 90vw;
+	}
 }
 
-.footer__intro{
-    width: 100%;
-    height: 28rem;
+.footer__intro {
+	width: 100%;
+	height: 28rem;
 
-    position: relative;
+	position: relative;
 
-    color: white;
+	color: white;
 
-    grid-column: span 2;
+	grid-column: span 2;
 
-    margin: 5rem 0 0;
+	margin: 5rem 0 0;
 
-    @media screen and (max-width: $width-mobile){
-        color: #000;
+	@media screen and (max-width: $width-mobile) {
+		color: #000;
 
-        order: 2;
+		order: 2;
 
-        display: flex;
-        flex-direction: column;
+		display: flex;
+		flex-direction: column;
 
-        margin: 0;
+		margin: 0;
 
-        height: 90vw;
-    }
+		height: 90vw;
+	}
 }
 
-.footer__band{
-    position: absolute;
+.footer__bgSnowFlakes {
+	position: absolute;
 
-    top: 0;
-    left: 0;
-    right: 0;
+	width: 100%;
+	height: 100%;
 
-    width: 100%;
-    height: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
 
-    @media screen and (max-width: $width-mobile){
-        height: 20rem;
-        width: auto;
-    }
+	background-image: url("../../assets/images/Footer_intro_snowflakes.svg");
+	background-repeat: no-repeat;
+	background-size: 90%;
+	background-position: center;
+
+	z-index: 1;
+	pointer-events: none;
 }
 
-.footer__prizeCards{
-    position: absolute;
+.footer__band {
+	position: absolute;
 
-    right: 3rem;
-    top: -4rem;
+	top: 0;
+	left: 0;
+	right: 0;
 
-    width: 52.1rem;
-    height: auto;
-    z-index: 5;
+	width: 100%;
+	height: auto;
 
-    @media screen and (max-width: $width-mobile){
-        width: 92vw;
-
-        position: static;
-
-        order: 2;
-    }
+	@media screen and (max-width: $width-mobile) {
+		height: 20rem;
+		width: auto;
+	}
 }
 
-.footer__title{
-    margin: 5rem 0 3rem 4.8rem;
+.footer__prizeCards {
+	position: absolute;
 
-    font-weight: 700;
-    font-family: var(--font_Montserrat);
-    font-size: 4rem;
-    line-height: 4.8rem;
+	right: 3rem;
+	top: -4rem;
 
-    transform: rotate(-2deg);
+	width: 52.1rem;
+	height: auto;
+	z-index: 5;
 
-    @media screen and (max-width: $width-mobile){
-        margin: 5rem var(--section_padding) 0;
-        font-size: 6.1vw;
-        line-height: 7.1vw;
+	@media screen and (max-width: $width-mobile) {
+		width: 92vw;
 
-        transform: rotate(-3deg);
+		position: static;
 
-        color: white;
-
-        order: 1;
-    }
+		order: 2;
+	}
 }
 
-.footer__subTitle{
-    display: inline-block;
-    transform: rotate(-2deg);
+.footer__title {
+	margin: 5rem 0 3rem 4.8rem;
 
-    font-weight: 400;
-    font-size: 1.6rem;
-    line-height: 2rem;
-    opacity: 0.5;
+	font-weight: 700;
+	font-family: var(--font_Montserrat);
+	font-size: 4rem;
+	line-height: 4.8rem;
 
-    margin: 0 0 0 4.8rem;
+	transform: rotate(-2deg);
 
-    @media screen and (max-width: $width-mobile){
-        margin: 0 var(--section_padding);
+	@media screen and (max-width: $width-mobile) {
+		margin: 5rem var(--section_padding) 0;
+		font-size: 6.1vw;
+		line-height: 7.1vw;
 
-        transform: rotate(0);
+		transform: rotate(-3deg);
 
-        order: 3;
+		color: white;
 
-        font-size: 4.1vw;
-        line-height: 5.1vw;
-    }
+		order: 1;
+	}
+}
+
+.footer__subTitle {
+	display: inline-block;
+	transform: rotate(-2deg);
+
+	font-weight: 400;
+	font-size: 1.6rem;
+	line-height: 2rem;
+	opacity: 0.5;
+
+	margin: 0 0 0 4.8rem;
+
+	@media screen and (max-width: $width-mobile) {
+		margin: 0 var(--section_padding);
+
+		transform: rotate(0);
+
+		order: 3;
+
+		font-size: 4.1vw;
+		line-height: 5.1vw;
+	}
 }

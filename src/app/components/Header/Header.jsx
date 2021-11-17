@@ -10,16 +10,16 @@ import styles from './Header.module.scss';
 const MainPage = () => {
 	return (
 		<header className={styles.header}>
-			<div className={styles.header__logoWrap}>
-				<div className={styles.header__logo}>
-					<img className={styles.header__band} src={require('../../assets/images/Header_band.png').default} alt="band" />
-					<div className={styles.header__brand}>
-						<Cola className={styles.header__logoCola} />
-						<Feat className={styles.header__Logofeat} />
-						<Delivery className={styles.header__logoDelivery} />
-					</div>
+			{/* <div className={styles.header__logoWrap}> */}
+			<div className={styles.header__logo}>
+				<img className={styles.header__band} src={require('../../assets/images/Header_band.png').default} alt="band" />
+				<div className={styles.header__brand}>
+					<Cola className={styles.header__logoCola} />
+					<Feat className={styles.header__Logofeat} />
+					<Delivery className={styles.header__logoDelivery} />
 				</div>
 			</div>
+			{/* </div> */}
 			<h1 className={styles.header__title}>Погрузитесь в волшебную атмосферу </h1>
 			<p className={styles.header__subTitle}>C advent-календарем, мини-играми и 
                 приятными подарками

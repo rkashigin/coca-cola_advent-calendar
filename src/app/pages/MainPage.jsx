@@ -8,11 +8,13 @@ import styles from './MainPage.module.scss';
 
 const MainPage = () => {
 	return (
-		<main>
+		<>
 			<Header />
-			<Calendar />
+			<main>
+				<Calendar />
+			</main>
 			<Footer />
-		</main>
+		</>
 	);
 };
 
