@@ -6,6 +6,9 @@
     overflow: hidden;
 
     display: grid;
+
+    margin-top: -1px;
+    
     grid-template-rows: repeat(3, 12rem) 24.2rem;
     grid-template-columns: repeat(9, 1fr);
 

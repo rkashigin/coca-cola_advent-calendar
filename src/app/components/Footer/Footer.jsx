@@ -7,7 +7,7 @@ import styles from './Footer.module.scss';
 
 const Footer = () => {
 	return (
-		<div className={styles.footer}>
+		<footer className={styles.footer}>
 			<SnowDecoration className={styles.footer__decoration} />
 			<div className={styles.footer__card}>
 				<h3 className={styles.footer__cardTitle}>
@@ -42,14 +42,16 @@ const Footer = () => {
 					Уникальный холодильник с запасом Coca-Cola
 				 	и промокод 3 500 ₽ на заказы в ресторанах!
 				</span>
-
-				<img
-					className={styles.footer__cardPrize_multiple}
-					src={
-						require('../../assets/images/Footer_card_cola_and_delivery.png').default
-					}
-					alt="Delivery and Coca-Cola"
-				/>
+				<picture>
+					<source srcSet="../../assets/images/Footer_prize_cards_mobile.svg" media="(max-width: 725px)" />
+					<img
+						className={styles.footer__cardPrize_multiple}
+						src={
+							require('../../assets/images/Footer_card_cola_and_delivery.svg').default
+						}
+						alt="Delivery and Coca-Cola"
+					/>
+				</picture>
 			</div>
 			<div className={styles.footer__intro}>
 				<div className={styles.footer__bgSnowFlakes} />
@@ -67,11 +69,12 @@ const Footer = () => {
 					Розыгрыши больших призов для участников advent-календаря
 				</h2>
 				<span className={styles.footer__subTitle}>
-					* Результаты розыгрыша будут опубликованына сайте 8 декабря, 15 декабря, 22
+					* Результаты розыгрыша будут опубликованы на сайте 8 декабря, 15 декабря, 22
 					декабря и 10 января
 				</span>
 			</div>
-		</div>
+			<SnowDecoration className={styles.footer__decoration_mobile} />
+		</footer>
 	);
 };
 

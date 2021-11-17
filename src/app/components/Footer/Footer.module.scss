@@ -13,10 +13,16 @@
 	grid-template-rows: repeat(2, max-content);
 	gap: 0 3.2rem;
 
+	padding-top: 5.5rem;
+
+	overflow-x: clip;
+
 	@media screen and (max-width: $width-mobile) {
 		display: flex;
 		flex-direction: column;
 		gap: 0;
+
+		padding-top: 0;
 	}
 }
 
@@ -33,7 +39,25 @@
 	z-index: 0;
 
 	@media screen and (max-width: $width-mobile) {
-		top: -2rem;
+		top: -6.9vw;
+	}
+}
+
+.footer__decoration_mobile {
+	display: none;
+
+	@media screen and (max-width: $width-mobile) {
+        display: block;
+		position: absolute;
+
+		width: 100%;
+		height: auto;
+
+		left: 0;
+		right: 0;
+        bottom: 0;
+
+		z-index: 0;
 	}
 }
 
@@ -47,7 +71,7 @@
 
 	overflow: hidden;
 
-	padding: 3.2rem;
+	padding: 3.5rem 3.2rem;
 
 	position: relative;
 
@@ -77,7 +101,7 @@
 
 	@media screen and (max-width: $width-mobile) {
 		width: auto;
-		height: 82vw;
+		height: 77.5vw;
 
 		background-color: white;
 
@@ -86,6 +110,13 @@
 		margin: 0 var(--section_padding);
 
 		order: 1;
+
+		&::after {
+			background-image: url("../../assets/images/Footer_stars_white_card_mobile.svg");
+			background-size: 100%;
+			background-position: top center;
+			top: -1vw;
+		}
 	}
 }
 
@@ -98,7 +129,7 @@
 		position: absolute;
 		top: 0;
 		bottom: 0;
-		left: 0;
+		left: 1rem;
 		right: 0;
 
 		width: 100%;
@@ -106,7 +137,7 @@
 
 		background-image: url("../../assets/images/Footer_stars_red_card.svg");
 		background-repeat: no-repeat;
-		background-size: 90%;
+		background-size: 95%;
 		background-position: center;
 
 		z-index: 0;
@@ -115,18 +146,45 @@
 
 	.footer__cardTitle {
 		color: white;
+		max-width: 78%;
 	}
 
 	@media screen and (max-width: $width-mobile) {
 		background-color: white;
 
 		margin: 0 var(--section_padding);
+		padding-top: 19vw;
 		order: 3;
 
 		height: 128vw;
 
 		.footer__cardTitle {
 			color: #000;
+			max-width: 100%;
+			margin: 0;
+			position: relative;
+		}
+
+		&::after {
+			background-image: url("../../assets/images/Footer_stars_white_card_mobile.svg");
+		}
+		&::before {
+			content: "";
+			position: absolute;
+			top: -20vw;
+			bottom: 0;
+			left: 1rem;
+			right: 0;
+
+			width: 100%;
+			height: 100%;
+			background-image: url("../../assets/images/Footer_stars_white_card_mobile.svg");
+			background-repeat: no-repeat;
+			background-size: 95%;
+			background-position: center;
+
+			z-index: 0;
+			pointer-events: none;
 		}
 	}
 }
@@ -142,11 +200,17 @@
 
 	font-family: var(--font_Montserrat);
 
+	max-width: 70%;
+
 	@media screen and (max-width: $width-mobile) {
-		margin: 6vw 0 0;
+		margin: 4vw 0 0;
+		max-width: 100%;
 
 		font-size: 6.1vw;
 		line-height: 7.1vw;
+
+		position: relative;
+		z-index: 5;
 	}
 }
 
@@ -158,47 +222,59 @@
 	color: white;
 	display: block;
 
-	margin: 1.8rem 0 0;
+	margin: 1.4rem 0 0;
+
+	max-width: 60%;
 
 	@media screen and (max-width: $width-mobile) {
 		font-size: 4.1vw;
 		line-height: 5.6vw;
 
+		margin: 4.5vw 0 0;
+
 		color: #000;
+
+		max-width: 100%;
+		position: relative;
+		z-index: 5;
 	}
 }
 
 .footer__cardPrize_ivi {
 	position: absolute;
-	top: 8.3rem;
+	top: 8.1rem;
 	right: 3rem;
 
-	width: 20.7rem;
+	width: 22.7rem;
 	height: auto;
 
-	@media screen and (max-width: $width-mobile) {
-		width: 34vw;
+	z-index: 5;
 
-		top: 20vw;
-		right: 0;
+	@media screen and (max-width: $width-mobile) {
+		width: 38vw;
+
+		top: 18.5vw;
+		right: -1vw;
 	}
 }
 
 .footer__cardPrize_delivery {
 	position: absolute;
-	top: 10.7rem;
-	left: 2.4rem;
+	top: 8rem;
+	left: -0.5rem;
 
-	width: 35.7rem;
+	width: 42rem;
 	height: auto;
-	transform: rotate(-9.46deg);
+
+	z-index: 5;
+	// transform: rotate(-9.46deg);
 
 	@media screen and (max-width: $width-mobile) {
-		width: 59vw;
-		top: 30vw;
-		left: 0;
+		width: 69vw;
+		top: 21.4vw;
+		left: -7.1vw;
 
-		transform: rotate(7.31deg);
+		transform: rotate(17deg);
 	}
 }
 
@@ -206,10 +282,12 @@
 	position: absolute;
 
 	right: -4rem;
-	bottom: -3rem;
+	bottom: -4.2rem;
 
-	width: 20.4rem;
+	width: 22.6rem;
 	height: auto;
+
+	transform: rotate(60deg);
 
 	@media screen and (max-width: $width-mobile) {
 		display: none;
@@ -219,11 +297,13 @@
 .footer__cardband_left {
 	position: absolute;
 
-	left: 0;
-	bottom: 1rem;
+	left: -3.1rem;
+	bottom: 1.6rem;
 
 	width: 16rem;
 	height: auto;
+
+	z-index: 5;
 
 	@media screen and (max-width: $width-mobile) {
 		display: none;
@@ -238,6 +318,8 @@
 	width: 40rem;
 	height: auto;
 
+	z-index: 5;
+
 	@media screen and (max-width: $width-mobile) {
 		width: 90vw;
 	}
@@ -245,7 +327,7 @@
 
 .footer__intro {
 	width: 100%;
-	height: 28rem;
+	height: 27rem;
 
 	position: relative;
 
@@ -253,7 +335,7 @@
 
 	grid-column: span 2;
 
-	margin: 5rem 0 0;
+	margin: 5.8rem 0 0;
 
 	@media screen and (max-width: $width-mobile) {
 		color: #000;
@@ -282,11 +364,15 @@
 
 	background-image: url("../../assets/images/Footer_intro_snowflakes.svg");
 	background-repeat: no-repeat;
-	background-size: 90%;
+	background-size: 100%;
 	background-position: center;
 
 	z-index: 1;
 	pointer-events: none;
+
+	@media screen and (max-width: $width-mobile) {
+		display: none;
+	}
 }
 
 .footer__band {
@@ -308,7 +394,7 @@
 .footer__prizeCards {
 	position: absolute;
 
-	right: 3rem;
+	right: 4.5rem;
 	top: -4rem;
 
 	width: 52.1rem;
@@ -321,21 +407,25 @@
 		position: static;
 
 		order: 2;
+
+		margin: 3vw 4.5vw 5vw;
 	}
 }
 
 .footer__title {
-	margin: 5rem 0 3rem 4.8rem;
+	margin: 6rem 0 2.3rem 4.9rem;
 
 	font-weight: 700;
 	font-family: var(--font_Montserrat);
 	font-size: 4rem;
 	line-height: 4.8rem;
 
+	max-width: 55%;
+
 	transform: rotate(-2deg);
 
 	@media screen and (max-width: $width-mobile) {
-		margin: 5rem var(--section_padding) 0;
+		margin: 9.3vw var(--section_padding) 0;
 		font-size: 6.1vw;
 		line-height: 7.1vw;
 
@@ -344,6 +434,8 @@
 		color: white;
 
 		order: 1;
+
+		max-width: 100%;
 	}
 }
 
@@ -356,7 +448,9 @@
 	line-height: 2rem;
 	opacity: 0.5;
 
-	margin: 0 0 0 4.8rem;
+	margin: 0 0 0 4.9rem;
+
+	max-width: 29.5%;
 
 	@media screen and (max-width: $width-mobile) {
 		margin: 0 var(--section_padding);
@@ -367,5 +461,7 @@
 
 		font-size: 4.1vw;
 		line-height: 5.1vw;
+
+		max-width: 100%;
 	}
 }
