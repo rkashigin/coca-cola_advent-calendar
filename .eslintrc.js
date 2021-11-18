@@ -57,7 +57,7 @@ module.exports = {
         'global-require': 'off',
         'no-continue': 'off',
         'no-unused-vars': 'warn',
-        'no-tabs': 0,
+        'no-tabs': 'off',
         'prettier/prettier': [
             'error',
             {
@@ -68,8 +68,7 @@ module.exports = {
                 bracketSpacing: true
             }
         ],
-        camelcase: 'off',
-        indent: 'off'
+        camelcase: 'off'
     },
     plugins: ['prettier', 'react']
 };

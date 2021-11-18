@@ -5,20 +5,20 @@ import classNames from 'classnames';
 import styles from './Button.module.scss';
 
 const Button = ({ content, className }) => {
-	return (
-		<button type="button" className={classNames(className, styles.button)}>
-			{content}
-		</button>
-	);
+    return (
+        <button type="button" className={classNames(className, styles.button)}>
+            {content}
+        </button>
+    );
 };
 
 Button.defaultProps = {
-	className: ''
+    className: ''
 };
 
 Button.propTypes = {
-	content: PropTypes.elementType.isRequired,
-	className: PropTypes.elementType
+    content: PropTypes.elementType.isRequired,
+    className: PropTypes.elementType
 };
 
 export default Button;
