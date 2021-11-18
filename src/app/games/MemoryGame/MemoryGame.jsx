@@ -68,7 +68,6 @@ const MemoryGame = () => {
                                 <div className={styles.card__front}>
                                     <img src={card} alt="Card front" />
                                 </div>
-                                {/* <img src={ImageCover} alt="Card cover" /> */}
                                 <div className={styles.card__back} />
                             </div>
                         </div>
