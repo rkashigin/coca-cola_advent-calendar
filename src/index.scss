@@ -78,6 +78,12 @@ div.css-yiavyu-MuiBackdrop-root-MuiDialog-backdrop {
 	background-color: rgba(0, 0, 0, 0.4);
 }
 
+div.css-hz1bth-MuiDialog-container{
+  @media screen and (max-width: $width-mobile) {
+    align-items: flex-end;
+  }
+}
+
 div.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
 	box-shadow: none;
 
@@ -93,6 +99,11 @@ div.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
   justify-content: center;
 
   overflow: visible;
+
+  @media screen and (max-width: $width-mobile) {
+    margin: 2vw;
+    width: 100%;
+  }
 }
 div.css-ypiqx9-MuiDialogContent-root {
 	overflow-x: hidden;
@@ -106,12 +117,20 @@ h2.css-bdhsul-MuiTypography-root-MuiDialogTitle-root {
   text-align: center;
 
 	padding: 0;
+
+  @media screen and (max-width: $width-mobile){
+    font-size: 6vw;
+    line-height: 7.1vw;
+  }
 }
 
 div.MuiDialogTitle-root,
 div.css-ypiqx9-MuiDialogContent-root {
 	padding: 0;
 	margin: 1.6rem 0 0;
+
+  @media screen and (max-width: $width-mobile){
+  }
 }
 
 p.css-qfso29-MuiTypography-root-MuiDialogContentText-root{
@@ -122,12 +141,23 @@ p.css-qfso29-MuiTypography-root-MuiDialogContentText-root{
   text-align: center;
 
   color: #000;
+
+  @media screen and (max-width: $width-mobile){
+    font-size: 3.9vw;
+    line-height: 5.6vw;
+  }
 }
 
 div.css-hlj6pa-MuiDialogActions-root{
   padding: 0;
   justify-content: center;
   flex-direction: column;
+
+  margin-top: 3.2rem;
+
+  @media screen and (max-width: $width-mobile){
+    margin-top: 8.2vw;
+  }
 }
 
 button.css-1e6y48t-MuiButtonBase-root-MuiButton-root{
@@ -145,6 +175,8 @@ button.css-1e6y48t-MuiButtonBase-root-MuiButton-root{
   font-weight: 700;
 
   border-radius: 1.6rem;
+
+  text-transform: unset;
 
   transition: opacity 0.3s ease-in-out;
 
@@ -164,5 +196,12 @@ button.css-1e6y48t-MuiButtonBase-root-MuiButton-root{
       background-color: var(--color_alabaster_grey);
       color: var(--color_dim_gray);
     }
+  }
+
+  @media screen and (max-width: $width-mobile){
+    font-size: 4.1vw;
+    line-height: 6.1vw;
+
+    padding: 4.2vw;
   }
 }

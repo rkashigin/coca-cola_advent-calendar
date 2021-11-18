@@ -11,6 +11,8 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 
+import { ReactComponent as CopyIcon } from '../../assets/icons/Modal_promoCode_button_copy.svg';
+
 import styles from './CalendarDay.module.scss';
 
 const Transition = React.forwardRef((props, ref) => {
@@ -84,16 +86,20 @@ const CalendarDay = ({
                             />
                             {promoCodeText}
                         </div>
-                        <div
-                            name="promoCode"
-                            type="button"
-                            value={promoCode}
-                            className={styles.modal__promoCode}
-                            // onChange={changeHandler}
-                        >
-                            {promoCode}
-                            <button type="button">{/* icon */}</button>
-                        </div>
+                        {promoCode && (
+                            <div
+                                name="promoCode"
+                                type="button"
+                                value={promoCode}
+                                className={styles.modal__promoCode}
+                                // onChange={changeHandler}
+                            >
+                                {promoCode}
+                                <button className={styles.promoCode__button} type="button">
+                                    <CopyIcon className={styles.promoCode__button_copy} />
+                                </button>
+                            </div>
+                        )}
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleClose}>Заказать сейчас</Button>

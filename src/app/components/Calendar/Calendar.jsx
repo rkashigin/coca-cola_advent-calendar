@@ -121,6 +121,7 @@ const DATES = [
         img: require('../../assets/images/Calendar/12day.png').default,
         modalImg: require('../../assets/images/Games/game_12_day.png').default,
         title: 'Давайте начнем наше новогоднее путешествие!',
-        intro: 'Задание этого дня совсем простое: сделайте заказ в Delivery Club на любую сумму с нашим волшебным промокодом на Coca-Cola за 1 ₽'
+        intro: 'Задание этого дня совсем простое: сделайте заказ в Delivery Club на любую сумму с нашим волшебным промокодом на Coca-Cola за 1 ₽',
+        promoCode: 'DCCC2022'
     }
 ];
