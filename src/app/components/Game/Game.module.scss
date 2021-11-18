@@ -1,4 +1,4 @@
-.game {
+.gamesWrapper {
   position: relative;
   border: 1px solid black;
   width: max-content;
@@ -10,7 +10,11 @@
   }
 }
 
-.game__exitButton {
+.gamesWrapper__content {
+  height: fit-content;
+}
+
+.gamesWrapper__exitButton {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -31,7 +35,7 @@
   }
 }
 
-.game__closeIcon {
+.gamesWrapper__closeIcon {
   width: 15px;
   height: 15px;
   margin-left: 5px;

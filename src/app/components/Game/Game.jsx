@@ -11,22 +11,24 @@ import styles from './Game.module.scss';
 const Game = ({ game, fullScreen, test, onClose }) => {
     return (
         <div
-            className={cn(styles.game, {
-                [styles.game_fullScreen]: fullScreen
+            className={cn(styles.gamesWrapper, {
+                [styles.gamesWrapper_fullScreen]: fullScreen
             })}
         >
             <button
                 type="button"
-                className={cn(styles.game__exitButton, {
-                    [styles.game__exitButton_fixed]: fullScreen
+                className={cn(styles.gamesWrapper__exitButton, {
+                    [styles.gamesWrapper__exitButton_fixed]: fullScreen
                 })}
                 onClick={onClose}
             >
                 {test ? 'Выйти из теста' : 'Выйти из игры'}
-                <CloseIcon className={styles.game__closeIcon} />
+                <CloseIcon className={styles.gamesWrapper__closeIcon} />
             </button>
-            {/* <WhereIsGame gameVariant="easy" /> */}
-            <MemoryGame />
+            <div className={styles.gamesWrapper__content}>
+                <WhereIsGame gameVariant="easy" />
+                {/* <MemoryGame /> */}
+            </div>
         </div>
     );
 };

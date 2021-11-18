@@ -18,11 +18,13 @@ const WhereIsGame = ({ gameVariant }) => {
     const confirmFind = (x, y) => {
         const { coords } = gameConfig;
 
+        console.log('COORDS VS S AND Y', coords, x, y);
+
         return x >= coords.xStart && x <= coords.xEnd && y >= coords.yStart && y <= coords.yEnd;
     };
 
-    const generateSelectionWindow = (x, y) => {
-        const isFindSuccess = confirmFind(x, y);
+    const generateSelectionWindow = ({ x, xChange, y }) => {
+        const isFindSuccess = confirmFind(x - xChange, y);
 
         if (isFindSuccess) {
             setSelectionColor('green');
@@ -35,13 +37,19 @@ const WhereIsGame = ({ gameVariant }) => {
     };
 
     const handlePerformFindAttempt = (e) => {
+        console.log('EVENT', e);
         setXPos(e.nativeEvent.offsetX);
         setYPos(e.nativeEvent.offsetY);
-        generateSelectionWindow(e.nativeEvent.pageX, e.nativeEvent.pageY);
+        generateSelectionWindow({
+            x: e.nativeEvent.pageX,
+            xChange: e.target.x,
+            y: e.nativeEvent.pageY,
+            yChange: e.target.y
+        });
     };
 
     return (
-        <div>
+        <div className={styles.game}>
             <div
                 className={styles.selectionWindow}
                 style={
