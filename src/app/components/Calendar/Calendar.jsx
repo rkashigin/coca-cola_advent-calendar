@@ -5,19 +5,18 @@ import CalendarDay from '../CalendarDay/CalendarDay';
 import styles from './Calendar.module.scss';
 
 const Calendar = () => {
-	return (
-		<div className={styles.calendar}>
-
-			{DATES.map((el) => (
-				<CalendarDay 
-					id={el.day}
-					date={el.day}
-					img={el.img}
-					className={styles[`calendarDay_${el.day}`]}
-				/>
-			))}
-		</div>
-	);
+    return (
+        <div className={styles.calendar}>
+            {DATES.map((el) => (
+                <CalendarDay
+                    id={el.day}
+                    date={el.day}
+                    img={el.img}
+                    className={styles[`calendarDay_${el.day}`]}
+                />
+            ))}
+        </div>
+    );
 };
 
 export default Calendar;

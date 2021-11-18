@@ -50,11 +50,11 @@ textarea {
   vertical-align: top; // 2
 }
 
-img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
+//img {
+//  display: block;
+//  max-width: 100%;
+//  height: auto;
+//}
 
 textarea:focus,
 input:focus {
@@ -78,4 +78,7 @@ div.css-yiavyu-MuiBackdrop-root-MuiDialog-backdrop{
 div.css-1t1j96h-MuiPaper-root-MuiDialog-paper{
   border-radius: 1.6rem;
   box-shadow: none;
+}
+.App {
+  overflow: auto;
 }

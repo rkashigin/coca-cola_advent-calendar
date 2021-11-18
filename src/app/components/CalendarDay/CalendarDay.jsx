@@ -108,9 +108,9 @@ const CalendarDay = ({
 };
 
 CalendarDay.defaultProps = {
-	className: '',
-	classNameImg: '',
-	classNameSpan: ''
+    className: '',
+    classNameImg: '',
+    classNameSpan: ''
 };
 
 CalendarDay.propTypes = {

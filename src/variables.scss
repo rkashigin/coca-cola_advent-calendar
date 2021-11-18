@@ -20,4 +20,12 @@ $width-mobile: 725px;
     @media screen and (max-width: $width-mobile){
         --section_padding: 1.6rem;
     }
+
+    // Games config
+    --memoryBoardVerticalGap: 16px;
+    --memoryBoardHorizontalGap: 8px;
+    --memoryBoardWidth: 360px;
+    --memoryBoardHeight: calc(320px + 4 * 16px);
+    --memoryBoardHorizontalLength: 5;
+    --memoryBoardVerticalLength: 4;
 }
