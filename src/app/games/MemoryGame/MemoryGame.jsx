@@ -11,7 +11,6 @@ const MemoryGame = () => {
     const [activeCards, setActiveCards] = React.useState([]);
     const [foundPairs, setFoundPairs] = React.useState([]);
     const [won, setWon] = React.useState(false);
-    const [showPreview, setShowPreview] = React.useState(true);
 
     const flipCard = (index) => {
         if (activeCards.length === 2) return;
@@ -30,12 +29,6 @@ const MemoryGame = () => {
             setActiveCards([index]);
         }
     };
-
-    React.useEffect(() => {
-        const timer = setTimeout(() => setShowPreview(false), 2000);
-
-        return () => clearTimeout(timer);
-    }, []);
 
     React.useEffect(() => {
         let timer;
@@ -60,7 +53,7 @@ const MemoryGame = () => {
                     return (
                         <div
                             className={cn(styles.board__cardWrapper, {
-                                [styles.board__cardWrapper_flipped]: showPreview || flippedToFront
+                                [styles.board__cardWrapper_flipped]: flippedToFront
                             })}
                             onClick={() => flipCard(cardIdx)}
                         >
