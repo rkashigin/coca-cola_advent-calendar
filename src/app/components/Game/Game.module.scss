@@ -1,9 +1,8 @@
 .game {
   position: relative;
-  box-sizing: content-box;
   border: 1px solid black;
-  //width: 40vw;
-  //height: 60vh;
+  width: max-content;
+  height: max-content;
 
   &_fullScreen {
     width: 100%;
@@ -23,9 +22,13 @@
 
   padding: 5px 12px;
 
-  position: fixed;
+  position: absolute;
   top: 12px;
   right: 12px;
+
+  &_fixed {
+    position: fixed;
+  }
 }
 
 .game__closeIcon {

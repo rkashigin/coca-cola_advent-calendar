@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
-import { WhereIsGame } from '../../games';
+import { MemoryGame, WhereIsGame } from '../../games';
 
 import { ReactComponent as CloseIcon } from '../../assets/icons/icon__close.svg';
 
@@ -15,11 +15,18 @@ const Game = ({ game, fullScreen, test, onClose }) => {
                 [styles.game_fullScreen]: fullScreen
             })}
         >
-            <button type="button" className={styles.game__exitButton} onClick={onClose}>
+            <button
+                type="button"
+                className={cn(styles.game__exitButton, {
+                    [styles.game__exitButton_fixed]: fullScreen
+                })}
+                onClick={onClose}
+            >
                 {test ? 'Выйти из теста' : 'Выйти из игры'}
                 <CloseIcon className={styles.game__closeIcon} />
             </button>
-            <WhereIsGame gameVariant="easy" />
+            {/* <WhereIsGame gameVariant="easy" /> */}
+            <MemoryGame />
         </div>
     );
 };
