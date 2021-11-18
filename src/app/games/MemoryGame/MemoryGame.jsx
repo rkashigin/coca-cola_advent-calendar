@@ -3,7 +3,6 @@ import { shuffle } from 'lodash';
 import cn from 'classnames';
 
 import Images from './images';
-import ImageCover from '../../assets/images/memory/card__back.png';
 
 import styles from './MemoryGame.module.scss';
 
