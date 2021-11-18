@@ -132,6 +132,8 @@
     background-color: rgba(201, 43, 39, 0.56);
     mix-blend-mode: unset;
 
+    justify-content: flex-start;
+
     img{
         bottom: 50%;
         right: 0;
@@ -141,6 +143,12 @@
         font-size: 1.8rem;
         line-height: 2.4rem;
         font-weight: 500;
+
+        padding-left: 1.5rem;
+
+        &::after{
+            content: ' день';
+        }
     }
 
     @media screen and (max-width: $width-mobile){

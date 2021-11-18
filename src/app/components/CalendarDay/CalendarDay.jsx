@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -17,9 +18,26 @@ const Transition = React.forwardRef((props, ref) => {
 });
 
 const CalendarDay = ({
-	id, date, img, className, classNameImg, classNameSpan 
+	id,
+	date,
+	img,
+	className,
+	classNameImg,
+	classNameSpan,
+	modalImg,
+	title,
+	intro,
+	promoCodeImg,
+	promoCodeText,
+	promoCode,
+	buttonText
 }) => {
 	const [open, setOpen] = React.useState(false);
+
+	useEffect(() => {
+		const app = document.querySelector('.App');
+		app.style.filter = open ? 'blur(10px)' : '';
+	}, [open]);
 
 	const handleClickOpen = () => {
 		setOpen(true);
@@ -31,9 +49,18 @@ const CalendarDay = ({
 
 	return (
 		<>
-			<div className={classNames(className, styles.calendarDay)} onClick={handleClickOpen}>
-				<span className={classNames(classNameSpan, styles.calendarDay__date)}>{date}</span>
-				<img className={classNames(classNameImg, styles.calendarDay__img)} src={img} alt="" />
+			<div
+				className={classNames(className, styles.calendarDay)}
+				onClick={handleClickOpen}
+			>
+				<span className={classNames(classNameSpan, styles.calendarDay__date)}>
+					{date}
+				</span>
+				<img
+					className={classNames(classNameImg, styles.calendarDay__img)}
+					src={img}
+					alt=""
+				/>
 			</div>
 			<Dialog
 				open={open}
@@ -43,16 +70,37 @@ const CalendarDay = ({
 				aria-describedby="alert-dialog-slide-description"
 				className={styles.popup}
 			>
-				<DialogTitle>Use Google location service?</DialogTitle>
+				<img
+					className={classNames(classNameImg, styles.calendarDay__img)}
+					src={modalImg}
+					alt=""
+				/>
+				<DialogTitle>{title}</DialogTitle>
 				<DialogContent>
 					<DialogContentText id="alert-dialog-slide-description">
-						Let Google help apps determine location. This means sending anonymous
-						location data to Google, even when no apps are running.
+						{intro}
 					</DialogContentText>
+					<div>
+						<img
+							className={classNames(classNameImg, styles.calendarDay__img)}
+							src={promoCodeImg}
+							alt=""
+						/>
+						{promoCodeText}
+					</div>
+					<div
+						name="promoCode"
+						type="button"
+						value={promoCode}
+						// onChange={changeHandler}
+					>
+						<button type="button">
+							{/* icon */}
+						</button>
+					</div>
 				</DialogContent>
 				<DialogActions>
-					<Button onClick={handleClose}>Disagree</Button>
-					<Button onClick={handleClose}>Agree</Button>
+					<Button onClick={handleClose}>{buttonText}</Button>
 				</DialogActions>
 			</Dialog>
 		</>
@@ -67,7 +115,7 @@ CalendarDay.defaultProps = {
 
 CalendarDay.propTypes = {
 	id: PropTypes.number.isRequired,
-	date: PropTypes.number.isRequired,
+	date: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 	img: PropTypes.string.isRequired,
 	className: PropTypes.elementType,
 	classNameImg: PropTypes.elementType,

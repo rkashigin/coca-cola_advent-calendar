@@ -6,6 +6,8 @@
   font-size: calc(10 / 1440 * 100vw);
   font-family: var(--font_Roboto);
 
+  background-color: var(--color_red);
+
   @media screen and (max-width: $width-mobile) {
     font-size: calc(10 / 390 * 100vw);
   }
@@ -67,4 +69,13 @@ input {
 
 button {
   cursor: pointer;
+}
+
+div.css-yiavyu-MuiBackdrop-root-MuiDialog-backdrop{
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+div.css-1t1j96h-MuiPaper-root-MuiDialog-paper{
+  border-radius: 1.6rem;
+  box-shadow: none;
 }

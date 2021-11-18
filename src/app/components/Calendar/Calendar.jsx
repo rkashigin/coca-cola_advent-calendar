@@ -25,7 +25,15 @@ export default Calendar;
 const DATES = [
 	{
 		day: 1,
-		img: require('../../assets/images/Calendar/1day.png').default
+		img: require('../../assets/images/Calendar/1day.png').default,
+		modalImg: require('../../assets/images/Games/game_1_day.png').default,
+		title: 'Давайте начнем наше новогоднее путешествие!',
+		intro: 'Задание этого дня совсем простое: сделайте заказ в Delivery Club на любую сумму с нашим волшебным промокодом на Coca-Cola за 1 ₽',
+		promoCode: 'DCCC2022',
+		buttonText: {
+			step1: 'Заказать сейчас',
+			step2: 'В календарь'
+		}
 	},
 	{
 		day: 2,
@@ -44,7 +52,7 @@ const DATES = [
 		img: require('../../assets/images/Calendar/5day.png').default
 	},
 	{
-		day: `${6}день`,
+		day: 6,
 		img: require('../../assets/images/Calendar/6day.png').default
 	},
 	{
