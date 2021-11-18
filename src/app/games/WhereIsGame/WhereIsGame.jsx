@@ -61,11 +61,7 @@ const WhereIsGame = ({ gameVariant }) => {
 };
 
 WhereIsGame.propTypes = {
-    gameVariant: PropTypes.string
-};
-
-WhereIsGame.defaultProps = {
-    gameVariant: 'easy'
+    gameVariant: PropTypes.string.isRequired
 };
 
 export default WhereIsGame;

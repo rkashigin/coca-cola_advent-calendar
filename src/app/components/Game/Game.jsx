@@ -19,7 +19,7 @@ const Game = ({ game, fullScreen, test, onClose }) => {
                 {test ? 'Выйти из теста' : 'Выйти из игры'}
                 <CloseIcon className={styles.game__closeIcon} />
             </button>
-            <WhereIsGame />
+            <WhereIsGame gameVariant="easy" />
         </div>
     );
 };
