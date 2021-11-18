@@ -18,8 +18,6 @@ const WhereIsGame = ({ gameVariant }) => {
     const confirmFind = (x, y) => {
         const { coords } = gameConfig;
 
-        console.log('COORDS VS S AND Y', coords, x, y);
-
         return x >= coords.xStart && x <= coords.xEnd && y >= coords.yStart && y <= coords.yEnd;
     };
 
