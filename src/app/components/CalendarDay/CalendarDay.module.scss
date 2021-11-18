@@ -50,3 +50,26 @@
 .popup{
     // background-color: blue;
 }
+
+.calendarModal__img{
+    position: absolute;
+
+    width: 34.2rem;
+
+    top: -9rem;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+.modal{
+    background-color: white;
+
+    border-radius: 1.6rem;
+
+    padding: 22.8rem 1.6rem 1.6rem;
+	width: 37.4rem;
+}
+
+.modal__promoCode{
+    display: none;
+}

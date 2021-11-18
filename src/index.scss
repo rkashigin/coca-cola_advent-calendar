@@ -3,51 +3,50 @@
 @import "variables";
 
 :root {
-  font-size: calc(10 / 1440 * 100vw);
-  font-family: var(--font_Roboto);
+	font-size: calc(10 / 1440 * 100vw);
+	font-family: var(--font_Roboto);
 
-  background-color: var(--color_red);
+	background-color: var(--color_red);
 
-  @media screen and (max-width: $width-mobile) {
-    font-size: calc(10 / 390 * 100vw);
-  }
-
+	@media screen and (max-width: $width-mobile) {
+		font-size: calc(10 / 390 * 100vw);
+	}
 }
 
 ul {
-  list-style-type: none;
+	list-style-type: none;
 }
 
 a {
-  background: transparent;
-  text-decoration: none;
-  color: var(--color-dark-grey);
+	background: transparent;
+	text-decoration: none;
+	color: var(--color-dark-grey);
 }
 
 // 1. Addresses appearance set to searchfield in Safari 5, Chrome
 input[type="search"] {
-  -webkit-appearance: textfield; // 1
+	-webkit-appearance: textfield; // 1
 }
 
 // Removes inner padding and search cancel button in S5, Chrome on OS X
 input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button {
-  -webkit-appearance: none;
+	-webkit-appearance: none;
 }
 
 // Removes inner padding and border in FF3+
 // www.sitepen.com/blog/2008/05/14/the-devils-in-the-details-fixing-dojos-toolbar-buttons/
 button::-moz-focus-inner,
 input::-moz-focus-inner {
-  border: 0;
-  padding: 0;
+	border: 0;
+	padding: 0;
 }
 
 // 1. Removes default vertical scrollbar in IE6/7/8/9
 // 2. Improves readability and alignment in all browsers
 textarea {
-  overflow: auto; // 1
-  vertical-align: top; // 2
+	overflow: auto; // 1
+	vertical-align: top; // 2
 }
 
 //img {
@@ -58,27 +57,112 @@ textarea {
 
 textarea:focus,
 input:focus {
-  outline: 0;
+	outline: 0;
 }
 
 input {
-  margin: 0;
-  padding: 0;
-  appearance: none;
+	margin: 0;
+	padding: 0;
+	appearance: none;
 }
 
 button {
-  cursor: pointer;
+	cursor: pointer;
 }
 
-div.css-yiavyu-MuiBackdrop-root-MuiDialog-backdrop{
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-div.css-1t1j96h-MuiPaper-root-MuiDialog-paper{
-  border-radius: 1.6rem;
-  box-shadow: none;
-}
 .App {
-  overflow: auto;
+	overflow: auto;
+}
+
+div.css-yiavyu-MuiBackdrop-root-MuiDialog-backdrop {
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+div.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+	box-shadow: none;
+
+  background-color: transparent;
+
+	padding: 0;
+	width: max-content;
+
+  height: max-content;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: visible;
+}
+div.css-ypiqx9-MuiDialogContent-root {
+	overflow-x: hidden;
+}
+h2.css-bdhsul-MuiTypography-root-MuiDialogTitle-root {
+	font-family: var(--font_Montserrat);
+	font-weight: 700;
+	font-size: 2.4rem;
+	line-height: 2.8rem;
+
+  text-align: center;
+
+	padding: 0;
+}
+
+div.MuiDialogTitle-root,
+div.css-ypiqx9-MuiDialogContent-root {
+	padding: 0;
+	margin: 1.6rem 0 0;
+}
+
+p.css-qfso29-MuiTypography-root-MuiDialogContentText-root{
+  font-family: var(--font_Roboto);
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  text-align: center;
+
+  color: #000;
+}
+
+div.css-hlj6pa-MuiDialogActions-root{
+  padding: 0;
+  justify-content: center;
+  flex-direction: column;
+}
+
+button.css-1e6y48t-MuiButtonBase-root-MuiButton-root{
+  background-color: var(--color_dark_olive_green);
+  padding: 1.65rem;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  color: white;
+  font-weight: 700;
+
+  border-radius: 1.6rem;
+
+  transition: opacity 0.3s ease-in-out;
+
+  &:hover{
+    background-color: var(--color_dark_olive_green);
+    opacity: 0.7;
+  }
+
+  &:not(:first-of-type){
+    margin: 0.7rem 0 0;
+
+    background-color: var(--color_alabaster_grey);
+    color: var(--color_dim_gray);
+
+    &:hover{
+      opacity: 0.7;
+      background-color: var(--color_alabaster_grey);
+      color: var(--color_dim_gray);
+    }
+  }
 }

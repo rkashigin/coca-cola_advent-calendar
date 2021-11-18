@@ -7,15 +7,15 @@ import Footer from '../components/Footer/Footer';
 import styles from './MainPage.module.scss';
 
 const MainPage = () => {
-	return (
-		<>
-			<Header />
-			<main>
-				<Calendar />
-			</main>
-			<Footer />
-		</>
-	);
+    return (
+        <>
+            <Header />
+            <main>
+                <Calendar />
+            </main>
+            <Footer />
+        </>
+    );
 };
 
 export default MainPage;
