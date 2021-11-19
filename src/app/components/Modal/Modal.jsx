@@ -27,8 +27,10 @@ const Modal = ({ open, handleClose, title, children }) => {
         >
             <div className={styles.modal}>
                 <DialogTitle>{title}</DialogTitle>
-                <DialogContentText id="alert-dialog-slide-description" />
-                <DialogContent>{children}</DialogContent>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-slide-description" />
+                    {children}
+                </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Заказать сейчас</Button>
                 </DialogActions>

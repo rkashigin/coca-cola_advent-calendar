@@ -56,7 +56,7 @@
 
 	width: 34.2rem;
 
-	top: -9rem;
+	top: -7.5rem;
 	right: 50%;
 	transform: translateX(50%);
 }
@@ -67,7 +67,7 @@
 	border-radius: 1.6rem;
 
 	padding: 22.8rem 1.6rem 1.6rem;
-	width: 37.4rem;
+	width: 47rem;
 
 	@media screen and (max-width: $width-mobile) {
 		width: 95%;
@@ -83,7 +83,7 @@
 	line-height: 3.2rem;
 	font-weight: 400;
 
-	padding: 1.6rem;
+	padding: 1rem;
 	box-sizing: border-box;
 
 	border-radius: 1.6rem;
@@ -98,9 +98,9 @@
 
 	position: relative;
 
-	margin-top: 4.4rem;
+	margin-top: 2.5rem;
 
-	min-height: 6.8rem;
+	min-height: 6rem;
 
 	@media screen and (max-width: $width-mobile) {
 		margin-top: 6.1vw;

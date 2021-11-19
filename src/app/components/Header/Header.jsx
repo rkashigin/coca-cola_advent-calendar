@@ -1,5 +1,11 @@
 import React, { useEffect } from 'react';
 
+// import Dialog from '@mui/material/Dialog';
+// import DialogActions from '@mui/material/DialogActions';
+// import { DialogContentText } from '@mui/material';
+// import DialogContent from '@mui/material/DialogContent';
+// import DialogTitle from '@mui/material/DialogTitle';
+
 import Slide from '@mui/material/Slide';
 import Button from '../Button/Button';
 
@@ -11,10 +17,6 @@ import { ReactComponent as Delivery } from '../../assets/icons/Logo_delivery.svg
 import { ReactComponent as Cola } from '../../assets/icons/Logo_cola.svg';
 
 import styles from './Header.module.scss';
-
-const Transition = React.forwardRef((props, ref) => {
-    return <Slide direction="up" ref={ref} {...props} />;
-});
 
 const MainPage = () => {
     const [open, setOpen] = React.useState(false);
@@ -63,19 +65,19 @@ const MainPage = () => {
                     src={require('../../assets/images/Header_band_bottom.png').default}
                     alt="band"
                 />
-                <Modal title="Мои промокоды" handleClose={handleClose} open={open}>
-                    {PRONOCODES.map((el) => (
-                        <PromoCode key={el.id} promoCodeText={el.title} promoCode={el.code} />
-                    ))}
-                </Modal>
             </header>
+            <Modal title="Мои промокоды" handleClose={handleClose} open={open}>
+                {PROMOCODES.map((el) => (
+                    <PromoCode key={el.id} promoCodeText={el.title} promoCode={el.code} />
+                ))}
+            </Modal>
         </>
     );
 };
 
 export default MainPage;
 
-const PRONOCODES = [
+const PROMOCODES = [
     {
         id: 1,
         title: '100 ₽ на доставку Delivery Club',
