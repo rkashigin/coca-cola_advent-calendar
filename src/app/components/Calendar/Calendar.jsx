@@ -1,7 +1,7 @@
 import React from 'react';
 
 import CalendarDay from '../CalendarDay/CalendarDay';
-import { Day1 } from '../Day1/Day1';
+import { Day11 } from '../Days/Day11';
 
 import styles from './Calendar.module.scss';
 
@@ -11,31 +11,28 @@ const Calendar = () => {
         setOpen(el);
     };
     return (
-        <div className={styles.calendar}>
-            {DATES.map((el) => (
-                <CalendarDay
-                    id={el.day}
-                    date={el.day}
-                    img={el.img}
-                    className={styles[`calendarDay_${el.day}`]}
-                    modalImg={el.modalImg}
-                    title={el.title}
-                    intro={el.intro}
-                    promoCode={el.promoCode}
-                    type={el.type}
-                />
-            ))}
-        </div>
+        <>
+            <Day11 />
+            <div className={styles.calendar}>
+                {DATES.map((el) => (
+                    <CalendarDay
+                        id={el.day}
+                        date={el.day}
+                        img={el.img}
+                        className={styles[`calendarDay_${el.day}`]}
+                        modalImg={el.modalImg}
+                        title={el.title}
+                        intro={el.intro}
+                        promoCode={el.promoCode}
+                        type={el.type}
+                    />
+                ))}
+            </div>
+        </>
     );
 };
 
 export default Calendar;
-
-const DAYS = [
-    {
-        day: <Day1 />
-    }
-];
 
 const DATES = [
     {

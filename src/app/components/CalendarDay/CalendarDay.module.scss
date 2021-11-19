@@ -77,7 +77,7 @@
 }
 
 .modal__promoCode {
-	--color_promoCode_field: hsl(1, 68%, 47%);
+	--color_promoCode_field: hsl(344, 100%, 46%);
 
 	font-size: 3.2rem;
 	line-height: 3.2rem;
@@ -182,4 +182,58 @@
 .promoCode__button_copy {
 	height: 100%;
 	width: 100%;
+}
+
+.modalResult__img {
+	position: absolute;
+
+	width: 34.2rem;
+
+	top: -9.5rem;
+	right: 50%;
+	transform: translateX(50%);
+}
+
+.modal__promoText{
+	margin: 3rem 0 0;
+
+	display: flex;
+	flex-direction: row;
+
+	align-items: center;
+	justify-content: center;
+
+	color: hsl(344, 100%, 46%);
+
+	font-weight: 400;
+	font-size: 1.6rem;
+	line-height: 2.2rem;
+
+	cursor: default;
+
+	@media screen and (max-width: $width-mobile) {
+		margin: 6.4vw 0 0;
+
+		font-weight: 4.1vw;
+		line-height: 5.6vw;
+	}
+}
+
+.modal__promoIcon{
+	margin-right: 0.8rem;
+
+	@media screen and (max-width: $width-mobile) {
+		margin-right: 2vw;
+	}
+}
+
+.modalResult__postcard{
+	width: 31rem;
+	height: 47rem;
+}
+
+.modal__postcard{
+	padding: 1.6rem;
+
+	width: 37rem;
 }
