@@ -18,7 +18,12 @@ const SocialNetwork = ({ className, onClick }) => {
                 rel="noopener noreferrer"
                 className={styles.socialNetwork__link}
             >
-                <FacebookIcon className={styles.socialNetwork__icon_facebook} />
+                <FacebookIcon
+                    className={classNames(
+                        styles.socialNetwork__icon,
+                        styles.socialNetwork__icon_facebook
+                    )}
+                />
             </button>
             <button
                 onClick={() => onClick('twitter')}
@@ -27,7 +32,12 @@ const SocialNetwork = ({ className, onClick }) => {
                 rel="noopener noreferrer"
                 className={styles.socialNetwork__link}
             >
-                <TwitterIcon className={styles.socialNetwork__icon_twitter} />
+                <TwitterIcon
+                    className={classNames(
+                        styles.socialNetwork__icon,
+                        styles.socialNetwork__icon_twitter
+                    )}
+                />
             </button>
             <button
                 onClick={() => onClick('vk')}
@@ -36,7 +46,12 @@ const SocialNetwork = ({ className, onClick }) => {
                 rel="noopener noreferrer"
                 className={styles.socialNetwork__link}
             >
-                <VkIcon className={styles.socialNetwork__icon_vk} />
+                <VkIcon
+                    className={classNames(
+                        styles.socialNetwork__icon,
+                        styles.socialNetwork__icon_vk
+                    )}
+                />
             </button>
         </div>
     );

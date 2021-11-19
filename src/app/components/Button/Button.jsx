@@ -4,21 +4,23 @@ import classNames from 'classnames';
 
 import styles from './Button.module.scss';
 
-const Button = ({ content, className }) => {
+const Button = ({ content, className, onClick }) => {
     return (
-        <button type="button" className={classNames(className, styles.button)}>
+        <button type="button" className={classNames(className, styles.button)} onClick={onClick}>
             {content}
         </button>
     );
 };
 
 Button.defaultProps = {
-    className: ''
+    className: '',
+    onClick: () => {}
 };
 
 Button.propTypes = {
     content: PropTypes.elementType.isRequired,
-    className: PropTypes.elementType
+    className: PropTypes.elementType,
+    onClick: PropTypes.func
 };
 
 export default Button;

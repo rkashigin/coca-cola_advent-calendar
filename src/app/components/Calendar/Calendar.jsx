@@ -54,7 +54,7 @@ const DATES = [
         day: 3,
         img: require('../../assets/images/Calendar/3day.png').default,
         modalImg: require('../../assets/images/Games/game_2_day.png').default,
-        title: 'Тест про ДМ',
+        title: 'Тест про Деда Мороза',
         intro: 'Тест про Деда Мороза',
         type: 'test'
     },

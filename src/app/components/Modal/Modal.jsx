@@ -23,16 +23,23 @@ const Modal = ({ open, handleClose, title, children }) => {
             keepMounted
             onClose={handleClose}
             aria-describedby="alert-dialog-slide-description"
-            className={styles.popup}
         >
             <div className={styles.modal}>
-                <DialogTitle>{title}</DialogTitle>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-slide-description" />
-                    {children}
+                <Button
+                    onClick={handleClose}
+                    className={styles.modal__button_close}
+                    content="Закрыть"
+                />
+                <DialogTitle className={styles.modal__title}>{title}</DialogTitle>
+                <DialogContent className={styles.modal__contentWrap}>
+                    <div>{children}</div>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Заказать сейчас</Button>
+                    <Button
+                        onClick={handleClose}
+                        className={styles.modal__button_order}
+                        content="Заказать сейчас"
+                    />
                 </DialogActions>
             </div>
         </Dialog>

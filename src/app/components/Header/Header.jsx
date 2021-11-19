@@ -1,11 +1,5 @@
 import React, { useEffect } from 'react';
 
-// import Dialog from '@mui/material/Dialog';
-// import DialogActions from '@mui/material/DialogActions';
-// import { DialogContentText } from '@mui/material';
-// import DialogContent from '@mui/material/DialogContent';
-// import DialogTitle from '@mui/material/DialogTitle';
-
 import Slide from '@mui/material/Slide';
 import Button from '../Button/Button';
 
@@ -54,12 +48,14 @@ const MainPage = () => {
                 <p className={styles.header__subTitle}>
                     C advent-календарем, мини-играми и приятными подарками
                 </p>
-                <Button content="Победители" className={styles.header__button_winners} />
-                <Button
-                    content="Мои промокоды"
-                    onClick={handleClickOpen}
-                    className={styles.header__button_promoCodes}
-                />
+                <div className={styles.header__buttonsWrap}>
+                    <Button content="Победители" className={styles.header__button_winners} />
+                    <Button
+                        content="Мои промокоды"
+                        onClick={handleClickOpen}
+                        className={styles.header__button_promoCodes}
+                    />
+                </div>
                 <img
                     className={styles.header__bandBottom}
                     src={require('../../assets/images/Header_band_bottom.png').default}
@@ -85,6 +81,31 @@ const PROMOCODES = [
     },
     {
         id: 2,
+        title: '100 ₽ на доставку Delivery Club',
+        code: 'SD1233131'
+    },
+    {
+        id: 3,
+        title: '100 ₽ на доставку Delivery Club',
+        code: 'SD1233131'
+    },
+    {
+        id: 4,
+        title: '100 ₽ на доставку Delivery Club',
+        code: 'SD1233131'
+    },
+    {
+        id: 5,
+        title: '100 ₽ на доставку Delivery Club',
+        code: 'SD1233131'
+    },
+    {
+        id: 6,
+        title: '100 ₽ на доставку Delivery Club',
+        code: 'SD1233131'
+    },
+    {
+        id: 7,
         title: '100 ₽ на доставку Delivery Club',
         code: 'SD1233131'
     }

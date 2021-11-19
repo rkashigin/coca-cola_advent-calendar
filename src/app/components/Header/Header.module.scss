@@ -200,12 +200,9 @@
 	border-radius: 1.2rem;
 	color: var(--color_red);
 
-	position: absolute;
+	z-index: 5;
 
-	top: 1.4rem;
-	right: 19.5rem;
-
-    z-index: 5;
+	margin-right: 1.6rem;
 
 	transition: color 0.3s ease-in-out, border 0.3s ease-in-out,
 		background-color 0.3s ease-in-out, opacity 0.3s ease-in-out;
@@ -228,6 +225,8 @@
 		line-height: 6.1vw;
 
 		padding: 2vw 6.1vw;
+
+		margin-right: 4vw;
 	}
 }
 
@@ -235,14 +234,11 @@
 	font-weight: 400;
 	border: 1px solid white;
 
+	background-color: var(--color_red);
+
 	border-radius: 1.2rem;
 
-	position: absolute;
-
-	top: 1.4rem;
-	right: 2.2rem;
-
-    z-index: 5;
+	z-index: 5;
 
 	transition: color 0.3s ease-in-out, border 0.3s ease-in-out,
 		background-color 0.3s ease-in-out, opacity 0.3s ease-in-out;
@@ -265,5 +261,18 @@
 		line-height: 6.1vw;
 
 		padding: 2vw 6.1vw;
+	}
+}
+
+.header__buttonsWrap {
+	position: absolute;
+	top: 1.6rem;
+	right: var(--section_padding);
+
+	z-index: 5;
+
+	@media screen and (max-width: $width-mobile) {
+		position: static;
+		z-index: 20;
 	}
 }

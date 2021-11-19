@@ -1,7 +1,14 @@
 @import "../../../variables.scss";
 
-.modal__promoCode {
-	--color_promoCode_field: hsl(1, 68%, 47%);
+
+.promoCode{
+	&:not(:last-of-type){
+		margin-bottom: 1.6rem;
+	}
+}
+
+.promoCode__input {
+	--color_promoCode_field: #5D5F61;
 
 	font-size: 3.2rem;
 	line-height: 3.2rem;
@@ -22,7 +29,7 @@
 
 	position: relative;
 
-	margin-top: 4.4rem;
+	margin-top: 0.8rem;
 
 	min-height: 6.8rem;
 
@@ -34,6 +41,14 @@
 
 		padding: 4.1vw;
 	}
+}
+
+.promoCode__text{
+	font-weight: 400;
+	font-size: 1.6rem;
+	line-height: 2.2rem;
+
+	color: var(--color_promoCode_field);
 }
 
 .promoCode__button {

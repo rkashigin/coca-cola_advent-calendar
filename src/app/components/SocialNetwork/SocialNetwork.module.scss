@@ -15,6 +15,10 @@
 	padding: 3rem 0 2rem;
 }
 
+.socialNetwork__icon{
+	transition: transform 0.3s ease-in-out;
+}
+
 .socialNetwork__link {
 	outline: none;
 	background-color: transparent;
@@ -30,7 +34,15 @@
 
 	cursor: pointer;
 
+	transition: transform 0.3s ease-in-out;
+
 	&:not(:last-of-type) {
 		margin-right: 6.4rem;
+	}
+
+	&:hover{
+		.socialNetwork__icon{
+			transform: rotate(10deg) scale(1.1);
+		}
 	}
 }

@@ -7,13 +7,13 @@ import styles from './PromoCode.module.scss';
 
 const PromoCode = ({ promoCode, promoCodeText }) => {
     return (
-        <div>
-            <div>{promoCodeText}</div>
+        <div className={styles.promoCode}>
+            <div className={styles.promoCode__text}>{promoCodeText}</div>
             <div
                 name="promoCode"
                 type="button"
                 value={promoCode}
-                className={styles.modal__promoCode}
+                className={styles.promoCode__input}
                 // onChange={changeHandler}
             >
                 {promoCode}
