@@ -32,7 +32,8 @@ const CalendarDay = ({
     promoCodeImg,
     promoCodeText,
     promoCode,
-    buttonText
+    buttonText,
+    type
 }) => {
     const [open, setOpen] = React.useState(false);
 
@@ -101,10 +102,30 @@ const CalendarDay = ({
                             </div>
                         )}
                     </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleClose}>Заказать сейчас</Button>
-                        <Button onClick={handleClose}>В календарь</Button>
-                    </DialogActions>
+                    {type === 'test' && (
+                        <DialogActions>
+                            <Button onClick={handleClose}>Начать тест</Button>
+                            <Button onClick={handleClose}>Выполнить позже</Button>
+                        </DialogActions>
+                    )}
+                    {type === 'game' && (
+                        <DialogActions>
+                            <Button onClick={handleClose}>Начать игру</Button>
+                            <Button onClick={handleClose}>Выполнить позже</Button>
+                        </DialogActions>
+                    )}
+                    {type === 'promoCode' && (
+                        <DialogActions>
+                            <Button onClick={handleClose}>Заказать сейчас</Button>
+                            <Button onClick={handleClose}>В календарь</Button>
+                        </DialogActions>
+                    )}
+                    {type === 'postCard' && (
+                        <DialogActions>
+                            <Button onClick={handleClose}>Узнать</Button>
+                            <Button onClick={handleClose}>Выполнить позже</Button>
+                        </DialogActions>
+                    )}
                 </div>
             </Dialog>
         </>
