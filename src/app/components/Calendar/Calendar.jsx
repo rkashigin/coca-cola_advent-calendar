@@ -1,7 +1,6 @@
 import React from 'react';
 
 import CalendarDay from '../CalendarDay/CalendarDay';
-import { Day11 } from '../Days/Day11';
 
 import styles from './Calendar.module.scss';
 
@@ -12,7 +11,6 @@ const Calendar = () => {
     };
     return (
         <>
-            <Day11 />
             <div className={styles.calendar}>
                 {DATES.map((el) => (
                     <CalendarDay

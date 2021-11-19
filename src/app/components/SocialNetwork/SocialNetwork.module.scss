@@ -1,0 +1,36 @@
+@import "../../../variables.scss";
+
+.socialNetwork {
+	display: flex;
+	flex-direction: row;
+
+	align-items: center;
+	justify-content: space-between;
+
+	max-width: 24rem;
+
+	margin: 0 auto;
+	overflow: hidden;
+
+	padding: 3rem 0 2rem;
+}
+
+.socialNetwork__link {
+	outline: none;
+	background-color: transparent;
+
+	border: none;
+
+	--size: 3.2rem;
+
+	width: var(--size);
+	height: var(--size);
+
+	padding: 0;
+
+	cursor: pointer;
+
+	&:not(:last-of-type) {
+		margin-right: 6.4rem;
+	}
+}

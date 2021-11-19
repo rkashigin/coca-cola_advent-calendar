@@ -2,13 +2,13 @@
 import React, { useEffect } from 'react';
 import classNames from 'classnames';
 
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
+import Button from '../Button/Button';
+
+import SocialNetwork from '../SocialNetwork/SocialNetwork';
 
 import { ReactComponent as CopyIcon } from '../../assets/icons/Modal_promoCode_button_copy.svg';
 
@@ -54,20 +54,14 @@ export const Day11 = () => {
                 />
 
                 <DialogContent>
-                    <ul>
-                        <li>
-                            <a href="/">Fb</a>
-                        </li>
-                        <li>
-                            <a href="/">Twit</a>
-                        </li>
-                        <li>
-                            <a href="/">Vk</a>
-                        </li>
-                    </ul>
+                    <SocialNetwork />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>В календарь</Button>
+                    <Button
+                        className={styles.modalResult__button}
+                        onClick={handleClose}
+                        content="В календарь"
+                    />
                 </DialogActions>
             </div>
         </Dialog>
