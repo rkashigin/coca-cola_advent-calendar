@@ -29,8 +29,8 @@ const Game = ({ game, fullScreen, test, onClose }) => {
             <div className={styles.gamesWrapper__content}>
                 {/* <WhereIsGame gameVariant="easy" /> */}
                 {/* <MemoryGame /> */}
-                {/* <ThreeInARowGame /> */}
-                <CatchItemGame />
+                <ThreeInARowGame />
+                {/* <CatchItemGame /> */}
             </div>
         </div>
     );

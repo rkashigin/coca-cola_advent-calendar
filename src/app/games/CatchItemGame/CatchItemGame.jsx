@@ -30,8 +30,6 @@ const CatchItemGame = () => {
         }
     }, [isCanvasReady]);
 
-    // TODO: смотреть мобилка или нет внутри handleMouseMove и внутри handleTouch (если не соответствует нужному девайсу, то return)
-
     return (
         <div className={styles.game}>
             <div className={styles.game__score}>Очки: {scores}</div>
@@ -42,7 +40,7 @@ const CatchItemGame = () => {
                 onMouseMove={handleMouseMove}
                 onTouchEnd={handleTouch}
             >
-                Чтобы поиграть в игру, поменяйте, пожалуйста, браузер
+                Чтобы поиграть в игру, поменяйте браузер
             </canvas>
         </div>
     );

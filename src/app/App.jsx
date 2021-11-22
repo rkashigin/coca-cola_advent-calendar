@@ -12,7 +12,7 @@ const App = () => {
         <div className="App">
             <Routes>
                 <Route exact path="/" element={<MainPage />} />
-                <Route path="/game" element={<Game fullScreen />} />
+                <Route path="/game" element={<Game />} />
             </Routes>
         </div>
     );

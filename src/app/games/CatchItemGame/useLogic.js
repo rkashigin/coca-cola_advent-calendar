@@ -101,12 +101,18 @@ export default function useLogic({ canvasRef, cart, setScores }) {
             requestAnimationFrame(game);
         };
 
+        const handleCartPositionChange = (e) => {
+            if (e.nativeEvent.offsetX + 150 <= canvas.width) {
+                cart.x = e.nativeEvent.offsetX;
+            }
+        };
+
         const handleMouseMove = (e) => {
             if (isTabletOrMobile) {
                 return;
             }
 
-            cart.x = e.nativeEvent.offsetX;
+            handleCartPositionChange(e);
         };
 
         const handleTouch = (e) => {
@@ -114,7 +120,7 @@ export default function useLogic({ canvasRef, cart, setScores }) {
                 return;
             }
 
-            cart.x = e.nativeEvent.offsetX;
+            handleCartPositionChange(e);
         };
 
         return {
