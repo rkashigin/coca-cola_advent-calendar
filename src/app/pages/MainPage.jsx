@@ -8,7 +8,7 @@ import Header from '../components/Header/Header';
 import Calendar from '../components/Calendar/Calendar';
 import Footer from '../components/Footer/Footer';
 
-import styles from './MainPage.module.scss';
+// import styles from './MainPage.module.scss';
 
 const MainPage = () => {
     const [auth, setAuth] = useState(true);
@@ -16,12 +16,13 @@ const MainPage = () => {
     const isMobile = useMediaQuery(Adaptive.isMobile);
 
     useEffect(() => {
-        document.body.style.paddingTop = auth && !isMobile ? '3.3rem' : '0';
+        const app = document.querySelector('.App');
+        app.style.paddingTop = auth && !isMobile ? '4rem' : '0';
     }, [auth]);
 
     return (
         <>
-            <ProfileBanner />
+            {auth && <ProfileBanner />}
             <Header auth={auth} />
             <main>
                 <Calendar />

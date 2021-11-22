@@ -25,7 +25,7 @@ const Footer = () => {
                 />
                 <img
                     className={styles.footer__cardband_bottom}
-                    src={require('../../assets/images/Header_band_bottom.png').default}
+                    src={require('../../assets/images/Foter_card_band_bottom.png').default}
                     alt="band"
                 />
                 <img

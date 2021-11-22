@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -20,7 +20,6 @@ const Transition = React.forwardRef((props, ref) => {
 });
 
 const CalendarDay = ({
-    id,
     date,
     img,
     className,
@@ -32,7 +31,6 @@ const CalendarDay = ({
     promoCodeImg,
     promoCodeText,
     promoCode,
-    buttonText,
     type
 }) => {
     const [open, setOpen] = React.useState(false);
@@ -139,7 +137,6 @@ CalendarDay.defaultProps = {
 };
 
 CalendarDay.propTypes = {
-    id: PropTypes.number.isRequired,
     date: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     img: PropTypes.string.isRequired,
     className: PropTypes.elementType,

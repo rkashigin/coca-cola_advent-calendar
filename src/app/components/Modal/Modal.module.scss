@@ -1,6 +1,8 @@
 @import "../../../variables.scss";
 
 .modal {
+	--color_copy_icon: rgba(93, 95, 97, 0.5);
+
 	background-color: white;
 
 	border-radius: 1.6rem;
@@ -43,6 +45,16 @@
 	align-self: flex-end;
 
 	margin-bottom: 1.6rem;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+
+	transition: opacity 0.3s ease-in-out;
+
+	&:hover, &:active{
+		opacity: 0.7;
+	}
 
 	@media screen and (max-width: $width-mobile) {
 		font-size: 4.6vw;
@@ -199,6 +211,8 @@
 	max-height: calc(100vh - 30vw);
 	overflow-y: auto;
 
+	// position: relative;
+
 	&::-webkit-scrollbar {
 		width: 0;
 		background-color: transparent;
@@ -206,5 +220,36 @@
 	&::-webkit-scrollbar-thumb {
 		background-color: transparent;
 		border-radius: 0;
+	}
+
+	// &:after{
+	// 	position: absolute;
+	// 	content: '';
+	// 	background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 100%);
+
+	// 	bottom: -1px;
+	// 	left: 0;
+	// 	right: 0;
+
+	// 	width: 100%;
+	// 	height: 10%;
+
+	// }
+
+	@media screen and (max-width: $width-mobile) {
+		max-height: calc(100vh - 100vw);
+	}
+}
+
+.modal__buttonIcon_close{
+	--size: 2.4rem;
+
+	width: var(--size);
+	height: var(--size);
+
+	margin-left: 0.4rem;
+
+	@media screen and (max-width: $width-mobile) {
+		--size: 6.1vw;
 	}
 }

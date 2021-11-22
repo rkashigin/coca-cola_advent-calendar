@@ -45,7 +45,7 @@
 	}
 
 	@media screen and (max-width: $width-mobile) {
-		--height: 106vw;
+		--height: 114vw;
 		padding: var(--section_padding) var(--section_padding) 3.2rem;
 
 		&:after {
@@ -112,25 +112,52 @@
 .header__logo_auth{
 	top: 4rem;
 
-	@media screen and (max-width: $width-mobile) {
-		top: 0;
-	}
 }
 
-.header__band {
+.header__bandsWrap{
 	position: absolute;
-	top: -6rem;
-	left: -13rem;
+	top: 0;
+	left: 0;
+
+	width: 100%;
+}
+
+.header__band_red{
+	position: absolute;
+	top: -6.5rem;
+	left: -12rem;
 	width: 100%;
 	height: auto;
 
 	@media screen and (max-width: $width-mobile) {
-		width: 120.5vw;
-		top: -2.4rem;
-		left: -5rem;
+		transform: rotate(3deg);
 
-		transform: rotate(7deg);
+		top: -8.9vw;
+		left: -12.8vw;
+		width: 118vw;
+
 	}
+
+}
+
+.header__band_green{
+
+	position: absolute;
+	top: -28.5rem;
+	left: -16rem;
+	width: 43rem;
+	height: auto;
+
+	@media screen and (max-width: $width-mobile) {
+		transform: rotate(-10deg);
+
+		top: -30.6vw;
+		left: auto;
+		right: 20.8vw;
+
+		width: 105vw;
+	}
+
 }
 
 .header__brand {
@@ -151,25 +178,6 @@
 
 		position: absolute;
 		width: max-content;
-	}
-}
-
-.header__bandBottom {
-	position: absolute;
-	bottom: -4.2rem;
-	right: -4rem;
-
-	width: 23.4rem;
-	height: auto;
-
-	z-index: 5;
-
-	pointer-events: none;
-
-	@media screen and (max-width: $width-mobile) {
-		width: 57vw;
-		bottom: -6rem;
-		right: -5.3rem;
 	}
 }
 
@@ -218,8 +226,9 @@
 	&:hover {
 		color: white;
 		// border: 1px solid var(--color_red);
+		border: 1px solid var(--color_dark_olive_green);
 
-		background-color: var(--color_red);
+		background-color: var(--color_dark_olive_green);
 	}
 	&:active {
 		opacity: 0.7;
@@ -232,7 +241,7 @@
 		font-size: 4.1vw;
 		line-height: 6.1vw;
 
-		padding: 2vw 6.1vw;
+		padding: 2vw 4vw;
 
 		margin-right: 4vw;
 	}
@@ -252,10 +261,10 @@
 		background-color 0.3s ease-in-out, opacity 0.3s ease-in-out;
 
 	&:hover {
-		color: var(--color_red);
-		// border: 1px solid var(--color_red);
+		// color: var(--color_red);
+		border: 1px solid var(--color_dark_olive_green);
 
-		background-color: white;
+		background-color: var(--color_dark_olive_green);
 	}
 	&:active {
 		opacity: 0.7;
@@ -268,7 +277,7 @@
 		font-size: 4.1vw;
 		line-height: 6.1vw;
 
-		padding: 2vw 6.1vw;
+		padding: 2vw 3vw;
 	}
 }
 
@@ -282,5 +291,24 @@
 	@media screen and (max-width: $width-mobile) {
 		position: static;
 		z-index: 20;
+	}
+}
+
+.header__band_bottom {
+	position: absolute;
+	bottom: -5rem;
+	right: -32rem;
+
+	width: 48rem;
+	height: auto;
+
+	z-index: 5;
+
+	pointer-events: none;
+
+	@media screen and (max-width: $width-mobile) {
+		width: 123vw;
+		bottom: 5.6vw;
+		right: -92.3vw;
 	}
 }

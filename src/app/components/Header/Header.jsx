@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import Slide from '@mui/material/Slide';
+// import Slide from '@mui/material/Slide';
 import Button from '../Button/Button';
 
 import Modal from '../Modal/Modal';
@@ -38,11 +38,18 @@ const Header = ({ auth }) => {
                         [styles.header__logo_auth]: auth
                     })}
                 >
-                    <img
-                        className={styles.header__band}
-                        src={require('../../assets/images/Header_band.png').default}
-                        alt="band"
-                    />
+                    <div className={styles.header__bandsWrap}>
+                        <img
+                            className={styles.header__band_red}
+                            src={require('../../assets/images/Header_band_red.png').default}
+                            alt="band"
+                        />
+                        <img
+                            className={styles.header__band_green}
+                            src={require('../../assets/images/Header_band_green.png').default}
+                            alt="band"
+                        />
+                    </div>
                     <div className={styles.header__brand}>
                         <Cola className={styles.header__logoCola} />
                         <Feat className={styles.header__Logofeat} />
@@ -63,7 +70,7 @@ const Header = ({ auth }) => {
                     />
                 </div>
                 <img
-                    className={styles.header__bandBottom}
+                    className={styles.header__band_bottom}
                     src={require('../../assets/images/Header_band_bottom.png').default}
                     alt="band"
                 />

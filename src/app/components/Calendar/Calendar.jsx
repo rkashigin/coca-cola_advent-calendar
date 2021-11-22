@@ -5,15 +5,12 @@ import CalendarDay from '../CalendarDay/CalendarDay';
 import styles from './Calendar.module.scss';
 
 const Calendar = () => {
-    const [open, setOpen] = React.useState(<></>);
-    const handleClickOpen = (el) => {
-        setOpen(el);
-    };
     return (
         <>
             <div className={styles.calendar}>
                 {DATES.map((el) => (
                     <CalendarDay
+                        key={el.day}
                         id={el.day}
                         date={el.day}
                         img={el.img}
@@ -25,6 +22,11 @@ const Calendar = () => {
                         type={el.type}
                     />
                 ))}
+                <img
+                    className={styles.calendar__bandBottom}
+                    src={require('../../assets/images/Calendar/Calendar_band_bottom.png').default}
+                    alt="band"
+                />
             </div>
         </>
     );

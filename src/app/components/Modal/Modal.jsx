@@ -1,13 +1,15 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
-import { DialogContentText } from '@mui/material';
+// import { DialogContentText } from '@mui/material';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import Button from '../Button/Button';
+
+import { ReactComponent as CloseIcon } from '../../assets/icons/Modal_close_icon.svg';
 
 import styles from './Modal.module.scss';
 
@@ -29,7 +31,9 @@ const Modal = ({ open, handleClose, title, children }) => {
                     onClick={handleClose}
                     className={styles.modal__button_close}
                     content="Закрыть"
-                />
+                >
+                    <CloseIcon className={styles.modal__buttonIcon_close} />
+                </Button>
                 <DialogTitle className={styles.modal__title}>{title}</DialogTitle>
                 <DialogContent className={styles.modal__contentWrap}>
                     <div>{children}</div>

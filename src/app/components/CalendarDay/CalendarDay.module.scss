@@ -1,6 +1,7 @@
 @import "../../../variables.scss";
 
 .calendarDay {
+
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -180,6 +181,7 @@
 }
 
 .promoCode__button_copy {
+	--color_copy_icon: #EA003D;
 	height: 100%;
 	width: 100%;
 }

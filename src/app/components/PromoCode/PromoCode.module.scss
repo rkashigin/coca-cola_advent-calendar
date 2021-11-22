@@ -8,7 +8,7 @@
 }
 
 .promoCode__input {
-	--color_promoCode_field: #5D5F61;
+	--color_promoCode_field: rgba(93, 95, 97, 0.5);
 
 	font-size: 3.2rem;
 	line-height: 3.2rem;
@@ -21,7 +21,7 @@
 
 	border: 2px dashed var(--color_promoCode_field);
 
-	color: var(--color_promoCode_field);
+	color: #000;
 
 	display: flex;
 	align-items: center;
@@ -48,7 +48,7 @@
 	font-size: 1.6rem;
 	line-height: 2.2rem;
 
-	color: var(--color_promoCode_field);
+	color: #5D5F61;
 }
 
 .promoCode__button {
