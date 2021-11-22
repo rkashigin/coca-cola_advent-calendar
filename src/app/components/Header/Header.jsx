@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import Slide from '@mui/material/Slide';
 import Button from '../Button/Button';
@@ -12,7 +14,7 @@ import { ReactComponent as Cola } from '../../assets/icons/Logo_cola.svg';
 
 import styles from './Header.module.scss';
 
-const MainPage = () => {
+const Header = ({ auth }) => {
     const [open, setOpen] = React.useState(false);
 
     useEffect(() => {
@@ -31,7 +33,11 @@ const MainPage = () => {
         <>
             <header className={styles.header}>
                 {/* <div className={styles.header__logoWrap}> */}
-                <div className={styles.header__logo}>
+                <div
+                    className={classNames(styles.header__logo, {
+                        [styles.header__logo_auth]: auth
+                    })}
+                >
                     <img
                         className={styles.header__band}
                         src={require('../../assets/images/Header_band.png').default}
@@ -71,7 +77,11 @@ const MainPage = () => {
     );
 };
 
-export default MainPage;
+Header.propTypes = {
+    auth: PropTypes.bool.isRequired
+};
+
+export default Header;
 
 const PROMOCODES = [
     {

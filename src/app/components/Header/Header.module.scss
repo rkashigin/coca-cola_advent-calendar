@@ -109,6 +109,14 @@
 	}
 }
 
+.header__logo_auth{
+	top: 4rem;
+
+	@media screen and (max-width: $width-mobile) {
+		top: 0;
+	}
+}
+
 .header__band {
 	position: absolute;
 	top: -6rem;
