@@ -10,6 +10,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
+import { Alert, AlertTitle } from '@mui/material';
 
 import { ReactComponent as CopyIcon } from '../../assets/icons/Modal_promoCode_button_copy.svg';
 
@@ -34,6 +35,17 @@ const CalendarDay = ({
     type
 }) => {
     const [open, setOpen] = React.useState(false);
+    const [copied, setCopied] = React.useState(false);
+
+    const copiedHandler = async () => {
+        try {
+            await navigator.clipboard.writeText(promoCode);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 1500);
+        } catch (e) {
+            console.log(e);
+        }
+    };
 
     useEffect(() => {
         const app = document.querySelector('.App');
@@ -94,9 +106,23 @@ const CalendarDay = ({
                                 // onChange={changeHandler}
                             >
                                 {promoCode}
-                                <button className={styles.promoCode__button} type="button">
+                                <button
+                                    className={styles.promoCode__button}
+                                    type="button"
+                                    onClick={copiedHandler}
+                                >
                                     <CopyIcon className={styles.promoCode__button_copy} />
                                 </button>
+                                <Alert
+                                    severity="success"
+                                    className={classNames(styles.promoCode__alert_success, {
+                                        [styles.promoCode_copied]: copied
+                                    })}
+                                >
+                                    <AlertTitle className={styles.promoCode__alertInfo}>
+                                        Скопировано
+                                    </AlertTitle>
+                                </Alert>
                             </div>
                         )}
                     </DialogContent>
