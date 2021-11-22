@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
-import { MemoryGame, WhereIsGame } from '../../games';
+import { MemoryGame, WhereIsGame, ThreeInARowGame } from '../../games';
 
 import { ReactComponent as CloseIcon } from '../../assets/icons/icon__close.svg';
 
 import styles from './Game.module.scss';
-import ThreeInARow from '../../games/ThreeInARow';
+import CatchItemGame from '../../games/CatchItemGame';
 
 const Game = ({ game, fullScreen, test, onClose }) => {
     return (
@@ -29,7 +29,8 @@ const Game = ({ game, fullScreen, test, onClose }) => {
             <div className={styles.gamesWrapper__content}>
                 {/* <WhereIsGame gameVariant="easy" /> */}
                 {/* <MemoryGame /> */}
-                <ThreeInARow />
+                {/* <ThreeInARowGame /> */}
+                <CatchItemGame />
             </div>
         </div>
     );

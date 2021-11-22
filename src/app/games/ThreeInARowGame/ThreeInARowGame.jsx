@@ -1,12 +1,12 @@
 import React from 'react';
 
-import styles from './ThreeInARow.module.scss';
+import styles from './ThreeInARowGame.module.scss';
 
 const width = 5;
 
 const colors = ['blue', 'green', 'orange', 'purple', 'red', 'yellow'];
 
-const ThreeInARow = () => {
+const ThreeInARowGame = () => {
     const [currentBoard, setCurrentBoard] = React.useState([]);
 
     const createBoard = () => {
@@ -100,4 +100,4 @@ const ThreeInARow = () => {
     );
 };
 
-export default ThreeInARow;
+export default ThreeInARowGame;
