@@ -21,7 +21,7 @@ const ThreeInARow = () => {
         setCurrentBoard(board);
     };
 
-    // TODO: проверяем 4?
+    // TODO: проверку делаем по максимуму строк
 
     const checkForColumnOfThree = () => {
         for (let i = 0; i < width * (width - 2); i += 1) {
@@ -51,12 +51,32 @@ const ThreeInARow = () => {
         }
     };
 
+    const moveIntoSquareBelow = () => {
+        for (let i = 0; i < width ** 2 - width; i += 1) {
+            const firstRow = [0, 1, 2, 3, 4];
+            const isFirstRow = firstRow.includes(i);
+
+            if (isFirstRow && currentBoard[i] === '') {
+                const randomColor = Math.floor(Math.random() * colors.length);
+                currentBoard[i] = colors[randomColor];
+            }
+
+            if (currentBoard[i + width] === '') {
+                currentBoard[i + width] = currentBoard[i];
+                currentBoard[i] = '';
+            }
+        }
+    };
+
+    // TODO: Сделать буферное игрокове поле, которое будет не видно, и элементы которого будут падать сверху
+
     React.useEffect(createBoard, []);
 
     React.useEffect(() => {
         const timer = setInterval(() => {
             checkForColumnOfThree();
             checkForRowOfThree();
+            moveIntoSquareBelow();
 
             setCurrentBoard([...currentBoard]);
         }, 100);
@@ -69,8 +89,8 @@ const ThreeInARow = () => {
             <div className={styles.game__score}>Очки: 120</div>
             <div className={styles.game__timer}>01:32</div>
             <div className={styles.game__board}>
-                {currentBoard.map((item) => (
-                    <div className={styles.game__boardItem}>
+                {currentBoard.map((item, itemIdx) => (
+                    <div className={styles.game__boardItem} data-id={itemIdx}>
                         {/* eslint-disable-next-line jsx-a11y/alt-text */}
                         <img style={{ backgroundColor: item }} />
                     </div>
