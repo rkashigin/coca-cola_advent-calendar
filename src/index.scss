@@ -82,6 +82,15 @@ div.css-hz1bth-MuiDialog-container{
   @media screen and (max-width: $width-mobile) {
     align-items: flex-end;
   }
+
+  @media screen and (max-height: 464px) {
+    overflow: auto;
+
+    div.css-ypiqx9-MuiDialogContent-root{
+      min-height: 100%;
+      max-height: 100%;
+    }
+  }
 }
 
 div.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
