@@ -303,7 +303,6 @@ export default function useLogic({ canvasRef, setScores }) {
                 );
                 const col2 = tileColors[level.tiles[currentmove.column2][currentmove.row2].type];
 
-                // Draw a black background
                 drawTile(coord1.tilex, coord1.tiley, 0, 0, 0);
                 drawTile(coord2.tilex, coord2.tiley, 0, 0, 0);
 
@@ -328,31 +327,6 @@ export default function useLogic({ canvasRef, setScores }) {
             ctx.fillRect(x + 2, y + 2, level.tileWidth - 4, level.tileHeight - 4);
         };
 
-        const renderClusters = () => {
-            for (let i = 0; i < clusters.length; i += 1) {
-                const coord = getTileCoordinate(clusters[i].column, clusters[i].row, 0, 0);
-
-                if (clusters[i].horizontal) {
-                    ctx.fillStyle = '#00ff00';
-                    ctx.fillRect(
-                        coord.tilex + level.tileWidth / 2,
-                        coord.tiley + level.tileHeight / 2 - 4,
-                        (clusters[i].length - 1) * level.tileWidth,
-                        8
-                    );
-                } else {
-                    // Draw a vertical line
-                    ctx.fillStyle = '#0000ff';
-                    ctx.fillRect(
-                        coord.tilex + level.tileWidth / 2 - 4,
-                        coord.tiley + level.tileHeight / 2,
-                        8,
-                        (clusters[i].length - 1) * level.tileHeight
-                    );
-                }
-            }
-        };
-
         const render = () => {
             ctx.fillStyle = '#000000';
             ctx.font = '24px Verdana';
@@ -363,8 +337,6 @@ export default function useLogic({ canvasRef, setScores }) {
             ctx.fillRect(level.x - 4, level.y - 4, levelwidth + 8, levelheight + 8);
 
             renderTiles();
-
-            renderClusters();
 
             if (gameover) {
                 ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
