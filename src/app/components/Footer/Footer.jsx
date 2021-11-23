@@ -44,7 +44,9 @@ const Footer = () => {
                 </span>
                 <picture>
                     <source
-                        srcSet="../../assets/images/Footer_prize_cards_mobile.svg"
+                        srcSet={
+                            require('../../assets/images/Footer_prize_cards_mobile.svg').default
+                        }
                         media="(max-width: 725px)"
                     />
                     <img
