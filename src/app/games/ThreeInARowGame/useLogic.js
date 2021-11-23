@@ -2,7 +2,6 @@ import { useMediaQuery } from 'react-responsive';
 
 export default function useLogic({ canvasRef, setScores }) {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
-
     if (canvasRef) {
         const canvas = document.getElementById('canvas');
         const ctx = canvas?.getContext('2d');
@@ -37,12 +36,11 @@ export default function useLogic({ canvasRef, setScores }) {
         let animationstate = 0;
         let animationtime = 0;
         const animationtimetotal = 0.3;
-        let score = 0;
         let currentmove = { column1: 0, row1: 0, column2: 0, row2: 0 };
         let drag = false;
 
         const newGame = () => {
-            score = 0;
+            setScores(0);
 
             gamestate = gamestates.ready;
 
@@ -78,15 +76,12 @@ export default function useLogic({ canvasRef, setScores }) {
 
         const updateFps = (dt) => {
             if (fpstime > 0.25) {
-                // Calculate fps
                 fps = Math.round(framecount / fpstime);
 
-                // Reset time and framecount
                 fpstime = 0;
                 framecount = 0;
             }
 
-            // Increase time and framecount
             fpstime += dt;
             framecount += 1;
         };
@@ -95,65 +90,49 @@ export default function useLogic({ canvasRef, setScores }) {
             const dt = (tframe - lastframe) / 1000;
             lastframe = tframe;
 
-            // Update the fps counter
             updateFps(dt);
 
             if (gamestate === gamestates.ready) {
-                // Game is ready for player input
-
-                // Check for game over
                 if (moves.length <= 0) {
                     gameover = true;
                 }
             } else if (gamestate === gamestates.resolve) {
-                // Game is busy resolving and animating clusters
                 animationtime += dt;
 
                 if (animationstate === 0) {
-                    // Clusters need to be found and removed
                     if (animationtime > animationtimetotal) {
-                        // Find clusters
                         findClusters();
 
                         if (clusters.length > 0) {
-                            // Add points to the score
                             for (let i = 0; i < clusters.length; i += 1) {
-                                // Add extra points for longer clusters
-                                score += 100 * (clusters[i].length - 2);
+                                setScores(
+                                    // eslint-disable-next-line no-loop-func
+                                    (prevScores) => prevScores + 100 * (clusters[i].length - 2)
+                                );
                             }
 
-                            // Clusters found, remove them
                             removeClusters();
 
-                            // Tiles need to be shifted
                             animationstate = 1;
                         } else {
-                            // No clusters found, animation complete
                             gamestate = gamestates.ready;
                         }
                         animationtime = 0;
                     }
                 } else if (animationstate === 1) {
-                    // Tiles need to be shifted
                     if (animationtime > animationtimetotal) {
-                        // Shift tiles
                         shiftTiles();
 
-                        // New clusters need to be found
                         animationstate = 0;
                         animationtime = 0;
 
-                        // Check if there are new clusters
                         findClusters();
                         if (clusters.length <= 0) {
-                            // Animation complete
                             gamestate = gamestates.ready;
                         }
                     }
                 } else if (animationstate === 2) {
-                    // Swapping tiles animation
                     if (animationtime > animationtimetotal) {
-                        // Swap the tiles
                         swap(
                             currentmove.column1,
                             currentmove.row1,
@@ -161,28 +140,21 @@ export default function useLogic({ canvasRef, setScores }) {
                             currentmove.row2
                         );
 
-                        // Check if the swap made a cluster
                         findClusters();
                         if (clusters.length > 0) {
-                            // Valid swap, found one or more clusters
-                            // Prepare animation states
                             animationstate = 0;
                             animationtime = 0;
                             gamestate = gamestates.resolve;
                         } else {
-                            // Invalid swap, Rewind swapping animation
                             animationstate = 3;
                             animationtime = 0;
                         }
 
-                        // Update moves and clusters
                         findMoves();
                         findClusters();
                     }
                 } else if (animationstate === 3) {
-                    // Rewind swapping animation
                     if (animationtime > animationtimetotal) {
-                        // Invalid swap, swap back
                         swap(
                             currentmove.column1,
                             currentmove.row1,
@@ -190,38 +162,13 @@ export default function useLogic({ canvasRef, setScores }) {
                             currentmove.row2
                         );
 
-                        // Animation complete
                         gamestate = gamestates.ready;
                     }
                 }
 
-                // Update moves and clusters
                 findMoves();
                 findClusters();
             }
-        };
-
-        // Draw a frame with a border
-        const drawFrame = () => {
-            // Draw background and a border
-            ctx.fillStyle = '#d0d0d0';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#e8eaec';
-            ctx.fillRect(1, 1, canvas.width - 2, canvas.height - 2);
-
-            // Draw header
-            ctx.fillStyle = '#303030';
-            ctx.fillRect(0, 0, canvas.width, 65);
-
-            // Draw title
-            ctx.fillStyle = '#ffffff';
-            ctx.font = '24px Verdana';
-            ctx.fillText('Match3 Example - Rembound.com', 10, 30);
-
-            // Display fps
-            ctx.fillStyle = '#ffffff';
-            ctx.font = '12px Verdana';
-            ctx.fillText(`Fps: ${fps}`, 13, 50);
         };
 
         const main = (tframe) => {
@@ -407,8 +354,6 @@ export default function useLogic({ canvasRef, setScores }) {
         };
 
         const render = () => {
-            drawFrame();
-
             ctx.fillStyle = '#000000';
             ctx.font = '24px Verdana';
 
@@ -655,7 +600,11 @@ export default function useLogic({ canvasRef, setScores }) {
         };
 
         return {
-            game
+            game,
+            onMouseMove,
+            onMouseDown,
+            onMouseUp,
+            onMouseOut
         };
     }
 
