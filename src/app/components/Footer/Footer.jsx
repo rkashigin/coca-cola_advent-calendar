@@ -7,7 +7,7 @@ import styles from './Footer.module.scss';
 
 const Footer = () => {
     return (
-        <div className={styles.footer}>
+        <footer className={styles.footer}>
             <SnowDecoration className={styles.footer__decoration} />
             <div className={styles.footer__card}>
                 <h3 className={styles.footer__cardTitle}>
@@ -25,7 +25,7 @@ const Footer = () => {
                 />
                 <img
                     className={styles.footer__cardband_bottom}
-                    src={require('../../assets/images/Footer_card_band_bottom.png').default}
+                    src={require('../../assets/images/Foter_card_band_bottom.png').default}
                     alt="band"
                 />
                 <img
@@ -42,14 +42,24 @@ const Footer = () => {
                     Уникальный холодильник с запасом Coca-Cola и промокод 3 500 ₽ на заказы в
                     ресторанах!
                 </span>
-
-                <img
-                    className={styles.footer__cardPrize_multiple}
-                    src={require('../../assets/images/Footer_card_cola_and_delivery.png').default}
-                    alt="Delivery and Coca-Cola"
-                />
+                <picture>
+                    <source
+                        srcSet={
+                            require('../../assets/images/Footer_prize_cards_mobile.svg').default
+                        }
+                        media="(max-width: 725px)"
+                    />
+                    <img
+                        className={styles.footer__cardPrize_multiple}
+                        src={
+                            require('../../assets/images/Footer_card_cola_and_delivery.svg').default
+                        }
+                        alt="Delivery and Coca-Cola"
+                    />
+                </picture>
             </div>
             <div className={styles.footer__intro}>
+                <div className={styles.footer__bgSnowFlakes} />
                 <img
                     className={styles.footer__band}
                     src={require('../../assets/images/Footer_band.png').default}
@@ -61,14 +71,15 @@ const Footer = () => {
                     alt="Prize from Delivery"
                 />
                 <h2 className={styles.footer__title}>
-                    Розыгрыши больших призов для участников advent-кадендаря
+                    Розыгрыши больших призов для участников advent-календаря
                 </h2>
                 <span className={styles.footer__subTitle}>
-                    * Результаты розыгрыша будут опубликованына сайте 8 декабря, 15 декабря, 22
+                    * Результаты розыгрыша будут опубликованы на сайте 8 декабря, 15 декабря, 22
                     декабря и 10 января
                 </span>
             </div>
-        </div>
+            <SnowDecoration className={styles.footer__decoration_mobile} />
+        </footer>
     );
 };
 

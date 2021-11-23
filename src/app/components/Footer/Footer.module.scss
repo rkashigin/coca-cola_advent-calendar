@@ -1,313 +1,475 @@
 @import "../../../variables.scss";
 
+.footer {
+	position: relative;
 
-.footer{
-    position: relative;
+	box-sizing: border-box;
 
-    box-sizing: border-box;
+	// padding: 10rem var(--section_padding) var(--section_padding);
 
-    // padding: 10rem var(--section_padding) var(--section_padding);
+	display: grid;
 
-    display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(2, max-content);
+	gap: 0 3.2rem;
 
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, max-content);
-    gap: 0 3.2rem;
+	padding: 5.5rem 0 1rem;
 
-    @media screen and (max-width: $width-mobile){
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-    }
+	overflow-x: clip;
 
+	background-color: white;
+
+	@media screen and (max-width: $width-mobile) {
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+
+		padding: 0 0 1rem;
+	}
 }
 
-.footer__decoration{
-    position: absolute;
+.footer__decoration {
+	position: absolute;
 
-    width: 100%;
-    height: auto;
+	width: 100%;
+	height: auto;
 
-    top: -5rem;
-    left: 0;
-    right: 0;
+	top: -5rem;
+	left: 0;
+	right: 0;
 
-    z-index: 0;
+	z-index: 0;
 
-    @media screen and (max-width: $width-mobile){
-        top: -2rem;
-    }
+	@media screen and (max-width: $width-mobile) {
+		top: -6.9vw;
+	}
 }
 
-.footer__card{
-    width: 67.2rem;
-    height: 39.2rem;
+.footer__decoration_mobile {
+	display: none;
 
-    border-radius: 1.6rem;
+	@media screen and (max-width: $width-mobile) {
+        display: block;
+		position: absolute;
 
-    box-sizing: border-box;
+		width: 100%;
+		height: auto;
 
-    overflow: hidden;
+		left: 0;
+		right: 0;
+        bottom: 0;
 
-    padding: 3.2rem;
-
-    position: relative;
-
-    background-color: var(--color_light_grey);
-
-    margin: 0 0 0 var(--section_padding);
-
-    @media screen and (max-width: $width-mobile){
-        width: auto;
-        height: 82vw;
-
-        background-color: white;
-
-        padding: 0;
-
-        margin: 0 var(--section_padding);
-
-        order: 1;
-    }
+		z-index: 50;
+	}
 }
 
-.footer__card_red{
-    background-color: var(--color_red);
-    margin: 0 var(--section_padding) 0 0;
+.footer__card {
+	width: 67.2rem;
+	height: 39.2rem;
 
-    .footer__cardTitle{
-        color: white;
-    }
+	border-radius: 1.6rem;
 
-    @media screen and (max-width: $width-mobile){
-        background-color: white;
+	box-sizing: border-box;
 
-        margin: 0 var(--section_padding);
-        order: 3;
+	overflow: hidden;
 
-        height: 128vw;
+	padding: 3.5rem 3.2rem;
 
-        .footer__cardTitle{
-            color: #000;
-        }
-    }
+	position: relative;
+
+	background-color: var(--color_light_grey);
+
+	margin: 0 0 0 var(--section_padding);
+
+	&::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+
+		width: 100%;
+		height: 100%;
+
+		background-image: url("../../assets/images/Footer_stars_white_card.svg");
+		background-repeat: no-repeat;
+		background-size: 90%;
+		background-position: center;
+
+		z-index: 0;
+		pointer-events: none;
+	}
+
+	@media screen and (max-width: $width-mobile) {
+		width: auto;
+		height: 77.5vw;
+
+		background-color: white;
+
+		padding: 0;
+
+		margin: 0 var(--section_padding);
+
+		order: 1;
+
+		&::after {
+			background-image: url("../../assets/images/Footer_stars_white_card_mobile.svg");
+			background-size: 100%;
+			background-position: top center;
+			top: -1vw;
+		}
+	}
 }
 
-.footer__cardTitle{
-    font-weight: 700;
-    font-size: var(--font_size_h3);
-    line-height: 2.8rem;
+.footer__card_red {
+	background-color: var(--color_red);
+	margin: 0 var(--section_padding) 0 0;
 
-    margin: 0;
+	&::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 1rem;
+		right: 0;
 
-    color: black;
+		width: 100%;
+		height: 100%;
 
-    font-family: var(--font_Montserrat);
+		background-image: url("../../assets/images/Footer_stars_red_card.svg");
+		background-repeat: no-repeat;
+		background-size: 95%;
+		background-position: center;
 
-    @media screen and (max-width: $width-mobile){
-        margin: 6vw 0 0;
+		z-index: 0;
+		pointer-events: none;
+	}
 
-        font-size: 6.1vw;
-        line-height: 7.1vw;
-    }
+	.footer__cardTitle {
+		color: white;
+		max-width: 78%;
+	}
+
+	@media screen and (max-width: $width-mobile) {
+		background-color: white;
+
+		margin: 0 var(--section_padding);
+		padding-top: 19vw;
+		order: 3;
+
+		height: 128vw;
+
+		.footer__cardTitle {
+			color: #000;
+			max-width: 100%;
+			margin: 0;
+			position: relative;
+		}
+
+		&::after {
+			background-image: url("../../assets/images/Footer_stars_white_card_mobile.svg");
+		}
+		&::before {
+			content: "";
+			position: absolute;
+			top: -20vw;
+			bottom: 0;
+			left: 1rem;
+			right: 0;
+
+			width: 100%;
+			height: 100%;
+			background-image: url("../../assets/images/Footer_stars_white_card_mobile.svg");
+			background-repeat: no-repeat;
+			background-size: 95%;
+			background-position: center;
+
+			z-index: 0;
+			pointer-events: none;
+		}
+	}
 }
 
-.footer__cardSubTitle{
-    font-weight: 400;
-    font-size: 1.6rem;
-    line-height: 2.2rem;
+.footer__cardTitle {
+	font-weight: 700;
+	font-size: var(--font_size_h3);
+	line-height: 2.8rem;
 
-    color: white;
-    display: block;
+	margin: 0;
 
-    margin: 1.8rem 0 0;
+	color: black;
 
-    @media screen and (max-width: $width-mobile){
-        font-size: 4.1vw;
-        line-height: 5.6vw;
+	font-family: var(--font_Montserrat);
 
-        color: #000;
-    }
+	max-width: 70%;
+
+	@media screen and (max-width: $width-mobile) {
+		margin: 4vw 0 0;
+		max-width: 100%;
+
+		font-size: 6.1vw;
+		line-height: 7.1vw;
+
+		position: relative;
+		z-index: 5;
+	}
 }
 
-.footer__cardPrize_ivi{
-    position: absolute;
-    top: 8.3rem;
-    right: 3rem;
+.footer__cardSubTitle {
+	font-weight: 400;
+	font-size: 1.6rem;
+	line-height: 2.2rem;
 
-    width: 20.7rem;
-    height: auto;
+	color: white;
+	display: block;
 
-    @media screen and (max-width: $width-mobile){
-        width: 34vw;
+	margin: 1.4rem 0 0;
 
-        top: 20vw;
-        right: 0;
-    }
+	max-width: 60%;
+
+	@media screen and (max-width: $width-mobile) {
+		font-size: 4.1vw;
+		line-height: 5.6vw;
+
+		margin: 4.5vw 0 2.6vw;
+
+		color: #000;
+
+		max-width: 100%;
+		position: relative;
+		z-index: 5;
+	}
 }
 
-.footer__cardPrize_delivery{
-    position: absolute;
-    top: 10.7rem;
-    left: 2.4rem;
+.footer__cardPrize_ivi {
+	position: absolute;
+	top: 8.1rem;
+	right: 3rem;
 
-    width: 35.7rem;
-    height: auto;
-    transform: rotate(-9.46deg);
+	filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.25));
 
-    @media screen and (max-width: $width-mobile){
-        width: 59vw;
-        top: 30vw;
-        left: 0;
+	width: 22.7rem;
+	height: auto;
 
-        transform: rotate(7.31deg);
-    }
+	z-index: 5;
+
+	@media screen and (max-width: $width-mobile) {
+		width: 38vw;
+
+		top: 18.5vw;
+		right: -1vw;
+	}
 }
 
-.footer__cardband_bottom{
-    position: absolute;
+.footer__cardPrize_delivery {
+	position: absolute;
+	top: 8rem;
+	left: -0.5rem;
 
-    right: -4rem;
-    bottom: -3rem;
+	width: 42rem;
+	height: auto;
 
-    width: 20.4rem;
-    height: auto;
+	filter: drop-shadow(0px 6.2343px 6.2343px rgba(0, 0, 0, 0.25));
 
-    @media screen and (max-width: $width-mobile){
-        display: none;
-    }
+	z-index: 5;
+	// transform: rotate(-9.46deg);
+
+	@media screen and (max-width: $width-mobile) {
+		width: 69vw;
+		top: 21.4vw;
+		left: -7.1vw;
+
+		transform: rotate(17deg);
+	}
 }
 
-.footer__cardband_left{
-    position: absolute;
+.footer__cardband_bottom {
+	position: absolute;
 
-    left: 0;
-    bottom: 1rem;
+	right: -4rem;
+	bottom: -4.2rem;
 
-    width: 16rem;
-    height: auto;
+	width: 22.6rem;
+	height: auto;
 
-    @media screen and (max-width: $width-mobile){
-        display: none;
-    }
+	transform: rotate(60deg);
+
+	@media screen and (max-width: $width-mobile) {
+		display: none;
+	}
 }
 
-.footer__cardPrize_multiple{
-    position: absolute;
-    bottom: 1rem;
-    right: 1rem;
+.footer__cardband_left {
+	position: absolute;
 
-    width: 40rem;
-    height: auto;
+	left: -3.1rem;
+	bottom: 1.6rem;
 
-    @media screen and (max-width: $width-mobile){
-        width: 90vw;
-    }
+	width: 16rem;
+	height: auto;
+
+	z-index: 5;
+
+	@media screen and (max-width: $width-mobile) {
+		display: none;
+	}
 }
 
-.footer__intro{
-    width: 100%;
-    height: 28rem;
+.footer__cardPrize_multiple {
+	position: absolute;
+	bottom: 1rem;
+	right: 1rem;
 
-    position: relative;
+	width: 40rem;
+	height: auto;
 
-    color: white;
+	z-index: 5;
 
-    grid-column: span 2;
-
-    margin: 5rem 0 0;
-
-    @media screen and (max-width: $width-mobile){
-        color: #000;
-
-        order: 2;
-
-        display: flex;
-        flex-direction: column;
-
-        margin: 0;
-
-        height: 90vw;
-    }
+	@media screen and (max-width: $width-mobile) {
+		width: 90vw;
+		position: static;
+		filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+	}
 }
 
-.footer__band{
-    position: absolute;
+.footer__intro {
+	width: 100%;
+	height: 27rem;
 
-    top: 0;
-    left: 0;
-    right: 0;
+	position: relative;
 
-    width: 100%;
-    height: auto;
+	color: white;
 
-    @media screen and (max-width: $width-mobile){
-        height: 20rem;
-        width: auto;
-    }
+	grid-column: span 2;
+
+	margin: 5.8rem 0 0;
+
+	@media screen and (max-width: $width-mobile) {
+		color: #000;
+
+		order: 2;
+
+		display: flex;
+		flex-direction: column;
+
+		margin: 0;
+
+		height: 90vw;
+	}
 }
 
-.footer__prizeCards{
-    position: absolute;
+.footer__bgSnowFlakes {
+	position: absolute;
 
-    right: 3rem;
-    top: -4rem;
+	width: 100%;
+	height: 100%;
 
-    width: 52.1rem;
-    height: auto;
-    z-index: 5;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
 
-    @media screen and (max-width: $width-mobile){
-        width: 92vw;
+	background-image: url("../../assets/images/Footer_intro_snowflakes.svg");
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-position: center;
 
-        position: static;
+	z-index: 1;
+	pointer-events: none;
 
-        order: 2;
-    }
+	@media screen and (max-width: $width-mobile) {
+		display: none;
+	}
 }
 
-.footer__title{
-    margin: 5rem 0 3rem 4.8rem;
+.footer__band {
+	position: absolute;
 
-    font-weight: 700;
-    font-family: var(--font_Montserrat);
-    font-size: 4rem;
-    line-height: 4.8rem;
+	top: 0;
+	left: 0;
+	right: 0;
 
-    transform: rotate(-2deg);
+	width: 100%;
+	height: auto;
 
-    @media screen and (max-width: $width-mobile){
-        margin: 5rem var(--section_padding) 0;
-        font-size: 6.1vw;
-        line-height: 7.1vw;
-
-        transform: rotate(-3deg);
-
-        color: white;
-
-        order: 1;
-    }
+	@media screen and (max-width: $width-mobile) {
+		height: 20rem;
+		width: auto;
+	}
 }
 
-.footer__subTitle{
-    display: inline-block;
-    transform: rotate(-2deg);
+.footer__prizeCards {
+	position: absolute;
 
-    font-weight: 400;
-    font-size: 1.6rem;
-    line-height: 2rem;
-    opacity: 0.5;
+	right: 4.5rem;
+	top: -4rem;
 
-    margin: 0 0 0 4.8rem;
+	width: 52.1rem;
+	height: auto;
+	z-index: 5;
 
-    @media screen and (max-width: $width-mobile){
-        margin: 0 var(--section_padding);
+	@media screen and (max-width: $width-mobile) {
+		width: 92vw;
 
-        transform: rotate(0);
+		position: static;
 
-        order: 3;
+		order: 2;
 
-        font-size: 4.1vw;
-        line-height: 5.1vw;
-    }
+		margin: 3vw 4.5vw 5vw;
+	}
+}
+
+.footer__title {
+	margin: 6rem 0 2.3rem 4.9rem;
+
+	font-weight: 700;
+	font-family: var(--font_Montserrat);
+	font-size: 4rem;
+	line-height: 4.8rem;
+
+	max-width: 55%;
+
+	transform: rotate(-2deg);
+
+	@media screen and (max-width: $width-mobile) {
+		margin: 9.3vw var(--section_padding) 0;
+		font-size: 6.1vw;
+		line-height: 7.1vw;
+
+		transform: rotate(-3deg);
+
+		color: white;
+
+		order: 1;
+
+		max-width: 100%;
+	}
+}
+
+.footer__subTitle {
+	display: inline-block;
+	transform: rotate(-2deg);
+
+	font-weight: 400;
+	font-size: 1.6rem;
+	line-height: 2rem;
+	opacity: 0.5;
+
+	margin: 0 0 0 4.9rem;
+
+	max-width: 29.5%;
+
+	@media screen and (max-width: $width-mobile) {
+		margin: 0 var(--section_padding);
+
+		transform: rotate(0);
+
+		order: 3;
+
+		font-size: 4.1vw;
+		line-height: 5.1vw;
+
+		max-width: 100%;
+	}
 }
