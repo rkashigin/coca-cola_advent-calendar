@@ -113,6 +113,10 @@ div.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
     margin: 2vw;
     width: 100%;
   }
+
+  @media screen and (max-height: 464px) {
+    // padding-top: 42rem;
+  }
 }
 div.css-ypiqx9-MuiDialogContent-root {
 	overflow-x: hidden;
@@ -167,6 +171,10 @@ div.css-hlj6pa-MuiDialogActions-root{
 
   @media screen and (max-width: $width-mobile){
     margin-top: 8.2vw;
+  }
+
+  @media screen and (max-height: 464px) {
+    width: 100%;
   }
 }
 

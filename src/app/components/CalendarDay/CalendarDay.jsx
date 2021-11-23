@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { useMediaQuery } from 'react-responsive';
 
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -11,6 +12,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { Alert, AlertTitle } from '@mui/material';
+import Adaptive from '../../helpers/Adaptive';
 
 import { ReactComponent as CopyIcon } from '../../assets/icons/Modal_promoCode_button_copy.svg';
 
@@ -36,6 +38,8 @@ const CalendarDay = ({
 }) => {
     const [open, setOpen] = React.useState(false);
     const [copied, setCopied] = React.useState(false);
+
+    const isHorizontal = useMediaQuery(Adaptive.isHorizontal);
 
     const copiedHandler = async () => {
         try {
@@ -78,12 +82,24 @@ const CalendarDay = ({
                 aria-describedby="alert-dialog-slide-description"
                 className={styles.popup}
             >
-                <img
-                    className={classNames(classNameImg, styles.calendarModal__img)}
-                    src={modalImg}
-                    alt=""
-                />
+                {!isHorizontal && (
+                    <img
+                        className={classNames(classNameImg, styles.calendarModal__img)}
+                        src={modalImg}
+                        alt=""
+                    />
+                )}
                 <div className={styles.modal}>
+                    {isHorizontal && (
+                        <img
+                            className={classNames(
+                                classNameImg,
+                                styles.calendarModal__img_horizontalMedia
+                            )}
+                            src={modalImg}
+                            alt=""
+                        />
+                    )}
                     <DialogTitle>{title}</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-slide-description">
