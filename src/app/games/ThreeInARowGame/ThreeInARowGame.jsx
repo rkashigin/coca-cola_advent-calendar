@@ -9,7 +9,7 @@ const ThreeInARowGame = () => {
     const canvasRef = React.useRef(null);
     const [scores, setScores] = React.useState(0);
     const [isCanvasReady, setIsCanvasReady] = React.useState(false);
-    const { game, onMouseMove, onMouseDown, onMouseUp, onMouseOut } = useLogic({
+    const { canvas, game, onMouseMove, onMouseDown, onMouseUp, onMouseOut } = useLogic({
         canvasRef: isCanvasReady,
         setScores
     });
@@ -18,6 +18,13 @@ const ThreeInARowGame = () => {
         if (canvasRef.current) {
             setIsCanvasReady(true);
         }
+
+        return () => {
+            canvas.removeEventListener('mousemove', onMouseMove);
+            canvas.removeEventListener('mousedown', onMouseDown);
+            canvas.removeEventListener('mouseup', onMouseUp);
+            canvas.removeEventListener('mouseout', onMouseOut);
+        };
     }, []);
 
     React.useEffect(() => {
@@ -30,16 +37,7 @@ const ThreeInARowGame = () => {
         <div className={styles.game}>
             <div className={styles.game__score}>Очки: {scores}</div>
             <Timer styles={styles} givenTime={120_000} />
-            <canvas
-                id="canvas"
-                ref={canvasRef}
-                className={styles.game__board}
-                onMouseMove={onMouseMove}
-                onMouseDown={onMouseDown}
-                onMouseUp={onMouseUp}
-                onMouseOut={onMouseOut}
-                onBlur={onMouseOut}
-            >
+            <canvas id="canvas" ref={canvasRef} className={styles.game__board}>
                 Чтобы поиграть в игру, поменяйте браузер
             </canvas>
         </div>

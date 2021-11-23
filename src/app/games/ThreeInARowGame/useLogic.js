@@ -572,6 +572,7 @@ export default function useLogic({ canvasRef, setScores }) {
         };
 
         return {
+            canvas,
             game,
             onMouseMove,
             onMouseDown,
