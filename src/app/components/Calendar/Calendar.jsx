@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 import CalendarDay from '../CalendarDay/CalendarDay';
@@ -8,6 +8,11 @@ import { Day10, Day11, Day2, Day3, Day4, Day5, Day6, Day7, Day8, Day9 } from '..
 
 const Calendar = () => {
     const [openedDay, setOpenedDay] = React.useState(0);
+
+    useEffect(() => {
+        const app = document.querySelector('.App');
+        app.style.filter = openedDay ? 'blur(10px)' : '';
+    }, [openedDay]);
 
     const handleOpenDay = (day) => setOpenedDay(day);
 
