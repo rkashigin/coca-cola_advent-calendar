@@ -85,6 +85,7 @@ const CalendarDay = ({
                 onClose={handleClose}
                 aria-describedby="alert-dialog-slide-description"
                 className={styles.popup}
+                // transitionDuration={...(openedDay && { exit: 0 })}
             >
                 <img
                     className={classNames(classNameImg, styles.calendarModal__img)}

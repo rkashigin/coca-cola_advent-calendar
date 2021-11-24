@@ -71,7 +71,7 @@ const Day2 = ({ setOpenedDay }) => {
                 />
             </div>
             <Dialog
-                open={!result}
+                open={result}
                 TransitionComponent={Transition}
                 keepMounted
                 onClose={handleClose}

@@ -9,8 +9,6 @@ import styles from './WhereIsGame.module.scss';
 
 const WhereIsGame = ({ gameVariant, setResult }) => {
     const gameConfig = config.references.whereIsGame[gameVariant];
-    const [xPos, setXPos] = React.useState('');
-    const [yPos, setYPos] = React.useState('');
     const [selectionWindowX, setSelectionWindowX] = React.useState('');
     const [selectionWindowY, setSelectionWindowY] = React.useState('');
     const [selectionColor, setSelectionColor] = React.useState('');
@@ -36,9 +34,6 @@ const WhereIsGame = ({ gameVariant, setResult }) => {
     };
 
     const handlePerformFindAttempt = (e) => {
-        setXPos(e.nativeEvent.offsetX);
-        setYPos(e.nativeEvent.offsetY);
-
         generateSelectionWindow({
             x: e.nativeEvent.offsetX,
             xChange: e.target.x,
