@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import CalendarDay from '../CalendarDay/CalendarDay';
+import { Day10, Day11, Day2, Day3, Day4, Day5, Day6, Day7, Day8, Day9 } from '../Days';
+import config from '../../config';
 
 import styles from './Calendar.module.scss';
-import { Day10, Day11, Day2, Day3, Day4, Day5, Day6, Day7, Day8, Day9 } from '../Days';
 
 const Calendar = () => {
     const [openedDay, setOpenedDay] = React.useState(0);
@@ -82,8 +83,8 @@ const DATES = [
         day: 3,
         img: require('../../assets/images/Calendar/3day.png').default,
         modalImg: require('../../assets/images/Games/game_2_day.png').default,
-        title: 'Тест про Деда Мороза',
-        intro: 'Тест про Деда Мороза',
+        title: config.references.quizes.day3.title,
+        intro: config.references.quizes.day3.description,
         type: 'test'
     },
     {
