@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import useLogic from './useLogic';
 
 import styles from './CatchItemGame.module.scss';
 
-const CatchItemGame = () => {
+const CatchItemGame = ({ setResult }) => {
     const canvasRef = React.useRef(null);
     const [scores, setScores] = React.useState(0);
     const [isCanvasReady, setIsCanvasReady] = React.useState(false);
@@ -30,6 +31,12 @@ const CatchItemGame = () => {
         }
     }, [isCanvasReady]);
 
+    React.useEffect(() => {
+        if (scores === 300) {
+            setResult(true);
+        }
+    }, [scores]);
+
     return (
         <div className={styles.game}>
             <div className={styles.game__score}>Очки: {scores}</div>
@@ -44,6 +51,10 @@ const CatchItemGame = () => {
             </canvas>
         </div>
     );
+};
+
+CatchItemGame.propTypes = {
+    setResult: PropTypes.func.isRequired
 };
 
 export default CatchItemGame;
