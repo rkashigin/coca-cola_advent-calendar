@@ -43,13 +43,13 @@ const Day2 = ({ setOpenedDay }) => {
         return () => clearTimeout(timer);
     }, [open]);
 
-    React.useEffect(() => {
-        if (result) {
-            const game = document.querySelector('.gameWrapper');
-            game.style.filter = result ? 'blur(10px)' : '';
-            game.style.background = result ? 'rgba(0, 0, 0, 0.8)' : '';
-        }
-    }, [result]);
+    // React.useEffect(() => {
+    //     if (result) {
+    //         const game = document.querySelector('.gameWrapper');
+    //         game.style.filter = result ? 'blur(10px)' : '';
+    //         game.style.background = result ? 'rgba(0, 0, 0, 0.8)' : '';
+    //     }
+    // }, [result]);
 
     return (
         <Dialog
@@ -93,9 +93,9 @@ const Day2 = ({ setOpenedDay }) => {
                 )}
                 <div className={styles.modal}>
                     {result ? (
-                        <DialogTitle>Уолли нашелся!</DialogTitle>
+                        <DialogTitle>Холодильник нашелся, поздравляем!</DialogTitle>
                     ) : (
-                        <DialogTitle>Вы очень постарались, чтобы найти Уолли!</DialogTitle>
+                        <DialogTitle>Вы очень постарались! Вот Ваш приз за усердие!</DialogTitle>
                     )}
                     <DialogContent>
                         {result ? (

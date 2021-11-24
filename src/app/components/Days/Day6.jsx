@@ -8,6 +8,8 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 
+import PromoCode from '../PromoCode/PromoCode';
+
 import Game from '../Game';
 import { CatchItemGame } from '../../games';
 
@@ -113,7 +115,7 @@ const Day6 = ({ setOpenedDay }) => {
                                     />
                                     Сертификат в онлайн-кинотеатр IVI
                                 </p>
-                                <div
+                                {/* <div
                                     name="promoCode"
                                     type="button"
                                     value={promocode}
@@ -124,7 +126,11 @@ const Day6 = ({ setOpenedDay }) => {
                                     <button className={styles.promoCode__button} type="button">
                                         <CopyIcon className={styles.promoCode__button_copy} />
                                     </button>
-                                </div>
+                                </div> */}
+                                <PromoCode
+                                    promoCode={promocode}
+                                    promoCodeText="Срок действия промокода 31.01.2022"
+                                />
                             </>
                         )}
                     </DialogContent>

@@ -23,7 +23,7 @@ const PromoCode = ({ promoCode, promoCodeText }) => {
 
     return (
         <div className={styles.promoCode}>
-            <div className={styles.promoCode__text}>{promoCodeText}</div>
+            {promoCodeText && <div className={styles.promoCode__text}>{promoCodeText}</div>}
             <div
                 name="promoCode"
                 type="button"

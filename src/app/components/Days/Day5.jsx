@@ -10,6 +10,8 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 
+import PromoCode from '../PromoCode/PromoCode';
+
 import { ReactComponent as CopyIcon } from '../../assets/icons/Modal_promoCode_button_copy.svg';
 
 import styles from '../CalendarDay/CalendarDay.module.scss';
@@ -73,7 +75,7 @@ const Day5 = () => {
                                 Задание этого дня совсем простое: сделайте заказ в Delivery Club на
                                 любую сумму с нашим волшебным промокодом на Coca-Cola за 1 ₽
                             </DialogContentText>
-                            <div
+                            {/* <div
                                 name="promoCode"
                                 type="button"
                                 value={promocode}
@@ -84,7 +86,11 @@ const Day5 = () => {
                                 <button className={styles.promoCode__button} type="button">
                                     <CopyIcon className={styles.promoCode__button_copy} />
                                 </button>
-                            </div>
+                            </div> */}
+                            <PromoCode
+                                promoCode={promocode}
+                                promoCodeText="Срок действия промокода 31.01.2022"
+                            />
                         </>
                     ) : (
                         <DialogContentText id="alert-dialog-slide-description">

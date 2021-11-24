@@ -10,6 +10,8 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 
+import PromoCode from '../PromoCode/PromoCode';
+
 import { ReactComponent as CopyIcon } from '../../assets/icons/Modal_promoCode_button_copy.svg';
 
 import styles from '../CalendarDay/CalendarDay.module.scss';
@@ -90,18 +92,20 @@ const Day4 = ({ setOpenedDay }) => {
                 )}
                 <div className={styles.modal}>
                     {result ? (
-                        <DialogTitle>18 из 18</DialogTitle>
+                        <DialogTitle>Поздравляем!</DialogTitle>
                     ) : (
-                        <DialogTitle>{score} из 18</DialogTitle>
+                        <DialogTitle>
+                            К сожалению, вы не успели найти все пары картинок вовремя
+                        </DialogTitle>
                     )}
                     <DialogContent>
                         {result ? (
                             <>
                                 <DialogContentText id="alert-dialog-slide-description">
-                                    Задание этого дня совсем простое: сделайте заказ в Delivery Club
-                                    на любую сумму с нашим волшебным промокодом на Coca-Cola за 1 ₽
+                                    У вас прекрасная память и быстрая реакция! За это дарим вам
+                                    подарок!
                                 </DialogContentText>
-                                <div
+                                {/* <div
                                     name="promoCode"
                                     type="button"
                                     value={promocode}
@@ -112,12 +116,14 @@ const Day4 = ({ setOpenedDay }) => {
                                     <button className={styles.promoCode__button} type="button">
                                         <CopyIcon className={styles.promoCode__button_copy} />
                                     </button>
-                                </div>
+                                </div> */}
+                                <PromoCode
+                                    promoCode={promocode}
+                                    promoCodeText="Срок действия промокода 31.01.2022"
+                                />
                             </>
                         ) : (
-                            <DialogContentText id="alert-dialog-slide-description">
-                                Описание
-                            </DialogContentText>
+                            <></>
                         )}
                     </DialogContent>
                     <DialogActions>
@@ -128,7 +134,7 @@ const Day4 = ({ setOpenedDay }) => {
                             </>
                         ) : (
                             <>
-                                <Button onClick={handleClose}>Попробовать ещё раз</Button>
+                                <Button onClick={handleClose}>Играть ещё раз</Button>
                                 <Button onClick={handleClose}>В календарь</Button>
                             </>
                         )}

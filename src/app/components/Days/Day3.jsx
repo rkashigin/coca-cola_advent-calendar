@@ -10,6 +10,8 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 
+import PromoCode from '../PromoCode/PromoCode';
+
 import { ReactComponent as CopyIcon } from '../../assets/icons/Modal_promoCode_button_copy.svg';
 
 import styles from '../CalendarDay/CalendarDay.module.scss';
@@ -23,7 +25,7 @@ const Day3 = () => {
     const [result, setResult] = React.useState(true);
 
     const promocode = 'DCCC2022';
-    const score = 5;
+    // const score = 5;
 
     useEffect(() => {
         const app = document.querySelector('.App');
@@ -62,18 +64,21 @@ const Day3 = () => {
             )}
             <div className={styles.modal}>
                 {result ? (
-                    <DialogTitle>10 из 10</DialogTitle>
+                    <DialogTitle>Вы настоящий знаток Деда Мороза!</DialogTitle>
                 ) : (
-                    <DialogTitle>{score} из 10</DialogTitle>
+                    <DialogTitle>
+                        Кажется, вам нужно немного подтянуть свои познания о Деде Морозе. Не
+                        переживайте!
+                    </DialogTitle>
                 )}
                 <DialogContent>
                     {result ? (
                         <>
                             <DialogContentText id="alert-dialog-slide-description">
-                                Задание этого дня совсем простое: сделайте заказ в Delivery Club на
-                                любую сумму с нашим волшебным промокодом на Coca-Cola за 1 ₽
+                                Он это ценит, поэтому не оставит вас без внимания на этих
+                                праздниках!
                             </DialogContentText>
-                            <div
+                            {/* <div
                                 name="promoCode"
                                 type="button"
                                 value={promocode}
@@ -84,11 +89,16 @@ const Day3 = () => {
                                 <button className={styles.promoCode__button} type="button">
                                     <CopyIcon className={styles.promoCode__button_copy} />
                                 </button>
-                            </div>
+                            </div> */}
+                            <PromoCode
+                                promoCode={promocode}
+                                promoCodeText="Срок действия промокода 31.01.2022"
+                            />
                         </>
                     ) : (
                         <DialogContentText id="alert-dialog-slide-description">
-                            Описание
+                            С нашим advent-календарем вы еще много узнаете о новогодних традициях и
+                            символах!
                         </DialogContentText>
                     )}
                 </DialogContent>
