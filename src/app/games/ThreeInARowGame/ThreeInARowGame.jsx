@@ -1,11 +1,12 @@
 import React from 'react';
-import Countdown from 'react-countdown';
+import PropTypes from 'prop-types';
 
-import styles from './ThreeInARowGame.module.scss';
 import useLogic from './useLogic';
 import { Timer } from '../../components';
 
-const ThreeInARowGame = () => {
+import styles from './ThreeInARowGame.module.scss';
+
+const ThreeInARowGame = ({ setResult, setScore }) => {
     const canvasRef = React.useRef(null);
     const [scores, setScores] = React.useState(0);
     const [isCanvasReady, setIsCanvasReady] = React.useState(false);
@@ -33,15 +34,28 @@ const ThreeInARowGame = () => {
         }
     }, [isCanvasReady]);
 
+    React.useEffect(() => {
+        setScore(scores);
+
+        if (scores === 300) {
+            setResult(true);
+        }
+    }, [scores]);
+
     return (
         <div className={styles.game}>
             <div className={styles.game__score}>Очки: {scores}</div>
-            <Timer styles={styles} givenTime={120_000} />
+            <Timer className={styles.game__timer} givenTime={120_000} />
             <canvas id="canvas" ref={canvasRef} className={styles.game__board}>
                 Чтобы поиграть в игру, поменяйте браузер
             </canvas>
         </div>
     );
+};
+
+ThreeInARowGame.propTypes = {
+    setResult: PropTypes.func.isRequired,
+    setScore: PropTypes.func.isRequired
 };
 
 export default ThreeInARowGame;
