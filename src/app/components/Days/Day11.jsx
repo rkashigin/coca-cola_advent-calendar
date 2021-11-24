@@ -18,7 +18,7 @@ const Transition = React.forwardRef((props, ref) => {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export const Day11 = () => {
+const Day11 = () => {
     const [open, setOpen] = React.useState(true);
     const [result, setResult] = React.useState(true);
 
@@ -67,3 +67,5 @@ export const Day11 = () => {
         </Dialog>
     );
 };
+
+export default Day11;

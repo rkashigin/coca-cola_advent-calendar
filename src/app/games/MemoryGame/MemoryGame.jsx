@@ -2,16 +2,15 @@ import React from 'react';
 import { shuffle } from 'lodash';
 import cn from 'classnames';
 
+import PropTypes from 'prop-types';
 import Images from './images';
 
 import styles from './MemoryGame.module.scss';
 
-const MemoryGame = () => {
+const MemoryGame = ({ setResult, setScore }) => {
     const [cards] = React.useState(shuffle([...Images, ...Images]));
     const [activeCards, setActiveCards] = React.useState([]);
     const [foundPairs, setFoundPairs] = React.useState([]);
-    const [won, setWon] = React.useState(false);
-    const [showPreview, setShowPreview] = React.useState(true);
 
     const flipCard = (index) => {
         if (activeCards.length === 2) return;
@@ -21,7 +20,7 @@ const MemoryGame = () => {
             const secondsIndex = index;
             if (cards[firstIndex] === cards[secondsIndex]) {
                 if (foundPairs.length + 2 === cards.length) {
-                    setWon(true);
+                    setResult(true);
                 }
                 setFoundPairs([...foundPairs, firstIndex, secondsIndex]);
             }
@@ -32,12 +31,6 @@ const MemoryGame = () => {
     };
 
     React.useEffect(() => {
-        const timer = setTimeout(() => setShowPreview(false), 2000);
-
-        return () => clearTimeout(timer);
-    }, []);
-
-    React.useEffect(() => {
         let timer;
 
         if (activeCards.length === 2) {
@@ -46,6 +39,12 @@ const MemoryGame = () => {
 
         return () => clearTimeout(timer);
     }, [activeCards]);
+
+    React.useEffect(() => {
+        if (foundPairs.length) {
+            setScore(foundPairs.length);
+        }
+    }, [foundPairs]);
 
     return (
         <div className={styles.game}>
@@ -60,7 +59,7 @@ const MemoryGame = () => {
                     return (
                         <div
                             className={cn(styles.board__cardWrapper, {
-                                [styles.board__cardWrapper_flipped]: showPreview || flippedToFront
+                                [styles.board__cardWrapper_flipped]: flippedToFront
                             })}
                             onClick={() => flipCard(cardIdx)}
                         >
@@ -76,6 +75,11 @@ const MemoryGame = () => {
             </div>
         </div>
     );
+};
+
+MemoryGame.propTypes = {
+    setResult: PropTypes.func.isRequired,
+    setScore: PropTypes.func.isRequired
 };
 
 export default MemoryGame;

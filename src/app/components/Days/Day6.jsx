@@ -1,7 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react';
-import classNames from 'classnames';
-
+import React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -9,6 +7,9 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
+
+import Game from '../Game';
+import { CatchItemGame } from '../../games';
 
 import { ReactComponent as CopyIcon } from '../../assets/icons/Modal_promoCode_button_copy.svg';
 
@@ -18,24 +19,36 @@ const Transition = React.forwardRef((props, ref) => {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export const Day6 = () => {
+const Day6 = ({ setOpenedDay }) => {
     const [open, setOpen] = React.useState(true);
     const [result, setResult] = React.useState(false);
 
     const promocode = 'DCCC2022';
 
-    useEffect(() => {
-        const app = document.querySelector('.App');
-        app.style.filter = open ? 'blur(10px)' : '';
-    }, [open]);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
     const handleClose = () => {
         setOpen(false);
+        setResult(false);
     };
+
+    React.useEffect(() => {
+        let timer;
+        const app = document.querySelector('.App');
+        app.style.filter = open ? 'blur(10px)' : '';
+
+        if (!open) {
+            timer = setTimeout(() => setOpenedDay(0), 1000);
+        }
+
+        return () => clearTimeout(timer);
+    }, [open]);
+
+    React.useEffect(() => {
+        if (result) {
+            const game = document.querySelector('.gameWrapper');
+            game.style.filter = result ? 'blur(10px)' : '';
+            game.style.background = result ? 'rgba(0, 0, 0, 0.8)' : '';
+        }
+    }, [result]);
 
     return (
         <Dialog
@@ -45,70 +58,90 @@ export const Day6 = () => {
             onClose={handleClose}
             aria-describedby="alert-dialog-slide-description"
             className={styles.popup}
+            fullScreen
+            fullWidth
         >
-            {result ? (
-                <img
-                    className={styles.modalResult__img}
-                    src={require('../../assets/images/Games/game_won.png').default}
-                    alt=""
+            <div className="gameWrapper">
+                <Game
+                    handleClose={handleClose}
+                    game={<CatchItemGame setResult={setResult} />}
+                    fullScreen
                 />
-            ) : (
-                <img
-                    className={styles.modalResult__img}
-                    src={require('../../assets/images/Games/game_lost.png').default}
-                    alt=""
-                />
-            )}
-            <div className={styles.modal}>
-                {result ? (
-                    <DialogTitle>Вы молодцы и умеете пользоваться тележкой!</DialogTitle>
-                ) : (
-                    <DialogTitle>Вы не умеете пользоваться тележкой</DialogTitle>
-                )}
-                <DialogContent>
-                    {result ? (
-                        <DialogContentText id="alert-dialog-slide-description">
-                            Вы отлично справились с заданием!
-                        </DialogContentText>
-                    ) : (
-                        <>
-                            <DialogContentText id="alert-dialog-slide-description">
-                                Вот Ваш приз за старания!
-                            </DialogContentText>
-                            <p className={styles.modal__promoText}>
-                                <img
-                                    className={styles.modal__promoIcon}
-                                    src={require('../../assets/icons/ivi.svg').default}
-                                    alt=""
-                                />
-                                Сертификат в онлайн-кинотеатр IVI
-                            </p>
-                            <div
-                                name="promoCode"
-                                type="button"
-                                value={promocode}
-                                className={styles.modal__promoCode}
-                                // onChange={changeHandler}
-                            >
-                                {promocode}
-                                <button className={styles.promoCode__button} type="button">
-                                    <CopyIcon className={styles.promoCode__button_copy} />
-                                </button>
-                            </div>
-                        </>
-                    )}
-                </DialogContent>
-                <DialogActions>
-                    {result ? (
-                        <Button onClick={handleClose}>Увидимся завтра!</Button>
-                    ) : (
-                        <>
-                            <Button onClick={handleClose}>Попробовать ещё раз</Button>
-                            <Button onClick={handleClose}>В календарь</Button>
-                        </>
-                    )}
-                </DialogActions>
             </div>
+            <Dialog
+                open={result}
+                TransitionComponent={Transition}
+                keepMounted
+                onClose={handleClose}
+                aria-describedby="alert-dialog-slide-description"
+                className={styles.popup}
+            >
+                {result ? (
+                    <img
+                        className={styles.modalResult__img}
+                        src={require('../../assets/images/Games/game_won.png').default}
+                        alt=""
+                    />
+                ) : (
+                    <img
+                        className={styles.modalResult__img}
+                        src={require('../../assets/images/Games/game_lost.png').default}
+                        alt=""
+                    />
+                )}
+                <div className={styles.modal}>
+                    {result ? (
+                        <DialogTitle>Вы молодцы и умеете пользоваться тележкой!</DialogTitle>
+                    ) : (
+                        <DialogTitle>Вы не умеете пользоваться тележкой</DialogTitle>
+                    )}
+                    <DialogContent>
+                        {result ? (
+                            <DialogContentText id="alert-dialog-slide-description">
+                                Вы отлично справились с заданием!
+                            </DialogContentText>
+                        ) : (
+                            <>
+                                <DialogContentText id="alert-dialog-slide-description">
+                                    Вот Ваш приз за старания!
+                                </DialogContentText>
+                                <p className={styles.modal__promoText}>
+                                    <img
+                                        className={styles.modal__promoIcon}
+                                        src={require('../../assets/icons/ivi.svg').default}
+                                        alt=""
+                                    />
+                                    Сертификат в онлайн-кинотеатр IVI
+                                </p>
+                                <div
+                                    name="promoCode"
+                                    type="button"
+                                    value={promocode}
+                                    className={styles.modal__promoCode}
+                                    // onChange={changeHandler}
+                                >
+                                    {promocode}
+                                    <button className={styles.promoCode__button} type="button">
+                                        <CopyIcon className={styles.promoCode__button_copy} />
+                                    </button>
+                                </div>
+                            </>
+                        )}
+                    </DialogContent>
+                    <DialogActions>
+                        {result ? (
+                            <Button onClick={handleClose}>Увидимся завтра!</Button>
+                        ) : (
+                            <>
+                                <Button onClick={handleClose}>Попробовать ещё раз</Button>
+                                <Button onClick={handleClose}>В календарь</Button>
+                            </>
+                        )}
+                    </DialogActions>
+                </div>
+            </Dialog>
         </Dialog>
     );
 };
+
+export default Day6;

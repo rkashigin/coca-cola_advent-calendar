@@ -1,10 +1,16 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 import CalendarDay from '../CalendarDay/CalendarDay';
 
 import styles from './Calendar.module.scss';
+import { Day10, Day11, Day2, Day3, Day4, Day5, Day6, Day7, Day8, Day9 } from '../Days';
 
 const Calendar = () => {
+    const [openedDay, setOpenedDay] = React.useState(0);
+
+    const handleOpenDay = (day) => setOpenedDay(day);
+
     return (
         <>
             <div className={styles.calendar}>
@@ -20,6 +26,8 @@ const Calendar = () => {
                         intro={el.intro}
                         promoCode={el.promoCode}
                         type={el.type}
+                        handleOpenDay={() => handleOpenDay(el.day)}
+                        openedDay={openedDay}
                     />
                 ))}
                 <img
@@ -28,11 +36,29 @@ const Calendar = () => {
                     alt="band"
                 />
             </div>
+            {openedDay &&
+                ReactDOM.createPortal(
+                    React.cloneElement(DAYS[openedDay], { setOpenedDay }),
+                    document.body
+                )}
         </>
     );
 };
 
 export default Calendar;
+
+const DAYS = {
+    2: <Day2 />,
+    3: <Day3 />,
+    4: <Day4 />,
+    5: <Day5 />,
+    6: <Day6 />,
+    7: <Day7 />,
+    8: <Day8 />,
+    9: <Day9 />,
+    10: <Day10 />,
+    11: <Day11 />
+};
 
 const DATES = [
     {

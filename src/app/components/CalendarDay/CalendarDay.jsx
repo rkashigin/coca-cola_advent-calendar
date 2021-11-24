@@ -34,7 +34,9 @@ const CalendarDay = ({
     promoCodeImg,
     promoCodeText,
     promoCode,
-    type
+    type,
+    openedDay,
+    handleOpenDay
 }) => {
     const [open, setOpen] = React.useState(false);
     const [copied, setCopied] = React.useState(false);
@@ -55,6 +57,12 @@ const CalendarDay = ({
         const app = document.querySelector('.App');
         app.style.filter = open ? 'blur(10px)' : '';
     }, [open]);
+
+    useEffect(() => {
+        if (openedDay) {
+            setOpen(false);
+        }
+    }, [openedDay]);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -81,6 +89,7 @@ const CalendarDay = ({
                 onClose={handleClose}
                 aria-describedby="alert-dialog-slide-description"
                 className={styles.popup}
+                // transitionDuration={...(openedDay && { exit: 0 })}
             >
                 {!isHorizontal && (
                     <img
@@ -144,25 +153,25 @@ const CalendarDay = ({
                     </DialogContent>
                     {type === 'test' && (
                         <DialogActions>
-                            <Button onClick={handleClose}>Начать тест</Button>
+                            <Button onClick={handleOpenDay}>Начать тест</Button>
                             <Button onClick={handleClose}>Выполнить позже</Button>
                         </DialogActions>
                     )}
                     {type === 'game' && (
                         <DialogActions>
-                            <Button onClick={handleClose}>Начать игру</Button>
+                            <Button onClick={handleOpenDay}>Начать игру</Button>
                             <Button onClick={handleClose}>Выполнить позже</Button>
                         </DialogActions>
                     )}
                     {type === 'promoCode' && (
                         <DialogActions>
-                            <Button onClick={handleClose}>Заказать сейчас</Button>
+                            <Button onClick={handleOpenDay}>Заказать сейчас</Button>
                             <Button onClick={handleClose}>В календарь</Button>
                         </DialogActions>
                     )}
                     {type === 'postCard' && (
                         <DialogActions>
-                            <Button onClick={handleClose}>Узнать</Button>
+                            <Button onClick={handleOpenDay}>Узнать</Button>
                             <Button onClick={handleClose}>Выполнить позже</Button>
                         </DialogActions>
                     )}

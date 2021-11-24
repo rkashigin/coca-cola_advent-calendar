@@ -2,38 +2,35 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
-import { MemoryGame, WhereIsGame } from '../../games';
-
 import { ReactComponent as CloseIcon } from '../../assets/icons/icon__close.svg';
 
 import styles from './Game.module.scss';
 
-const Game = ({ game, fullScreen, test, onClose }) => {
+const Game = ({ game, fullScreen, test, handleClose }) => {
     return (
         <div
-            className={cn(styles.game, {
-                [styles.game_fullScreen]: fullScreen
+            className={cn(styles.gamesWrapper, {
+                [styles.gamesWrapper_fullScreen]: fullScreen
             })}
         >
             <button
                 type="button"
-                className={cn(styles.game__exitButton, {
-                    [styles.game__exitButton_fixed]: fullScreen
+                className={cn(styles.gamesWrapper__exitButton, {
+                    [styles.gamesWrapper__exitButton_fixed]: fullScreen
                 })}
-                onClick={onClose}
+                onClick={handleClose}
             >
                 {test ? 'Выйти из теста' : 'Выйти из игры'}
-                <CloseIcon className={styles.game__closeIcon} />
+                <CloseIcon className={styles.gamesWrapper__closeIcon} />
             </button>
-            {/* <WhereIsGame gameVariant="easy" /> */}
-            <MemoryGame />
+            <div className={styles.gamesWrapper__content}>{game}</div>
         </div>
     );
 };
 
 Game.propTypes = {
-    game: PropTypes.elementType.isRequired,
-    onClose: PropTypes.func.isRequired,
+    game: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
+    handleClose: PropTypes.func.isRequired,
     fullScreen: PropTypes.bool,
     test: PropTypes.bool
 };
