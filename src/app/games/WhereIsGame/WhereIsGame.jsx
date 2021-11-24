@@ -7,7 +7,7 @@ import Game from '../../assets/images/firstGame.svg';
 
 import styles from './WhereIsGame.module.scss';
 
-const WhereIsGame = ({ gameVariant }) => {
+const WhereIsGame = ({ gameVariant, setResult }) => {
     const gameConfig = config.references.whereIsGame[gameVariant];
     const [xPos, setXPos] = React.useState('');
     const [yPos, setYPos] = React.useState('');
@@ -25,6 +25,7 @@ const WhereIsGame = ({ gameVariant }) => {
         const isFindSuccess = confirmFind(x - xChange, y);
 
         if (isFindSuccess) {
+            setResult(true);
             setSelectionColor('green');
         } else {
             setSelectionColor('red');
@@ -35,13 +36,13 @@ const WhereIsGame = ({ gameVariant }) => {
     };
 
     const handlePerformFindAttempt = (e) => {
-        console.log('EVENT', e);
         setXPos(e.nativeEvent.offsetX);
         setYPos(e.nativeEvent.offsetY);
+
         generateSelectionWindow({
-            x: e.nativeEvent.pageX,
+            x: e.nativeEvent.offsetX,
             xChange: e.target.x,
-            y: e.nativeEvent.pageY,
+            y: e.nativeEvent.offsetY,
             yChange: e.target.y
         });
     };
@@ -67,7 +68,8 @@ const WhereIsGame = ({ gameVariant }) => {
 };
 
 WhereIsGame.propTypes = {
-    gameVariant: PropTypes.string.isRequired
+    gameVariant: PropTypes.string.isRequired,
+    setResult: PropTypes.func.isRequired
 };
 
 export default WhereIsGame;

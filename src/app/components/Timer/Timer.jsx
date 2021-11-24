@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Countdown from 'react-countdown';
 
-const Timer = React.memo(({ styles, givenTime }) => {
+const Timer = React.memo(({ className, givenTime }) => {
     const timerRenderer = ({ minutes, seconds, completed }) => {
         if (completed) {
             return <span>0:0</span>;
@@ -16,7 +16,7 @@ const Timer = React.memo(({ styles, givenTime }) => {
     };
 
     return (
-        <div className={styles.game__timer}>
+        <div className={className}>
             <Countdown date={Date.now() + givenTime} renderer={timerRenderer} zeroPadTime={4} />
         </div>
     );
@@ -24,7 +24,7 @@ const Timer = React.memo(({ styles, givenTime }) => {
 
 Timer.propTypes = {
     // eslint-disable-next-line react/forbid-prop-types
-    styles: PropTypes.object.isRequired,
+    className: PropTypes.string.isRequired,
     givenTime: PropTypes.number.isRequired
 };
 

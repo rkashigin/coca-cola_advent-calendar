@@ -20,10 +20,10 @@ const ThreeInARowGame = () => {
         }
 
         return () => {
-            canvas.removeEventListener('mousemove', onMouseMove);
-            canvas.removeEventListener('mousedown', onMouseDown);
-            canvas.removeEventListener('mouseup', onMouseUp);
-            canvas.removeEventListener('mouseout', onMouseOut);
+            canvas?.removeEventListener('mousemove', onMouseMove);
+            canvas?.removeEventListener('mousedown', onMouseDown);
+            canvas?.removeEventListener('mouseup', onMouseUp);
+            canvas?.removeEventListener('mouseout', onMouseOut);
         };
     }, []);
 

@@ -1,7 +1,13 @@
 import { useMediaQuery } from 'react-responsive';
 
+// TODO: если ходов нет перегенерить доску
+// TODO: в таймер прокидывать не все styles а конкретный класс
+// TODO: за победу не обязательно дают помокод (ответ с бэка)
+// TODO: Сделать тесты в дополнение к играм (что-то тест, что-то - опрос (без правильного варианта))
+
 export default function useLogic({ canvasRef, setScores }) {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
+
     if (canvasRef) {
         const canvas = document.getElementById('canvas');
         const ctx = canvas?.getContext('2d');
@@ -32,7 +38,6 @@ export default function useLogic({ canvasRef, setScores }) {
         let fps = 0;
         const gamestates = { init: 0, ready: 1, resolve: 2 };
         let gamestate = gamestates.init;
-        let gameover = false;
         let animationstate = 0;
         let animationtime = 0;
         const animationtimetotal = 0.3;
@@ -43,8 +48,6 @@ export default function useLogic({ canvasRef, setScores }) {
             setScores(0);
 
             gamestate = gamestates.ready;
-
-            gameover = false;
 
             createLevel();
 
@@ -94,7 +97,7 @@ export default function useLogic({ canvasRef, setScores }) {
 
             if (gamestate === gamestates.ready) {
                 if (moves.length <= 0) {
-                    gameover = true;
+                    createLevel();
                 }
             } else if (gamestate === gamestates.resolve) {
                 animationtime += dt;
@@ -337,14 +340,6 @@ export default function useLogic({ canvasRef, setScores }) {
             ctx.fillRect(level.x - 4, level.y - 4, levelwidth + 8, levelheight + 8);
 
             renderTiles();
-
-            if (gameover) {
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
-                ctx.fillRect(level.x, level.y, levelwidth, levelheight);
-
-                ctx.fillStyle = '#ffffff';
-                ctx.font = '24px Verdana';
-            }
         };
 
         const findMoves = () => {
