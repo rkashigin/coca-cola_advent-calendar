@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 const host = process.env.REACT_APP_API || '123';
 const port = process.env.PORT || 8080;
 
@@ -56,6 +54,49 @@ export default {
                         correctExplanation: 'Ну а кто коденчика не хочет? А? А?',
                         failureExplanation:
                             'Ну ты как так?? А как ты собрался делать Purple Drunk???? Мда.....'
+                    },
+                    {
+                        question: 'Быть дауном или не быть дауном?',
+                        answers: [
+                            {
+                                text: 'Лучше не быть дауном',
+                                isCorrect: true
+                            },
+                            {
+                                text: 'ДАДАЯ',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'А ШО?',
+                                isCorrect: false
+                            }
+                        ],
+                        correctExplanation: 'Ну не хочу я(((',
+                        failureExplanation: 'Ты дурак?....'
+                    },
+                    {
+                        question:
+                            'Кто быстрее, негр драг диллер или школьник, который хочет в туалет?',
+                        answers: [
+                            {
+                                text: 'Первый',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Второй',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Скорость распространения короны',
+                                isCorrect: true
+                            },
+                            {
+                                text: 'Я быстрее всех',
+                                isCorrect: false
+                            }
+                        ],
+                        correctExplanation: 'Ну тут даже думать не надо',
+                        failureExplanation: 'Кек'
                     }
                 ]
             }

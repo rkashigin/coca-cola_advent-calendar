@@ -11,8 +11,33 @@ import styles from './Quiz.module.scss';
 const Quiz = ({ setResult, setScore, quiz }) => {
     const [questionNumber, setQuestionNumber] = React.useState(0);
     const [selectedAnswer, setSelectedAnswer] = React.useState(null);
+    const rightAnswers = React.useRef(0);
 
-    const handleSelectAnswer = (answerIdx) => setSelectedAnswer(answerIdx);
+    const handleSelectAnswer = (answerIdx, isCorrect) => {
+        setSelectedAnswer(answerIdx);
+
+        if (isCorrect) {
+            rightAnswers.current += 1;
+        }
+    };
+
+    React.useEffect(() => {
+        let timer;
+
+        if (Number.isInteger(selectedAnswer)) {
+            timer = setTimeout(() => {
+                if (questionNumber + 1 !== quiz.length) {
+                    setSelectedAnswer(null);
+                    setQuestionNumber((prevNumber) => prevNumber + 1);
+                } else {
+                    setResult(true);
+                    setScore(rightAnswers.current);
+                }
+            }, 1500);
+        }
+
+        return () => clearTimeout(timer);
+    }, [selectedAnswer]);
 
     return (
         <div className={styles.quiz}>
@@ -40,7 +65,7 @@ const Quiz = ({ setResult, setScore, quiz }) => {
             {quiz[questionNumber].answers.map(({ text, isCorrect }, answerIdx) => (
                 <Button
                     type="button"
-                    onClick={() => handleSelectAnswer(answerIdx)}
+                    onClick={() => handleSelectAnswer(answerIdx, isCorrect)}
                     key={text}
                     className={cn(styles.quiz__answer, {
                         [styles.quiz__answer_correct]:

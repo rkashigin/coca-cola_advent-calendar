@@ -97,11 +97,9 @@ const Day3 = ({ setOpenedDay }) => {
                     />
                 )}
                 <div className={styles.modal}>
-                    {result ? (
-                        <DialogTitle>10 из 10</DialogTitle>
-                    ) : (
-                        <DialogTitle>{score} из 10</DialogTitle>
-                    )}
+                    <DialogTitle>
+                        {score} из {config.references.quizes.day3.quiz.length}
+                    </DialogTitle>
                     <DialogContent>
                         {result ? (
                             <>
