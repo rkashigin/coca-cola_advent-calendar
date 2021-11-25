@@ -33,71 +33,187 @@ export default {
                 description: 'Но хорошо ли вы его знаете? Давайте проверим!',
                 quiz: [
                     {
-                        question: 'Идеальный подарок, который Вы ожидаете увидеть?',
+                        question: 'Какого прозвища не бывает у Деда Мороза?',
                         answers: [
                             {
-                                text: 'Кубинская цепь',
+                                text: 'Студенец',
                                 isCorrect: false
                             },
                             {
-                                text: 'Драгзы',
+                                text: 'Леденец',
                                 isCorrect: false
                             },
                             {
-                                text: 'Кодеин',
+                                text: 'Трескунец',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Морозко',
                                 isCorrect: true
-                            },
-                            {
-                                text: "Lil' shawtey",
-                                isCorrect: false
                             }
                         ],
-                        correctExplanation: 'Ну а кто коденчика не хочет? А? А?',
-                        failureExplanation:
-                            'Ну ты как так?? А как ты собрался делать Purple Drunk???? Мда.....'
+                        correctExplanation: 'У Деда Мороза прозвище - Морозко'
                     },
                     {
-                        question: 'Быть дауном или не быть дауном?',
+                        question: 'Где в России находится зимняя родина Деда Мороза?',
                         answers: [
                             {
-                                text: 'Лучше не быть дауном',
+                                text: 'Тверь',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Петрозаводск',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Великий Устюг',
                                 isCorrect: true
                             },
                             {
-                                text: 'ДАДАЯ',
-                                isCorrect: false
-                            },
-                            {
-                                text: 'А ШО?',
+                                text: 'Ростов Великий',
                                 isCorrect: false
                             }
                         ],
-                        correctExplanation: 'Ну не хочу я(((',
-                        failureExplanation: 'Ты дурак?....'
+                        correctExplanation:
+                            'В Великом Устюге не так давно расположена зимняя резиденция Деда Мороза и считается его родиной'
                     },
                     {
                         question:
-                            'Кто быстрее, негр драг диллер или школьник, который хочет в туалет?',
+                            'Как зовут любимца Деда Мороза, белого оленя, что живет с ним в Великом Устюге?',
                         answers: [
                             {
-                                text: 'Первый',
+                                text: 'Петька',
                                 isCorrect: false
                             },
                             {
-                                text: 'Второй',
-                                isCorrect: false
-                            },
-                            {
-                                text: 'Скорость распространения короны',
+                                text: 'Лешка',
                                 isCorrect: true
                             },
                             {
-                                text: 'Я быстрее всех',
+                                text: 'Ванька',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Сенька',
                                 isCorrect: false
                             }
                         ],
-                        correctExplanation: 'Ну тут даже думать не надо',
-                        failureExplanation: 'Кек'
+                        correctExplanation:
+                            'В Великом Устюге живет белый олень Лешка, любимец Деда Мороза'
+                    },
+                    {
+                        question: 'Какого цвета не может быть шуба у Деда Мороза?',
+                        answers: [
+                            {
+                                text: 'Желтая',
+                                isCorrect: true
+                            },
+                            {
+                                text: 'Красная',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Серая',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Синяя',
+                                isCorrect: false
+                            }
+                        ],
+                        correctExplanation:
+                            'Шуба у Деда Мороза может быть красной, серой или синей. Но, может, в будущем он попробует какой-то другой цвет?'
+                    },
+                    {
+                        question: 'Какого святого принято считать прообразом Деда Мороза?',
+                        answers: [
+                            {
+                                text: 'Святой Петр',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Святой Николай',
+                                isCorrect: true
+                            },
+                            {
+                                text: 'Святой Павел',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Святой Георгий',
+                                isCorrect: false
+                            }
+                        ],
+                        correctExplanation:
+                            'Святой Николай стал прообразом современного Деда Мороза'
+                    },
+                    {
+                        question: 'Когда Дед Мороз появляется на праздничной детской ёлке?',
+                        answers: [
+                            {
+                                text: 'Находится там всегда',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'В самом начале',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'В середине',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'В конце',
+                                isCorrect: true
+                            }
+                        ],
+                        correctExplanation: 'Правильный ответ'
+                    },
+                    {
+                        question: 'Какой из этих фактов про Деда Мороза — вымысел?',
+                        answers: [
+                            {
+                                text: 'У Деда Мороза есть волшебный посох',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Дед Мороз огромного роста',
+                                isCorrect: true
+                            },
+                            {
+                                text: 'Деду Морозу свыше 2000 лет',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'У Деда Мороза длинная седая борода',
+                                isCorrect: false
+                            }
+                        ],
+                        correctExplanation:
+                            'Дед Мороз небольшого роста с длинной бородой и волшебным посохом. И ему свыше 2000 лет'
+                    },
+                    {
+                        question:
+                            'Как зовут помощников Деда Мороза, что несут за собой снег и холода?',
+                        answers: [
+                            {
+                                text: 'Ледяники',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Снежинки',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Морозцы',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Трескуны',
+                                isCorrect: true
+                            }
+                        ],
+                        correctExplanation: 'Правильный ответ'
                     }
                 ]
             }

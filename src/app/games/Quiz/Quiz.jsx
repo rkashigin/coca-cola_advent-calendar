@@ -33,7 +33,7 @@ const Quiz = ({ setResult, setScore, quiz }) => {
                     setResult(true);
                     setScore(rightAnswers.current);
                 }
-            }, 1500);
+            }, 2500);
         }
 
         return () => clearTimeout(timer);
@@ -58,7 +58,7 @@ const Quiz = ({ setResult, setScore, quiz }) => {
                     {Number.isInteger(selectedAnswer)
                         ? quiz[questionNumber].answers[selectedAnswer].isCorrect
                             ? quiz[questionNumber].correctExplanation
-                            : quiz[questionNumber].failureExplanation
+                            : quiz[questionNumber].correctExplanation
                         : quiz[questionNumber].question}
                 </h2>
             </div>

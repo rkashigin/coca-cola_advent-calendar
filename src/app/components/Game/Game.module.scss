@@ -34,14 +34,18 @@
   line-height: 2.4rem;
 
   position: absolute;
-  top: 1.7rem;
-  right: 1rem;
+  top: 1.6rem;
+  right: 1.6rem;
 
   &_fixed {
     position: fixed;
     background-color: rgba(0, 0, 0, 0.32);
 
     color: white;
+
+    .gamesWrapper__closeIcon{
+      --color_icon_close: white;
+    }
   }
 }
 
@@ -58,5 +62,5 @@
   height: 2.4rem;
   margin-left: 0.4rem;
 
-  --color_icon_close: white;
+  --color_icon_close: #5D5F61;
 }
