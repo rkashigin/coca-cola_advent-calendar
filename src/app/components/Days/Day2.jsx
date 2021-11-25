@@ -10,7 +10,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 
-import { ReactComponent as CopyIcon } from '../../assets/icons/Modal_promoCode_button_copy.svg';
+import PromoCode from '../PromoCode/PromoCode';
 
 import styles from '../CalendarDay/CalendarDay.module.scss';
 import Game from '../Game';
@@ -24,7 +24,7 @@ const Day2 = ({ setOpenedDay }) => {
     const [open, setOpen] = React.useState(true);
     const [result, setResult] = React.useState(false);
 
-    const promocode = 'DCCC2022';
+    const promoCode = 'DCCC2022';
 
     const handleClose = () => {
         setResult(false);
@@ -85,58 +85,99 @@ const Day2 = ({ setOpenedDay }) => {
                         alt=""
                     />
                 ) : (
-                    <img
-                        className={styles.modalResult__img}
-                        src={require('../../assets/images/Games/game_lost.png').default}
-                        alt=""
-                    />
+                    <>
+                        {promoCode ? (
+                            <img
+                                className={styles.modalResult__img}
+                                src={require('../../assets/images/Games/game_lost.png').default}
+                                alt=""
+                            />
+                        ) : (
+                            <img
+                                className={classNames(
+                                    styles.modalResult__img,
+                                    styles.modalResult__img_resize
+                                )}
+                                src={require('../../assets/images/Calendar/3day.svg').default}
+                                alt=""
+                            />
+                        )}
+                    </>
                 )}
                 <div className={styles.modal}>
                     {result ? (
                         <DialogTitle>Холодильник нашелся, поздравляем!</DialogTitle>
                     ) : (
-                        <DialogTitle>Вы очень постарались! Вот Ваш приз за усердие!</DialogTitle>
+                        <>
+                            {promoCode ? (
+                                <DialogTitle>
+                                    Вы очень постарались! Вот Ваш приз за усердие!
+                                </DialogTitle>
+                            ) : (
+                                <DialogTitle>Проиграли</DialogTitle>
+                            )}
+                        </>
                     )}
                     <DialogContent>
                         {result ? (
-                            <DialogContentText id="alert-dialog-slide-description">
-                                Вы отлично справились с заданием!
-                            </DialogContentText>
-                        ) : (
                             <>
                                 <DialogContentText id="alert-dialog-slide-description">
-                                    Вот Ваш приз за старания!
+                                    Вы отлично справились с заданием!
                                 </DialogContentText>
-                                <p className={styles.modal__promoText}>
-                                    <img
-                                        className={styles.modal__promoIcon}
-                                        src={require('../../assets/icons/ivi.svg').default}
-                                        alt=""
+                                {promoCode && (
+                                    <PromoCode
+                                        type="red"
+                                        promoCode={promoCode}
+                                        promoCodeName="45 дней подписки онлайн-кинотеатра IVI"
                                     />
-                                    Сертификат в онлайн-кинотеатр IVI
-                                </p>
-                                <div
-                                    name="promoCode"
-                                    type="button"
-                                    value={promocode}
-                                    className={styles.modal__promoCode}
-                                    // onChange={changeHandler}
-                                >
-                                    {promocode}
-                                    <button className={styles.promoCode__button} type="button">
-                                        <CopyIcon className={styles.promoCode__button_copy} />
-                                    </button>
-                                </div>
+                                )}
+                            </>
+                        ) : (
+                            <>
+                                {promoCode ? (
+                                    <>
+                                        <DialogContentText id="alert-dialog-slide-description">
+                                            Вот Ваш приз за старания!
+                                        </DialogContentText>
+                                        <PromoCode
+                                            type="red"
+                                            promoCode={promoCode}
+                                            promoCodeName="45 дней подписки онлайн-кинотеатра IVI"
+                                        />
+                                    </>
+                                ) : (
+                                    <DialogContentText id="alert-dialog-slide-description">
+                                        Попробуйте ещё раз
+                                    </DialogContentText>
+                                )}
                             </>
                         )}
                     </DialogContent>
                     <DialogActions>
                         {result ? (
-                            <Button onClick={handleClose}>Увидимся завтра!</Button>
+                            <>
+                                {promoCode ? (
+                                    <>
+                                        <Button onClick={handleClose}>Заказать сейчас</Button>
+                                        <Button onClick={handleClose}>В календарь</Button>
+                                    </>
+                                ) : (
+                                    <Button onClick={handleClose}>Увидимся завтра!</Button>
+                                )}
+                            </>
                         ) : (
                             <>
-                                <Button onClick={handleClose}>Попробовать ещё раз</Button>
-                                <Button onClick={handleClose}>В календарь</Button>
+                                {promoCode ? (
+                                    <>
+                                        <Button onClick={handleClose}>Заказать сейчас</Button>
+                                        <Button onClick={handleClose}>В календарь</Button>
+                                    </>
+                                ) : (
+                                    <>
+                                        <Button onClick={handleClose}>Попробовать еще раз</Button>
+                                        <Button onClick={handleClose}>В календарь</Button>
+                                    </>
+                                )}
                             </>
                         )}
                     </DialogActions>

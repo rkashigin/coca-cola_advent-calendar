@@ -77,7 +77,12 @@ const Header = ({ auth }) => {
             </header>
             <Modal title="Мои промокоды" handleClose={handleClose} open={open}>
                 {PROMOCODES.map((el) => (
-                    <PromoCode key={el.id} promoCodeText={el.title} promoCode={el.code} />
+                    <PromoCode
+                        key={el.id}
+                        type="grey"
+                        promoCodeText={el.title}
+                        promoCode={el.code}
+                    />
                 ))}
             </Modal>
         </>

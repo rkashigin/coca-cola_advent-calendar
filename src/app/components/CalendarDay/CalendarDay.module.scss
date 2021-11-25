@@ -116,150 +116,6 @@
 	}
 }
 
-.modal__promoCode {
-	--color_promoCode_field: hsl(344, 100%, 46%);
-
-	font-size: 3.2rem;
-	line-height: 3.2rem;
-	font-weight: 400;
-
-	padding: 1rem;
-	box-sizing: border-box;
-
-	border-radius: 1.6rem;
-
-	border: 2px dashed var(--color_promoCode_field);
-
-	color: var(--color_promoCode_field);
-
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-
-	position: relative;
-
-	margin-top: 2.5rem;
-
-	min-height: 6rem;
-
-	@media screen and (max-width: $width-mobile) {
-		margin-top: 6.1vw;
-
-		font-size: 8.2vw;
-		line-height: 8.2vw;
-
-		padding: 4.1vw;
-	}
-}
-
-.promoCode__button {
-	--size: 3.2rem;
-
-	height: var(--size);
-	width: var(--size);
-
-	background-color: transparent;
-
-	border: none;
-	outline: none;
-
-	cursor: pointer;
-
-	padding: 0;
-
-	position: absolute;
-
-	top: 50%;
-	right: 1.6rem;
-	transform: translateY(-50%);
-
-    overflow: visible;
-
-	&:hover{
-		.promoCode__button_copy{
-			transform: rotate(10deg);
-		}
-	}
-
-    // &::after {
-    //     content: "Копировать";
-    //     font-size: 1.2rem;
-    //     line-height: 1;
-    //     font-weight: 400;
-    //     position: absolute;
-
-    //     top: 50%;
-    //     left: -8.6rem;
-    //     transform: translateY(-50%);
-
-    //     width: 8rem;
-    //     height: 2rem;
-
-    //     display: flex;
-    //     align-items: center;
-    //     justify-content: center;
-
-    //     border-radius: 0.5rem;
-    //     background-color: rgba(0, 0, 0, 0.5);
-
-    //     color: white;
-
-    //     z-index: 50;
-
-    //     opacity: 0;
-    //     visibility: hidden;
-    //     pointer-events: none;
-
-    //     transition: opacity 0.3s ease-in-out;
-    // }
-
-	@media screen and (max-width: $width-mobile) {
-		right: 4.1vw;
-	}
-}
-
-.promoCode__button_copy {
-	--color_copy_icon: #EA003D;
-	height: 100%;
-	width: 100%;
-
-	transition: transform 0.3s ease-in-out;
-}
-
-div.promoCode__alert_success{
-
-	padding: 0 1rem;
-
-	border-radius: 0.7rem;
-
-	width: 13rem;
-
-	position: absolute;
-
-	bottom: 50%;
-	right: 15%;
-	transform: translateY(50%);
-
-	opacity: 0;
-	visibility: hidden;
-	pointer-events: none;
-
-	transition: opacity 0.3s ease-in-out;
-
-}
-
-div.promoCode_copied{
-	opacity: 1;
-	visibility: visible;
-}
-
-div.promoCode__alertInfo{
-	font-size: 1.4rem;
-	line-height: 1;
-
-	margin: 0.2rem 0 0;
-}
-
 .modalResult__img {
 	position: absolute;
 
@@ -358,5 +214,15 @@ div.promoCode__alertInfo{
 
 		padding: 4.2vw;
 	}
+}
+
+.modalResult__img_resize{
+	width: 28rem;
+	top: -16rem;
+}
+
+button.modalButton_return{
+	background-color: var(--color_alabaster_grey);
+	color: var(--color_dim_gray);
 }
 

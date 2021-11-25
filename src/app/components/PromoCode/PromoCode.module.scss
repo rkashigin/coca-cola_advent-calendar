@@ -2,13 +2,21 @@
 
 
 .promoCode{
+
+	--color_text_red: hsl(1, 68%, 47%);
+	--color_text_grey: hsl(210, 2%, 37%);
+	--color_input_border_grey: rgba(93, 95, 97, 0.5);
+	--color_input_border_red: rgba(201, 43, 39, 0.5);
+
+	display: flex;
+	flex-direction: column;
+
 	&:not(:last-of-type){
 		margin-bottom: 1.6rem;
 	}
 }
 
 .promoCode__input {
-	--color_promoCode_field: rgba(93, 95, 97, 0.5);
 
 	font-size: 3.2rem;
 	line-height: 3.2rem;
@@ -19,9 +27,9 @@
 
 	border-radius: 1.6rem;
 
-	border: 2px dashed var(--color_promoCode_field);
+	border: 2px dashed var(--color_input_border_red);
 
-	color: #000;
+	color: #C92B27;
 
 	display: flex;
 	align-items: center;
@@ -43,12 +51,33 @@
 	}
 }
 
-.promoCode__text{
+.promoCode__input_grey{
+	border: 2px dashed var(--color_input_border_grey);
+	color: #000;
+}
+
+.promoCode__text_red{
 	font-weight: 400;
 	font-size: 1.6rem;
 	line-height: 2.2rem;
 
-	color: #5D5F61;
+	align-self: center;
+
+	margin-top: 0.8rem;
+
+	color: var(--color_text_red);
+}
+
+.promoCode__name{
+	margin-top: 3.2rem;
+}
+
+.promoCode__text_grey{
+	font-weight: 400;
+	font-size: 1.6rem;
+	line-height: 2.2rem;
+
+	color: var(--color_text_grey);
 }
 
 .promoCode__button {
@@ -91,6 +120,10 @@
 
 	transition: transform 0.3s ease-in-out;
 
+	--color_copy_icon: #C92B27;
+}
+
+.promoCode__buttonIcon_grey{
 	--color_copy_icon: rgba(93, 95, 97, 0.5);
 }
 

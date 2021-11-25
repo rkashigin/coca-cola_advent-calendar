@@ -35,6 +35,7 @@ const Calendar = () => {
                             [styles.calendarDay_pastDay]: pastDay
                         })}
                         modalImg={el.modalImg}
+                        classNameImg={classNames(styles[`calendarDay_modalImg_${el.day}`])}
                         title={el.title}
                         intro={el.intro}
                         promoCode={el.promoCode}
@@ -111,8 +112,8 @@ const DATES = [
         day: 5,
         img: require('../../assets/images/Calendar/5day.svg').default,
         modalImg: require('../../assets/images/Calendar/5day.svg').default,
-        title: 'Тест правда или миф',
-        intro: 'Тест правда или миф',
+        title: 'Coca-Cola пробовали все!',
+        intro: 'Это напиток ассоциируется с новогодними праздниками у людей по всему миру. Но много ли вы знаете об истории этого напитка? Сейчас узнаем!',
         type: 'test'
     },
     {
@@ -120,7 +121,7 @@ const DATES = [
         img: require('../../assets/images/Calendar/6day.svg').default,
         modalImg: require('../../assets/images/Calendar/6day.svg').default,
         title: 'В предновогодней суете сложно все успеть, но можно потренироваться у нас в мини-игре',
-        intro: 'Ловите тележкой как можно больше подарков и набирайте очки. Чем больше очков — тем круче призы!',
+        intro: 'Поймайте тележкой как можно больше подарков за одну минуту',
         type: 'game'
     },
     {
@@ -143,32 +144,32 @@ const DATES = [
         day: 9,
         img: require('../../assets/images/Calendar/9day.svg').default,
         modalImg: require('../../assets/images/Calendar/9day.svg').default,
-        title: 'Двигаемся дальше!',
-        intro: 'Сегодня Уолли не сидится на месте, он вечно куда-то пропадает. Отыщите Уолли за пять минут в этой предпраздничной суматохе',
+        title: 'Кажется, наш главный приз снова потерялся!',
+        intro: 'Помогите найти наш волшебный холодильник, но помните, что время ограничено, а сделать это теперь гораздо сложнее',
         type: 'game'
     },
     {
         day: 10,
         img: require('../../assets/images/Calendar/10day.svg').default,
         modalImg: require('../../assets/images/Calendar/10day.svg').default,
-        title: 'Загадки про Новый Год',
-        intro: 'Загадки про Новый Год',
+        title: 'Помните детские утренники, ёлку и загадки от Деда Мороза?',
+        intro: 'Вот мы и решили проверить, справитесь ли вы с ними сейчас. Каждая загадка имеет четыре вариант ответов, но только один правильный. И не все так просто, как может показаться на первый взгляд',
         type: 'test'
     },
     {
         day: 11,
         img: require('../../assets/images/Calendar/11day.svg').default,
         modalImg: require('../../assets/images/Calendar/11day.svg').default,
-        title: 'Новогодняя открытка',
-        intro: 'Новогодняя открытка',
+        title: 'Праздничными открытками сложно кого-то удивить',
+        intro: 'Они могут даже казаться пережитком прошлого. Но наши открытки наполнены только самыми теплыми и полезными пожеланиями. Отправьте их своим друзьям и близким, чтобы передать им кусочек новогоднего настроения',
         type: 'postCard'
     },
     {
         day: 12,
         img: require('../../assets/images/Calendar/12day.svg').default,
         modalImg: require('../../assets/images/Calendar/12day.svg').default,
-        title: 'Давайте начнем наше новогоднее путешествие!',
-        intro: 'Задание этого дня совсем простое: сделайте заказ в Delivery Club на любую сумму с нашим волшебным промокодом на Coca-Cola за 1 ₽',
+        title: 'Наш advent-календарь подходит к концу!',
+        intro: 'Спасибо, что прошли его вместе с нами. Вы успешно справлялись со всеми нашими играми и загадками. Вот ваше финальное задание. Закажите три Coca-Cola в ресторанах Delivery Club по нашему особому промокоду до 30 декабря и участвуйте в розыгрыше наших главных призов!',
         promoCode: 'DCCC2022',
         type: 'promoCode'
     }

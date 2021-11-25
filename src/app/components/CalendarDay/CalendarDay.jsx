@@ -14,6 +14,8 @@ import Slide from '@mui/material/Slide';
 import { Alert, AlertTitle } from '@mui/material';
 import Adaptive from '../../helpers/Adaptive';
 
+import PromoCode from '../PromoCode/PromoCode';
+
 import { ReactComponent as CopyIcon } from '../../assets/icons/Modal_promoCode_button_copy.svg';
 
 import styles from './CalendarDay.module.scss';
@@ -76,11 +78,7 @@ const CalendarDay = ({
         <>
             <div className={classNames(className, styles.calendarDay)} onClick={handleClickOpen}>
                 <span className={classNames(classNameSpan, styles.calendarDay__date)}>{date}</span>
-                <img
-                    className={classNames(classNameImg, styles.calendarDay__img)}
-                    src={img}
-                    alt=""
-                />
+                <img className={styles.calendarDay__img} src={img} alt="" />
             </div>
             <Dialog
                 open={open}
@@ -114,41 +112,12 @@ const CalendarDay = ({
                         <DialogContentText id="alert-dialog-slide-description">
                             {intro}
                         </DialogContentText>
-                        <div>
-                            <img
-                                className={classNames(classNameImg, styles.calendarModal__img)}
-                                src={promoCodeImg}
-                                alt=""
-                            />
-                            {promoCodeText}
-                        </div>
                         {promoCode && (
-                            <div
-                                name="promoCode"
-                                type="button"
-                                value={promoCode}
-                                className={styles.modal__promoCode}
-                                // onChange={changeHandler}
-                            >
-                                {promoCode}
-                                <button
-                                    className={styles.promoCode__button}
-                                    type="button"
-                                    onClick={copiedHandler}
-                                >
-                                    <CopyIcon className={styles.promoCode__button_copy} />
-                                </button>
-                                <Alert
-                                    severity="success"
-                                    className={classNames(styles.promoCode__alert_success, {
-                                        [styles.promoCode_copied]: copied
-                                    })}
-                                >
-                                    <AlertTitle className={styles.promoCode__alertInfo}>
-                                        Скопировано
-                                    </AlertTitle>
-                                </Alert>
-                            </div>
+                            <PromoCode
+                                type="red"
+                                promoCode={promoCode}
+                                promoCodeText="Срок действия промокода 31.01.2022"
+                            />
                         )}
                     </DialogContent>
                     {type === 'test' && (

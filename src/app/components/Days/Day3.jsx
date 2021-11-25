@@ -12,8 +12,6 @@ import Slide from '@mui/material/Slide';
 
 import PromoCode from '../PromoCode/PromoCode';
 
-import { ReactComponent as CopyIcon } from '../../assets/icons/Modal_promoCode_button_copy.svg';
-
 import styles from '../CalendarDay/CalendarDay.module.scss';
 
 const Transition = React.forwardRef((props, ref) => {
@@ -24,7 +22,7 @@ const Day3 = () => {
     const [open, setOpen] = React.useState(true);
     const [result, setResult] = React.useState(true);
 
-    const promocode = 'DCCC2022';
+    const promoCode = null;
     // const score = 5;
 
     useEffect(() => {
@@ -78,39 +76,45 @@ const Day3 = () => {
                                 Он это ценит, поэтому не оставит вас без внимания на этих
                                 праздниках!
                             </DialogContentText>
-                            {/* <div
-                                name="promoCode"
-                                type="button"
-                                value={promocode}
-                                className={styles.modal__promoCode}
-                                // onChange={changeHandler}
-                            >
-                                {promocode}
-                                <button className={styles.promoCode__button} type="button">
-                                    <CopyIcon className={styles.promoCode__button_copy} />
-                                </button>
-                            </div> */}
-                            <PromoCode
-                                promoCode={promocode}
-                                promoCodeText="Срок действия промокода 31.01.2022"
-                            />
+                            {promoCode && (
+                                <PromoCode
+                                    type="red"
+                                    promoCode={promoCode}
+                                    promoCodeText="Срок действия промокода 31.01.2022"
+                                />
+                            )}
                         </>
                     ) : (
-                        <DialogContentText id="alert-dialog-slide-description">
-                            С нашим advent-календарем вы еще много узнаете о новогодних традициях и
-                            символах!
-                        </DialogContentText>
+                        <>
+                            <DialogContentText id="alert-dialog-slide-description">
+                                С нашим advent-календарем вы еще много узнаете о новогодних
+                                традициях и символах!
+                            </DialogContentText>
+                            {promoCode && (
+                                <PromoCode
+                                    type="red"
+                                    promoCode={promoCode}
+                                    promoCodeText="Срок действия промокода 31.01.2022"
+                                />
+                            )}
+                        </>
                     )}
                 </DialogContent>
                 <DialogActions>
                     {result ? (
                         <>
-                            <Button onClick={handleClose}>Заказать сейчас</Button>
-                            <Button onClick={handleClose}>В календарь</Button>
+                            {promoCode && <Button onClick={handleClose}>Заказать сейчас</Button>}
+                            <Button className={styles.modalButton_return} onClick={handleClose}>
+                                В календарь
+                            </Button>
                         </>
                     ) : (
                         <>
-                            <Button onClick={handleClose}>Пройти тест еще раз</Button>
+                            {promoCode ? (
+                                <Button onClick={handleClose}>Заказать сейчас</Button>
+                            ) : (
+                                <Button onClick={handleClose}>Пройти тест еще раз</Button>
+                            )}
                             <Button onClick={handleClose}>В календарь</Button>
                         </>
                     )}
