@@ -70,31 +70,8 @@
   color: var(--color_dim_gray) !important;
   position: relative;
 
-  .quiz__answerIcon {
-    width: 14px;
-    height: 14px;
-    position: absolute;
-    top: 50%;
-    right: 5%;
-    transform: translateY(-50%);
-  }
-
-  &_correct {
+  &_selected {
     background-color: var(--color_dark_olive_green) !important;
     color: white !important;
-
-    .quiz__answerIcon {
-      fill: white;
-    }
-  }
-
-  &_false {
-    background-color: var(--color_ligth_pink) !important;
-    color: var(--color_red) !important;
-    opacity: 0.5;
-
-    .quiz__answerIcon {
-      fill: var(--color_red);
-    }
   }
 }

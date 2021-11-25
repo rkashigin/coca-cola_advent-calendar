@@ -3,9 +3,6 @@ import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import cn from 'classnames';
 
-import { ReactComponent as WrongAnswer } from '../../assets/icons/icon__bad.svg';
-import { ReactComponent as RightAnswer } from '../../assets/icons/icon__good.svg';
-
 import styles from './TruthOrMyth.module.scss';
 
 const TruthOrMyth = ({ setResult, setScore, quiz }) => {
@@ -76,19 +73,11 @@ const TruthOrMyth = ({ setResult, setScore, quiz }) => {
                         onClick={() => handleSelectAnswer(answerIdx, isCorrect)}
                         key={text}
                         className={cn(styles.quiz__answer, {
-                            [styles.quiz__answer_correct]:
-                                isCorrect && Number.isInteger(selectedAnswer),
-                            [styles.quiz__answer_false]: !isCorrect && answerIdx === selectedAnswer
+                            [styles.quiz__answer_selected]: answerIdx === selectedAnswer
                         })}
                         disabled={typeof selectedAnswer === 'number'}
                     >
                         {text}
-                        {isCorrect && Number.isInteger(selectedAnswer) && (
-                            <RightAnswer className={styles.quiz__answerIcon} />
-                        )}
-                        {!isCorrect && answerIdx === selectedAnswer && (
-                            <WrongAnswer className={styles.quiz__answerIcon} />
-                        )}
                     </Button>
                 ))}
             </div>
