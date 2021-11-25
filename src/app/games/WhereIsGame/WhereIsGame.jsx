@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import config from '../../config';
 
 import styles from './WhereIsGame.module.scss';
+import { Timer } from '../../components';
 
 const WhereIsGame = ({ gameVariant, setResult }) => {
     const gameConfig = config.references.whereIsGame[gameVariant];
@@ -42,6 +43,11 @@ const WhereIsGame = ({ gameVariant, setResult }) => {
 
     return (
         <div className={styles.game}>
+            <Timer
+                className={styles.game__timer}
+                givenTime={120_000}
+                onComplete={() => setResult(true)}
+            />
             <div
                 className={styles.selectionWindow}
                 style={
