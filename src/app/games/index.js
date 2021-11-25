@@ -3,3 +3,4 @@ export { default as MemoryGame } from './MemoryGame';
 export { default as ThreeInARowGame } from './ThreeInARowGame';
 export { default as CatchItemGame } from './CatchItemGame';
 export { default as Quiz } from './Quiz';
+export { default as TruthOrMyth } from './TruthOrMyth';

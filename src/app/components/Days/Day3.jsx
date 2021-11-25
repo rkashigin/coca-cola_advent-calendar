@@ -72,7 +72,7 @@ const Day3 = ({ setOpenedDay }) => {
                         />
                     }
                     setResult={setResult}
-                    text
+                    test
                 />
             </div>
             <Dialog

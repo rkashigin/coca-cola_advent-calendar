@@ -99,8 +99,8 @@ const DATES = [
         day: 5,
         img: require('../../assets/images/Calendar/5day.png').default,
         modalImg: require('../../assets/images/Games/game_2_day.png').default,
-        title: 'Тест правда или миф',
-        intro: 'Тест правда или миф',
+        title: config.references.truthOrMyths.day5.title,
+        intro: config.references.truthOrMyths.day5.description,
         type: 'test'
     },
     {
