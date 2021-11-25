@@ -3,23 +3,34 @@
 .calendarDay {
 
 	display: flex;
-	align-items: center;
-	justify-content: center;
+	align-items: flex-start;
+	justify-content: flex-start;
 
 	position: relative;
 
-	mix-blend-mode: overlay;
+	mix-blend-mode: normal;
 	cursor: pointer;
 
 	transition: transform 0.3s ease-in-out;
 
-	&:hover {
-		transform: scale(1.1);
-	}
 
 	@media screen and (max-width: $width-mobile) {
-		&:hover {
-			transform: scale(1);
+		align-items: flex-end;
+
+		&:last-of-type{
+			align-items: flex-start;
+
+			.calendarDay__date{
+				margin: 4.1vw 0 0 6vw;
+			}
+		}
+
+		&:nth-of-type(11){
+			align-items: flex-start;
+
+			.calendarDay__date{
+				margin: 4.1vw 0 0 6vw;
+			}
 		}
 	}
 }
@@ -33,9 +44,16 @@
 
 	z-index: 2;
 
+	margin: 2.4rem 0 0 2.4rem;
+
+	color: 	#E93533;
+
 	@media screen and (max-width: $width-mobile) {
 		font-size: 14.3vw;
 		line-height: 14.3vw;
+
+		margin: 0 0 4.1vw 6vw;
+
 	}
 }
 
@@ -43,6 +61,8 @@
 	position: absolute;
 
 	z-index: 0;
+
+	opacity: 0.5;
 
 	@media screen and (max-width: $width-mobile) {
 	}

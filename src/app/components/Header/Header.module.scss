@@ -1,7 +1,7 @@
 @import "../../../variables.scss";
 
 .header {
-	--height: 24.5rem;
+	--height: 27rem;
 
 	min-height: var(--height);
 	height: var(--height);
@@ -15,7 +15,7 @@
 	box-sizing: border-box;
 	position: relative;
 
-	padding: var(--section_padding) var(--section_padding) 4.5rem;
+	padding: var(--section_padding) var(--section_padding) 6.2rem;
 
 	display: flex;
 	flex-direction: column;
@@ -296,7 +296,7 @@
 
 .header__band_bottom {
 	position: absolute;
-	bottom: -5rem;
+	bottom: -2.6rem;
 	right: -32rem;
 
 	width: 48rem;

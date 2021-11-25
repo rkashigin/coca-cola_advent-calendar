@@ -11,8 +11,8 @@
 
 	margin-top: -1px;
 
-	grid-template-rows: repeat(3, 12rem) 24.2rem;
-	grid-template-columns: repeat(9, 1fr);
+	grid-template-rows: repeat(3, 12.2rem) 22.7rem;
+	grid-template-columns: 24rem 12.1rem 23.5rem repeat(5, 12.1rem) 24.2rem;
 
 	grid-template-areas:
 		". . . . . . . . ."
@@ -22,7 +22,7 @@
 
 	@media screen and (max-width: $width-mobile) {
 		grid-template-columns: repeat(2, 1fr);
-		grid-template-rows: 50vw repeat(5, 25vw) 42vw;
+		grid-template-rows: 50vw repeat(5, 25vw) 42.3vw 46.4vw;
 
 		overflow: visible;
 
@@ -33,7 +33,8 @@
 			"sixthDay ."
 			"seventhDay ."
 			"ninethDay eleventhDay"
-			"tenthDay twelfthDay";
+			"tenthDay eleventhDay"
+			"twelfthDay twelfthDay";
 	}
 }
 
@@ -41,11 +42,22 @@
 	grid-column: span 2;
 	grid-row: span 2;
 
-	background-color: rgba(0, 0, 0, 0.32);
+	background-color: #B00200;
 
 	img {
-		bottom: 0;
-		right: 1rem;
+		bottom: 1.2rem;
+		right: 2rem;
+
+		width: 18rem;
+		height: 13.7rem;
+
+		@media screen and (max-width: $width-mobile) {
+			width: 12.1rem;
+			height: 9.2rem;
+
+			top: 2rem;
+			right: 1rem;
+		}
 	}
 
 	@media screen and (max-width: $width-mobile) {
@@ -57,11 +69,22 @@
 	grid-column: span 2;
 	grid-row: span 2;
 
-	background-color: rgba(0, 0, 0, 0.16);
+	background-color: #960200;
 
 	img {
-		bottom: 1rem;
-		right: 1rem;
+		bottom: 3rem;
+		right: 2rem;
+
+		width: 16.6rem;
+		height: 12.8rem;
+
+		@media screen and (max-width: $width-mobile) {
+			top: 2rem;
+			right: 1rem;
+
+			width: 12rem;
+			height: 9.1rem;
+		}
 	}
 
 	@media screen and (max-width: $width-mobile) {
@@ -73,11 +96,22 @@
 	grid-column: span 2;
 	grid-row: span 2;
 
-	background-color: rgba(0, 0, 0, 0.58);
+	background-color: #b50403;
 
 	img {
-		bottom: 0.5rem;
-		right: 0.5rem;
+		bottom: 2.5rem;
+		right: 2rem;
+
+		width: 11.4rem;
+		height: 15rem;
+
+		@media screen and (max-width: $width-mobile) {
+			top: 1.5rem;
+			right: 2rem;
+
+			width: 10rem;
+			height: 13.2rem;
+		}
 	}
 
 	@media screen and (max-width: $width-mobile) {
@@ -89,11 +123,22 @@
 	grid-column: span 2;
 	grid-row: span 2;
 
-	background-color: rgba(0, 0, 0, 0.24);
+	background-color: #920c0a;
 
 	img {
-		bottom: 0.3rem;
-		top: 0.3rem;
+		bottom: 0;
+		right: 1rem;
+
+		width: 18rem;
+		height: 19.4rem;
+
+		@media screen and (max-width: $width-mobile) {
+			top: 0.5rem;
+			right: 0.8rem;
+
+			width: 8.5rem;
+			height: 9.1rem;
+		}
 	}
 
 	@media screen and (max-width: $width-mobile) {
@@ -107,11 +152,22 @@
 	grid-column: span 1;
 	grid-row: span 1;
 
-	background-color: rgba(0, 0, 0, 0.32);
+	background-color: #c40300;
 
 	img {
-		bottom: 0rem;
-		right: 0.4rem;
+		bottom: -3.5rem;
+		right: 1.5rem;
+
+		width: 11.7rem;
+		height: 18.7rem;
+
+		@media screen and (max-width: $width-mobile) {
+			top: 2rem;
+			right: 1rem;
+
+			width: 8.7rem;
+			height: auto;
+		}
 	}
 
 	@media screen and (max-width: $width-mobile) {
@@ -127,25 +183,24 @@
 
 	grid-area: sixthDay;
 
-	background-color: rgba(201, 43, 39, 0.56);
-	mix-blend-mode: unset;
+	background-color: #891211;
 
 	justify-content: flex-start;
 
 	img {
 		bottom: 50%;
-		right: 0;
+		right: 3.5rem;
 		transform: translateY(50%);
-	}
-	span {
-		font-size: 1.8rem;
-		line-height: 2.4rem;
-		font-weight: 500;
 
-		padding-left: 1.5rem;
+		width: 8.6rem;
+		height: 8.3rem;
 
-		&::after {
-			content: " день";
+		@media screen and (max-width: $width-mobile) {
+			top: -1.7rem;
+			right: 2rem;
+
+			width: 7.1rem;
+			height: auto;
 		}
 	}
 
@@ -156,11 +211,22 @@
 	grid-column: span 1;
 	grid-row: span 2;
 
-	background-color: rgba(0, 0, 0, 0.58);
+	background-color: #bc0f0d;
 
 	img {
-		bottom: 2rem;
-		right: 0.5rem;
+		bottom: 3rem;
+		right: 2rem;
+
+		width: 16.4rem;
+		height: 15.8rem;
+
+		@media screen and (max-width: $width-mobile) {
+			top: 1.5rem;
+			right: 2rem;
+
+			width: 7.6rem;
+			height: auto;
+		}
 	}
 
 	@media screen and (max-width: $width-mobile) {
@@ -174,11 +240,22 @@
 	grid-column: span 2;
 	grid-row: span 2;
 
-	background-color: rgba(0, 0, 0, 0.4);
+	background-color: #a11412;
 
 	img {
 		bottom: 3rem;
-		right: 0.5rem;
+		right: 2.5rem;
+
+		width: 24.7rem;
+		height: 26.2rem;
+
+		@media screen and (max-width: $width-mobile) {
+			top: 1rem;
+			right: 1.5rem;
+
+			width: 13.3rem;
+			height: 14.2rem;
+		}
 	}
 
 	@media screen and (max-width: $width-mobile) {
@@ -192,11 +269,22 @@
 
 	grid-area: ninethDay;
 
-	background-color: rgba(0, 0, 0, 0.24);
+	background-color: #9a0503;
 
 	img {
-		bottom: 0;
-		right: 0;
+		bottom: 1rem;
+		right: 2rem;
+
+		width: 12.1rem;
+		height: 10rem;
+
+		@media screen and (max-width: $width-mobile) {
+			top: 1rem;
+			right: 2rem;
+
+			width: 9.6rem;
+			height: 8rem;
+		}
 	}
 
 	@media screen and (max-width: $width-mobile) {
@@ -210,11 +298,23 @@
 
 	grid-area: tenthDay;
 
-	background-color: rgba(0, 0, 0, 0.56);
+	background-color: #8a0b0a;
 
 	img {
 		bottom: 0;
-		left: 0;
+		left: 4rem;
+
+		width: 19.2rem;
+		height: 15.4rem;
+
+		@media screen and (max-width: $width-mobile) {
+			top: 1.4rem;
+			right: 1rem;
+			left: unset;
+
+			width: 10.7rem;
+			height: 8.6rem;
+		}
 	}
 
 	@media screen and (max-width: $width-mobile) {
@@ -226,11 +326,22 @@
 	grid-column: span 2;
 	grid-row: span 2;
 
-	background-color: rgba(0, 0, 0, 0.32);
+	background-color: #bc1615;
 
 	img {
 		bottom: 3rem;
-		right: 0.5rem;
+		right: 3rem;
+
+		width: 18rem;
+		height: 19.6rem;
+
+		@media screen and (max-width: $width-mobile) {
+			bottom: 1rem;
+			right: 1.5rem;
+
+			width: 16rem;
+			height: 16rem;
+		}
 	}
 
 	@media screen and (max-width: $width-mobile) {
@@ -244,11 +355,22 @@
 	grid-column: span 2;
 	grid-row: span 2;
 
-	background-color: rgba(0, 0, 0, 0.16);
+	background-color: #a11412;
 
 	img {
-		bottom: 0;
-		left: 0;
+		bottom: -1.4rem;
+		right: 3rem;
+
+		width: 27rem;
+		height: 22.8rem;
+
+		@media screen and (max-width: $width-mobile) {
+			bottom: -1rem;
+			right: 2.5rem;
+
+			width: 19.6rem;
+			height: 16.8rem;
+		}
 	}
 
 	@media screen and (max-width: $width-mobile) {
@@ -261,7 +383,7 @@
 
 .calendar__bandBottom {
 	position: absolute;
-	top: 9rem;
+	top: 6.5rem;
 	left: -9rem;
 
 	width: 18rem;
@@ -277,5 +399,33 @@
 		left: -21vw;
 
 		transform: rotate(-45deg);
+	}
+}
+.calendarDay_current {
+	mix-blend-mode: unset;
+	background-color: #e3302b;
+
+	span {
+		color: white;
+	}
+	img {
+		opacity: 1;
+	}
+}
+
+.calendarDay_pastDay {
+	mix-blend-mode: normal;
+
+	transition: background-color 0.3s ease-in-out;
+
+	span {
+		color: white;
+	}
+	img {
+		opacity: 1;
+	}
+
+	&:hover {
+		background-color: #e3302b;
 	}
 }

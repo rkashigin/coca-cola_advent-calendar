@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
+import classNames from 'classnames';
 
 import CalendarDay from '../CalendarDay/CalendarDay';
 
@@ -8,6 +9,10 @@ import { Day10, Day11, Day2, Day3, Day4, Day5, Day6, Day7, Day8, Day9 } from '..
 
 const Calendar = () => {
     const [openedDay, setOpenedDay] = React.useState(0);
+    // состояние для активного дня
+    const [currentDay, setCurrentDay] = React.useState(false);
+    // состояние для дня, который прошел
+    const [pastDay, setPastDay] = React.useState(false);
 
     useEffect(() => {
         const app = document.querySelector('.App');
@@ -25,7 +30,10 @@ const Calendar = () => {
                         id={el.day}
                         date={el.day}
                         img={el.img}
-                        className={styles[`calendarDay_${el.day}`]}
+                        className={classNames(styles[`calendarDay_${el.day}`], {
+                            [styles.calendarDay_current]: currentDay,
+                            [styles.calendarDay_pastDay]: pastDay
+                        })}
                         modalImg={el.modalImg}
                         title={el.title}
                         intro={el.intro}
@@ -68,8 +76,8 @@ const DAYS = {
 const DATES = [
     {
         day: 1,
-        img: require('../../assets/images/Calendar/1day.png').default,
-        modalImg: require('../../assets/images/Games/game_1_day.png').default,
+        img: require('../../assets/images/Calendar/1day.svg').default,
+        modalImg: require('../../assets/images/Calendar/1day.svg').default,
         title: 'Давайте начнем наше новогоднее путешествие!',
         intro: 'Задание этого дня совсем простое: сделайте заказ в Delivery Club на любую сумму с нашим волшебным промокодом на Coca-Cola за 1 ₽',
         promoCode: 'DCCC2022',
@@ -77,88 +85,88 @@ const DATES = [
     },
     {
         day: 2,
-        img: require('../../assets/images/Calendar/2day.png').default,
-        modalImg: require('../../assets/images/Games/game_2_day.png').default,
+        img: require('../../assets/images/Calendar/2day.svg').default,
+        modalImg: require('../../assets/images/Calendar/2day.svg').default,
         title: 'Двигаемся дальше!',
         intro: 'Чтобы поближе познакомиться с главным призом нашего календаря, нужно сначала его найти. Отыщите наш волшебный холодильник за пять минут в этой предпраздничной суматохе',
         type: 'game'
     },
     {
         day: 3,
-        img: require('../../assets/images/Calendar/3day.png').default,
-        modalImg: require('../../assets/images/Games/game_2_day.png').default,
+        img: require('../../assets/images/Calendar/3day.svg').default,
+        modalImg: require('../../assets/images/Calendar/3day.svg').default,
         title: 'Дед Мороз — фигура значительная, ведь он олицетворяет собой главный праздник года',
         intro: 'Но хорошо ли вы его знаете? Давайте проверим!',
         type: 'test'
     },
     {
         day: 4,
-        img: require('../../assets/images/Calendar/4day.png').default,
-        modalImg: require('../../assets/images/Games/game_2_day.png').default,
+        img: require('../../assets/images/Calendar/4day.svg').default,
+        modalImg: require('../../assets/images/Calendar/4day.svg').default,
         title: 'Подготовка к праздникам может быть не только приятной, но и полезной!',
         intro: 'Прокачайте память с нашей новогодней мини-игрой. Найдите пару для каждой картинки, но помните — карточки закрываются при открытии новых, а время поиска ограничено',
         type: 'game'
     },
     {
         day: 5,
-        img: require('../../assets/images/Calendar/5day.png').default,
-        modalImg: require('../../assets/images/Games/game_2_day.png').default,
+        img: require('../../assets/images/Calendar/5day.svg').default,
+        modalImg: require('../../assets/images/Calendar/5day.svg').default,
         title: 'Тест правда или миф',
         intro: 'Тест правда или миф',
         type: 'test'
     },
     {
         day: 6,
-        img: require('../../assets/images/Calendar/6day.png').default,
-        modalImg: require('../../assets/images/Games/game_2_day.png').default,
+        img: require('../../assets/images/Calendar/6day.svg').default,
+        modalImg: require('../../assets/images/Calendar/6day.svg').default,
         title: 'В предновогодней суете сложно все успеть, но можно потренироваться у нас в мини-игре',
         intro: 'Ловите тележкой как можно больше подарков и набирайте очки. Чем больше очков — тем круче призы!',
         type: 'game'
     },
     {
         day: 7,
-        img: require('../../assets/images/Calendar/7day.png').default,
-        modalImg: require('../../assets/images/Games/game_2_day.png').default,
+        img: require('../../assets/images/Calendar/7day.svg').default,
+        modalImg: require('../../assets/images/Calendar/7day.svg').default,
         title: 'Порядок важен даже во время праздников, хотя за ним и непросто уследить',
         intro: 'Собирайте новогодние атрибуты по три в ряд, но помните — время ограничено, а нужно столько всего сделать!',
         type: 'game'
     },
     {
         day: 8,
-        img: require('../../assets/images/Calendar/8day.png').default,
-        modalImg: require('../../assets/images/Games/game_2_day.png').default,
+        img: require('../../assets/images/Calendar/8day.svg').default,
+        modalImg: require('../../assets/images/Calendar/8day.svg').default,
         title: 'Дед Мороз уже заканчивает составлять списки подарков!',
         intro: 'Поэтому самое время выяснить, в какой же список вы попадете.',
         type: 'test'
     },
     {
         day: 9,
-        img: require('../../assets/images/Calendar/9day.png').default,
-        modalImg: require('../../assets/images/Games/game_2_day.png').default,
+        img: require('../../assets/images/Calendar/9day.svg').default,
+        modalImg: require('../../assets/images/Calendar/9day.svg').default,
         title: 'Двигаемся дальше!',
         intro: 'Сегодня Уолли не сидится на месте, он вечно куда-то пропадает. Отыщите Уолли за пять минут в этой предпраздничной суматохе',
         type: 'game'
     },
     {
         day: 10,
-        img: require('../../assets/images/Calendar/10day.png').default,
-        modalImg: require('../../assets/images/Games/game_2_day.png').default,
+        img: require('../../assets/images/Calendar/10day.svg').default,
+        modalImg: require('../../assets/images/Calendar/10day.svg').default,
         title: 'Загадки про Новый Год',
         intro: 'Загадки про Новый Год',
         type: 'test'
     },
     {
         day: 11,
-        img: require('../../assets/images/Calendar/11day.png').default,
-        modalImg: require('../../assets/images/Games/game_2_day.png').default,
+        img: require('../../assets/images/Calendar/11day.svg').default,
+        modalImg: require('../../assets/images/Calendar/11day.svg').default,
         title: 'Новогодняя открытка',
         intro: 'Новогодняя открытка',
         type: 'postCard'
     },
     {
         day: 12,
-        img: require('../../assets/images/Calendar/12day.png').default,
-        modalImg: require('../../assets/images/Games/game_12_day.png').default,
+        img: require('../../assets/images/Calendar/12day.svg').default,
+        modalImg: require('../../assets/images/Calendar/12day.svg').default,
         title: 'Давайте начнем наше новогоднее путешествие!',
         intro: 'Задание этого дня совсем простое: сделайте заказ в Delivery Club на любую сумму с нашим волшебным промокодом на Coca-Cola за 1 ₽',
         promoCode: 'DCCC2022',
