@@ -4,6 +4,7 @@ import cn from 'classnames';
 
 import PropTypes from 'prop-types';
 import Images from './images';
+import { Timer } from '../../components';
 
 import styles from './MemoryGame.module.scss';
 
@@ -30,6 +31,8 @@ const MemoryGame = ({ setResult, setScore }) => {
         }
     };
 
+    const handleTimerComplete = React.useCallback(() => setResult(true), []);
+
     React.useEffect(() => {
         let timer;
 
@@ -51,6 +54,11 @@ const MemoryGame = ({ setResult, setScore }) => {
             <div className={styles.game__score}>
                 {`${foundPairs.length / 2} / ${cards.length / 2}`} пар
             </div>
+            <Timer
+                className={styles.game__timer}
+                givenTime={120_000}
+                onComplete={handleTimerComplete}
+            />
             <div className={styles.game__board}>
                 {cards.map((card, cardIdx) => {
                     const flippedToFront =

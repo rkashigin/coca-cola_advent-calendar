@@ -29,9 +29,8 @@ export default {
         },
         quizes: {
             day3: {
-                title: 'В каком списке деда мороза ты находишься?',
-                description:
-                    'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae debitis, ducimus impedit in, itaque maxime molestiae mollitia natus nihil nisi obcaecati quasi rem? Assumenda dolores, et modi nostrum officia tempore.',
+                title: 'Дед Мороз — фигура значительная, ведь он олицетворяет собой главный праздник года',
+                description: 'Но хорошо ли вы его знаете? Давайте проверим!',
                 quiz: [
                     {
                         question: 'Идеальный подарок, который Вы ожидаете увидеть?',

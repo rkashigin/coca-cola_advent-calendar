@@ -89,11 +89,7 @@ const Day4 = ({ setOpenedDay }) => {
                     />
                 )}
                 <div className={styles.modal}>
-                    {result ? (
-                        <DialogTitle>18 из 18</DialogTitle>
-                    ) : (
-                        <DialogTitle>{score} из 18</DialogTitle>
-                    )}
+                    <DialogTitle>{score} из 20</DialogTitle>
                     <DialogContent>
                         {result ? (
                             <>

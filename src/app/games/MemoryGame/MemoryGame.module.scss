@@ -1,18 +1,26 @@
 .game {
   width: 512px;
-  height: 512px;
   background: url('../../assets/images/games-background.jpg');
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  border-radius: 32px;
+}
+
+.game__timer {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 40px;
+  padding: 80px 20px 40px;
 }
 
 .game__score {
   position: absolute;
   font-size: 18px;
   line-height: 32px;
-  top: 8px;
-  left: 12px;
+  top: 10px;
+  left: 15px;
 }
 
 .game__board {
@@ -21,7 +29,8 @@
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(4, 1fr);
   width: var(--memoryBoardWidth);
-  height: var(--memoryBoardHeight)
+  height: var(--memoryBoardHeight);
+  margin-bottom: 50px;
 }
 
 .board__cardWrapper {
