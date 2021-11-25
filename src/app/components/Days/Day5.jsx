@@ -28,7 +28,7 @@ const Day5 = ({ setOpenedDay }) => {
     const [result, setResult] = React.useState(false);
     const [score, setScore] = React.useState(0);
 
-    const promocode = 'DCCC2022';
+    const promoCode = 'DCCC2022';
 
     const handleClose = () => {
         setResult(false);
@@ -86,67 +86,41 @@ const Day5 = ({ setOpenedDay }) => {
                 aria-describedby="alert-dialog-slide-description"
                 className={styles.popup}
             >
-                {result ? (
-                    <img
-                        className={styles.modalResult__img}
-                        src={require('../../assets/images/Games/game_1_day.png').default}
-                        alt=""
-                    />
-                ) : (
-                    <img
-                        className={styles.modalResult__img}
-                        src={require('../../assets/images/Games/game_2_day.png').default}
-                        alt=""
-                    />
-                )}
+                <img
+                    className={styles.modalResult__img}
+                    src={require('../../assets/images/Games/game_1_day.png').default}
+                    alt=""
+                />
+
                 <div className={styles.modal}>
-                    <DialogTitle>
-                        {score} из {config.references.truthOrMyths.day5.quiz.length}
-                    </DialogTitle>
+                    {result ? (
+                        <DialogTitle>Вы настоящий знаток Coca-Cola!</DialogTitle>
+                    ) : (
+                        <DialogTitle>
+                            О Coca-Cola вы знаете еще совсем мало, но мы поможем подтянуть знания!
+                        </DialogTitle>
+                    )}
                     <DialogContent>
                         {result ? (
-                            <>
-                                <DialogContentText id="alert-dialog-slide-description">
-                                    Задание этого дня совсем простое: сделайте заказ в Delivery Club
-                                    на любую сумму с нашим волшебным промокодом на Coca-Cola за 1 ₽
-                                </DialogContentText>
-                                <div
-                                    name="promoCode"
-                                    type="button"
-                                    value={promocode}
-                                    className={styles.modal__promoCode}
-                                    // onChange={changeHandler}
-                                >
-                                    {promocode}
-                                    <button className={styles.promoCode__button} type="button">
-                                        <CopyIcon className={styles.promoCode__button_copy} />
-                                    </button>
-                                </div>
-                            </>
+                            <DialogContentText id="alert-dialog-slide-description">
+                                Чтобы продвинуться дальше по календарю, закажите Coca-Cola в
+                                ресторанах Delivery Club за 1 ₽ по нашему специальному промокоду
+                            </DialogContentText>
                         ) : (
-                            <>
-                                <DialogContentText id="alert-dialog-slide-description">
-                                    Описание
-                                </DialogContentText>
-                                <PromoCode
-                                    promoCode={promocode}
-                                    promoCodeText="Срок действия промокода 31.01.2022"
-                                />
-                            </>
+                            <DialogContentText id="alert-dialog-slide-description">
+                                Чтобы продвинуться дальше по календарю, закажите Coca-Cola в
+                                ресторанах Delivery Club за 1 ₽ по нашему специальному промокоду
+                            </DialogContentText>
                         )}
+                        <PromoCode
+                            type="red"
+                            promoCode={promoCode}
+                            promoCodeText="Срок действия промокода 31.01.2022"
+                        />
                     </DialogContent>
                     <DialogActions>
-                        {result ? (
-                            <>
-                                <Button onClick={handleClose}>Заказать сейчас</Button>
-                                <Button onClick={handleClose}>В календарь</Button>
-                            </>
-                        ) : (
-                            <>
-                                <Button onClick={handleClose}>Пройти тест еще раз</Button>
-                                <Button onClick={handleClose}>В календарь</Button>
-                            </>
-                        )}
+                        <Button onClick={handleClose}>Заказать сейчас</Button>
+                        <Button onClick={handleClose}>В календарь</Button>
                     </DialogActions>
                 </div>
             </Dialog>

@@ -8,11 +8,11 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 
+import PromoCode from '../PromoCode/PromoCode';
+
 import Game from '../Game';
 import { Survey } from '../../games';
 import config from '../../config';
-
-import { ReactComponent as CopyIcon } from '../../assets/icons/Modal_promoCode_button_copy.svg';
 
 import styles from '../CalendarDay/CalendarDay.module.scss';
 
@@ -24,7 +24,7 @@ const Day8 = ({ setOpenedDay }) => {
     const [open, setOpen] = React.useState(true);
     const [result, setResult] = React.useState(false);
 
-    const promocode = 'DCCC2022';
+    const promoCode = 'DCCC2022';
 
     const handleClose = () => {
         setResult(false);
@@ -136,18 +136,11 @@ const Day8 = ({ setOpenedDay }) => {
                                 заслужили немного отдыха и волшебства
                             </DialogContentText>
                         )}
-                        <div
-                            name="promoCode"
-                            type="button"
-                            value={promocode}
-                            className={styles.modal__promoCode}
-                            // onChange={changeHandler}
-                        >
-                            {promocode}
-                            <button className={styles.promoCode__button} type="button">
-                                <CopyIcon className={styles.promoCode__button_copy} />
-                            </button>
-                        </div>
+                        <PromoCode
+                            type="red"
+                            promoCode={promoCode}
+                            promoCodeText="Срок действия промокода 31.01.2022"
+                        />
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleClose}>Заказать сейчас</Button>

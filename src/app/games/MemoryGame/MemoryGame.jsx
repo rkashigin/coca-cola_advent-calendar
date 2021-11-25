@@ -56,7 +56,7 @@ const MemoryGame = ({ setResult, setScore }) => {
             </div>
             <Timer
                 className={styles.game__timer}
-                givenTime={5_000}
+                givenTime={120_000}
                 onComplete={handleTimerComplete}
             />
             <div className={styles.game__board}>

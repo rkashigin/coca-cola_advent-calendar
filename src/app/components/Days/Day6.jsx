@@ -13,8 +13,6 @@ import PromoCode from '../PromoCode/PromoCode';
 import Game from '../Game';
 import { CatchItemGame } from '../../games';
 
-import { ReactComponent as CopyIcon } from '../../assets/icons/Modal_promoCode_button_copy.svg';
-
 import styles from '../CalendarDay/CalendarDay.module.scss';
 
 const Transition = React.forwardRef((props, ref) => {
@@ -25,7 +23,7 @@ const Day6 = ({ setOpenedDay }) => {
     const [open, setOpen] = React.useState(true);
     const [result, setResult] = React.useState(false);
 
-    const promocode = 'DCCC2022';
+    const promoCode = 'DCCC2022';
 
     const handleClose = () => {
         setOpen(false);
@@ -81,62 +79,67 @@ const Day6 = ({ setOpenedDay }) => {
                 {result ? (
                     <img
                         className={styles.modalResult__img}
-                        src={require('../../assets/images/Games/game_won.png').default}
+                        src={require('../../assets/images/Games/game_1_day.png').default}
                         alt=""
                     />
                 ) : (
                     <img
                         className={styles.modalResult__img}
-                        src={require('../../assets/images/Games/game_lost.png').default}
+                        src={require('../../assets/images/Games/game_2_day.png').default}
                         alt=""
                     />
                 )}
                 <div className={styles.modal}>
                     {result ? (
-                        <DialogTitle>Вы молодцы и умеете пользоваться тележкой!</DialogTitle>
+                        <DialogTitle>Поздравляем!</DialogTitle>
                     ) : (
-                        <DialogTitle>Вы не умеете пользоваться тележкой</DialogTitle>
+                        <DialogTitle>
+                            Как жаль, вы не успели поймать все подарки вовремя!
+                        </DialogTitle>
                     )}
                     <DialogContent>
                         {result ? (
-                            <DialogContentText id="alert-dialog-slide-description">
-                                Вы отлично справились с заданием!
-                            </DialogContentText>
-                        ) : (
                             <>
-                                <DialogContentText id="alert-dialog-slide-description">
-                                    Вот Ваш приз за старания!
-                                </DialogContentText>
-                                <p className={styles.modal__promoText}>
-                                    <img
-                                        className={styles.modal__promoIcon}
-                                        src={require('../../assets/icons/ivi.svg').default}
-                                        alt=""
-                                    />
-                                    Сертификат в онлайн-кинотеатр IVI
-                                </p>
-                                {/* <div
-                                    name="promoCode"
-                                    type="button"
-                                    value={promocode}
-                                    className={styles.modal__promoCode}
-                                    // onChange={changeHandler}
-                                >
-                                    {promocode}
-                                    <button className={styles.promoCode__button} type="button">
-                                        <CopyIcon className={styles.promoCode__button_copy} />
-                                    </button>
-                                </div> */}
-                                <PromoCode
-                                    promoCode={promocode}
-                                    promoCodeText="Срок действия промокода 31.01.2022"
-                                />
+                                {promoCode ? (
+                                    <>
+                                        <DialogContentText id="alert-dialog-slide-description">
+                                            Вы успели поймать все подарки вовремя! Приз уже ждет
+                                            вас!
+                                        </DialogContentText>
+                                        <PromoCode
+                                            type="red"
+                                            promoCode={promoCode}
+                                            promoCodeText="Срок действия промокода 31.01.2022"
+                                        />
+                                    </>
+                                ) : (
+                                    <DialogContentText id="alert-dialog-slide-description">
+                                        Вы успели поймать все подарки вовремя! Предновогодняя суета
+                                        вам нипочём!
+                                    </DialogContentText>
+                                )}
                             </>
+                        ) : (
+                            <></>
                         )}
                     </DialogContent>
                     <DialogActions>
                         {result ? (
-                            <Button onClick={handleClose}>Увидимся завтра!</Button>
+                            <>
+                                {promoCode ? (
+                                    <>
+                                        <Button onClick={handleClose}>Заказать сейчас</Button>
+                                        <Button onClick={handleClose}>В календарь</Button>
+                                    </>
+                                ) : (
+                                    <Button
+                                        className={styles.modalButton_return}
+                                        onClick={handleClose}
+                                    >
+                                        В календарь
+                                    </Button>
+                                )}
+                            </>
                         ) : (
                             <>
                                 <Button onClick={handleClose}>Попробовать ещё раз</Button>
