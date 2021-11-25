@@ -45,7 +45,7 @@ const WhereIsGame = ({ gameVariant, setResult }) => {
         <div className={styles.game}>
             <Timer
                 className={styles.game__timer}
-                givenTime={2_000}
+                givenTime={120_000}
                 onComplete={() => setResult(true)}
             />
             <div

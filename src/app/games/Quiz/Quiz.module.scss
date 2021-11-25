@@ -13,9 +13,14 @@
 	flex-direction: column;
 
 	@media screen and (max-width: $width-mobile) {
-		width: 95%;
+		width: 39rem;
+		height: calc(100vh - 2.5rem);
 
-		padding: 58.4vw 2vw 2vw;
+		box-sizing: border-box;
+
+		padding: 4.1vw;
+
+		margin-bottom: 2.5rem;
 	}
 }
 

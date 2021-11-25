@@ -24,7 +24,7 @@ const Day3 = ({ setOpenedDay }) => {
     const [result, setResult] = React.useState(false);
     const [score, setScore] = React.useState(0);
 
-    const promoCode = null;
+    const promoCode = 'DCCC2022';
     // const score = 5;
 
     const handleClose = () => {

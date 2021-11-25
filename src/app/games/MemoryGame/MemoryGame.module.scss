@@ -19,6 +19,15 @@
   
   @media screen and (max-width: $width-mobile) {
     background-image: url("../../assets/images/Quiz/snowflakes_mobile.svg");
+
+    width: 39rem;
+		height: calc(100vh - 2.5rem);
+
+		box-sizing: border-box;
+
+		padding: 4.1vw;
+
+		margin-bottom: 2.5rem;
   }
 }
 
