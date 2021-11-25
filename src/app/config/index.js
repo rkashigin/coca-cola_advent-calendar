@@ -357,6 +357,197 @@ export default {
                     }
                 ]
             }
+        },
+        riddles: {
+            day10: {
+                title: 'Помните детские утренники, ёлку и загадки от Деда Мороза?',
+                description:
+                    'Вот мы и решили проверить, справитесь ли вы с ними сейчас. Каждая загадка имеет четыре вариант ответов, но только один правильный. И не все так просто, как может показаться на первый взгляд',
+                riddle: [
+                    {
+                        question:
+                            'Вкусные, красивые, миром всем любимые, новогодний атрибут. На столе их очень ждут',
+                        answers: [
+                            {
+                                text: 'Салаты',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Конфеты',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Мандарины',
+                                isCorrect: true
+                            },
+                            {
+                                text: 'Бутерброды',
+                                isCorrect: false
+                            }
+                        ],
+                        correctExplanation: 'Мандарины'
+                    },
+                    {
+                        question:
+                            'Это удивительное волшебство, которое вмиг превращает детей и взрослых в медведей, зайчиков и лисичек',
+                        answers: [
+                            {
+                                text: 'Утренник',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Бал',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Волшебная палочка',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Маскарад',
+                                isCorrect: true
+                            }
+                        ],
+                        correctExplanation: 'Маскарад'
+                    },
+                    {
+                        question:
+                            'Лежит дед – белее нет. Лежит всю зиму, никто не подымет. Весна придет – сам пропадет',
+                        answers: [
+                            {
+                                text: 'Сугроб',
+                                isCorrect: true
+                            },
+                            {
+                                text: 'Газон',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Куст',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Холм',
+                                isCorrect: false
+                            }
+                        ],
+                        correctExplanation: 'Сугроб'
+                    },
+                    {
+                        question:
+                            'Самый страшный зимний зверь. Его все боятся, ведь он может кусаться',
+                        answers: [
+                            {
+                                text: 'Медведь',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Заяц',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Новый Год',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Мороз',
+                                isCorrect: true
+                            }
+                        ],
+                        correctExplanation: 'Мороз'
+                    },
+                    {
+                        question:
+                            'Гостья в Новый год пришла: Как лягушка — зелена, Лапы все — в иголках... Кто пришел к нам?',
+                        answers: [
+                            {
+                                text: 'Клумба',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Жаба',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Ёлка',
+                                isCorrect: true
+                            },
+                            {
+                                text: 'Игуана',
+                                isCorrect: false
+                            }
+                        ],
+                        correctExplanation: 'Ёлка'
+                    },
+                    {
+                        question:
+                            'Эта дружная цепочка вокруг елочки бежит. Звонко хлопает в ладошки и от радости визжит',
+                        answers: [
+                            {
+                                text: 'Хоровод',
+                                isCorrect: true
+                            },
+                            {
+                                text: 'Гирлянда',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Мишура',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Конфетти',
+                                isCorrect: false
+                            }
+                        ],
+                        correctExplanation: 'Хоровод'
+                    },
+                    {
+                        question: 'Кто никогда не спешит, и никогда не опаздывает?',
+                        answers: [
+                            {
+                                text: 'Автобус',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Праздничный ужин',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Новый Год',
+                                isCorrect: true
+                            },
+                            {
+                                text: 'Дед Мороз',
+                                isCorrect: false
+                            }
+                        ],
+                        correctExplanation: 'Новый Год'
+                    },
+                    {
+                        question: 'Было колесиком, стало ленточкой. Что это за новогодняя игрушка?',
+                        answers: [
+                            {
+                                text: 'Серпантин',
+                                isCorrect: true
+                            },
+                            {
+                                text: 'Гирлянда',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Дождик',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Мишура',
+                                isCorrect: false
+                            }
+                        ],
+                        correctExplanation: 'Серпантин'
+                    }
+                ]
+            }
         }
     }
 };
