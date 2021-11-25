@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import config from '../../config';
 
-import Game from '../../assets/images/firstGame.svg';
-
 import styles from './WhereIsGame.module.scss';
 
 const WhereIsGame = ({ gameVariant, setResult }) => {
@@ -57,7 +55,11 @@ const WhereIsGame = ({ gameVariant, setResult }) => {
                         : null
                 }
             />
-            <img src={Game} alt="Game" onClick={handlePerformFindAttempt} />
+            <img
+                src={config.references.whereIsGame[gameVariant].image}
+                alt="Game"
+                onClick={handlePerformFindAttempt}
+            />
         </div>
     );
 };
