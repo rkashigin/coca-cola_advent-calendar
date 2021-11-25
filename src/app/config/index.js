@@ -1,4 +1,4 @@
-import WhereIsGameFirstLevel from '../assets/images/whereIsGame/easy.svg';
+import WhereIsGameFirstLevel from '../assets/images/whereIsGame/easy.jpg';
 
 const host = process.env.REACT_APP_API || '123';
 const port = process.env.PORT || 8080;
@@ -20,10 +20,10 @@ export default {
             easy: {
                 image: WhereIsGameFirstLevel,
                 coords: {
-                    xStart: 570,
-                    xEnd: 600,
-                    yStart: 1210,
-                    yEnd: 1240
+                    xStart: 2100,
+                    xEnd: 2140,
+                    yStart: 960,
+                    yEnd: 1080
                 }
             }
         },
