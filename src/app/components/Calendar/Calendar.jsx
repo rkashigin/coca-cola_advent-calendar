@@ -123,8 +123,8 @@ const DATES = [
         day: 8,
         img: require('../../assets/images/Calendar/8day.png').default,
         modalImg: require('../../assets/images/Games/game_2_day.png').default,
-        title: 'Дед Мороз уже заканчивает составлять списки подарков!',
-        intro: 'Поэтому самое время выяснить, в какой же список вы попадете.',
+        title: config.references.surveys.day8.title,
+        intro: config.references.surveys.day8.description,
         type: 'test'
     },
     {
