@@ -1,0 +1,77 @@
+@import "../../../variables.scss";
+
+.quiz {
+  background-color: white;
+
+  border-radius: 1.6rem;
+
+  padding: 4.8rem 1.6rem 1.6rem;
+  width: 47rem;
+
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (max-width: $width-mobile) {
+    width: 95%;
+
+    padding: 58.4vw 2vw 2vw;
+  }
+}
+
+.quiz__question {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex: 1;
+  min-height: 22.8rem;
+}
+
+.quiz__questionText {
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 32px;
+  text-align: center;
+
+  &_correct {
+    color: var(--color_dark_olive_green);
+  }
+
+  &_false {
+    color: var(--color_red);
+  }
+}
+
+.quiz__scores {
+  position: absolute;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 32px;
+  left: 3%;
+  top: 1%;
+}
+
+.quiz__answers {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & > button {
+    margin-top: 0 !important;
+  }
+
+  & > button:first-of-type {
+    margin-right: 16px !important;
+  }
+}
+
+.quiz__answer {
+  background-color: var(--color_alabaster_grey) !important;
+  color: var(--color_dim_gray) !important;
+  position: relative;
+
+  &_selected {
+    background-color: var(--color_dark_olive_green) !important;
+    color: white !important;
+  }
+}

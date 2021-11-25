@@ -1,6 +1,6 @@
 .gamesWrapper {
   position: relative;
-  border: 1px solid black;
+  border-radius: 1.6rem;
   width: max-content;
   height: max-content;
 
@@ -12,12 +12,14 @@
 
 .gamesWrapper__content {
   height: fit-content;
+  position: relative;
 }
 
 .gamesWrapper__exitButton {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  z-index: 50;
 
   border: none;
 

@@ -12,8 +12,6 @@ import Slide from '@mui/material/Slide';
 
 import PromoCode from '../PromoCode/PromoCode';
 
-import { ReactComponent as CopyIcon } from '../../assets/icons/Modal_promoCode_button_copy.svg';
-
 import styles from '../CalendarDay/CalendarDay.module.scss';
 import Game from '../Game';
 import { MemoryGame } from '../../games';
@@ -91,54 +89,47 @@ const Day4 = ({ setOpenedDay }) => {
                     />
                 )}
                 <div className={styles.modal}>
-                    {result ? (
-                        <DialogTitle>Поздравляем!</DialogTitle>
-                    ) : (
-                        <DialogTitle>
-                            К сожалению, вы не успели найти все пары картинок вовремя
-                        </DialogTitle>
-                    )}
-                    <DialogContent>
+                    <>
                         {result ? (
-                            <>
-                                <DialogContentText id="alert-dialog-slide-description">
-                                    У вас прекрасная память и быстрая реакция! За это дарим вам
-                                    подарок!
-                                </DialogContentText>
-                                {/* <div
-                                    name="promoCode"
-                                    type="button"
-                                    value={promocode}
-                                    className={styles.modal__promoCode}
-                                    // onChange={changeHandler}
-                                >
-                                    {promocode}
-                                    <button className={styles.promoCode__button} type="button">
-                                        <CopyIcon className={styles.promoCode__button_copy} />
-                                    </button>
-                                </div> */}
-                                <PromoCode
-                                    promoCode={promocode}
-                                    promoCodeText="Срок действия промокода 31.01.2022"
-                                />
-                            </>
-                        ) : (
-                            <></>
-                        )}
-                    </DialogContent>
-                    <DialogActions>
-                        {result ? (
-                            <>
-                                <Button onClick={handleClose}>Заказать сейчас</Button>
-                                <Button onClick={handleClose}>В календарь</Button>
-                            </>
+                            <DialogTitle>Поздравляем!</DialogTitle>
                         ) : (
                             <>
-                                <Button onClick={handleClose}>Играть ещё раз</Button>
-                                <Button onClick={handleClose}>В календарь</Button>
+                                <DialogTitle>
+                                    К сожалению, вы не успели найти все пары картинок вовремя
+                                </DialogTitle>
+                                <DialogTitle>{score} из 20</DialogTitle>
                             </>
                         )}
-                    </DialogActions>
+                        <DialogContent>
+                            {result ? (
+                                <>
+                                    <DialogContentText id="alert-dialog-slide-description">
+                                        У вас прекрасная память и быстрая реакция! За это дарим вам
+                                        подарок!
+                                    </DialogContentText>
+                                    <PromoCode
+                                        promoCode={promocode}
+                                        promoCodeText="Срок действия промокода 31.01.2022"
+                                    />
+                                </>
+                            ) : (
+                                <></>
+                            )}
+                        </DialogContent>
+                        <DialogActions>
+                            {result ? (
+                                <>
+                                    <Button onClick={handleClose}>Заказать сейчас</Button>
+                                    <Button onClick={handleClose}>В календарь</Button>
+                                </>
+                            ) : (
+                                <>
+                                    <Button onClick={handleClose}>Играть ещё раз</Button>
+                                    <Button onClick={handleClose}>В календарь</Button>
+                                </>
+                            )}
+                        </DialogActions>
+                    </>
                 </div>
             </Dialog>
         </Dialog>

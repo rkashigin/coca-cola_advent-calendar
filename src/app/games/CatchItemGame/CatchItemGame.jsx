@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import useLogic from './useLogic';
 
 import styles from './CatchItemGame.module.scss';
+import { Timer } from '../../components';
 
 const CatchItemGame = ({ setResult }) => {
     const canvasRef = React.useRef(null);
@@ -18,6 +19,7 @@ const CatchItemGame = ({ setResult }) => {
         cart,
         setScores
     });
+    const handleTimerComplete = React.useCallback(() => setResult(true), []);
 
     React.useEffect(() => {
         if (canvasRef.current) {
@@ -39,7 +41,12 @@ const CatchItemGame = ({ setResult }) => {
 
     return (
         <div className={styles.game}>
-            <div className={styles.game__score}>Очки: {scores}</div>
+            <Timer
+                className={styles.game__timer}
+                givenTime={120_000}
+                onComplete={handleTimerComplete}
+            />
+            <div className={styles.game__score}>{scores}</div>
             <canvas
                 id="canvas"
                 ref={canvasRef}

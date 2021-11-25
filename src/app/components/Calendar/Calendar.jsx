@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 
 import CalendarDay from '../CalendarDay/CalendarDay';
+import { Day10, Day11, Day2, Day3, Day4, Day5, Day6, Day7, Day8, Day9 } from '../Days';
+import config from '../../config';
 
 import styles from './Calendar.module.scss';
-import { Day10, Day11, Day2, Day3, Day4, Day5, Day6, Day7, Day8, Day9 } from '../Days';
 
 const Calendar = () => {
     const [openedDay, setOpenedDay] = React.useState(0);
@@ -96,8 +97,8 @@ const DATES = [
         day: 3,
         img: require('../../assets/images/Calendar/3day.svg').default,
         modalImg: require('../../assets/images/Calendar/3day.svg').default,
-        title: 'Дед Мороз — фигура значительная, ведь он олицетворяет собой главный праздник года',
-        intro: 'Но хорошо ли вы его знаете? Давайте проверим!',
+        title: config.references.quizes.day3.title,
+        intro: config.references.quizes.day3.description,
         type: 'test'
     },
     {
@@ -112,8 +113,8 @@ const DATES = [
         day: 5,
         img: require('../../assets/images/Calendar/5day.svg').default,
         modalImg: require('../../assets/images/Calendar/5day.svg').default,
-        title: 'Coca-Cola пробовали все!',
-        intro: 'Это напиток ассоциируется с новогодними праздниками у людей по всему миру. Но много ли вы знаете об истории этого напитка? Сейчас узнаем!',
+        title: config.references.truthOrMyths.day5.title,
+        intro: config.references.truthOrMyths.day5.description,
         type: 'test'
     },
     {
@@ -136,8 +137,8 @@ const DATES = [
         day: 8,
         img: require('../../assets/images/Calendar/8day.svg').default,
         modalImg: require('../../assets/images/Calendar/8day.svg').default,
-        title: 'Дед Мороз уже заканчивает составлять списки подарков!',
-        intro: 'Поэтому самое время выяснить, в какой же список вы попадете.',
+        title: config.references.surveys.day8.title,
+        intro: config.references.surveys.day8.description,
         type: 'test'
     },
     {

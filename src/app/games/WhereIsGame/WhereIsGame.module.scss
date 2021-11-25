@@ -2,6 +2,20 @@
   width: 100%;
   height: fit-content;
   overflow: auto;
+  position: relative;
+}
+
+.game__timer {
+  position: fixed;
+  background-color: white;
+  padding: 10px 25px;
+  border-radius: 32px;
+  top: 16px;
+  left: 16px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
 }
 
 .selectionWindow {

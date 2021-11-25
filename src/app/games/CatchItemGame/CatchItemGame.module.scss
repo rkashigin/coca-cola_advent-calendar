@@ -1,12 +1,28 @@
 .game {
 }
 
+.game__timer {
+  position: fixed;
+  background-color: white;
+  padding: 10px 25px;
+  border-radius: 32px;
+  top: 16px;
+  left: 16px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+}
+
 .game__score {
   position: absolute;
-  font-size: 18px;
-  line-height: 32px;
-  top: 8px;
-  left: 12px;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: bold;
+  font-size: 64px;
+  line-height: 64px;
 }
+
 .game__board {
 }

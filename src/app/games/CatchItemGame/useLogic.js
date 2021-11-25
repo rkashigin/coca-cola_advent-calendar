@@ -1,9 +1,9 @@
 import { useMediaQuery } from 'react-responsive';
-import BgImage from '../../assets/images/catchItem/bg.jpg';
-import CucumberImage from '../../assets/images/catchItem/cucumber.png';
-import TomatoImage from '../../assets/images/catchItem/tomato.png';
-import PotatoImage from '../../assets/images/catchItem/potato.png';
-import CabbageImage from '../../assets/images/catchItem/cabbage.png';
+import RedHat from '../../assets/images/catchItem/RedHat.png';
+import GreenHat from '../../assets/images/catchItem/GreenHat.png';
+import RedGloves from '../../assets/images/catchItem/RedGloves.png';
+import GreenGloves from '../../assets/images/catchItem/GreenGloves.png';
+import Penguin from '../../assets/images/catchItem/Penguin.png';
 import ShoppingCartImage from '../../assets/images/catchItem/cart.png';
 
 // TODO: в игре с поиском ужен таймер, если время кончилось - ты проиграл
@@ -20,25 +20,31 @@ export default function useLogic({ canvasRef, cart, setScores }) {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        const bgImage = new Image();
-        bgImage.src = BgImage;
-
         const shoppingCartImage = new Image();
         shoppingCartImage.src = ShoppingCartImage;
 
-        const cucumberImage = new Image();
-        cucumberImage.src = CucumberImage;
+        const redHatImage = new Image();
+        redHatImage.src = RedHat;
 
-        const tomatoImage = new Image();
-        tomatoImage.src = TomatoImage;
+        const greenHatImage = new Image();
+        greenHatImage.src = GreenHat;
 
-        const potatoImage = new Image();
-        potatoImage.src = PotatoImage;
+        const redGlovesImage = new Image();
+        redGlovesImage.src = RedGloves;
 
-        const cabbageImage = new Image();
-        cabbageImage.src = CabbageImage;
+        const greenGlovesImage = new Image();
+        greenGlovesImage.src = GreenGloves;
 
-        const productsOptions = [cucumberImage, tomatoImage, potatoImage, cabbageImage];
+        const penguinImage = new Image();
+        penguinImage.src = Penguin;
+
+        const productsOptions = [
+            redHatImage,
+            greenHatImage,
+            redGlovesImage,
+            greenGlovesImage,
+            penguinImage
+        ];
 
         const update = () => {
             gameTimer += 1;
@@ -83,7 +89,8 @@ export default function useLogic({ canvasRef, cart, setScores }) {
 
         const render = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#E5E5E5';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(shoppingCartImage, cart.x, cart.y, 150, 150);
 
             products.forEach((product) => {
@@ -101,18 +108,14 @@ export default function useLogic({ canvasRef, cart, setScores }) {
             requestAnimationFrame(game);
         };
 
-        const handleCartPositionChange = (e) => {
-            if (e.nativeEvent.offsetX + 150 <= canvas.width) {
-                cart.x = e.nativeEvent.offsetX;
-            }
-        };
-
         const handleMouseMove = (e) => {
             if (isTabletOrMobile) {
                 return;
             }
 
-            handleCartPositionChange(e);
+            if (e.nativeEvent.offsetX + 150 <= canvas.width) {
+                cart.x = e.nativeEvent.offsetX;
+            }
         };
 
         const handleTouch = (e) => {
@@ -120,7 +123,11 @@ export default function useLogic({ canvasRef, cart, setScores }) {
                 return;
             }
 
-            handleCartPositionChange(e);
+            if (e.changedTouches[0].clientX + 150 <= canvas.width) {
+                cart.x = e.changedTouches[0].clientX;
+            } else {
+                cart.x = canvas.width - 150;
+            }
         };
 
         return {
