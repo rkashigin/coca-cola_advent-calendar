@@ -21,7 +21,7 @@ const Transition = React.forwardRef((props, ref) => {
 
 const Day6 = ({ setOpenedDay }) => {
     const [open, setOpen] = React.useState(true);
-    const [result, setResult] = React.useState(null);
+    const [result, setResult] = React.useState({});
     const [resultVisible, setResultVisible] = React.useState(false);
 
     const handleClose = () => {

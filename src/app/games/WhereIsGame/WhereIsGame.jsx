@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { useMediaQuery } from 'react-responsive';
 import config from '../../config';
 
+// TODO: на декстопе 100% высоты у картинки (типа просто фулскрин без скролла)
+
 import styles from './WhereIsGame.module.scss';
 import { Timer } from '../../components';
 import Adaptive from '../../helpers/Adaptive';

@@ -8,6 +8,8 @@ import { Timer } from '../../components';
 
 import styles from './MemoryGame.module.scss';
 
+// TODO: если кликать кучу раз на 1 картинку, то игра выиграется (поправить логику подсчета пар)
+
 const MemoryGame = ({ setResult, setScore }) => {
     const [cards] = React.useState(shuffle([...Images, ...Images]));
     const [activeCards, setActiveCards] = React.useState([]);
