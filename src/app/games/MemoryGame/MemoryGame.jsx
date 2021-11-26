@@ -16,7 +16,7 @@ const MemoryGame = ({ setResult, setScore }) => {
     const [foundPairs, setFoundPairs] = React.useState([]);
 
     const flipCard = (index) => {
-        if (foundPairs.indexOf(index) !== -1) return;
+        if (activeCards.indexOf(index) !== -1 || foundPairs.indexOf(index) !== -1) return;
 
         if (activeCards.length === 2) return;
 
