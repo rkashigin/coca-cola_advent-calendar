@@ -6,8 +6,6 @@ import GreenGloves from '../../assets/images/catchItem/GreenGloves.png';
 import Penguin from '../../assets/images/catchItem/Penguin.png';
 import ShoppingCartImage from '../../assets/images/catchItem/cart.png';
 
-// TODO: в игре с поиском ужен таймер, если время кончилось - ты проиграл
-
 export default function useLogic({ canvasRef, cart, setScores }) {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 

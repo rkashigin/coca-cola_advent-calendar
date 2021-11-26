@@ -4,8 +4,6 @@ import { Route } from 'react-router-dom';
 import { Routes } from 'react-router';
 import MainPage from './pages/MainPage';
 
-// TODO: проверить профайлер на ререндеры
-
 const App = () => {
     return (
         <div className="App">

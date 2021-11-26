@@ -1,9 +1,6 @@
 import { useMediaQuery } from 'react-responsive';
 
-// TODO: если ходов нет перегенерить доску
-// TODO: в таймер прокидывать не все styles а конкретный класс
 // TODO: за победу не обязательно дают помокод (ответ с бэка)
-// TODO: Сделать тесты в дополнение к играм (что-то тест, что-то - опрос (без правильного варианта))
 
 export default function useLogic({ canvasRef, setScores }) {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
