@@ -196,25 +196,61 @@
 }
 
 .modalResult__postcard{
-	width: 31rem;
-	height: 47rem;
+	--size: 31rem;
+	width: 90%;
+	height: var(--size);
+
+	box-sizing: border-box;
 
 	border-radius: 1.6rem;
 	object-fit: cover;
 
+	background-color: var(--color_red);
+
 	align-self: center;
+
+	@media screen and (max-width: $width-mobile) {
+		-size: 31rem;
+		width: var(--size);
+	
+	}
 }
 
 .modal__postcard{
-	padding: 1.6rem;
+	font-family: var(--font_Montserrat);
+	padding: 4rem 1.6rem 1.6rem;
 
-	width: 37rem;
+	width: 51rem;
 
 	box-sizing: border-box;
 
 	display: flex;
 	flex-direction: column;
 
+	@media screen and (max-width: $width-mobile) {
+		width: 100%;
+
+		padding: 6.8rem 1.6rem 1.6rem;
+	}
+
+}
+
+.modalResult__postcardTitle{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	font-weight: 700;
+	font-size: 2.4rem;
+	line-height: 2.8rem;
+
+	text-align: center;
+
+	margin: 6rem auto;
+
+	@media screen and (max-width: $width-mobile) {
+		max-width: 50%;
+	}
 }
 
 .modalResult__button {
