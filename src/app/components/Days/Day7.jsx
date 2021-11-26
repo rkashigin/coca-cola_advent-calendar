@@ -23,14 +23,13 @@ const Transition = React.forwardRef((props, ref) => {
 
 const Day7 = ({ setOpenedDay }) => {
     const [open, setOpen] = React.useState(true);
-    const [result, setResult] = React.useState(null);
+    const [result, setResult] = React.useState({});
     const [score, setScore] = React.useState(0);
-
-    const promoCode = 'DCCC2022';
+    const [resultVisible, setResultVisible] = React.useState(false);
 
     const handleClose = () => {
-        setResult(false);
         setOpen(false);
+        setResultVisible(false);
     };
 
     React.useEffect(() => {
@@ -46,7 +45,9 @@ const Day7 = ({ setOpenedDay }) => {
     }, [open]);
 
     React.useEffect(() => {
-        if (result) {
+        if (Object.keys(result).length) {
+            setResultVisible(true);
+
             const game = document.querySelector('.gameWrapper');
             game.style.filter = result ? 'blur(10px)' : '';
             game.style.background = result ? 'rgba(0, 0, 0, 0.8)' : '';
@@ -69,7 +70,7 @@ const Day7 = ({ setOpenedDay }) => {
                 />
             </div>
             <Dialog
-                open={result}
+                open={resultVisible}
                 TransitionComponent={Transition}
                 keepMounted
                 onClose={handleClose}
