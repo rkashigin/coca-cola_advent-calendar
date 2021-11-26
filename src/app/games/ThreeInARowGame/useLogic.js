@@ -1,6 +1,7 @@
 import { useMediaQuery } from 'react-responsive';
 
 import TileImages from './images';
+import drawRoundRect from '../../helpers/drawRoundRect';
 
 // TODO: за победу не обязательно дают помокод (ответ с бэка)
 
@@ -320,7 +321,13 @@ export default function useLogic({ canvasRef, setScores }) {
         };
 
         const drawTile = (image, x, y) => {
-            ctx.drawImage(image, x + 2, y + 2, level.tileWidth, level.tileHeight);
+            drawRoundRect.apply(ctx, [x + 8, y + 8, level.tileWidth - 8, level.tileHeight - 8, 8]);
+            ctx.fillStyle = '#F7F7F7';
+            ctx.fill();
+            drawRoundRect.apply(ctx, [x + 8, y + 8, level.tileWidth - 8, level.tileHeight - 8, 8]);
+            ctx.strokeStyle = '#EEEEEE';
+            ctx.stroke();
+            ctx.drawImage(image, x + 14, y + 14, 45, 45);
         };
 
         const render = () => {

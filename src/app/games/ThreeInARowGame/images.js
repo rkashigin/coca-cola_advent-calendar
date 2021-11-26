@@ -1,8 +1,8 @@
-import RedHat from '../../assets/images/Games/RedHat.png';
-import GreenHat from '../../assets/images/Games/GreenHat.png';
-import RedGloves from '../../assets/images/Games/RedGloves.png';
-import GreenGloves from '../../assets/images/Games/GreenGloves.png';
-import Penguin from '../../assets/images/Games/Penguin.png';
+import RedHat from '../../assets/images/threeInARow/RedHat.png';
+import GreenHat from '../../assets/images/threeInARow/GreenHat.png';
+import RedGloves from '../../assets/images/threeInARow/RedGloves.png';
+import GreenGloves from '../../assets/images/threeInARow/GreenGloves.png';
+import Penguin from '../../assets/images/threeInARow/Penguin.png';
 
 const redHatImage = new Image();
 redHatImage.src = RedHat;
