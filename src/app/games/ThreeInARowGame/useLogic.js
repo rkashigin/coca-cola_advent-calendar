@@ -1,9 +1,8 @@
 import { useMediaQuery } from 'react-responsive';
 
-// TODO: если ходов нет перегенерить доску
-// TODO: в таймер прокидывать не все styles а конкретный класс
+import TileImages from './images';
+
 // TODO: за победу не обязательно дают помокод (ответ с бэка)
-// TODO: Сделать тесты в дополнение к играм (что-то тест, что-то - опрос (без правильного варианта))
 
 export default function useLogic({ canvasRef, setScores }) {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
@@ -21,15 +20,9 @@ export default function useLogic({ canvasRef, setScores }) {
             tiles: [],
             selectedTile: { selected: false, column: 0, row: 0 }
         };
-        const tileColors = [
-            [255, 128, 128],
-            [128, 255, 128],
-            [128, 128, 255],
-            [255, 255, 128],
-            [255, 128, 255],
-            [128, 255, 255],
-            [93, 95, 97]
-        ];
+        const tileImages = [...TileImages];
+        const tileMultipliers = [32, 16, 4, 1, 8];
+        const clustersMultipliers = [1, 1.5, 2];
         let clusters = [];
         let moves = [];
         let lastframe = 0;
@@ -110,7 +103,11 @@ export default function useLogic({ canvasRef, setScores }) {
                             for (let i = 0; i < clusters.length; i += 1) {
                                 setScores(
                                     // eslint-disable-next-line no-loop-func
-                                    (prevScores) => prevScores + 100 * (clusters[i].length - 2)
+                                    (prevScores) =>
+                                        prevScores +
+                                        clusters[i].length *
+                                            tileMultipliers[clusters[i].tilesType] *
+                                            clustersMultipliers[clusters[i].length - 3]
                                 );
                             }
 
@@ -213,7 +210,8 @@ export default function useLogic({ canvasRef, setScores }) {
                                 column: i + 1 - matchLength,
                                 row: j,
                                 length: matchLength,
-                                horizontal: true
+                                horizontal: true,
+                                tilesType: level.tiles[i][j].type
                             });
                         }
 
@@ -245,7 +243,8 @@ export default function useLogic({ canvasRef, setScores }) {
                                 column: i,
                                 row: j + 1 - matchLength,
                                 length: matchLength,
-                                horizontal: false
+                                horizontal: false,
+                                tilesType: level.tiles[i][j].type
                             });
                         }
 
@@ -268,15 +267,9 @@ export default function useLogic({ canvasRef, setScores }) {
                     );
 
                     if (level.tiles[i][j].type >= 0) {
-                        const col = tileColors[level.tiles[i][j].type];
+                        const tile = tileImages[level.tiles[i][j].type];
 
-                        drawTile(coord.tilex, coord.tiley, col[0], col[1], col[2]);
-                    }
-
-                    if (level.selectedTile.selected) {
-                        if (level.selectedTile.column === i && level.selectedTile.row === j) {
-                            drawTile(coord.tilex, coord.tiley, 255, 0, 0);
-                        }
+                        drawTile(tile, coord.tilex, coord.tiley);
                     }
                 }
             }
@@ -295,7 +288,7 @@ export default function useLogic({ canvasRef, setScores }) {
                     (animationtime / animationtimetotal) * shiftx,
                     (animationtime / animationtimetotal) * shifty
                 );
-                const col1 = tileColors[level.tiles[currentmove.column1][currentmove.row1].type];
+                const tile1 = tileImages[level.tiles[currentmove.column1][currentmove.row1].type];
 
                 const coord2 = getTileCoordinate(currentmove.column2, currentmove.row2, 0, 0);
                 const coord2shift = getTileCoordinate(
@@ -304,17 +297,18 @@ export default function useLogic({ canvasRef, setScores }) {
                     (animationtime / animationtimetotal) * -shiftx,
                     (animationtime / animationtimetotal) * -shifty
                 );
-                const col2 = tileColors[level.tiles[currentmove.column2][currentmove.row2].type];
+                const tile2 = tileImages[level.tiles[currentmove.column2][currentmove.row2].type];
 
-                drawTile(coord1.tilex, coord1.tiley, 0, 0, 0);
-                drawTile(coord2.tilex, coord2.tiley, 0, 0, 0);
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(coord1.tilex, coord1.tiley, level.tileWidth, level.tileHeight);
+                ctx.fillRect(coord2.tilex, coord2.tiley, level.tileWidth, level.tileHeight);
 
                 if (animationstate === 2) {
-                    drawTile(coord1shift.tilex, coord1shift.tiley, col1[0], col1[1], col1[2]);
-                    drawTile(coord2shift.tilex, coord2shift.tiley, col2[0], col2[1], col2[2]);
+                    drawTile(tile1, coord1shift.tilex, coord1shift.tiley);
+                    drawTile(tile2, coord2shift.tilex, coord2shift.tiley);
                 } else {
-                    drawTile(coord2shift.tilex, coord2shift.tiley, col2[0], col2[1], col2[2]);
-                    drawTile(coord1shift.tilex, coord1shift.tiley, col1[0], col1[1], col1[2]);
+                    drawTile(tile2, coord2shift.tilex, coord2shift.tiley);
+                    drawTile(tile1, coord1shift.tilex, coord1shift.tiley);
                 }
             }
         };
@@ -325,9 +319,8 @@ export default function useLogic({ canvasRef, setScores }) {
             return { tilex, tiley };
         };
 
-        const drawTile = (x, y, r, g, b) => {
-            ctx.fillStyle = `rgb(${r},${g},${b})`;
-            ctx.fillRect(x + 2, y + 2, level.tileWidth - 4, level.tileHeight - 4);
+        const drawTile = (image, x, y) => {
+            ctx.drawImage(image, x + 2, y + 2, level.tileWidth, level.tileHeight);
         };
 
         const render = () => {
@@ -438,7 +431,7 @@ export default function useLogic({ canvasRef, setScores }) {
         };
 
         const getRandomTile = () => {
-            return Math.floor(Math.random() * tileColors.length);
+            return Math.floor(Math.random() * tileImages.length);
         };
 
         const createLevel = () => {

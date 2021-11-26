@@ -30,7 +30,10 @@ const Riddle = ({ setResult, setScore, riddle }) => {
                     setSelectedAnswer(null);
                     setQuestionNumber((prevNumber) => prevNumber + 1);
                 } else {
-                    setResult(true);
+                    setResult({
+                        status: true,
+                        promoCode: Math.floor(Math.random() * 2) === 0 ? false : 'DCCC2022'
+                    });
                     setScore(rightAnswers.current);
                 }
             }, 2500);

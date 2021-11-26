@@ -51,7 +51,7 @@ const Calendar = () => {
                     alt="band"
                 />
             </div>
-            {openedDay &&
+            {openedDay in DAYS &&
                 ReactDOM.createPortal(
                     React.cloneElement(DAYS[openedDay], { setOpenedDay }),
                     document.body

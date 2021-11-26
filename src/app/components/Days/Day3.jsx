@@ -21,15 +21,13 @@ const Transition = React.forwardRef((props, ref) => {
 
 const Day3 = ({ setOpenedDay }) => {
     const [open, setOpen] = React.useState(true);
-    const [result, setResult] = React.useState(false);
+    const [result, setResult] = React.useState({});
     const [score, setScore] = React.useState(0);
-
-    const promoCode = 'DCCC2022';
-    // const score = 5;
+    const [resultVisible, setResultVisible] = React.useState(false);
 
     const handleClose = () => {
-        setResult(false);
         setOpen(false);
+        setResultVisible(false);
     };
 
     React.useEffect(() => {
@@ -45,7 +43,9 @@ const Day3 = ({ setOpenedDay }) => {
     }, [open]);
 
     React.useEffect(() => {
-        if (result) {
+        if (Object.keys(result).length) {
+            setResultVisible(true);
+
             const game = document.querySelector('.gameWrapper');
             game.style.filter = result ? 'blur(10px)' : '';
             game.style.background = result ? 'rgba(0, 0, 0, 0.8)' : '';
@@ -76,14 +76,14 @@ const Day3 = ({ setOpenedDay }) => {
                 />
             </div>
             <Dialog
-                open={result}
+                open={resultVisible}
                 TransitionComponent={Transition}
                 keepMounted
                 onClose={handleClose}
                 aria-describedby="alert-dialog-slide-description"
                 className={styles.popup}
             >
-                {result ? (
+                {result.status ? (
                     <img
                         className={styles.modalResult__img_result}
                         src={require('../../assets/images/Games/game_1_day.png').default}
@@ -100,7 +100,7 @@ const Day3 = ({ setOpenedDay }) => {
                     {/* <DialogTitle>
                         {score} из {config.references.quizes.day3.quiz.length}
                     </DialogTitle> */}
-                    {result ? (
+                    {result.status ? (
                         <DialogTitle>Вы настоящий знаток Деда Мороза!</DialogTitle>
                     ) : (
                         <DialogTitle>
@@ -109,16 +109,16 @@ const Day3 = ({ setOpenedDay }) => {
                         </DialogTitle>
                     )}
                     <DialogContent>
-                        {result ? (
+                        {result.status ? (
                             <>
                                 <DialogContentText id="alert-dialog-slide-description">
                                     Он это ценит, поэтому не оставит вас без внимания на этих
                                     праздниках!
                                 </DialogContentText>
-                                {promoCode && (
+                                {result.promoCode && (
                                     <PromoCode
                                         type="red"
-                                        promoCode={promoCode}
+                                        promoCode={result.promoCode}
                                         promoCodeText="Срок действия промокода 31.01.2022"
                                     />
                                 )}
@@ -129,10 +129,10 @@ const Day3 = ({ setOpenedDay }) => {
                                     С нашим advent-календарем вы еще много узнаете о новогодних
                                     традициях и символах!
                                 </DialogContentText>
-                                {promoCode && (
+                                {result.promoCode && (
                                     <PromoCode
                                         type="red"
-                                        promoCode={promoCode}
+                                        promoCode={result.promoCode}
                                         promoCodeText="Срок действия промокода 31.01.2022"
                                     />
                                 )}
@@ -140,9 +140,9 @@ const Day3 = ({ setOpenedDay }) => {
                         )}
                     </DialogContent>
                     <DialogActions>
-                        {result ? (
+                        {result.status ? (
                             <>
-                                {promoCode && (
+                                {result.promoCode && (
                                     <Button onClick={handleClose}>Заказать сейчас</Button>
                                 )}
                                 <Button className={styles.modalButton_return} onClick={handleClose}>
@@ -151,7 +151,7 @@ const Day3 = ({ setOpenedDay }) => {
                             </>
                         ) : (
                             <>
-                                {promoCode ? (
+                                {result.promoCode ? (
                                     <Button onClick={handleClose}>Заказать сейчас</Button>
                                 ) : (
                                     <Button onClick={handleClose}>Пройти тест еще раз</Button>

@@ -25,14 +25,13 @@ const Transition = React.forwardRef((props, ref) => {
 
 const Day5 = ({ setOpenedDay }) => {
     const [open, setOpen] = React.useState(true);
-    const [result, setResult] = React.useState(false);
+    const [result, setResult] = React.useState({});
     const [score, setScore] = React.useState(0);
-
-    const promoCode = 'DCCC2022';
+    const [resultVisible, setResultVisible] = React.useState(false);
 
     const handleClose = () => {
-        setResult(false);
         setOpen(false);
+        setResultVisible(false);
     };
 
     React.useEffect(() => {
@@ -48,7 +47,9 @@ const Day5 = ({ setOpenedDay }) => {
     }, [open]);
 
     React.useEffect(() => {
-        if (result) {
+        if (Object.keys(result).length) {
+            setResultVisible(true);
+
             const game = document.querySelector('.gameWrapper');
             game.style.filter = result ? 'blur(10px)' : '';
             game.style.background = result ? 'rgba(0, 0, 0, 0.8)' : '';
@@ -79,7 +80,7 @@ const Day5 = ({ setOpenedDay }) => {
                 />
             </div>
             <Dialog
-                open={result}
+                open={resultVisible}
                 TransitionComponent={Transition}
                 keepMounted
                 onClose={handleClose}
@@ -93,7 +94,7 @@ const Day5 = ({ setOpenedDay }) => {
                 />
 
                 <div className={styles.modal}>
-                    {result ? (
+                    {result.status ? (
                         <DialogTitle>Вы настоящий знаток Coca-Cola!</DialogTitle>
                     ) : (
                         <DialogTitle>
@@ -101,7 +102,7 @@ const Day5 = ({ setOpenedDay }) => {
                         </DialogTitle>
                     )}
                     <DialogContent>
-                        {result ? (
+                        {result.status ? (
                             <DialogContentText id="alert-dialog-slide-description">
                                 Чтобы продвинуться дальше по календарю, закажите Coca-Cola в
                                 ресторанах Delivery Club за 1 ₽ по нашему специальному промокоду
@@ -114,7 +115,7 @@ const Day5 = ({ setOpenedDay }) => {
                         )}
                         <PromoCode
                             type="red"
-                            promoCode={promoCode}
+                            promoCode={result.promoCode}
                             promoCodeText="Срок действия промокода 31.01.2022"
                         />
                     </DialogContent>

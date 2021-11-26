@@ -22,13 +22,12 @@ const Transition = React.forwardRef((props, ref) => {
 
 const Day2 = ({ setOpenedDay }) => {
     const [open, setOpen] = React.useState(true);
-    const [result, setResult] = React.useState(false);
-
-    const promoCode = 'DCCC2022';
+    const [result, setResult] = React.useState({});
+    const [resultVisible, setResultVisible] = React.useState(false);
 
     const handleClose = () => {
-        setResult(false);
         setOpen(false);
+        setResultVisible(false);
     };
 
     React.useEffect(() => {
@@ -43,13 +42,15 @@ const Day2 = ({ setOpenedDay }) => {
         return () => clearTimeout(timer);
     }, [open]);
 
-    // React.useEffect(() => {
-    //     if (result) {
-    //         const game = document.querySelector('.gameWrapper');
-    //         game.style.filter = result ? 'blur(10px)' : '';
-    //         game.style.background = result ? 'rgba(0, 0, 0, 0.8)' : '';
-    //     }
-    // }, [result]);
+    React.useEffect(() => {
+        if (Object.keys(result).length) {
+            setResultVisible(true);
+
+            const game = document.querySelector('.gameWrapper');
+            game.style.filter = result ? 'blur(10px)' : '';
+            game.style.background = result ? 'rgba(0, 0, 0, 0.8)' : '';
+        }
+    }, [result]);
 
     return (
         <Dialog
@@ -71,14 +72,14 @@ const Day2 = ({ setOpenedDay }) => {
                 />
             </div>
             <Dialog
-                open={result}
+                open={resultVisible}
                 TransitionComponent={Transition}
                 keepMounted
                 onClose={handleClose}
                 aria-describedby="alert-dialog-slide-description"
                 className={styles.popup}
             >
-                {result ? (
+                {result.status ? (
                     <img
                         className={styles.modalResult__img}
                         src={require('../../assets/images/Games/game_won.png').default}
@@ -86,7 +87,7 @@ const Day2 = ({ setOpenedDay }) => {
                     />
                 ) : (
                     <>
-                        {promoCode ? (
+                        {result.promoCode ? (
                             <img
                                 className={styles.modalResult__img}
                                 src={require('../../assets/images/Games/game_lost.png').default}
@@ -105,11 +106,11 @@ const Day2 = ({ setOpenedDay }) => {
                     </>
                 )}
                 <div className={styles.modal}>
-                    {result ? (
+                    {result.status ? (
                         <DialogTitle>Холодильник нашелся, поздравляем!</DialogTitle>
                     ) : (
                         <>
-                            {promoCode ? (
+                            {result.promoCode ? (
                                 <DialogTitle>
                                     Вы очень постарались! Вот Ваш приз за усердие!
                                 </DialogTitle>
@@ -119,29 +120,29 @@ const Day2 = ({ setOpenedDay }) => {
                         </>
                     )}
                     <DialogContent>
-                        {result ? (
+                        {result.status ? (
                             <>
                                 <DialogContentText id="alert-dialog-slide-description">
                                     Вы отлично справились с заданием!
                                 </DialogContentText>
-                                {promoCode && (
+                                {result.promoCode && (
                                     <PromoCode
                                         type="red"
-                                        promoCode={promoCode}
+                                        promoCode={result.promoCode}
                                         promoCodeName="45 дней подписки онлайн-кинотеатра IVI"
                                     />
                                 )}
                             </>
                         ) : (
                             <>
-                                {promoCode ? (
+                                {result.promoCode ? (
                                     <>
                                         <DialogContentText id="alert-dialog-slide-description">
                                             Вот Ваш приз за старания!
                                         </DialogContentText>
                                         <PromoCode
                                             type="red"
-                                            promoCode={promoCode}
+                                            promoCode={result.promoCode}
                                             promoCodeName="45 дней подписки онлайн-кинотеатра IVI"
                                         />
                                     </>
@@ -154,9 +155,9 @@ const Day2 = ({ setOpenedDay }) => {
                         )}
                     </DialogContent>
                     <DialogActions>
-                        {result ? (
+                        {result.status ? (
                             <>
-                                {promoCode ? (
+                                {result.promoCode ? (
                                     <>
                                         <Button onClick={handleClose}>Заказать сейчас</Button>
                                         <Button onClick={handleClose}>В календарь</Button>
@@ -167,7 +168,7 @@ const Day2 = ({ setOpenedDay }) => {
                             </>
                         ) : (
                             <>
-                                {promoCode ? (
+                                {result.promoCode ? (
                                     <>
                                         <Button onClick={handleClose}>Заказать сейчас</Button>
                                         <Button onClick={handleClose}>В календарь</Button>

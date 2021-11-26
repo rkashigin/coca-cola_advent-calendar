@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { useMediaQuery } from 'react-responsive';
 import config from '../../config';
+
+// TODO: на декстопе 100% высоты у картинки (типа просто фулскрин без скролла)
 
 import styles from './WhereIsGame.module.scss';
 import { Timer } from '../../components';
+import Adaptive from '../../helpers/Adaptive';
 
 const WhereIsGame = ({ gameVariant, setResult }) => {
     const gameConfig = config.references.whereIsGame[gameVariant];
@@ -18,11 +22,14 @@ const WhereIsGame = ({ gameVariant, setResult }) => {
         return x >= coords.xStart && x <= coords.xEnd && y >= coords.yStart && y <= coords.yEnd;
     };
 
-    const generateSelectionWindow = ({ x, xChange, y }) => {
-        const isFindSuccess = confirmFind(x - xChange, y);
+    const generateSelectionWindow = ({ x, y }) => {
+        const isFindSuccess = confirmFind(x, y);
 
         if (isFindSuccess) {
-            setResult(true);
+            setResult({
+                status: true,
+                promoCode: Math.floor(Math.random() * 2) === 0 ? false : 'DCCC2022'
+            });
             setSelectionColor('green');
         } else {
             setSelectionColor('red');
@@ -35,18 +42,24 @@ const WhereIsGame = ({ gameVariant, setResult }) => {
     const handlePerformFindAttempt = (e) => {
         generateSelectionWindow({
             x: e.nativeEvent.offsetX,
-            xChange: e.target.x,
-            y: e.nativeEvent.offsetY,
-            yChange: e.target.y
+            y: e.nativeEvent.offsetY
         });
     };
+
+    const handleTimerComplete = React.useCallback(
+        () =>
+            setResult({
+                status: false
+            }),
+        []
+    );
 
     return (
         <div className={styles.game}>
             <Timer
                 className={styles.game__timer}
                 givenTime={120_000}
-                onComplete={() => setResult(true)}
+                onComplete={handleTimerComplete}
             />
             <div
                 className={styles.selectionWindow}

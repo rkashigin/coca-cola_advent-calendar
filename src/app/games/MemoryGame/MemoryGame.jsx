@@ -8,12 +8,16 @@ import { Timer } from '../../components';
 
 import styles from './MemoryGame.module.scss';
 
+// TODO: если кликать кучу раз на 1 картинку, то игра выиграется (поправить логику подсчета пар)
+
 const MemoryGame = ({ setResult, setScore }) => {
     const [cards] = React.useState(shuffle([...Images, ...Images]));
     const [activeCards, setActiveCards] = React.useState([]);
     const [foundPairs, setFoundPairs] = React.useState([]);
 
     const flipCard = (index) => {
+        if (activeCards.indexOf(index) !== -1 || foundPairs.indexOf(index) !== -1) return;
+
         if (activeCards.length === 2) return;
 
         if (activeCards.length) {
@@ -21,7 +25,10 @@ const MemoryGame = ({ setResult, setScore }) => {
             const secondsIndex = index;
             if (cards[firstIndex] === cards[secondsIndex]) {
                 if (foundPairs.length + 2 === cards.length) {
-                    setResult(true);
+                    setResult({
+                        status: true,
+                        promoCode: Math.floor(Math.random() * 2) === 0 ? false : 'DCCC2022'
+                    });
                 }
                 setFoundPairs([...foundPairs, firstIndex, secondsIndex]);
             }
@@ -31,7 +38,7 @@ const MemoryGame = ({ setResult, setScore }) => {
         }
     };
 
-    const handleTimerComplete = React.useCallback(() => setResult(true), []);
+    const handleTimerComplete = React.useCallback(() => setResult({ status: false }), []);
 
     React.useEffect(() => {
         let timer;

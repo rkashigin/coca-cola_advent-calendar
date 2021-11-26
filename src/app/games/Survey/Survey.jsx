@@ -18,7 +18,7 @@ const Survey = ({ setResult, survey }) => {
             } else {
                 const resultsArray = ['A', 'B', 'C', 'D'];
                 const randomResult = Math.floor(Math.random() * 4);
-                setResult(resultsArray[randomResult]);
+                setResult({ status: resultsArray[randomResult], promoCode: 'DCCC2022' });
             }
         }
     }, [selectedAnswer]);

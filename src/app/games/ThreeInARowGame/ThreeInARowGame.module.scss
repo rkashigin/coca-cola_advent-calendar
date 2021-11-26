@@ -33,6 +33,37 @@
 	}
 }
 
+.game__scoresInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 32px;
+
+  &__item {
+    border-radius: 32px;
+    width: 65px;
+    height: 32px;
+    background: #F7F7F7;
+    border: 0.5px solid #EEEEEE;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 20px;
+      height: 20px;
+      margin-right: 4px;
+    }
+
+    p {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 24px;
+    }
+  }
+}
+
 .game__score {
   position: absolute;
 	font-weight: 700;
