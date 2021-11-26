@@ -9,7 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 
 import PromoCode from '../PromoCode/PromoCode';
-
+import { useDay } from '../../hooks';
 import Game from '../Game';
 import { CatchItemGame } from '../../games';
 
@@ -20,63 +20,29 @@ const Transition = React.forwardRef((props, ref) => {
 });
 
 const Day6 = ({ setOpenedDay }) => {
-    const [open, setOpen] = React.useState(true);
-    const [result, setResult] = React.useState({});
-    const [resultVisible, setResultVisible] = React.useState(false);
-
-    const handleClose = () => {
-        setOpen(false);
-        setResultVisible(false);
-    };
-
-    React.useEffect(() => {
-        let timer;
-        const app = document.querySelector('.App');
-        app.style.filter = open ? 'blur(10px)' : '';
-
-        if (!open) {
-            timer = setTimeout(() => setOpenedDay(0), 1000);
-        }
-
-        return () => clearTimeout(timer);
-    }, [open]);
-
-    React.useEffect(() => {
-        if (Object.keys(result).length) {
-            setResultVisible(true);
-
-            const game = document.querySelector('.gameWrapper');
-            game.style.filter = result ? 'blur(10px)' : '';
-            game.style.background = result ? 'rgba(0, 0, 0, 0.8)' : '';
-        }
-    }, [result]);
+    const { open, result, resultVisible, setResult, handleClose, handleRestart } = useDay({
+        setOpenedDay
+    });
 
     return (
-        <Dialog
-            open={open}
-            TransitionComponent={Transition}
-            keepMounted
-            onClose={handleClose}
-            aria-describedby="alert-dialog-slide-description"
-            className={styles.popup}
-            fullScreen
-            fullWidth
-        >
-            <div className="gameWrapper">
-                <Game
-                    handleClose={handleClose}
-                    game={<CatchItemGame setResult={setResult} />}
-                    fullScreen
-                />
-            </div>
+        <>
             <Dialog
-                open={resultVisible}
+                open={open}
                 TransitionComponent={Transition}
-                keepMounted
                 onClose={handleClose}
-                aria-describedby="alert-dialog-slide-description"
                 className={styles.popup}
+                fullScreen
+                fullWidth
             >
+                <div className="gameWrapper">
+                    <Game
+                        handleClose={handleClose}
+                        game={<CatchItemGame setResult={setResult} />}
+                        fullScreen
+                    />
+                </div>
+            </Dialog>
+            <Dialog open={resultVisible} TransitionComponent={Transition} className={styles.popup}>
                 {result.status ? (
                     <img
                         className={styles.modalResult__img}
@@ -143,14 +109,14 @@ const Day6 = ({ setOpenedDay }) => {
                             </>
                         ) : (
                             <>
-                                <Button onClick={handleClose}>Попробовать ещё раз</Button>
+                                <Button onClick={handleRestart}>Попробовать ещё раз</Button>
                                 <Button onClick={handleClose}>В календарь</Button>
                             </>
                         )}
                     </DialogActions>
                 </div>
             </Dialog>
-        </Dialog>
+        </>
     );
 };
 

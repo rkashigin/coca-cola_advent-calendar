@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react';
+import React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -14,74 +14,40 @@ import { Survey } from '../../games';
 import config from '../../config';
 
 import styles from '../CalendarDay/CalendarDay.module.scss';
+import { useDay } from '../../hooks';
 
 const Transition = React.forwardRef((props, ref) => {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
 const Day8 = ({ setOpenedDay }) => {
-    const [open, setOpen] = React.useState(true);
-    const [result, setResult] = React.useState({});
-    const [resultVisible, setResultVisible] = React.useState(false);
-
-    const handleClose = () => {
-        setOpen(false);
-        setResultVisible(false);
-        setResult({});
-    };
-
-    React.useEffect(() => {
-        let timer;
-        const app = document.querySelector('.App');
-        app.style.filter = open ? 'blur(10px)' : '';
-
-        if (!open) {
-            timer = setTimeout(() => setOpenedDay(0), 1000);
-        }
-
-        return () => clearTimeout(timer);
-    }, [open]);
-
-    React.useEffect(() => {
-        if (Object.keys(result).length) {
-            setResultVisible(true);
-
-            const game = document.querySelector('.gameWrapper');
-            game.style.filter = result ? 'blur(10px)' : '';
-            game.style.background = result ? 'rgba(0, 0, 0, 0.8)' : '';
-        }
-    }, [result]);
+    const { open, result, resultVisible, setResult, handleClose } = useDay({
+        setOpenedDay
+    });
 
     return (
-        <Dialog
-            open={open}
-            TransitionComponent={Transition}
-            keepMounted
-            onClose={handleClose}
-            aria-describedby="alert-dialog-slide-description"
-            className={styles.popup}
-        >
-            <div className="gameWrapper">
-                <Game
-                    handleClose={handleClose}
-                    game={
-                        <Survey
-                            survey={config.references.surveys.day8.survey}
-                            setResult={setResult}
-                        />
-                    }
-                    setResult={setResult}
-                    test
-                />
-            </div>
+        <>
             <Dialog
-                open={resultVisible}
+                open={open}
                 TransitionComponent={Transition}
-                keepMounted
                 onClose={handleClose}
-                aria-describedby="alert-dialog-slide-description"
                 className={styles.popup}
             >
+                <div className="gameWrapper">
+                    <Game
+                        handleClose={handleClose}
+                        game={
+                            <Survey
+                                survey={config.references.surveys.day8.survey}
+                                setResult={setResult}
+                            />
+                        }
+                        setResult={setResult}
+                        test
+                    />
+                </div>
+            </Dialog>
+            <Dialog open={resultVisible} TransitionComponent={Transition} className={styles.popup}>
                 <img
                     className={styles.modalResult__img}
                     src={require('../../assets/images/Games/game_2_day.png').default}
@@ -149,7 +115,7 @@ const Day8 = ({ setOpenedDay }) => {
                     </DialogActions>
                 </div>
             </Dialog>
-        </Dialog>
+        </>
     );
 };
 

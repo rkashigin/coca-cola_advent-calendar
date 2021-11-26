@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react';
+import React from 'react';
 import classNames from 'classnames';
-
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -11,74 +10,43 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 
 import PromoCode from '../PromoCode/PromoCode';
-
-import styles from '../CalendarDay/CalendarDay.module.scss';
 import Game from '../Game';
 import { WhereIsGame } from '../../games';
+import { useDay } from '../../hooks';
+
+import styles from '../CalendarDay/CalendarDay.module.scss';
 
 const Transition = React.forwardRef((props, ref) => {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
 const Day2 = ({ setOpenedDay }) => {
-    const [open, setOpen] = React.useState(true);
-    const [result, setResult] = React.useState({});
-    const [resultVisible, setResultVisible] = React.useState(false);
+    const { open, result, resultVisible, setResult, handleClose, handleRestart } = useDay({
+        setOpenedDay
+    });
 
-    const handleClose = () => {
-        setOpen(false);
-        setResultVisible(false);
-    };
-
-    React.useEffect(() => {
-        let timer;
-        const app = document.querySelector('.App');
-        app.style.filter = open ? 'blur(10px)' : '';
-
-        if (!open) {
-            timer = setTimeout(() => setOpenedDay(0), 1000);
-        }
-
-        return () => clearTimeout(timer);
-    }, [open]);
-
-    React.useEffect(() => {
-        if (Object.keys(result).length) {
-            setResultVisible(true);
-
-            const game = document.querySelector('.gameWrapper');
-            game.style.filter = result ? 'blur(10px)' : '';
-            game.style.background = result ? 'rgba(0, 0, 0, 0.8)' : '';
-        }
-    }, [result]);
+    console.log(open);
 
     return (
-        <Dialog
-            open={open}
-            TransitionComponent={Transition}
-            keepMounted
-            onClose={handleClose}
-            aria-describedby="alert-dialog-slide-description"
-            className={styles.popup}
-            fullScreen
-            fullWidth
-        >
-            <div className="gameWrapper">
-                <Game
-                    handleClose={handleClose}
-                    game={<WhereIsGame gameVariant="easy" setResult={setResult} />}
-                    setResult={setResult}
-                    fullScreen
-                />
-            </div>
+        <>
             <Dialog
-                open={resultVisible}
+                open={open}
                 TransitionComponent={Transition}
-                keepMounted
                 onClose={handleClose}
-                aria-describedby="alert-dialog-slide-description"
                 className={styles.popup}
+                fullScreen
+                fullWidth
             >
+                <div className="gameWrapper">
+                    <Game
+                        handleClose={handleClose}
+                        game={<WhereIsGame gameVariant="easy" setResult={setResult} />}
+                        setResult={setResult}
+                        fullScreen
+                    />
+                </div>
+            </Dialog>
+            <Dialog open={resultVisible} TransitionComponent={Transition} className={styles.popup}>
                 {result.status ? (
                     <img
                         className={styles.modalResult__img}
@@ -175,7 +143,7 @@ const Day2 = ({ setOpenedDay }) => {
                                     </>
                                 ) : (
                                     <>
-                                        <Button onClick={handleClose}>Попробовать еще раз</Button>
+                                        <Button onClick={handleRestart}>Попробовать еще раз</Button>
                                         <Button onClick={handleClose}>В календарь</Button>
                                     </>
                                 )}
@@ -184,7 +152,7 @@ const Day2 = ({ setOpenedDay }) => {
                     </DialogActions>
                 </div>
             </Dialog>
-        </Dialog>
+        </>
     );
 };
 

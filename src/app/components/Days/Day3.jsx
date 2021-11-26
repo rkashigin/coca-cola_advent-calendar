@@ -12,6 +12,7 @@ import PromoCode from '../PromoCode/PromoCode';
 import Game from '../Game';
 import { Quiz } from '../../games';
 import config from '../../config';
+import { useDay } from '../../hooks';
 
 import styles from '../CalendarDay/CalendarDay.module.scss';
 
@@ -20,69 +21,36 @@ const Transition = React.forwardRef((props, ref) => {
 });
 
 const Day3 = ({ setOpenedDay }) => {
-    const [open, setOpen] = React.useState(true);
-    const [result, setResult] = React.useState({});
-    const [score, setScore] = React.useState(0);
-    const [resultVisible, setResultVisible] = React.useState(false);
-
-    const handleClose = () => {
-        setOpen(false);
-        setResultVisible(false);
-    };
-
-    React.useEffect(() => {
-        let timer;
-        const app = document.querySelector('.App');
-        app.style.filter = open ? 'blur(10px)' : '';
-
-        if (!open) {
-            timer = setTimeout(() => setOpenedDay(0), 1000);
+    const { open, result, resultVisible, setScore, setResult, handleClose, handleRestart } = useDay(
+        {
+            setOpenedDay
         }
-
-        return () => clearTimeout(timer);
-    }, [open]);
-
-    React.useEffect(() => {
-        if (Object.keys(result).length) {
-            setResultVisible(true);
-
-            const game = document.querySelector('.gameWrapper');
-            game.style.filter = result ? 'blur(10px)' : '';
-            game.style.background = result ? 'rgba(0, 0, 0, 0.8)' : '';
-        }
-    }, [result]);
+    );
 
     return (
-        <Dialog
-            open={open}
-            TransitionComponent={Transition}
-            keepMounted
-            onClose={handleClose}
-            aria-describedby="alert-dialog-slide-description"
-            className={styles.popup}
-        >
-            <div className="gameWrapper">
-                <Game
-                    handleClose={handleClose}
-                    game={
-                        <Quiz
-                            quiz={config.references.quizes.day3.quiz}
-                            setResult={setResult}
-                            setScore={setScore}
-                        />
-                    }
-                    setResult={setResult}
-                    test
-                />
-            </div>
+        <>
             <Dialog
-                open={resultVisible}
+                open={open}
                 TransitionComponent={Transition}
-                keepMounted
                 onClose={handleClose}
-                aria-describedby="alert-dialog-slide-description"
                 className={styles.popup}
             >
+                <div className="gameWrapper">
+                    <Game
+                        handleClose={handleClose}
+                        game={
+                            <Quiz
+                                quiz={config.references.quizes.day3.quiz}
+                                setResult={setResult}
+                                setScore={setScore}
+                            />
+                        }
+                        setResult={setResult}
+                        test
+                    />
+                </div>
+            </Dialog>
+            <Dialog open={resultVisible} TransitionComponent={Transition} className={styles.popup}>
                 {result.status ? (
                     <img
                         className={styles.modalResult__img}
@@ -154,7 +122,7 @@ const Day3 = ({ setOpenedDay }) => {
                                 {result.promoCode ? (
                                     <Button onClick={handleClose}>Заказать сейчас</Button>
                                 ) : (
-                                    <Button onClick={handleClose}>Пройти тест еще раз</Button>
+                                    <Button onClick={handleRestart}>Пройти тест еще раз</Button>
                                 )}
                                 <Button onClick={handleClose}>В календарь</Button>
                             </>
@@ -162,7 +130,7 @@ const Day3 = ({ setOpenedDay }) => {
                     </DialogActions>
                 </div>
             </Dialog>
-        </Dialog>
+        </>
     );
 };
 

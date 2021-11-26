@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Countdown from 'react-countdown';
+import Countdown, { zeroPad } from 'react-countdown';
 
 const Timer = React.memo(({ className, givenTime, onComplete }) => {
     const timerRenderer = ({ minutes, seconds, completed }) => {
@@ -10,7 +10,7 @@ const Timer = React.memo(({ className, givenTime, onComplete }) => {
 
         return (
             <span>
-                {minutes}:{seconds}
+                {zeroPad(minutes)}:{zeroPad(seconds)}
             </span>
         );
     };

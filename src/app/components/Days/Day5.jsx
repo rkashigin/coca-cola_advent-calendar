@@ -1,7 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react';
-import classNames from 'classnames';
-
+import React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -10,83 +8,47 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 
+import Game from '../Game';
+import { TruthOrMyth } from '../../games';
+import config from '../../config';
+import { useDay } from '../../hooks';
 import PromoCode from '../PromoCode/PromoCode';
 
-import { ReactComponent as CopyIcon } from '../../assets/icons/Modal_promoCode_button_copy.svg';
-
 import styles from '../CalendarDay/CalendarDay.module.scss';
-import Game from '../Game';
-import { Quiz, TruthOrMyth } from '../../games';
-import config from '../../config';
 
 const Transition = React.forwardRef((props, ref) => {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
 const Day5 = ({ setOpenedDay }) => {
-    const [open, setOpen] = React.useState(true);
-    const [result, setResult] = React.useState({});
-    const [score, setScore] = React.useState(0);
-    const [resultVisible, setResultVisible] = React.useState(false);
-
-    const handleClose = () => {
-        setOpen(false);
-        setResultVisible(false);
-    };
-
-    React.useEffect(() => {
-        let timer;
-        const app = document.querySelector('.App');
-        app.style.filter = open ? 'blur(10px)' : '';
-
-        if (!open) {
-            timer = setTimeout(() => setOpenedDay(0), 1000);
-        }
-
-        return () => clearTimeout(timer);
-    }, [open]);
-
-    React.useEffect(() => {
-        if (Object.keys(result).length) {
-            setResultVisible(true);
-
-            const game = document.querySelector('.gameWrapper');
-            game.style.filter = result ? 'blur(10px)' : '';
-            game.style.background = result ? 'rgba(0, 0, 0, 0.8)' : '';
-        }
-    }, [result]);
+    const { open, result, resultVisible, setScore, setResult, handleClose } = useDay({
+        setOpenedDay
+    });
 
     return (
-        <Dialog
-            open={open}
-            TransitionComponent={Transition}
-            keepMounted
-            onClose={handleClose}
-            aria-describedby="alert-dialog-slide-description"
-            className={styles.popup}
-        >
-            <div className="gameWrapper">
-                <Game
-                    handleClose={handleClose}
-                    game={
-                        <TruthOrMyth
-                            quiz={config.references.truthOrMyths.day5.quiz}
-                            setResult={setResult}
-                            setScore={setScore}
-                        />
-                    }
-                    setResult={setResult}
-                    test
-                />
-            </div>
+        <>
             <Dialog
-                open={resultVisible}
+                open={open}
                 TransitionComponent={Transition}
-                keepMounted
                 onClose={handleClose}
-                aria-describedby="alert-dialog-slide-description"
                 className={styles.popup}
             >
+                <div className="gameWrapper">
+                    <Game
+                        handleClose={handleClose}
+                        game={
+                            <TruthOrMyth
+                                quiz={config.references.truthOrMyths.day5.quiz}
+                                setResult={setResult}
+                                setScore={setScore}
+                            />
+                        }
+                        setResult={setResult}
+                        test
+                    />
+                </div>
+            </Dialog>
+            <Dialog open={resultVisible} TransitionComponent={Transition} className={styles.popup}>
                 <img
                     className={styles.modalResult__img}
                     src={require('../../assets/images/Games/game_1_day.png').default}
@@ -125,7 +87,7 @@ const Day5 = ({ setOpenedDay }) => {
                     </DialogActions>
                 </div>
             </Dialog>
-        </Dialog>
+        </>
     );
 };
 

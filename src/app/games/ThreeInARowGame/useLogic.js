@@ -3,8 +3,6 @@ import { useMediaQuery } from 'react-responsive';
 import TileImages from './images';
 import drawRoundRect from '../../helpers/drawRoundRect';
 
-// TODO: за победу не обязательно дают помокод (ответ с бэка)
-
 export default function useLogic({ canvasRef, setScores }) {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 

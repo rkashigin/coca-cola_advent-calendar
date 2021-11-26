@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { useMediaQuery } from 'react-responsive';
+import cn from 'classnames';
 import config from '../../config';
-
-// TODO: на декстопе 100% высоты у картинки (типа просто фулскрин без скролла)
 
 import styles from './WhereIsGame.module.scss';
 import { Timer } from '../../components';
 import Adaptive from '../../helpers/Adaptive';
 
 const WhereIsGame = ({ gameVariant, setResult }) => {
+    const isMobile = useMediaQuery(Adaptive.isMobile);
     const gameConfig = config.references.whereIsGame[gameVariant];
     const [selectionWindowX, setSelectionWindowX] = React.useState('');
     const [selectionWindowY, setSelectionWindowY] = React.useState('');
@@ -75,6 +75,9 @@ const WhereIsGame = ({ gameVariant, setResult }) => {
                 }
             />
             <img
+                className={cn({
+                    [styles.image]: !isMobile
+                })}
                 src={config.references.whereIsGame[gameVariant].image}
                 alt="Game"
                 onClick={handlePerformFindAttempt}
