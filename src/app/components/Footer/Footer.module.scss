@@ -393,6 +393,8 @@
 	width: 100%;
 	height: auto;
 
+	pointer-events: none;
+
 	@media screen and (max-width: $width-mobile) {
 		height: 20rem;
 		width: auto;
@@ -408,6 +410,8 @@
 	width: 52.1rem;
 	height: auto;
 	z-index: 5;
+
+	pointer-events: none;
 
 	@media screen and (max-width: $width-mobile) {
 		width: 92vw;

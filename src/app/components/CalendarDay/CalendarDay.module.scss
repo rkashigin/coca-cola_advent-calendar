@@ -77,12 +77,12 @@
 }
 
 .calendarModal__img {
-	--size: 34.2rem;
+	--size: 32rem;
 	position: absolute;
 
 	width: var(--size);
 
-	top: -13.5rem;
+	top: -13rem;
 	right: 50%;
 	transform: translateX(50%);
 
@@ -133,15 +133,15 @@
 .modalResult__img {
 	position: absolute;
 
-	width: 34.2rem;
+	width: 34rem;
 
-	top: -15rem;
+	top: -13rem;
 	right: 50%;
 	transform: translateX(50%);
 
 	z-index: 50;
 	@media screen and (max-width: $width-mobile) {
-		top: -8rem;
+		top: 0;
 	}
 
 
@@ -158,7 +158,7 @@
 
 	z-index: 50;
 	@media screen and (max-width: $width-mobile) {
-		top: -5rem;
+		top: 0;
 	}
 }
 

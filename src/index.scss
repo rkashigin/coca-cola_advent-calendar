@@ -81,6 +81,7 @@ div.css-yiavyu-MuiBackdrop-root-MuiDialog-backdrop {
 div.css-hz1bth-MuiDialog-container{
   @media screen and (max-width: $width-mobile) {
     align-items: flex-end;
+    // height: calc(100vh - 2.9rem);
   }
 
   @media screen and (max-height: 464px) {
@@ -108,6 +109,8 @@ div.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
   justify-content: center;
 
   overflow: visible;
+
+  // margin-top: 24rem;
 
   @media screen and (max-width: $width-mobile) {
     margin: 2vw;
@@ -232,11 +235,7 @@ button.css-1e6y48t-MuiButtonBase-root-MuiButton-root{
     padding: 4.2vw 7vw;
   }
 }
-
-.test{
-	background-color: blue;
-
-	div.css-hz1bth-MuiDialog-container{
-		align-items: center;
-	}
-}
+// div.css-hz1bth-MuiDialog-container{
+//   overflow-x: hidden;
+//   overflow-y: auto;
+// }

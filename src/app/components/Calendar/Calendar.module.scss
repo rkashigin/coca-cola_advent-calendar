@@ -431,7 +431,7 @@
 }
 
 img.calendarDay_modalImg_1{
-	top: -11rem;
+	top: -9rem;
 
 	@media screen and (max-width: $width-mobile) {
 		top: -7rem;
@@ -439,7 +439,9 @@ img.calendarDay_modalImg_1{
 }
 
 img.calendarDay_modalImg_2{
+	top: -10rem;
 	@media screen and (max-width: $width-mobile) {
+		top: -7rem;
 	}
 }
 
@@ -453,14 +455,20 @@ img.calendarDay_modalImg_3{
 }
 
 img.calendarDay_modalImg_4{
-	top: -16.5rem;
+	top: -14rem;
 
 	@media screen and (max-width: $width-mobile) {
+		top: -10rem;
 	}
 	
 }
 
 img.calendarDay_modalImg_5{
+
+	top: -10rem;
+	@media screen and (max-width: $width-mobile) {
+		top: -7rem;
+	}
 	
 }
 
