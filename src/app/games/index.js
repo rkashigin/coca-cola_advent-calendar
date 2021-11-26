@@ -5,3 +5,4 @@ export { default as CatchItemGame } from './CatchItemGame';
 export { default as Quiz } from './Quiz';
 export { default as TruthOrMyth } from './TruthOrMyth';
 export { default as Survey } from './Survey';
+export { default as Riddle } from './Riddles/Riddle.jsx';

@@ -33,71 +33,187 @@ export default {
                 description: 'Но хорошо ли вы его знаете? Давайте проверим!',
                 quiz: [
                     {
-                        question: 'Идеальный подарок, который Вы ожидаете увидеть?',
+                        question: 'Какого прозвища не бывает у Деда Мороза?',
                         answers: [
                             {
-                                text: 'Кубинская цепь',
+                                text: 'Студенец',
                                 isCorrect: false
                             },
                             {
-                                text: 'Драгзы',
+                                text: 'Леденец',
                                 isCorrect: false
                             },
                             {
-                                text: 'Кодеин',
+                                text: 'Трескунец',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Морозко',
                                 isCorrect: true
-                            },
-                            {
-                                text: "Lil' shawtey",
-                                isCorrect: false
                             }
                         ],
-                        correctExplanation: 'Ну а кто коденчика не хочет? А? А?',
-                        failureExplanation:
-                            'Ну ты как так?? А как ты собрался делать Purple Drunk???? Мда.....'
+                        correctExplanation: 'У Деда Мороза прозвище - Морозко'
                     },
                     {
-                        question: 'Быть дауном или не быть дауном?',
+                        question: 'Где в России находится зимняя родина Деда Мороза?',
                         answers: [
                             {
-                                text: 'Лучше не быть дауном',
+                                text: 'Тверь',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Петрозаводск',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Великий Устюг',
                                 isCorrect: true
                             },
                             {
-                                text: 'ДАДАЯ',
-                                isCorrect: false
-                            },
-                            {
-                                text: 'А ШО?',
+                                text: 'Ростов Великий',
                                 isCorrect: false
                             }
                         ],
-                        correctExplanation: 'Ну не хочу я(((',
-                        failureExplanation: 'Ты дурак?....'
+                        correctExplanation:
+                            'В Великом Устюге не так давно расположена зимняя резиденция Деда Мороза и считается его родиной'
                     },
                     {
                         question:
-                            'Кто быстрее, негр драг диллер или школьник, который хочет в туалет?',
+                            'Как зовут любимца Деда Мороза, белого оленя, что живет с ним в Великом Устюге?',
                         answers: [
                             {
-                                text: 'Первый',
+                                text: 'Петька',
                                 isCorrect: false
                             },
                             {
-                                text: 'Второй',
-                                isCorrect: false
-                            },
-                            {
-                                text: 'Скорость распространения короны',
+                                text: 'Лешка',
                                 isCorrect: true
                             },
                             {
-                                text: 'Я быстрее всех',
+                                text: 'Ванька',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Сенька',
                                 isCorrect: false
                             }
                         ],
-                        correctExplanation: 'Ну тут даже думать не надо',
-                        failureExplanation: 'Кек'
+                        correctExplanation:
+                            'В Великом Устюге живет белый олень Лешка, любимец Деда Мороза'
+                    },
+                    {
+                        question: 'Какого цвета не может быть шуба у Деда Мороза?',
+                        answers: [
+                            {
+                                text: 'Желтая',
+                                isCorrect: true
+                            },
+                            {
+                                text: 'Красная',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Серая',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Синяя',
+                                isCorrect: false
+                            }
+                        ],
+                        correctExplanation:
+                            'Шуба у Деда Мороза может быть красной, серой или синей. Но, может, в будущем он попробует какой-то другой цвет?'
+                    },
+                    {
+                        question: 'Какого святого принято считать прообразом Деда Мороза?',
+                        answers: [
+                            {
+                                text: 'Святой Петр',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Святой Николай',
+                                isCorrect: true
+                            },
+                            {
+                                text: 'Святой Павел',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Святой Георгий',
+                                isCorrect: false
+                            }
+                        ],
+                        correctExplanation:
+                            'Святой Николай стал прообразом современного Деда Мороза'
+                    },
+                    {
+                        question: 'Когда Дед Мороз появляется на праздничной детской ёлке?',
+                        answers: [
+                            {
+                                text: 'Находится там всегда',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'В самом начале',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'В середине',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'В конце',
+                                isCorrect: true
+                            }
+                        ],
+                        correctExplanation: 'Правильный ответ'
+                    },
+                    {
+                        question: 'Какой из этих фактов про Деда Мороза — вымысел?',
+                        answers: [
+                            {
+                                text: 'У Деда Мороза есть волшебный посох',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Дед Мороз огромного роста',
+                                isCorrect: true
+                            },
+                            {
+                                text: 'Деду Морозу свыше 2000 лет',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'У Деда Мороза длинная седая борода',
+                                isCorrect: false
+                            }
+                        ],
+                        correctExplanation:
+                            'Дед Мороз небольшого роста с длинной бородой и волшебным посохом. И ему свыше 2000 лет'
+                    },
+                    {
+                        question:
+                            'Как зовут помощников Деда Мороза, что несут за собой снег и холода?',
+                        answers: [
+                            {
+                                text: 'Ледяники',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Снежинки',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Морозцы',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Трескуны',
+                                isCorrect: true
+                            }
+                        ],
+                        correctExplanation: 'Правильный ответ'
                     }
                 ]
             }
@@ -155,6 +271,36 @@ export default {
                         ],
                         explanation:
                             'Это правдивый факт. В 2016 году была выпущена лимитированная серия. При открывании бутылки запись воспроизводилась и поздравляла людей с праздниками'
+                    },
+                    {
+                        question:
+                            'В 2001 году Coca-Cola запустила в США уникальную акцию: в лимитированной серии счастливчикам могла выпасть возможность прокатиться на санях с Санта-Клаусом и оленями',
+                        answers: [
+                            {
+                                text: 'Правда',
+                                isCorrect: true
+                            },
+                            {
+                                text: 'Миф',
+                                isCorrect: false
+                            }
+                        ],
+                        explanation: 'Но было бы здорово иметь такую возможность, правда?'
+                    },
+                    {
+                        question: 'Coca-Cola выпускала бутылки для слабовидящих со шрифтом Брайля',
+                        answers: [
+                            {
+                                text: 'Правда',
+                                isCorrect: true
+                            },
+                            {
+                                text: 'Миф',
+                                isCorrect: false
+                            }
+                        ],
+                        explanation:
+                            'Это правдивый факт. В 2015 году для участников аргентинской сборной по футболу для незрячих'
                     }
                 ]
             }
@@ -190,6 +336,215 @@ export default {
                             'И без ёлки хорошо',
                             'Игрушки своими руками, фотографии близких, сверкающие животные и птицы'
                         ]
+                    },
+                    {
+                        question: 'Самое время писать письмо Деду Морозу. С каких слов начнете?',
+                        answers: [
+                            'Дедушка Мороз, этот год был совершенно удивительным…',
+                            'Писать письмо Деду Морозу как-то по-детски, но, знаешь, Дед Мороз, этот год был таким непростым…',
+                            'Дед Мороз, не будем тратить твое и мое время. Я хочу это, это и вот это…',
+                            'Дедушка Мороз, в этом году я, может, вел себя не идеально, но очень старался…'
+                        ]
+                    },
+                    {
+                        question: 'Какой же подарок ты мечтаешь получить от Деда Мороза?',
+                        answers: [
+                            'Главное, чтобы это был сюрприз',
+                            'Здоровья себе и близким',
+                            'Новый Год — новый смартфон, но фитнес-браслет тоже пойдет',
+                            'Книга — лучший подарок'
+                        ]
+                    }
+                ]
+            }
+        },
+        riddles: {
+            day10: {
+                title: 'Помните детские утренники, ёлку и загадки от Деда Мороза?',
+                description:
+                    'Вот мы и решили проверить, справитесь ли вы с ними сейчас. Каждая загадка имеет четыре вариант ответов, но только один правильный. И не все так просто, как может показаться на первый взгляд',
+                riddle: [
+                    {
+                        question:
+                            'Вкусные, красивые, миром всем любимые, новогодний атрибут. На столе их очень ждут',
+                        answers: [
+                            {
+                                text: 'Салаты',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Конфеты',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Мандарины',
+                                isCorrect: true
+                            },
+                            {
+                                text: 'Бутерброды',
+                                isCorrect: false
+                            }
+                        ],
+                        correctExplanation: 'Мандарины'
+                    },
+                    {
+                        question:
+                            'Это удивительное волшебство, которое вмиг превращает детей и взрослых в медведей, зайчиков и лисичек',
+                        answers: [
+                            {
+                                text: 'Утренник',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Бал',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Волшебная палочка',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Маскарад',
+                                isCorrect: true
+                            }
+                        ],
+                        correctExplanation: 'Маскарад'
+                    },
+                    {
+                        question:
+                            'Лежит дед – белее нет. Лежит всю зиму, никто не подымет. Весна придет – сам пропадет',
+                        answers: [
+                            {
+                                text: 'Сугроб',
+                                isCorrect: true
+                            },
+                            {
+                                text: 'Газон',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Куст',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Холм',
+                                isCorrect: false
+                            }
+                        ],
+                        correctExplanation: 'Сугроб'
+                    },
+                    {
+                        question:
+                            'Самый страшный зимний зверь. Его все боятся, ведь он может кусаться',
+                        answers: [
+                            {
+                                text: 'Медведь',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Заяц',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Новый Год',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Мороз',
+                                isCorrect: true
+                            }
+                        ],
+                        correctExplanation: 'Мороз'
+                    },
+                    {
+                        question:
+                            'Гостья в Новый год пришла: Как лягушка — зелена, Лапы все — в иголках... Кто пришел к нам?',
+                        answers: [
+                            {
+                                text: 'Клумба',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Жаба',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Ёлка',
+                                isCorrect: true
+                            },
+                            {
+                                text: 'Игуана',
+                                isCorrect: false
+                            }
+                        ],
+                        correctExplanation: 'Ёлка'
+                    },
+                    {
+                        question:
+                            'Эта дружная цепочка вокруг елочки бежит. Звонко хлопает в ладошки и от радости визжит',
+                        answers: [
+                            {
+                                text: 'Хоровод',
+                                isCorrect: true
+                            },
+                            {
+                                text: 'Гирлянда',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Мишура',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Конфетти',
+                                isCorrect: false
+                            }
+                        ],
+                        correctExplanation: 'Хоровод'
+                    },
+                    {
+                        question: 'Кто никогда не спешит, и никогда не опаздывает?',
+                        answers: [
+                            {
+                                text: 'Автобус',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Праздничный ужин',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Новый Год',
+                                isCorrect: true
+                            },
+                            {
+                                text: 'Дед Мороз',
+                                isCorrect: false
+                            }
+                        ],
+                        correctExplanation: 'Новый Год'
+                    },
+                    {
+                        question: 'Было колесиком, стало ленточкой. Что это за новогодняя игрушка?',
+                        answers: [
+                            {
+                                text: 'Серпантин',
+                                isCorrect: true
+                            },
+                            {
+                                text: 'Гирлянда',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Дождик',
+                                isCorrect: false
+                            },
+                            {
+                                text: 'Мишура',
+                                isCorrect: false
+                            }
+                        ],
+                        correctExplanation: 'Серпантин'
                     }
                 ]
             }

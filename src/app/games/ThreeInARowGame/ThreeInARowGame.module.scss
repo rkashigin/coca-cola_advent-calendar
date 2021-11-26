@@ -1,24 +1,59 @@
+@import "../../../variables.scss";
+
 .game {
-  padding: 20px 16px;
-  background: url('../../assets/images/games-background.jpg');
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  font-family: var(--font_Montserrat);
+  background-color: white;
+
+	border-radius: 1.6rem;
+
+	padding: 4.8rem 1.6rem 1.6rem;
+	width: 51.2rem;
+  height: 61.3rem;
+
+	display: flex;
+	flex-direction: column;
+
+  background-image: url("../../assets/images/Quiz/snowflakes.svg");
+	background-repeat:repeat-y;
+	background-size: contain;
+	background-position: center;
+
+	@media screen and (max-width: $width-mobile) {
+		width: 39rem;
+		height: calc(100vh - 2.5rem);
+
+		box-sizing: border-box;
+
+		padding: 4.1vw;
+
+		margin-bottom: 2.5rem;
+
+    background-image: url("../../assets/images/Quiz/snowflakes_mobile.svg");
+	}
 }
 
 .game__score {
   position: absolute;
-  font-size: 18px;
-  line-height: 32px;
-  top: 8px;
-  left: 12px;
+	font-weight: 700;
+	font-size: 1.8rem;
+	line-height: 3.2rem;
+	left: 1.6rem;
+	top: 2rem;
 }
 
 .game__timer {
-  font-size: 40px;
-  line-height: 40px;
-  letter-spacing: 0.1em;
+  font-weight: 700;
+  font-size: 4rem;
+  line-height: 4rem;
+  padding: 3.6rem 2rem 3.2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and (max-width: $width-mobile) {
+    padding: 10rem 2rem 6rem;
+  }
 }
 
 .game__board {

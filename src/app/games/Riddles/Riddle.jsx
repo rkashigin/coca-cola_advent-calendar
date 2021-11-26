@@ -6,9 +6,9 @@ import cn from 'classnames';
 import { ReactComponent as WrongAnswer } from '../../assets/icons/icon__bad.svg';
 import { ReactComponent as RightAnswer } from '../../assets/icons/icon__good.svg';
 
-import styles from './Quiz.module.scss';
+import styles from '../Quiz/Quiz.module.scss';
 
-const Quiz = ({ setResult, setScore, quiz }) => {
+const Riddle = ({ setResult, setScore, riddle }) => {
     const [questionNumber, setQuestionNumber] = React.useState(0);
     const [selectedAnswer, setSelectedAnswer] = React.useState(null);
     const rightAnswers = React.useRef(0);
@@ -26,7 +26,7 @@ const Quiz = ({ setResult, setScore, quiz }) => {
 
         if (Number.isInteger(selectedAnswer)) {
             timer = setTimeout(() => {
-                if (questionNumber + 1 !== quiz.length) {
+                if (questionNumber + 1 !== riddle.length) {
                     setSelectedAnswer(null);
                     setQuestionNumber((prevNumber) => prevNumber + 1);
                 } else {
@@ -42,27 +42,27 @@ const Quiz = ({ setResult, setScore, quiz }) => {
     return (
         <div className={styles.quiz}>
             <div className={styles.quiz__scores}>
-                {questionNumber + 1} / {quiz.length} вопросов
+                {questionNumber + 1} / {riddle.length} вопросов
             </div>
             <div className={styles.quiz__question}>
                 <h2
                     className={cn(styles.quiz__questionText, {
                         [styles.quiz__questionText_correct]:
                             Number.isInteger(selectedAnswer) &&
-                            quiz[questionNumber].answers[selectedAnswer].isCorrect,
+                            riddle[questionNumber].answers[selectedAnswer].isCorrect,
                         [styles.quiz__questionText_false]:
                             Number.isInteger(selectedAnswer) &&
-                            !quiz[questionNumber].answers[selectedAnswer].isCorrect
+                            !riddle[questionNumber].answers[selectedAnswer].isCorrect
                     })}
                 >
                     {Number.isInteger(selectedAnswer)
-                        ? quiz[questionNumber].answers[selectedAnswer].isCorrect
-                            ? quiz[questionNumber].correctExplanation
-                            : quiz[questionNumber].correctExplanation
-                        : quiz[questionNumber].question}
+                        ? riddle[questionNumber].answers[selectedAnswer].isCorrect
+                            ? riddle[questionNumber].correctExplanation
+                            : riddle[questionNumber].correctExplanation
+                        : riddle[questionNumber].question}
                 </h2>
             </div>
-            {quiz[questionNumber].answers.map(({ text, isCorrect }, answerIdx) => (
+            {riddle[questionNumber].answers.map(({ text, isCorrect }, answerIdx) => (
                 <Button
                     type="button"
                     onClick={() => handleSelectAnswer(answerIdx, isCorrect)}
@@ -87,8 +87,8 @@ const Quiz = ({ setResult, setScore, quiz }) => {
     );
 };
 
-Quiz.propTypes = {
-    quiz: PropTypes.arrayOf(
+Riddle.propTypes = {
+    riddle: PropTypes.arrayOf(
         PropTypes.shape({
             question: PropTypes.string,
             answers: PropTypes.arrayOf(
@@ -105,4 +105,4 @@ Quiz.propTypes = {
     setScore: PropTypes.func.isRequired
 };
 
-export default Quiz;
+export default Riddle;

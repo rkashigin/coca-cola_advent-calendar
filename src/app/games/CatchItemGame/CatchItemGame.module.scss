@@ -1,27 +1,28 @@
 .game {
+  font-family: var(--font_Montserrat);
 }
 
 .game__timer {
   position: fixed;
   background-color: white;
-  padding: 10px 25px;
-  border-radius: 32px;
-  top: 16px;
-  left: 16px;
+  padding: 1rem 2.5rem;
+  border-radius: 3.2rem;
+  top: 1.6rem;
+  left: 1.6rem;
   font-weight: 500;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 1.8rem;
+  line-height: 2.4rem;
   text-align: center;
 }
 
 .game__score {
   position: absolute;
-  top: 5%;
+  top: 7rem;
   left: 50%;
   transform: translateX(-50%);
   font-weight: bold;
-  font-size: 64px;
-  line-height: 64px;
+  font-size: 6.5rem;
+  line-height: 6.4rem;
 }
 
 .game__board {

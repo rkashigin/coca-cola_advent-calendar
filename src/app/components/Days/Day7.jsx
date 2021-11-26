@@ -9,6 +9,8 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 
+import PromoCode from '../PromoCode/PromoCode';
+
 import { ReactComponent as CopyIcon } from '../../assets/icons/Modal_promoCode_button_copy.svg';
 
 import styles from '../CalendarDay/CalendarDay.module.scss';
@@ -24,7 +26,7 @@ const Day7 = ({ setOpenedDay }) => {
     const [result, setResult] = React.useState(false);
     const [score, setScore] = React.useState(0);
 
-    const promocode = 'DCCC2022';
+    const promoCode = 'DCCC2022';
 
     const handleClose = () => {
         setResult(false);
@@ -89,45 +91,54 @@ const Day7 = ({ setOpenedDay }) => {
                 )}
                 <div className={styles.modal}>
                     {result ? (
-                        <DialogTitle>420</DialogTitle>
+                        <>
+                            {promoCode ? (
+                                <>
+                                    <DialogTitle>Вот это скорость!</DialogTitle>
+                                    <DialogContentText id="alert-dialog-slide-description">
+                                        Мы просто не можем оставить вас без подарка!
+                                    </DialogContentText>
+                                    <PromoCode
+                                        type="red"
+                                        promoCode={promoCode}
+                                        promoCodeText="Срок действия промокода 31.01.2022"
+                                    />
+                                </>
+                            ) : (
+                                <>
+                                    <DialogTitle>Поздравляем!</DialogTitle>
+                                    <DialogContentText id="alert-dialog-slide-description">
+                                        Вы прекрасно справились с заданием! Ваша скорость выше
+                                        всяких похвал!
+                                    </DialogContentText>
+                                </>
+                            )}
+                        </>
                     ) : (
-                        <DialogTitle>{score} очков</DialogTitle>
+                        <DialogTitle>
+                            Как жаль, время вышло! Но мы знаем, что вы очень старались!
+                        </DialogTitle>
                     )}
-                    <DialogContent>
-                        {result ? (
-                            <>
-                                <DialogContentText id="alert-dialog-slide-description">
-                                    Задание этого дня совсем простое: сделайте заказ в Delivery Club
-                                    на любую сумму с нашим волшебным промокодом на Coca-Cola за 1 ₽
-                                </DialogContentText>
-                                <div
-                                    name="promoCode"
-                                    type="button"
-                                    value={promocode}
-                                    className={styles.modal__promoCode}
-                                    // onChange={changeHandler}
-                                >
-                                    {promocode}
-                                    <button className={styles.promoCode__button} type="button">
-                                        <CopyIcon className={styles.promoCode__button_copy} />
-                                    </button>
-                                </div>
-                            </>
-                        ) : (
-                            <DialogContentText id="alert-dialog-slide-description">
-                                Вы набрали недостаточное кол-во очков
-                            </DialogContentText>
-                        )}
-                    </DialogContent>
                     <DialogActions>
                         {result ? (
                             <>
-                                <Button onClick={handleClose}>Заказать сейчас</Button>
-                                <Button onClick={handleClose}>В календарь</Button>
+                                {promoCode ? (
+                                    <>
+                                        <Button onClick={handleClose}>Заказать сейчас</Button>
+                                        <Button onClick={handleClose}>В календарь</Button>
+                                    </>
+                                ) : (
+                                    <Button
+                                        className={styles.modalButton_return}
+                                        onClick={handleClose}
+                                    >
+                                        В календарь
+                                    </Button>
+                                )}
                             </>
                         ) : (
                             <>
-                                <Button onClick={handleClose}>Пройти тест еще раз</Button>
+                                <Button onClick={handleClose}>Играть ещё раз</Button>
                                 <Button onClick={handleClose}>В календарь</Button>
                             </>
                         )}

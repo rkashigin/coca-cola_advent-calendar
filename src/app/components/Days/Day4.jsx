@@ -25,7 +25,7 @@ const Day4 = ({ setOpenedDay }) => {
     const [result, setResult] = React.useState(false);
     const [score, setScore] = React.useState(0);
 
-    const promocode = 'DCCC2022';
+    const promoCode = 'DCCC2022';
 
     const handleClose = () => {
         setResult(false);
@@ -94,38 +94,79 @@ const Day4 = ({ setOpenedDay }) => {
                             <DialogTitle>Поздравляем!</DialogTitle>
                         ) : (
                             <>
-                                <DialogTitle>
-                                    К сожалению, вы не успели найти все пары картинок вовремя
-                                </DialogTitle>
-                                <DialogTitle>{score} из 20</DialogTitle>
+                                {promoCode ? (
+                                    <DialogTitle>Вы очень старались, держите подарок</DialogTitle>
+                                ) : (
+                                    <DialogTitle>
+                                        К сожалению, вы не успели найти все пары картинок вовремя
+                                    </DialogTitle>
+                                )}
                             </>
                         )}
                         <DialogContent>
                             {result ? (
                                 <>
-                                    <DialogContentText id="alert-dialog-slide-description">
-                                        У вас прекрасная память и быстрая реакция! За это дарим вам
-                                        подарок!
-                                    </DialogContentText>
-                                    <PromoCode
-                                        promoCode={promocode}
-                                        promoCodeText="Срок действия промокода 31.01.2022"
-                                    />
+                                    {promoCode ? (
+                                        <>
+                                            <DialogContentText id="alert-dialog-slide-description">
+                                                У вас прекрасная память и быстрая реакция! За это
+                                                дарим вам подарок!
+                                            </DialogContentText>
+                                            <PromoCode
+                                                type="red"
+                                                promoCode={promoCode}
+                                                promoCodeText="Срок действия промокода 31.01.2022"
+                                            />
+                                        </>
+                                    ) : (
+                                        <DialogContentText id="alert-dialog-slide-description">
+                                            Вы прекрасно справились с заданием! Вашей памяти можно
+                                            позавидовать!
+                                        </DialogContentText>
+                                    )}
                                 </>
                             ) : (
-                                <></>
+                                <>
+                                    {promoCode && (
+                                        <PromoCode
+                                            type="red"
+                                            promoCode={promoCode}
+                                            promoCodeText="Срок действия промокода 31.01.2022"
+                                        />
+                                    )}
+                                </>
                             )}
                         </DialogContent>
                         <DialogActions>
                             {result ? (
                                 <>
-                                    <Button onClick={handleClose}>Заказать сейчас</Button>
-                                    <Button onClick={handleClose}>В календарь</Button>
+                                    {promoCode ? (
+                                        <>
+                                            <Button onClick={handleClose}>Заказать сейчас</Button>
+                                            <Button onClick={handleClose}>В календарь</Button>
+                                        </>
+                                    ) : (
+                                        <Button
+                                            className={styles.modalButton_return}
+                                            onClick={handleClose}
+                                        >
+                                            В календарь
+                                        </Button>
+                                    )}
                                 </>
                             ) : (
                                 <>
-                                    <Button onClick={handleClose}>Играть ещё раз</Button>
-                                    <Button onClick={handleClose}>В календарь</Button>
+                                    {promoCode ? (
+                                        <>
+                                            <Button onClick={handleClose}>Заказать сейчас</Button>
+                                            <Button onClick={handleClose}>В календарь</Button>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Button onClick={handleClose}>Играть ещё раз</Button>
+                                            <Button onClick={handleClose}>В календарь</Button>
+                                        </>
+                                    )}
                                 </>
                             )}
                         </DialogActions>

@@ -101,7 +101,9 @@
 	@media screen and (max-width: $width-mobile) {
 		width: 95%;
 
-		padding: 58.4vw 2vw 2vw;
+		padding: 58.4vw 4vw 4vw;
+
+		// margin-bottom: 2rem;
 	}
 
 	@media screen and (max-height: 464px) {
@@ -112,7 +114,7 @@
 
 		margin-top: 120%;
 
-		padding: 4vw 2vw 2vw;
+		padding: 4vw;
 	}
 }
 
@@ -222,7 +224,7 @@
 }
 
 button.modalButton_return{
-	background-color: var(--color_alabaster_grey);
-	color: var(--color_dim_gray);
+	background-color: var(--color_alabaster_grey)!important;
+	color: var(--color_dim_gray)!important;
 }
 

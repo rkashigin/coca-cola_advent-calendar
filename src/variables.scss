@@ -25,10 +25,10 @@ $width-mobile: 725px;
     }
 
     // Games config
-    --memoryBoardVerticalGap: 16px;
-    --memoryBoardHorizontalGap: 8px;
-    --memoryBoardWidth: 360px;
-    --memoryBoardHeight: calc(320px + 4 * 16px);
+    --memoryBoardVerticalGap: 1.6rem;
+    --memoryBoardHorizontalGap: 0.8rem;
+    --memoryBoardWidth: 36rem;
+    --memoryBoardHeight: calc(32rem + 4 * 1.6rem);
     --memoryBoardHorizontalLength: 5;
     --memoryBoardVerticalLength: 4;
 }

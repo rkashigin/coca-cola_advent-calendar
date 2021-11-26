@@ -25,7 +25,7 @@ export default function useLogic({ canvasRef, setScores }) {
             [255, 255, 128],
             [255, 128, 255],
             [128, 255, 255],
-            [255, 255, 255]
+            [93, 95, 97]
         ];
         let clusters = [];
         let moves = [];
@@ -328,12 +328,12 @@ export default function useLogic({ canvasRef, setScores }) {
         };
 
         const render = () => {
-            ctx.fillStyle = '#000000';
+            ctx.fillStyle = '#ffffff';
             ctx.font = '24px Verdana';
 
             const levelwidth = level.columns * level.tileWidth;
             const levelheight = level.rows * level.tileHeight;
-            ctx.fillStyle = '#000000';
+            ctx.fillStyle = '#ffffff';
             ctx.fillRect(level.x - 4, level.y - 4, levelwidth + 8, levelheight + 8);
 
             renderTiles();
