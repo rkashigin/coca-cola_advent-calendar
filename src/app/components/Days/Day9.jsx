@@ -80,7 +80,7 @@ const Day9 = ({ setOpenedDay }) => {
             >
                 {result ? (
                     <img
-                        className={styles.modalResult__img}
+                        className={styles.modalResult__img_result}
                         src={require('../../assets/images/Games/game_1_day.png').default}
                         alt=""
                     />

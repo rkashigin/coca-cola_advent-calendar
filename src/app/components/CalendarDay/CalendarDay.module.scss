@@ -69,17 +69,27 @@
 }
 
 .popup {
-	// background-color: blue;
+
+	@media screen and (max-width: $width-mobile) {
+		overflow-y: auto;
+		overflow-x: hidden;
+	}
 }
 
 .calendarModal__img {
+	--size: 34.2rem;
 	position: absolute;
 
-	width: 34.2rem;
+	width: var(--size);
 
-	top: -7.5rem;
+	top: -13.5rem;
 	right: 50%;
 	transform: translateX(50%);
+
+	@media screen and (max-width: $width-mobile) {
+		width: calc(var(--size) / 1.19);
+		top: -7rem;
+	}
 }
 
 .calendarModal__img_horizontalMedia{
@@ -95,15 +105,17 @@
 
 	border-radius: 1.6rem;
 
-	padding: 22.8rem 1.6rem 1.6rem;
-	width: 47rem;
+	padding: 17rem 1.6rem 1.6rem;
+	width: 45rem;
+
+	position: relative;
 
 	@media screen and (max-width: $width-mobile) {
-		width: 95%;
+		width: 92%;
 
-		padding: 58.4vw 4vw 4vw;
+		padding: 43.5vw 4vw 4vw;
 
-		// margin-bottom: 2rem;
+		margin-top: 17rem;
 	}
 
 	@media screen and (max-height: 464px) {
@@ -112,9 +124,9 @@
 
 		align-items: center;
 
-		margin-top: 120%;
+		margin-top: 100%;
 
-		padding: 4vw;
+		padding: 1.6rem;
 	}
 }
 
@@ -123,9 +135,31 @@
 
 	width: 34.2rem;
 
-	top: -9.5rem;
+	top: -15rem;
 	right: 50%;
 	transform: translateX(50%);
+
+	z-index: 50;
+	@media screen and (max-width: $width-mobile) {
+		top: -8rem;
+	}
+
+
+}
+
+.modalResult__img_result{
+	position: absolute;
+
+	width: 34.2rem;
+
+	top: -15rem;
+	right: 50%;
+	transform: translateX(50%);
+
+	z-index: 50;
+	@media screen and (max-width: $width-mobile) {
+		top: -5rem;
+	}
 }
 
 .modal__promoText{
