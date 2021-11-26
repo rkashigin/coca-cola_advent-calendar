@@ -42,7 +42,7 @@ const ThreeInARowGame = ({ setResult, setScore }) => {
     React.useEffect(() => {
         setScore(scores);
 
-        if (scores === 300) {
+        if (scores >= 300) {
             setResult({
                 status: true,
                 promoCode: Math.floor(Math.random() * 2) === 0 ? false : 'DCCC2022'
