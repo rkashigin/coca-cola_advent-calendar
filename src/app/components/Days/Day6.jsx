@@ -25,9 +25,8 @@ const Day6 = ({ setOpenedDay }) => {
     const [resultVisible, setResultVisible] = React.useState(false);
 
     const handleClose = () => {
+        setOpen(false);
         setResultVisible(false);
-        setResult({});
-        setResult(false);
     };
 
     React.useEffect(() => {
