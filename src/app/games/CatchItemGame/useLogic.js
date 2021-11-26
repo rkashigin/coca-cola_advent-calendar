@@ -1,9 +1,9 @@
 import { useMediaQuery } from 'react-responsive';
-import RedHat from '../../assets/images/catchItem/RedHat.png';
-import GreenHat from '../../assets/images/catchItem/GreenHat.png';
-import RedGloves from '../../assets/images/catchItem/RedGloves.png';
-import GreenGloves from '../../assets/images/catchItem/GreenGloves.png';
-import Penguin from '../../assets/images/catchItem/Penguin.png';
+import RedHat from '../../assets/images/Games/RedHat.png';
+import GreenHat from '../../assets/images/Games/GreenHat.png';
+import RedGloves from '../../assets/images/Games/RedGloves.png';
+import GreenGloves from '../../assets/images/Games/GreenGloves.png';
+import Penguin from '../../assets/images/Games/Penguin.png';
 import ShoppingCartImage from '../../assets/images/catchItem/cart.png';
 
 export default function useLogic({ canvasRef, cart, setScores }) {

@@ -22,7 +22,7 @@ const Transition = React.forwardRef((props, ref) => {
 
 const Day8 = ({ setOpenedDay }) => {
     const [open, setOpen] = React.useState(true);
-    const [result, setResult] = React.useState(false);
+    const [result, setResult] = React.useState(null);
 
     const promoCode = 'DCCC2022';
 
@@ -87,41 +87,41 @@ const Day8 = ({ setOpenedDay }) => {
                     alt=""
                 />
                 <div className={styles.modal}>
-                    {result === 'A' && (
+                    {result.status === 'A' && (
                         <DialogTitle>
                             Вы мечтательны и несете в себе эту черту на протяжении всей жизни
                         </DialogTitle>
                     )}
-                    {result === 'B' && (
+                    {result.status === 'B' && (
                         <DialogTitle>
                             Вам присущи особенное восприятие мира и тонкий вкус
                         </DialogTitle>
                     )}
-                    {result === 'C' && (
+                    {result.status === 'C' && (
                         <DialogTitle>
                             Возможно, серые будни и рутина захватили вас с головой
                         </DialogTitle>
                     )}
-                    {result === 'D' && (
+                    {result.status === 'D' && (
                         <DialogTitle>
                             Для вас очень важны праздники, о чем Дедушка Мороз знает
                         </DialogTitle>
                     )}
                     <DialogContent>
-                        {result === 'A' && (
+                        {result.status === 'A' && (
                             <DialogContentText id="alert-dialog-slide-description">
                                 Это прекрасное качество, которое Дедушка Мороз до глубины души любит
                                 и ценит. Вы попадете в список, где эльфы, феи и магические существа,
                                 а подарки удивят своим волшебством
                             </DialogContentText>
                         )}
-                        {result === 'B' && (
+                        {result.status === 'B' && (
                             <DialogContentText id="alert-dialog-slide-description">
                                 Поэтому Дедушка Мороз внес вас в список ценителей красоты и
                                 изящества, где и сюрпризы соответствующие
                             </DialogContentText>
                         )}
-                        {result === 'C' && (
+                        {result.status === 'C' && (
                             <DialogContentText id="alert-dialog-slide-description">
                                 Дедушка Мороз расстраивается, когда это происходит. Но для таких
                                 людей у него подготовлен особенный список, где подарки наполнены
@@ -129,7 +129,7 @@ const Day8 = ({ setOpenedDay }) => {
                                 в людей веру в новогодние чудеса
                             </DialogContentText>
                         )}
-                        {result === 'D' && (
+                        {result.status === 'D' && (
                             <DialogContentText id="alert-dialog-slide-description">
                                 Он внесет вас в самый скорый список, чтобы подарки и новогоднее
                                 настроение не заставили себя ждать. Вы весь год старались, поэтому
@@ -138,7 +138,7 @@ const Day8 = ({ setOpenedDay }) => {
                         )}
                         <PromoCode
                             type="red"
-                            promoCode={promoCode}
+                            promoCode={result.promoCode}
                             promoCodeText="Срок действия промокода 31.01.2022"
                         />
                     </DialogContent>

@@ -21,7 +21,10 @@ const MemoryGame = ({ setResult, setScore }) => {
             const secondsIndex = index;
             if (cards[firstIndex] === cards[secondsIndex]) {
                 if (foundPairs.length + 2 === cards.length) {
-                    setResult(true);
+                    setResult({
+                        status: true,
+                        promoCode: Math.floor(Math.random() * 2) === 0 ? false : 'DCCC2022'
+                    });
                 }
                 setFoundPairs([...foundPairs, firstIndex, secondsIndex]);
             }
@@ -31,7 +34,7 @@ const MemoryGame = ({ setResult, setScore }) => {
         }
     };
 
-    const handleTimerComplete = React.useCallback(() => setResult(true), []);
+    const handleTimerComplete = React.useCallback(() => setResult({ status: false }), []);
 
     React.useEffect(() => {
         let timer;

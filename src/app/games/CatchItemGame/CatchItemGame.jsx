@@ -19,7 +19,7 @@ const CatchItemGame = ({ setResult }) => {
         cart,
         setScores
     });
-    const handleTimerComplete = React.useCallback(() => setResult(true), []);
+    const handleTimerComplete = React.useCallback(() => setResult({ status: false }), []);
 
     React.useEffect(() => {
         if (canvasRef.current) {
@@ -35,7 +35,10 @@ const CatchItemGame = ({ setResult }) => {
 
     React.useEffect(() => {
         if (scores === 300) {
-            setResult(true);
+            setResult({
+                status: true,
+                promoCode: Math.floor(Math.random() * 2) === 0 ? false : 'DCCC2022'
+            });
         }
     }, [scores]);
 

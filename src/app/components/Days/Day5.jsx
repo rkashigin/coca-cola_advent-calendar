@@ -25,7 +25,7 @@ const Transition = React.forwardRef((props, ref) => {
 
 const Day5 = ({ setOpenedDay }) => {
     const [open, setOpen] = React.useState(true);
-    const [result, setResult] = React.useState(false);
+    const [result, setResult] = React.useState(null);
     const [score, setScore] = React.useState(0);
 
     const promoCode = 'DCCC2022';
@@ -93,7 +93,7 @@ const Day5 = ({ setOpenedDay }) => {
                 />
 
                 <div className={styles.modal}>
-                    {result ? (
+                    {result.status ? (
                         <DialogTitle>Вы настоящий знаток Coca-Cola!</DialogTitle>
                     ) : (
                         <DialogTitle>
@@ -101,7 +101,7 @@ const Day5 = ({ setOpenedDay }) => {
                         </DialogTitle>
                     )}
                     <DialogContent>
-                        {result ? (
+                        {result.status ? (
                             <DialogContentText id="alert-dialog-slide-description">
                                 Чтобы продвинуться дальше по календарю, закажите Coca-Cola в
                                 ресторанах Delivery Club за 1 ₽ по нашему специальному промокоду
@@ -114,7 +114,7 @@ const Day5 = ({ setOpenedDay }) => {
                         )}
                         <PromoCode
                             type="red"
-                            promoCode={promoCode}
+                            promoCode={result.promoCode}
                             promoCodeText="Срок действия промокода 31.01.2022"
                         />
                     </DialogContent>

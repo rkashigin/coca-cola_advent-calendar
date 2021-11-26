@@ -23,7 +23,7 @@ const Transition = React.forwardRef((props, ref) => {
 
 const Day7 = ({ setOpenedDay }) => {
     const [open, setOpen] = React.useState(true);
-    const [result, setResult] = React.useState(false);
+    const [result, setResult] = React.useState(null);
     const [score, setScore] = React.useState(0);
 
     const promoCode = 'DCCC2022';
@@ -76,7 +76,7 @@ const Day7 = ({ setOpenedDay }) => {
                 aria-describedby="alert-dialog-slide-description"
                 className={styles.popup}
             >
-                {result ? (
+                {result.status ? (
                     <img
                         className={styles.modalResult__img}
                         src={require('../../assets/images/Games/game_1_day.png').default}
@@ -90,9 +90,9 @@ const Day7 = ({ setOpenedDay }) => {
                     />
                 )}
                 <div className={styles.modal}>
-                    {result ? (
+                    {result.status ? (
                         <>
-                            {promoCode ? (
+                            {result.promoCode ? (
                                 <>
                                     <DialogTitle>Вот это скорость!</DialogTitle>
                                     <DialogContentText id="alert-dialog-slide-description">
@@ -100,7 +100,7 @@ const Day7 = ({ setOpenedDay }) => {
                                     </DialogContentText>
                                     <PromoCode
                                         type="red"
-                                        promoCode={promoCode}
+                                        promoCode={result.promoCode}
                                         promoCodeText="Срок действия промокода 31.01.2022"
                                     />
                                 </>
@@ -120,9 +120,9 @@ const Day7 = ({ setOpenedDay }) => {
                         </DialogTitle>
                     )}
                     <DialogActions>
-                        {result ? (
+                        {result.status ? (
                             <>
-                                {promoCode ? (
+                                {result.promoCode ? (
                                     <>
                                         <Button onClick={handleClose}>Заказать сейчас</Button>
                                         <Button onClick={handleClose}>В календарь</Button>

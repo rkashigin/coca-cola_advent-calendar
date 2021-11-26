@@ -27,7 +27,7 @@ const TruthOrMyth = ({ setResult, setScore, quiz }) => {
                     setSelectedAnswer(null);
                     setQuestionNumber((prevNumber) => prevNumber + 1);
                 } else {
-                    setResult(true);
+                    setResult({ status: true, promoCode: 'DCCC2022' });
                     setScore(rightAnswers.current);
                 }
             }, 2500);

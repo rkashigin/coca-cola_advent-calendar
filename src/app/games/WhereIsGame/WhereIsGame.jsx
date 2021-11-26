@@ -24,7 +24,10 @@ const WhereIsGame = ({ gameVariant, setResult }) => {
         const isFindSuccess = confirmFind(x, y);
 
         if (isFindSuccess) {
-            setResult(true);
+            setResult({
+                status: true,
+                promoCode: Math.floor(Math.random() * 2) === 0 ? false : 'DCCC2022'
+            });
             setSelectionColor('green');
         } else {
             setSelectionColor('red');
@@ -41,7 +44,13 @@ const WhereIsGame = ({ gameVariant, setResult }) => {
         });
     };
 
-    const handleTimerComplete = React.useCallback(() => setResult(true), []);
+    const handleTimerComplete = React.useCallback(
+        () =>
+            setResult({
+                status: false
+            }),
+        []
+    );
 
     return (
         <div className={styles.game}>
