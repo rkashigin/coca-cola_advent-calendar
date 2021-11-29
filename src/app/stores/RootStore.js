@@ -38,16 +38,20 @@ class RootStoreClass {
     }
 
     async init() {
-        console.log(Cookies);
-        this.token = RootStoreApi.dcApi.getCookie('x_user_authorization');
-        const query = new URLSearchParams(window.location.search);
-        if (query.get('t')) {
-            this.setXApiKey(query.get('t'));
-        }
-        if (!this.token && !this.xApiKey) {
-            const { secret, token } = await RootStoreApi.dcApi.userLogin();
-            this.setSecret(secret);
-            this.setToken(token);
+        try {
+            console.log(Cookies);
+            this.token = RootStoreApi.dcApi.getCookie('x_user_authorization');
+            const query = new URLSearchParams(window.location.search);
+            if (query.get('t')) {
+                this.setXApiKey(query.get('t'));
+            }
+            if (!this.token && !this.xApiKey) {
+                const { secret, token } = await RootStoreApi.dcApi.userLogin();
+                this.setSecret(secret);
+                this.setToken(token);
+            }
+        } catch (e) {
+            console.log(e);
         }
     }
 
