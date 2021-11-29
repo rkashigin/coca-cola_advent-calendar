@@ -23,6 +23,7 @@ build:
   stage: build
   script:
     - npm i
+    - unset CI
     - npm run build
   artifacts:
     paths:

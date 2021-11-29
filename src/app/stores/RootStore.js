@@ -1,125 +1,126 @@
 /* eslint-disable no-console */
 import Cookies from 'js-cookie';
-import {
-	makeAutoObservable
-} from 'mobx';
+import { makeAutoObservable } from 'mobx';
 
 import { RootStoreApi } from './RootStore.api';
 
 class RootStoreClass {
-	secret = null
+    secret = null;
 
-	token = null
+    token = null;
 
-	refreshToken = null
+    refreshToken = null;
 
-	xApiKey = null
+    xApiKey = null;
 
-	recaptchaToken = null
-	
-	otp = {
-		attempts: null,
-		expiresIn: null,
-		requestId: null, 
-		status: null
-	}
+    recaptchaToken = null;
 
-	otpTel = null
+    otp = {
+        attempts: null,
+        expiresIn: null,
+        requestId: null,
+        status: null
+    };
 
-	user = {
-		id: null,
-		name: null,
-		phone: null
-	}
+    otpTel = null;
 
-	constructor() {
-		makeAutoObservable(this);
-		this.init();
+    user = {
+        id: null,
+        name: null,
+        phone: null
+    };
 
-		this.getUserData();
-	}
+    constructor() {
+        makeAutoObservable(this);
+        this.init();
 
-	async init() {
-		console.log(Cookies);
-		this.token = RootStoreApi.dcApi.getCookie('x_user_authorization');
-		const query = new URLSearchParams(window.location.search);
-		if (query.get('t')) {
-			this.setXApiKey(query.get('t'));
-		}
-		if (!this.token && !this.xApiKey) {
-			const { secret, token } = await RootStoreApi.dcApi.userLogin();
-			this.setSecret(secret);
-			this.setToken(token);
-		}
-	}
+        this.getUserData();
+    }
 
-	async userOtp(tel) {
-		try {
-			this.setOtpTel(tel);
-			this.setOtp(await RootStoreApi.dcApi.userOtp(this.token, tel, this.recaptchaToken));
-		} catch (error) {
-			console.log(error);
-		}
-	}
+    async init() {
+        console.log(Cookies);
+        this.token = RootStoreApi.dcApi.getCookie('x_user_authorization');
+        const query = new URLSearchParams(window.location.search);
+        if (query.get('t')) {
+            this.setXApiKey(query.get('t'));
+        }
+        if (!this.token && !this.xApiKey) {
+            const { secret, token } = await RootStoreApi.dcApi.userLogin();
+            this.setSecret(secret);
+            this.setToken(token);
+        }
+    }
 
-	async loginOtp(code) {
-		if (code && code.length === 6) {
-			const data = await RootStoreApi.dcApi.loginOtp(this.token, code, this.otp.requestId);
+    async userOtp(tel) {
+        try {
+            this.setOtpTel(tel);
+            this.setOtp(await RootStoreApi.dcApi.userOtp(this.token, tel, this.recaptchaToken));
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
-			const { id, name, phone } = data;
-			this.setUser({ id, name, phone });
-			this.setRefreshToken(data.refresh_token);
-			this.setSecret(data.secret);
-			this.setToken(data.token);
-		} else {
-			console.log('code err');
-		}
-	}
+    async loginOtp(code) {
+        if (code && code.length === 6) {
+            const data = await RootStoreApi.dcApi.loginOtp(this.token, code, this.otp.requestId);
 
-	async getUserData() {
-		if (this.xApiKey || this.token) {
-			const userData = await RootStoreApi.dcApi.user({ xApiKey: this.xApiKey, token: this.token });
-			console.log(userData);
-		}
-	}
+            const { id, name, phone } = data;
+            this.setUser({ id, name, phone });
+            this.setRefreshToken(data.refresh_token);
+            this.setSecret(data.secret);
+            this.setToken(data.token);
+        } else {
+            console.log('code err');
+        }
+    }
 
-	setUser(user) {
-		this.user = user;
-	}
+    async getUserData() {
+        if (this.xApiKey || this.token) {
+            const userData = await RootStoreApi.dcApi.user({
+                xApiKey: this.xApiKey,
+                token: this.token
+            });
+            console.log(userData);
+        }
+    }
 
-	setXApiKey(xApiKey) {
-		this.xApiKey = xApiKey;
-	}
-	setToken(token) {
-		Cookies.set('x_user_authorization', token);
-		this.token = token;
-	}
-	setRefreshToken(refreshToken) {
-		Cookies.set('refresh_token', refreshToken);
-		this.refreshToken = refreshToken;
-	}
-	setSecret(secret) {
-		this.secret = secret;
-	}
-	setRecaptchaToken(recaptchaToken) {
-		this.recaptchaToken = recaptchaToken;
-	}
+    setUser(user) {
+        this.user = user;
+    }
 
-	setOtpTel(tel) {
-		this.otpTel = tel;
-	}
-	setOtp(otp) {
-		this.otp = otp;
-	}
+    setXApiKey(xApiKey) {
+        this.xApiKey = xApiKey;
+    }
+    setToken(token) {
+        Cookies.set('x_user_authorization', token);
+        this.token = token;
+    }
+    setRefreshToken(refreshToken) {
+        Cookies.set('refresh_token', refreshToken);
+        this.refreshToken = refreshToken;
+    }
+    setSecret(secret) {
+        this.secret = secret;
+    }
+    setRecaptchaToken(recaptchaToken) {
+        this.recaptchaToken = recaptchaToken;
+    }
 
-	clearOtp() {
-		this.otp = {
-			attempts: null,
-			expiresIn: null,
-			requestId: null, 
-			status: null
-		};
-	}
+    setOtpTel(tel) {
+        this.otpTel = tel;
+    }
+    setOtp(otp) {
+        this.otp = otp;
+    }
+
+    clearOtp() {
+        this.otp = {
+            attempts: null,
+            expiresIn: null,
+            requestId: null,
+            status: null
+        };
+    }
 }
 
 export const RootStore = new RootStoreClass();

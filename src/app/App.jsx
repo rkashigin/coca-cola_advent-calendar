@@ -9,27 +9,26 @@ import { RootStore } from './stores/RootStore';
 import config from '../config';
 
 const App = () => {
-	const recaptchaRef = useRef(null);
-	const recaptchaOnLoaded = () => {
-		if (recaptchaRef.current) {
-			recaptchaRef.current.execute()
-				.then((rtoken) => {
-					RootStore.setRecaptchaToken(rtoken);
-				});
-		}
-	};
-	return (
-		<div className="App">
-			<Routes>
-				<Route exact path="/" element={<MainPage />} />
-			</Routes>
-			<Recaptcha
-				ref={recaptchaRef}
-				sitekey={config.recaptchaSiteKey}
-				onLoaded={recaptchaOnLoaded} 
-			/>
-		</div>
-	);
+    const recaptchaRef = useRef(null);
+    const recaptchaOnLoaded = () => {
+        if (recaptchaRef.current) {
+            recaptchaRef.current.execute().then((rtoken) => {
+                RootStore.setRecaptchaToken(rtoken);
+            });
+        }
+    };
+    return (
+        <div className="App">
+            <Routes>
+                <Route exact path="/" element={<MainPage />} />
+            </Routes>
+            <Recaptcha
+                ref={recaptchaRef}
+                sitekey={config.recaptchaSiteKey}
+                onLoaded={recaptchaOnLoaded}
+            />
+        </div>
+    );
 };
 
 export default App;
