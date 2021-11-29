@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import Cookies from 'js-cookie';
 import { makeAutoObservable } from 'mobx';
+import config from '../../config';
 
 import { RootStoreApi } from './RootStore.api';
 
@@ -33,25 +34,29 @@ class RootStoreClass {
     constructor() {
         makeAutoObservable(this);
         this.init();
-
-        this.getUserData();
     }
 
     async init() {
-        try {
-            console.log(Cookies);
-            this.token = RootStoreApi.dcApi.getCookie('x_user_authorization');
-            const query = new URLSearchParams(window.location.search);
-            if (query.get('t')) {
-                this.setXApiKey(query.get('t'));
-            }
-            if (!this.token && !this.xApiKey) {
-                const { secret, token } = await RootStoreApi.dcApi.userLogin();
-                this.setSecret(secret);
-                this.setToken(token);
-            }
-        } catch (e) {
-            console.log(e);
+        const tokenCookie = RootStoreApi.dcApi.getCookie('x_user_authorization');
+        this.token = tokenCookie;
+        const secret = tokenCookie && tokenCookie.split('.').slice(1, 1);
+        if (secret) {
+            this.secret = secret;
+        }
+        this.refreshToken = RootStoreApi.dcApi.getCookie('refresh_token');
+        const query = new URLSearchParams(window.location.search);
+        if (query.get('t')) {
+            this.setXApiKey(query.get('t'));
+        }
+        if (!this.token && !this.xApiKey) {
+            const { secret, token } = await RootStoreApi.dcApi.userLogin({
+                xApiKey: null,
+                token: null
+            });
+            this.setSecret(secret);
+            this.setToken(token, false);
+        } else {
+            this.getUserData();
         }
     }
 
@@ -70,21 +75,63 @@ class RootStoreClass {
 
             const { id, name, phone } = data;
             this.setUser({ id, name, phone });
-            this.setRefreshToken(data.refresh_token);
-            this.setSecret(data.secret);
+            if (data.refresh_token) {
+                this.setRefreshToken(data.refresh_token);
+            }
+            if (data.secret) {
+                this.setSecret(data.secret);
+                data.token += `.${data.secret}`;
+            }
             this.setToken(data.token);
+            console.log(data);
         } else {
             console.log('code err');
         }
     }
 
-    async getUserData() {
-        if (this.xApiKey || this.token) {
-            const userData = await RootStoreApi.dcApi.user({
-                xApiKey: this.xApiKey,
-                token: this.token
-            });
-            console.log(userData);
+    async getUserData(tryIdx = 0) {
+        if (tryIdx < 4) {
+            try {
+                if (this.xApiKey || this.token) {
+                    const data = await RootStoreApi.dcApi.user({
+                        xApiKey: this.xApiKey,
+                        token: this.token
+                    });
+                    const { id, name, phone } = data;
+                    this.setUser({ id, name, phone });
+                    if (data.refresh_token) {
+                        this.setRefreshToken(data.refresh_token);
+                    }
+                    if (data.secret) {
+                        this.setSecret(data.secret);
+                        data.token += `.${data.secret}`;
+                    }
+                    this.setToken(data.token);
+                    console.log(data);
+                }
+            } catch (error) {
+                if ([401, 403, 423].includes(error)) {
+                    console.log('error');
+                    console.log(error);
+                    if (error !== 401) {
+                        return;
+                    }
+                    const data = await RootStoreApi.dcApi.userLogin({
+                        xApiKey: this.xApiKey,
+                        token: error === 401 && this.refreshToken ? this.refreshToken : this.token
+                    });
+                    if (data.secret) {
+                        this.setSecret(data.secret);
+                        data.token += `.${data.secret}`;
+                    }
+                    this.setToken(data.token);
+                    console.log(data);
+
+                    this.getUserData(tryIdx + 1);
+                }
+            }
+        } else {
+            console.warn('tryIdx === 4');
         }
     }
 
@@ -95,12 +142,14 @@ class RootStoreClass {
     setXApiKey(xApiKey) {
         this.xApiKey = xApiKey;
     }
-    setToken(token) {
-        Cookies.set('x_user_authorization', token);
+    setToken(token, isAuth = true) {
+        if (isAuth) {
+            Cookies.set('x_user_authorization', token, { path: '/', domain: config.server.domain });
+        }
         this.token = token;
     }
     setRefreshToken(refreshToken) {
-        Cookies.set('refresh_token', refreshToken);
+        Cookies.set('refresh_token', refreshToken, { path: '/', domain: config.server.domain });
         this.refreshToken = refreshToken;
     }
     setSecret(secret) {

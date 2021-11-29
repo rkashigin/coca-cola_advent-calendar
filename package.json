@@ -35,7 +35,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "clean": "rm -rf ./node_modules package-lock.json && npm install",
-    "deployDev": "npm run build && scp -o StrictHostKeyChecking=no -i ~/.ssh/pavlikov -r build/* root@94.228.126.19:/var/www/html"
+    "deployDev": "npm run build && scp -o StrictHostKeyChecking=no -i ~/.ssh/pavlikov -r build/* root@94.228.126.19:/var/www/html/fa53b91ccc1b78668d5af58e1ed3a485"
   },
   "eslintConfig": {
     "extends": [
@@ -44,6 +44,7 @@
     ]
   },
   "proxy": "https://coca-cola.delivery-club.ru/",
+  "homepage": "/fa53b91ccc1b78668d5af58e1ed3a485",
   "browserslist": {
     "production": [
       ">0.2%",
