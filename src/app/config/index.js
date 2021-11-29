@@ -1,4 +1,5 @@
 import WhereIsGameFirstLevel from '../assets/images/whereIsGame/easy.jpg';
+import WhereIsGameSecondLevel from '../assets/images/whereIsGame/hard.jpg';
 
 const host = process.env.REACT_APP_API || '123';
 const port = process.env.PORT || 8080;
@@ -24,6 +25,15 @@ export default {
                     xEnd: 2140,
                     yStart: 960,
                     yEnd: 1080
+                }
+            },
+            hard: {
+                image: WhereIsGameSecondLevel,
+                coords: {
+                    xStart: 845,
+                    xEnd: 870,
+                    yStart: 180,
+                    yEnd: 210
                 }
             }
         },

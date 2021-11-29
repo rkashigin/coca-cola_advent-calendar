@@ -87,7 +87,7 @@ const WhereIsGame = ({ gameVariant, setResult }) => {
 };
 
 WhereIsGame.propTypes = {
-    gameVariant: PropTypes.string.isRequired,
+    gameVariant: PropTypes.oneOf(['easy', 'hard']).isRequired,
     setResult: PropTypes.func.isRequired
 };
 
