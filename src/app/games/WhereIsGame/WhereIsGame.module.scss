@@ -4,6 +4,10 @@
   height: fit-content;
   overflow: auto;
   position: relative;
+
+  &_noOverflow {
+    overflow: hidden;
+  }
 }
 
 .game__timer {

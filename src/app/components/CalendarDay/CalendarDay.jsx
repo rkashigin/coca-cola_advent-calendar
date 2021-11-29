@@ -40,20 +40,8 @@ const CalendarDay = ({
     openedDay,
     handleOpenDay
 }) => {
-    const [open, setOpen] = React.useState(false);
-    const [copied, setCopied] = React.useState(false);
-
     const isHorizontal = useMediaQuery(Adaptive.isHorizontal);
-
-    const copiedHandler = async () => {
-        try {
-            await navigator.clipboard.writeText(promoCode);
-            setCopied(true);
-            setTimeout(() => setCopied(false), 1500);
-        } catch (e) {
-            console.log(e);
-        }
-    };
+    const [open, setOpen] = React.useState(false);
 
     useEffect(() => {
         const app = document.querySelector('.App');
@@ -83,9 +71,7 @@ const CalendarDay = ({
             <Dialog
                 open={open}
                 TransitionComponent={Transition}
-                keepMounted
                 onClose={handleClose}
-                aria-describedby="alert-dialog-slide-description"
                 className={styles.popup}
                 // transitionDuration={...(openedDay && { exit: 0 })}
             >

@@ -1,53 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useMediaQuery } from 'react-responsive';
-import cn from 'classnames';
 
+import cn from 'classnames';
 import config from '../../config';
 import { Timer } from '../../components';
+import useLogic from './useLogic';
 import Adaptive from '../../helpers/Adaptive';
 
 import styles from './WhereIsGame.module.scss';
 
 const WhereIsGame = ({ gameVariant, setResult }) => {
-    const isMobile = useMediaQuery(Adaptive.isMobile);
+    const isDesktop = useMediaQuery(Adaptive.isDesktop);
     const gameConfig = config.references.whereIsGame[gameVariant];
-    const [selectionWindowX, setSelectionWindowX] = React.useState('');
-    const [selectionWindowY, setSelectionWindowY] = React.useState('');
-    const [selectionColor, setSelectionColor] = React.useState('');
-
-    const confirmFind = (x, y) => {
-        const { coords } = gameConfig;
-
-        console.log('X', x, 'Y', y, 'FROM CONFIG', coords);
-
-        return x >= coords.xStart && x <= coords.xEnd && y >= coords.yStart && y <= coords.yEnd;
-    };
-
-    const generateSelectionWindow = ({ x, y }) => {
-        const isFindSuccess = confirmFind(x, y);
-
-        if (isFindSuccess) {
-            setResult({
-                status: true,
-                promoCode: Math.floor(Math.random() * 2) === 0 ? false : 'DCCC2022'
-            });
-            setSelectionColor('green');
-        } else {
-            setSelectionColor('red');
-        }
-
-        setSelectionWindowX(x);
-        setSelectionWindowY(y);
-    };
-
-    const handlePerformFindAttempt = (e) => {
-        console.log('EVENT', e);
-        generateSelectionWindow({
-            x: e.nativeEvent.offsetX,
-            y: e.nativeEvent.offsetY
+    const canvasRef = React.useRef(null);
+    const [isCanvasReady, setIsCanvasReady] = React.useState(false);
+    const { selectionWindowX, selectionWindowY, selectionColor, handlePerformFindAttempt, game } =
+        useLogic({
+            canvasRef: isCanvasReady,
+            image: config.references.whereIsGame[gameVariant].image,
+            gameConfig,
+            setResult,
+            isDesktop
         });
-    };
 
     const handleTimerComplete = React.useCallback(
         () =>
@@ -57,8 +32,26 @@ const WhereIsGame = ({ gameVariant, setResult }) => {
         []
     );
 
+    React.useEffect(() => {
+        if (canvasRef.current) {
+            setIsCanvasReady(true);
+        }
+
+        return () => setIsCanvasReady(false);
+    }, []);
+
+    React.useEffect(() => {
+        if (isCanvasReady) {
+            game();
+        }
+    }, [isCanvasReady]);
+
     return (
-        <div className={styles.game}>
+        <div
+            className={cn(styles.game, {
+                [styles.game_noOverflow]: isDesktop
+            })}
+        >
             <Timer
                 className={styles.game__timer}
                 givenTime={120_000}
@@ -77,11 +70,9 @@ const WhereIsGame = ({ gameVariant, setResult }) => {
                         : null
                 }
             />
-            <img
-                src={config.references.whereIsGame[gameVariant].image}
-                alt="Game"
-                onClick={handlePerformFindAttempt}
-            />
+            <canvas id="canvas" ref={canvasRef} onClick={handlePerformFindAttempt}>
+                Чтобы поиграть в игру, поменяйте браузер
+            </canvas>
         </div>
     );
 };

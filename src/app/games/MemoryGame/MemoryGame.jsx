@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import { shuffle } from 'lodash';
 import cn from 'classnames';
@@ -75,6 +76,7 @@ const MemoryGame = ({ setResult, setScore }) => {
                                 [styles.board__cardWrapper_flipped]: flippedToFront
                             })}
                             onClick={() => flipCard(cardIdx)}
+                            key={cardIdx}
                         >
                             <div className={styles.board__card}>
                                 <div className={styles.card__front}>

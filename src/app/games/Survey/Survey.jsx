@@ -51,7 +51,7 @@ Survey.propTypes = {
     survey: PropTypes.arrayOf(
         PropTypes.shape({
             question: PropTypes.string,
-            answers: PropTypes.string
+            answers: PropTypes.arrayOf(PropTypes.string)
         })
     ).isRequired,
     setResult: PropTypes.func.isRequired
