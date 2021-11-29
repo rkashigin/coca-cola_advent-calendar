@@ -47,26 +47,6 @@ export const RootStoreApi = {
             body.append('phone', phone);
             body.append('newotp', 1);
 
-            throw response.status;
-        },
-        // Получение анонимного токена
-        async userLogin() {
-            const response = await fetch(`${config.server.apiHost}/api1.2/user/login`, {
-                method: 'post'
-            });
-            if (response.ok) {
-                return response.json();
-            }
-
-            throw response.status;
-        },
-        // Авторизация через номер телефона
-        // Запрос кода
-        async userOtp(token, phone, recaptchaToken) {
-            const body = new FormData();
-            body.append('phone', phone);
-            body.append('newotp', 1);
-
             const response = await fetch(
                 `${config.server.apiHost}/api1.2/user/otp?gRecaptchaResponse=${recaptchaToken}`,
                 {
