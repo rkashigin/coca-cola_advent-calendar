@@ -74,11 +74,11 @@ button {
 	overflow: auto;
 }
 
-div.css-yiavyu-MuiBackdrop-root-MuiDialog-backdrop {
+div.css-yiavyu-MuiBackdrop-root-MuiDialog-backdrop, div.MuiDialog-backdrop {
 	background-color: rgba(0, 0, 0, 0.4);
 }
 
-div.css-hz1bth-MuiDialog-container{
+div.css-hz1bth-MuiDialog-container, div.MuiDialog-container {
   @media screen and (max-width: $width-mobile) {
     align-items: flex-end;
     // height: calc(100vh - 2.9rem);
@@ -94,7 +94,7 @@ div.css-hz1bth-MuiDialog-container{
   }
 }
 
-div.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+div.css-1t1j96h-MuiPaper-root-MuiDialog-paper, div.MuiDialog-paper {
 	box-shadow: none;
 
   background-color: transparent;
@@ -125,11 +125,11 @@ div.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
     // padding-top: 42rem;
   }
 }
-div.css-ypiqx9-MuiDialogContent-root {
+div.css-ypiqx9-MuiDialogContent-root, div.MuiDialogContent-root {
 	overflow-x: hidden;
   position: relative;
 }
-h2.css-bdhsul-MuiTypography-root-MuiDialogTitle-root {
+h2.css-bdhsul-MuiTypography-root-MuiDialogTitle-root, h2.MuiDialogTitle-root {
 	font-family: var(--font_Montserrat);
 	font-weight: 700;
 	font-size: 2.4rem;
@@ -146,7 +146,8 @@ h2.css-bdhsul-MuiTypography-root-MuiDialogTitle-root {
 }
 
 div.MuiDialogTitle-root,
-div.css-ypiqx9-MuiDialogContent-root {
+div.css-ypiqx9-MuiDialogContent-root,
+div.MuiDialogContent-root {
 	padding: 0;
 	margin: 1.6rem 0 0;
 
@@ -156,7 +157,7 @@ div.css-ypiqx9-MuiDialogContent-root {
   }
 }
 
-p.css-qfso29-MuiTypography-root-MuiDialogContentText-root{
+p.css-qfso29-MuiTypography-root-MuiDialogContentText-root, p.MuiDialogContentText-root{
   font-family: var(--font_Roboto);
   font-weight: 400;
   font-size: 1.6rem;
@@ -175,7 +176,7 @@ p.css-qfso29-MuiTypography-root-MuiDialogContentText-root{
   }
 }
 
-div.css-hlj6pa-MuiDialogActions-root{
+div.css-hlj6pa-MuiDialogActions-root, div.MuiDialogActions-root{
   padding: 0;
   justify-content: center;
   flex-direction: column;
@@ -191,7 +192,7 @@ div.css-hlj6pa-MuiDialogActions-root{
   }
 }
 
-button.css-1e6y48t-MuiButtonBase-root-MuiButton-root{
+button.css-1e6y48t-MuiButtonBase-root-MuiButton-root, button.MuiButtonBase-root{
   background-color: var(--color_dark_olive_green);
   padding: 1.65rem;
   width: 100%;
@@ -236,7 +237,3 @@ button.css-1e6y48t-MuiButtonBase-root-MuiButton-root{
     padding: 4.2vw 7vw;
   }
 }
-// div.css-hz1bth-MuiDialog-container{
-//   overflow-x: hidden;
-//   overflow-y: auto;
-// }

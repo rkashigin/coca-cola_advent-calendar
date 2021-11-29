@@ -1,4 +1,4 @@
-import { React, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Route } from 'react-router-dom';
 import Recaptcha from 'react-google-invisible-recaptcha';
 
@@ -17,6 +17,7 @@ const App = () => {
             });
         }
     };
+
     return (
         <div className="App">
             <Routes>
