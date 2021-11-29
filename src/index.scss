@@ -81,6 +81,7 @@ div.css-yiavyu-MuiBackdrop-root-MuiDialog-backdrop {
 div.css-hz1bth-MuiDialog-container{
   @media screen and (max-width: $width-mobile) {
     align-items: flex-end;
+    // height: calc(100vh - 2.9rem);
   }
 
   @media screen and (max-height: 464px) {
@@ -109,9 +110,15 @@ div.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
 
   overflow: visible;
 
+  // margin-top: 24rem;
+
   @media screen and (max-width: $width-mobile) {
     margin: 2vw;
     width: 100%;
+
+    // max-height: 100%;
+    // overflow-y: auto;
+    // overflow-x: hidden;
   }
 
   @media screen and (max-height: 464px) {
@@ -145,6 +152,7 @@ div.css-ypiqx9-MuiDialogContent-root {
 
   @media screen and (max-width: $width-mobile){
     margin:0;
+    overflow: hidden;
   }
 }
 
@@ -225,6 +233,10 @@ button.css-1e6y48t-MuiButtonBase-root-MuiButton-root{
     font-size: 4.1vw;
     line-height: 6.1vw;
 
-    padding: 4.2vw;
+    padding: 4.2vw 7vw;
   }
 }
+// div.css-hz1bth-MuiDialog-container{
+//   overflow-x: hidden;
+//   overflow-y: auto;
+// }

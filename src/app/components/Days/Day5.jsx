@@ -50,7 +50,7 @@ const Day5 = ({ setOpenedDay }) => {
             </Dialog>
             <Dialog open={resultVisible} TransitionComponent={Transition} className={styles.popup}>
                 <img
-                    className={styles.modalResult__img}
+                    className={styles.modalResult__img_result}
                     src={require('../../assets/images/Games/game_1_day.png').default}
                     alt=""
                 />

@@ -69,7 +69,7 @@
 }
 
 .promoCode__name{
-	margin-top: 3.2rem;
+	// margin-top: 3.2rem;
 }
 
 .promoCode__text_grey{
@@ -144,6 +144,8 @@ div.promoCode__alert_success{
 	opacity: 0;
 	visibility: hidden;
 	pointer-events: none;
+
+	align-items: center;
 
 	transition: opacity 0.3s ease-in-out;
 

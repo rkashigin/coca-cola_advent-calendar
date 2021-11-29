@@ -75,24 +75,24 @@ const CalendarDay = ({
                 className={styles.popup}
                 // transitionDuration={...(openedDay && { exit: 0 })}
             >
-                {!isHorizontal && (
+                {/* {!isHorizontal && ( */}
+                {/* <img
+                    className={classNames(classNameImg, styles.calendarModal__img)}
+                    src={modalImg}
+                    alt=""
+                /> */}
+                {/* )} */}
+                <div className={styles.modal}>
                     <img
-                        className={classNames(classNameImg, styles.calendarModal__img)}
+                        className={classNames(
+                            classNameImg,
+                            isHorizontal
+                                ? styles.calendarModal__img_horizontalMedia
+                                : styles.calendarModal__img
+                        )}
                         src={modalImg}
                         alt=""
                     />
-                )}
-                <div className={styles.modal}>
-                    {isHorizontal && (
-                        <img
-                            className={classNames(
-                                classNameImg,
-                                styles.calendarModal__img_horizontalMedia
-                            )}
-                            src={modalImg}
-                            alt=""
-                        />
-                    )}
                     <DialogTitle>{title}</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-slide-description">

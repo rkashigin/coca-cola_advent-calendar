@@ -31,7 +31,6 @@ const PromoCode = ({ promoCode, promoCodeText, type, promoCodeName }) => {
             {type === 'grey' && <div className={styles.promoCode__text_grey}>{promoCodeText}</div>}
             <div
                 name="promoCode"
-                type="button"
                 value={promoCode}
                 className={classNames(styles.promoCode__input, {
                     [styles.promoCode__input_grey]: type === 'grey'
