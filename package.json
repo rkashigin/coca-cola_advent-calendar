@@ -12,6 +12,7 @@
     "classnames": "^2.3.1",
     "cors": "^2.8.5",
     "lodash": "^4.17.21",
+    "js-cookie": "^3.0.1",
     "mobx": "^6.3.7",
     "mobx-react": "^7.2.1",
     "mobx-react-lite": "^3.2.2",
@@ -20,6 +21,7 @@
     "react": "^17.0.2",
     "react-countdown": "^2.3.2",
     "react-dom": "^17.0.2",
+    "react-google-invisible-recaptcha": "^0.2.12",
     "react-helmet": "^6.1.0",
     "react-responsive": "^9.0.0-beta.4",
     "react-router": "^6.0.2",
@@ -32,7 +34,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "clean": "rm -rf ./node_modules package-lock.json && npm install"
+    "clean": "rm -rf ./node_modules package-lock.json && npm install",
+    "deployDev": "npm run build && scp -o StrictHostKeyChecking=no -i ~/.ssh/pavlikov -r build/* root@94.228.126.19:/var/www/html"
   },
   "eslintConfig": {
     "extends": [
@@ -40,6 +43,7 @@
       "react-app/jest"
     ]
   },
+  "proxy": "https://coca-cola.delivery-club.ru/",
   "browserslist": {
     "production": [
       ">0.2%",
