@@ -1,0 +1,10 @@
+export { default as Day2 } from './Day2';
+export { default as Day3 } from './Day3';
+export { default as Day4 } from './Day4';
+export { default as Day5 } from './Day5';
+export { default as Day6 } from './Day6';
+export { default as Day7 } from './Day7';
+export { default as Day8 } from './Day8';
+export { default as Day9 } from './Day9';
+export { default as Day10 } from './Day10';
+export { default as Day11 } from './Day11';

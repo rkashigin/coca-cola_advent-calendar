@@ -1,0 +1,300 @@
+@import "../../../variables.scss";
+
+.calendarDay {
+
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+
+	position: relative;
+
+	mix-blend-mode: normal;
+	cursor: pointer;
+
+	transition: transform 0.3s ease-in-out;
+
+
+	@media screen and (max-width: $width-mobile) {
+		align-items: flex-end;
+
+		&:last-of-type{
+			align-items: flex-start;
+
+			.calendarDay__date{
+				margin: 4.1vw 0 0 6vw;
+			}
+		}
+
+		&:nth-of-type(11){
+			align-items: flex-start;
+
+			.calendarDay__date{
+				margin: 4.1vw 0 0 6vw;
+			}
+		}
+	}
+}
+
+.calendarDay__date {
+	font-size: 7.2rem;
+	line-height: 5.6rem;
+	font-weight: 700;
+
+	color: white;
+
+	z-index: 2;
+
+	margin: 2.4rem 0 0 2.4rem;
+
+	color: 	#E93533;
+
+	@media screen and (max-width: $width-mobile) {
+		font-size: 14.3vw;
+		line-height: 14.3vw;
+
+		margin: 0 0 4.1vw 6vw;
+
+	}
+}
+
+.calendarDay__img {
+	position: absolute;
+
+	z-index: 0;
+
+	opacity: 0.5;
+
+	@media screen and (max-width: $width-mobile) {
+	}
+}
+
+.popup {
+
+	@media screen and (max-width: $width-mobile) {
+		overflow-y: auto;
+		overflow-x: hidden;
+	}
+}
+
+.calendarModal__img {
+	--size: 32rem;
+	position: absolute;
+
+	width: var(--size);
+
+	top: -13rem;
+	right: 50%;
+	transform: translateX(50%);
+
+	@media screen and (max-width: $width-mobile) {
+		width: calc(var(--size) / 1.19);
+		top: -7rem;
+	}
+}
+
+.calendarModal__img_horizontalMedia{
+	position: static;
+
+	width: 28rem;
+
+	margin-bottom: 5vw;
+}
+
+.modal {
+	background-color: white;
+
+	border-radius: 1.6rem;
+
+	padding: 17rem 1.6rem 1.6rem;
+	width: 45rem;
+
+	position: relative;
+
+	@media screen and (max-width: $width-mobile) {
+		width: 92%;
+
+		padding: 43.5vw 4vw 4vw;
+
+		margin-top: 17rem;
+	}
+
+	@media screen and (max-height: 464px) {
+		display: flex;
+		flex-direction: column;
+
+		align-items: center;
+
+		margin-top: 100%;
+
+		padding: 1.6rem;
+	}
+}
+
+.modalResult__img {
+	position: absolute;
+
+	width: 34rem;
+
+	top: -13rem;
+	right: 50%;
+	transform: translateX(50%);
+
+	z-index: 50;
+	@media screen and (max-width: $width-mobile) {
+		top: 0;
+	}
+
+
+}
+
+.modalResult__img_result{
+	position: absolute;
+
+	width: 34.2rem;
+
+	top: -15rem;
+	right: 50%;
+	transform: translateX(50%);
+
+	z-index: 50;
+	@media screen and (max-width: $width-mobile) {
+		top: 0;
+	}
+}
+
+.modal__promoText{
+	margin: 3rem 0 0;
+
+	display: flex;
+	flex-direction: row;
+
+	align-items: center;
+	justify-content: center;
+
+	color: hsl(344, 100%, 46%);
+
+	font-weight: 400;
+	font-size: 1.6rem;
+	line-height: 2.2rem;
+
+	cursor: default;
+
+	@media screen and (max-width: $width-mobile) {
+		margin: 6.4vw 0 0;
+
+		font-weight: 4.1vw;
+		line-height: 5.6vw;
+	}
+}
+
+.modal__promoIcon{
+	margin-right: 0.8rem;
+
+	@media screen and (max-width: $width-mobile) {
+		margin-right: 2vw;
+	}
+}
+
+.modalResult__postcard{
+	--size: 31rem;
+	width: 90%;
+	height: var(--size);
+
+	box-sizing: border-box;
+
+	border-radius: 1.6rem;
+	object-fit: cover;
+
+	background-color: var(--color_red);
+
+	align-self: center;
+
+	@media screen and (max-width: $width-mobile) {
+		-size: 31rem;
+		width: var(--size);
+	
+	}
+}
+
+.modal__postcard{
+	font-family: var(--font_Montserrat);
+	padding: 4rem 1.6rem 1.6rem;
+
+	width: 51rem;
+
+	box-sizing: border-box;
+
+	display: flex;
+	flex-direction: column;
+
+	@media screen and (max-width: $width-mobile) {
+		width: 100%;
+
+		padding: 6.8rem 1.6rem 1.6rem;
+	}
+
+}
+
+.modalResult__postcardTitle{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	font-weight: 700;
+	font-size: 2.4rem;
+	line-height: 2.8rem;
+
+	text-align: center;
+
+	margin: 6rem auto;
+
+	@media screen and (max-width: $width-mobile) {
+		max-width: 50%;
+	}
+}
+
+.modalResult__button {
+	background-color: var(--color_alabaster_grey);
+	color: var(--color_dim_gray);
+
+	padding: 1.65rem;
+	width: 100%;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	font-size: 1.6rem;
+	line-height: 2.4rem;
+	font-weight: 700;
+
+	border-radius: 1.6rem;
+
+	text-transform: unset;
+
+	transition: opacity 0.3s ease-in-out;
+
+	&:hover{
+		opacity: 0.7;
+		background-color: var(--color_alabaster_grey);
+		color: var(--color_dim_gray);
+	}
+
+	@media screen and (max-width: $width-mobile) {
+		font-size: 4.1vw;
+		line-height: 6.1vw;
+
+		padding: 4.2vw;
+	}
+}
+
+.modalResult__img_resize{
+	width: 28rem;
+	top: -16rem;
+}
+
+button.modalButton_return{
+	background-color: var(--color_alabaster_grey)!important;
+	color: var(--color_dim_gray)!important;
+}
+
