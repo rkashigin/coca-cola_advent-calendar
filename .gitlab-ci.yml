@@ -29,6 +29,7 @@ build:
       - build
   only:
     - development
+    - main
 
 deploy_dev:
   stage: deploy
