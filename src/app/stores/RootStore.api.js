@@ -6,11 +6,15 @@ export const RootStoreApi = {
 	// Для получения token и secret нужно дернуть ручку 
 	// GET /api1.2/user/ и передать x-api-key в заголовке X-Api-Key.
 	dcApi: {
-		async user(apiKey) {
+		async user({ apiKey, token }) {
+			const headers = {};
+			if (apiKey) {
+				headers['X-Api-Key'] = apiKey;
+			} else if (token) {
+				headers['X-User-Authorization'] = token;
+			}
 			const response = await fetch(`${config.server.apiHost}/api1.2/user`, {
-				headers: {
-					'X-Api-Key': apiKey
-				}
+				headers
 			});
 			if (response.ok) {
 				return response.json();

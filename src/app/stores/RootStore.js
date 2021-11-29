@@ -35,9 +35,12 @@ class RootStoreClass {
 	constructor() {
 		makeAutoObservable(this);
 		this.init();
+
+		this.getUserData();
 	}
 
 	async init() {
+		console.log(Cookies);
 		this.token = RootStoreApi.dcApi.getCookie('x_user_authorization');
 		const query = new URLSearchParams(window.location.search);
 		if (query.get('t')) {
@@ -70,6 +73,13 @@ class RootStoreClass {
 			this.setToken(data.token);
 		} else {
 			console.log('code err');
+		}
+	}
+
+	async getUserData() {
+		if (this.xApiKey || this.token) {
+			const userData = await RootStoreApi.dcApi.user({ xApiKey: this.xApiKey, token: this.token });
+			console.log(userData);
 		}
 	}
 
