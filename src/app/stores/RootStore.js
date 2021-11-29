@@ -35,8 +35,6 @@ class RootStoreClass {
 	constructor() {
 		makeAutoObservable(this);
 		this.init();
-
-		this.getUserData();
 	}
 
 	async init() {
@@ -47,9 +45,13 @@ class RootStoreClass {
 			this.setXApiKey(query.get('t'));
 		}
 		if (!this.token && !this.xApiKey) {
-			const { secret, token } = await RootStoreApi.dcApi.userLogin();
+			const { secret, token } = await RootStoreApi.dcApi.userLogin(
+				{ xApiKey: this.xApiKey, token: this.token }
+			);
 			this.setSecret(secret);
-			this.setToken(token);
+			this.setToken(token, false);
+		} else {
+			this.getUserData();
 		}
 	}
 
@@ -68,18 +70,58 @@ class RootStoreClass {
 
 			const { id, name, phone } = data;
 			this.setUser({ id, name, phone });
-			this.setRefreshToken(data.refresh_token);
-			this.setSecret(data.secret);
+			if (data.refresh_token) {
+				this.setRefreshToken(data.refresh_token);
+			}
+			if (data.secret) {
+				this.setSecret(data.secret);
+				data.token += `.${data.secret}`;
+			}
 			this.setToken(data.token);
+			console.log(data);
 		} else {
 			console.log('code err');
 		}
 	}
 
-	async getUserData() {
-		if (this.xApiKey || this.token) {
-			const userData = await RootStoreApi.dcApi.user({ xApiKey: this.xApiKey, token: this.token });
-			console.log(userData);
+	async getUserData(tryIdx = 0) {
+		if (tryIdx < 4) {
+			try {
+				if (this.xApiKey || this.token) {
+					const data = await RootStoreApi.dcApi.user(
+						{ xApiKey: this.xApiKey, token: this.token }
+					);
+					const { id, name, phone } = data;
+					this.setUser({ id, name, phone });
+					if (data.refresh_token) {
+						this.setRefreshToken(data.refresh_token);
+					}
+					if (data.secret) {
+						this.setSecret(data.secret);
+						data.token += `.${data.secret}`;
+					}
+					this.setToken(data.token);
+					console.log(data);
+				}
+			} catch (error) {
+				if ([401, 403, 423].includes(error)) {
+					console.log('error');
+					console.log(error);
+					const data = await RootStoreApi.dcApi.userLogin(
+						{ xApiKey: this.xApiKey, token: this.token }
+					);
+					if (data.secret) {
+						this.setSecret(data.secret);
+						data.token += `.${data.secret}`;
+					}
+					this.setToken(data.token);
+					console.log(data);
+
+					this.getUserData(tryIdx + 1);
+				}
+			}
+		} else {
+			console.warn('tryIdx === 4');
 		}
 	}
 
@@ -90,12 +132,14 @@ class RootStoreClass {
 	setXApiKey(xApiKey) {
 		this.xApiKey = xApiKey;
 	}
-	setToken(token) {
-		Cookies.set('x_user_authorization', token);
+	setToken(token, isAuth = true) {
+		if (isAuth) {
+			Cookies.set('x_user_authorization', token, { path: '/', domain: '.delivery-club.ru' });
+		}
 		this.token = token;
 	}
 	setRefreshToken(refreshToken) {
-		Cookies.set('refresh_token', refreshToken);
+		Cookies.set('refresh_token', refreshToken, { path: '/', domain: '.delivery-club.ru' });
 		this.refreshToken = refreshToken;
 	}
 	setSecret(secret) {

@@ -30,7 +30,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deployDev": "npm run build && scp -o StrictHostKeyChecking=no -i ~/.ssh/pavlikov -r build/* root@94.228.126.19:/var/www/html"
+    "deployDev": "npm run build && scp -o StrictHostKeyChecking=no -i ~/.ssh/pavlikov -r build/* root@94.228.126.19:/var/www/html/stage-fa53b91ccc1b78668d5af58e1ed3a485"
   },
   "eslintConfig": {
     "extends": [
