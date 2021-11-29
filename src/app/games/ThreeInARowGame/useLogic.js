@@ -36,6 +36,9 @@ export default function useLogic({ canvasRef, setScores }) {
         let currentmove = { column1: 0, row1: 0, column2: 0, row2: 0 };
         let drag = false;
 
+        canvas.width = 325;
+        canvas.height = 325;
+
         const newGame = () => {
             setScores(0);
 
@@ -48,8 +51,6 @@ export default function useLogic({ canvasRef, setScores }) {
         };
 
         const game = () => {
-            canvas.width = 325;
-            canvas.height = 325;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             canvas.addEventListener('mousemove', onMouseMove);
             canvas.addEventListener('mousedown', onMouseDown);

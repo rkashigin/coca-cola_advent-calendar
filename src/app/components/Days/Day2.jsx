@@ -25,8 +25,6 @@ const Day2 = ({ setOpenedDay }) => {
         setOpenedDay
     });
 
-    console.log(open);
-
     return (
         <>
             <Dialog

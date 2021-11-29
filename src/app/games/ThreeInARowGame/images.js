@@ -1,8 +1,8 @@
-import RedHat from '../../assets/images/threeInARow/RedHat.png';
-import GreenHat from '../../assets/images/threeInARow/GreenHat.png';
-import RedGloves from '../../assets/images/threeInARow/RedGloves.png';
-import GreenGloves from '../../assets/images/threeInARow/GreenGloves.png';
-import Penguin from '../../assets/images/threeInARow/Penguin.png';
+import RedHat from '../../assets/images/threeInARow/RedHat.svg';
+import GreenHat from '../../assets/images/threeInARow/GreenHat.svg';
+import RedGloves from '../../assets/images/threeInARow/RedGloves.svg';
+import GreenGloves from '../../assets/images/threeInARow/GreenGloves.svg';
+import Penguin from '../../assets/images/threeInARow/Penguin.svg';
 
 const redHatImage = new Image();
 redHatImage.src = RedHat;

@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { useMediaQuery } from 'react-responsive';
 import cn from 'classnames';
-import config from '../../config';
 
-import styles from './WhereIsGame.module.scss';
+import config from '../../config';
 import { Timer } from '../../components';
 import Adaptive from '../../helpers/Adaptive';
+
+import styles from './WhereIsGame.module.scss';
 
 const WhereIsGame = ({ gameVariant, setResult }) => {
     const isMobile = useMediaQuery(Adaptive.isMobile);
@@ -18,6 +18,8 @@ const WhereIsGame = ({ gameVariant, setResult }) => {
 
     const confirmFind = (x, y) => {
         const { coords } = gameConfig;
+
+        console.log('X', x, 'Y', y, 'FROM CONFIG', coords);
 
         return x >= coords.xStart && x <= coords.xEnd && y >= coords.yStart && y <= coords.yEnd;
     };
@@ -40,6 +42,7 @@ const WhereIsGame = ({ gameVariant, setResult }) => {
     };
 
     const handlePerformFindAttempt = (e) => {
+        console.log('EVENT', e);
         generateSelectionWindow({
             x: e.nativeEvent.offsetX,
             y: e.nativeEvent.offsetY
@@ -75,9 +78,6 @@ const WhereIsGame = ({ gameVariant, setResult }) => {
                 }
             />
             <img
-                className={cn({
-                    [styles.image]: !isMobile
-                })}
                 src={config.references.whereIsGame[gameVariant].image}
                 alt="Game"
                 onClick={handlePerformFindAttempt}
