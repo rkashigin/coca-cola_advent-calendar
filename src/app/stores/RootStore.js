@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import Cookies from 'js-cookie';
 import {
 	makeAutoObservable
 } from 'mobx';
@@ -50,26 +51,42 @@ class RootStoreClass {
 	}
 
 	async userOtp(tel) {
-		this.setOtpTel(tel);
-		this.setOtp(await RootStoreApi.dcApi.userOtp(this.token, tel, this.recaptchaToken));
+		try {
+			this.setOtpTel(tel);
+			this.setOtp(await RootStoreApi.dcApi.userOtp(this.token, tel, this.recaptchaToken));
+		} catch (error) {
+			console.log(error);
+		}
 	}
+
 	async loginOtp(code) {
 		if (code && code.length === 6) {
 			const data = await RootStoreApi.dcApi.loginOtp(this.token, code, this.otp.requestId);
-			console.log(data);
-			// const {
-			// 	id, name, phone, refresh_token, secret, token 
-			// } = await RootStoreApi.dcApi.loginOtp(this.token, code, this.otp.requestId);
+
+			const { id, name, phone } = data;
+			this.setUser({ id, name, phone });
+			this.setRefreshToken(data.refresh_token);
+			this.setSecret(data.secret);
+			this.setToken(data.token);
 		} else {
 			console.log('code err');
 		}
+	}
+
+	setUser(user) {
+		this.user = user;
 	}
 
 	setXApiKey(xApiKey) {
 		this.xApiKey = xApiKey;
 	}
 	setToken(token) {
+		Cookies.set('x_user_authorization', token);
 		this.token = token;
+	}
+	setRefreshToken(refreshToken) {
+		Cookies.set('refresh_token', refreshToken);
+		this.refreshToken = refreshToken;
 	}
 	setSecret(secret) {
 		this.secret = secret;

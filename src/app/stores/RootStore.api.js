@@ -16,7 +16,7 @@ export const RootStoreApi = {
 				return response.json();
 			}
 		
-			throw new Error(`Ошибка HTTP: ${response.status}`);
+			throw response.status;
 		},
 		// Получение анонимного токена
 		async userLogin() { 
@@ -25,7 +25,7 @@ export const RootStoreApi = {
 				return response.json();
 			}
 	
-			throw new Error(`Ошибка HTTP: ${response.status}`);
+			throw response.status;
 		},
 		// Авторизация через номер телефона
 		// Запрос кода
@@ -46,7 +46,7 @@ export const RootStoreApi = {
 				return response.json();
 			}
 	
-			throw new Error(`Ошибка HTTP: ${response.status}`);
+			throw response.status;
 		},
 		
 		// Проверка кода и авторизация, в ответе будут token и secret, а также refreshToken
@@ -67,7 +67,7 @@ export const RootStoreApi = {
 				return response.json();
 			}
 	
-			throw new Error(`Ошибка HTTP: ${response.status}`);
+			throw response.status;
 		},
 
 		getCookie(name) {
