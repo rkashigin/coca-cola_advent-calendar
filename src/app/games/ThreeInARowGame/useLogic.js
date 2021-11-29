@@ -35,7 +35,7 @@ export default function useLogic({ canvasRef, setScores }) {
         const animationtimetotal = 0.3;
         let currentmove = { column1: 0, row1: 0, column2: 0, row2: 0 };
         let drag = false;
-        const size = isTabletOrMobile ? 325 : 340;
+        const size = isTabletOrMobile ? 325 : 370;
         const scale = window.devicePixelRatio;
 
         canvas.style.width = `${size}px`;
@@ -334,8 +334,8 @@ export default function useLogic({ canvasRef, setScores }) {
             ctx.stroke();
             ctx.drawImage(
                 image,
-                isTabletOrMobile ? x + 12 : x + 14,
-                isTabletOrMobile ? y + 12 : y + 14,
+                isTabletOrMobile ? x + 12 : x + 18,
+                isTabletOrMobile ? y + 12 : y + 18,
                 45,
                 45
             );
