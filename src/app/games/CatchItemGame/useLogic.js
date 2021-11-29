@@ -13,10 +13,13 @@ export default function useLogic({ canvasRef, cart, setScores }) {
         const canvas = document.getElementById('canvas');
         const ctx = canvas?.getContext('2d');
         const products = [];
+        const deviceMultiplier = isTabletOrMobile ? 0.6 : 1;
         let gameTimer = 0;
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
+
+        cart.y = canvas.height - 150 * deviceMultiplier;
 
         const shoppingCartImage = new Image();
         shoppingCartImage.src = ShoppingCartImage;
@@ -89,13 +92,25 @@ export default function useLogic({ canvasRef, cart, setScores }) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = '#E5E5E5';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(shoppingCartImage, cart.x, cart.y, 150, 150);
+            ctx.drawImage(
+                shoppingCartImage,
+                cart.x,
+                cart.y,
+                150 * deviceMultiplier,
+                150 * deviceMultiplier
+            );
 
             products.forEach((product) => {
                 ctx.save();
-                ctx.translate(product.x + 30, product.y + 30);
+                ctx.translate(product.x + 30 * deviceMultiplier, product.y + 30 * deviceMultiplier);
                 ctx.rotate(product.angle);
-                ctx.drawImage(product.img, -30, -30, 60, 60);
+                ctx.drawImage(
+                    product.img,
+                    -30 * deviceMultiplier,
+                    -30 * deviceMultiplier,
+                    60 * deviceMultiplier,
+                    60 * deviceMultiplier
+                );
                 ctx.restore();
             });
         };
@@ -111,7 +126,7 @@ export default function useLogic({ canvasRef, cart, setScores }) {
                 return;
             }
 
-            if (e.nativeEvent.offsetX + 150 <= canvas.width) {
+            if (e.nativeEvent.offsetX + 150 * deviceMultiplier <= canvas.width) {
                 cart.x = e.nativeEvent.offsetX;
             }
         };
@@ -121,10 +136,10 @@ export default function useLogic({ canvasRef, cart, setScores }) {
                 return;
             }
 
-            if (e.changedTouches[0].clientX + 150 <= canvas.width) {
+            if (e.changedTouches[0].clientX + 150 * deviceMultiplier <= canvas.width) {
                 cart.x = e.changedTouches[0].clientX;
             } else {
-                cart.x = canvas.width - 150;
+                cart.x = canvas.width - 150 * deviceMultiplier;
             }
         };
 

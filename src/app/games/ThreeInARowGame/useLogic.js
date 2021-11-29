@@ -3,19 +3,19 @@ import { useMediaQuery } from 'react-responsive';
 import TileImages from './images';
 import drawRoundRect from '../../helpers/drawRoundRect';
 
-// Todo: сделсать в игре тележкой проверку положения девайса и уменьшить масштаб всего
-
 export default function useLogic({ canvasRef, setScores }) {
+    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
+
     if (canvasRef) {
         const canvas = document.getElementById('canvas');
-        const ctx = canvas?.getContext('2d', { alpha: false });
+        const ctx = canvas?.getContext('2d');
         const level = {
             x: 0,
             y: 0,
             columns: 5,
             rows: 5,
-            tileWidth: 65,
-            tileHeight: 65,
+            tileWidth: isTabletOrMobile ? 65 : 73,
+            tileHeight: isTabletOrMobile ? 65 : 73,
             tiles: [],
             selectedTile: { selected: false, column: 0, row: 0 }
         };
@@ -35,7 +35,7 @@ export default function useLogic({ canvasRef, setScores }) {
         const animationtimetotal = 0.3;
         let currentmove = { column1: 0, row1: 0, column2: 0, row2: 0 };
         let drag = false;
-        const size = 325;
+        const size = isTabletOrMobile ? 325 : 340;
         const scale = window.devicePixelRatio;
 
         canvas.style.width = `${size}px`;
@@ -43,11 +43,6 @@ export default function useLogic({ canvasRef, setScores }) {
 
         canvas.width = Math.floor(size * scale);
         canvas.height = Math.floor(size * scale);
-
-        ctx.mozImageSmoothingEnabled = false;
-        ctx.webkitImageSmoothingEnabled = false;
-        ctx.msImageSmoothingEnabled = false;
-        ctx.imageSmoothingEnabled = false;
         ctx.scale(scale, scale);
 
         const newGame = () => {
@@ -337,10 +332,24 @@ export default function useLogic({ canvasRef, setScores }) {
             drawRoundRect.apply(ctx, [x + 8, y + 8, level.tileWidth - 8, level.tileHeight - 8, 8]);
             ctx.strokeStyle = '#EEEEEE';
             ctx.stroke();
-            ctx.drawImage(image, x + 14, y + 14, 45, 45);
+            ctx.drawImage(
+                image,
+                isTabletOrMobile ? x + 12 : x + 14,
+                isTabletOrMobile ? y + 12 : y + 14,
+                45,
+                45
+            );
         };
 
         const render = () => {
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '24px Verdana';
+
+            const levelwidth = level.columns * level.tileWidth;
+            const levelheight = level.rows * level.tileHeight;
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(level.x - 4, level.y - 4, levelwidth + 8, levelheight + 8);
+
             renderTiles();
         };
 
@@ -563,8 +572,12 @@ export default function useLogic({ canvasRef, setScores }) {
             const rect = canvas.getBoundingClientRect();
 
             return {
-                x: Math.round(((e.clientX - rect.left) / (rect.right - rect.left)) * canvas.width),
-                y: Math.round(((e.clientY - rect.top) / (rect.bottom - rect.top)) * canvas.height)
+                x: Math.round(
+                    (((e.clientX - rect.left) / (rect.right - rect.left)) * canvas.width) / scale
+                ),
+                y: Math.round(
+                    (((e.clientY - rect.top) / (rect.bottom - rect.top)) * canvas.height) / scale
+                )
             };
         };
 
