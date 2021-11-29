@@ -3,6 +3,7 @@ import Cookies from 'js-cookie';
 import {
 	makeAutoObservable
 } from 'mobx';
+import config from '../../config';
 
 import { RootStoreApi } from './RootStore.api';
 
@@ -38,15 +39,20 @@ class RootStoreClass {
 	}
 
 	async init() {
-		console.log(Cookies);
-		this.token = RootStoreApi.dcApi.getCookie('x_user_authorization');
+		const tokenCookie = RootStoreApi.dcApi.getCookie('x_user_authorization');
+		this.token = tokenCookie;
+		const secret = tokenCookie && tokenCookie.split('.').slice(1, 1);
+		if (secret) {
+			this.secret = secret;
+		}
+		this.refreshToken = RootStoreApi.dcApi.getCookie('refresh_token');
 		const query = new URLSearchParams(window.location.search);
 		if (query.get('t')) {
 			this.setXApiKey(query.get('t'));
 		}
 		if (!this.token && !this.xApiKey) {
 			const { secret, token } = await RootStoreApi.dcApi.userLogin(
-				{ xApiKey: this.xApiKey, token: this.token }
+				{ xApiKey: null, token: null }
 			);
 			this.setSecret(secret);
 			this.setToken(token, false);
@@ -107,8 +113,14 @@ class RootStoreClass {
 				if ([401, 403, 423].includes(error)) {
 					console.log('error');
 					console.log(error);
+					if (error !== 401) {
+						return;
+					}
 					const data = await RootStoreApi.dcApi.userLogin(
-						{ xApiKey: this.xApiKey, token: this.token }
+						{ 
+							xApiKey: this.xApiKey, 
+							token: error === 401 && this.refreshToken ? this.refreshToken : this.token 
+						}
 					);
 					if (data.secret) {
 						this.setSecret(data.secret);
@@ -134,12 +146,12 @@ class RootStoreClass {
 	}
 	setToken(token, isAuth = true) {
 		if (isAuth) {
-			Cookies.set('x_user_authorization', token, { path: '/', domain: '.delivery-club.ru' });
+			Cookies.set('x_user_authorization', token, { path: '/', domain: config.server.domain });
 		}
 		this.token = token;
 	}
 	setRefreshToken(refreshToken) {
-		Cookies.set('refresh_token', refreshToken, { path: '/', domain: '.delivery-club.ru' });
+		Cookies.set('refresh_token', refreshToken, { path: '/', domain: config.server.domain });
 		this.refreshToken = refreshToken;
 	}
 	setSecret(secret) {

@@ -8,6 +8,8 @@ import MainPage from './pages/MainPage';
 import { RootStore } from './stores/RootStore';
 import config from '../config';
 
+const root = '/fa53b91ccc1b78668d5af58e1ed3a485';
+
 const App = () => {
 	const recaptchaRef = useRef(null);
 	const recaptchaOnLoaded = () => {
@@ -21,7 +23,7 @@ const App = () => {
 	return (
 		<div className="App">
 			<Routes>
-				<Route exact path="/" element={<MainPage />} />
+				<Route exact path={root} element={<MainPage />} />
 			</Routes>
 			<Recaptcha
 				ref={recaptchaRef}
