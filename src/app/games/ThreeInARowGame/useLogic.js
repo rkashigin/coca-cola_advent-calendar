@@ -3,12 +3,12 @@ import { useMediaQuery } from 'react-responsive';
 import TileImages from './images';
 import drawRoundRect from '../../helpers/drawRoundRect';
 
-export default function useLogic({ canvasRef, setScores }) {
-    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
+// Todo: сделсать в игре тележкой проверку положения девайса и уменьшить масштаб всего
 
+export default function useLogic({ canvasRef, setScores }) {
     if (canvasRef) {
         const canvas = document.getElementById('canvas');
-        const ctx = canvas?.getContext('2d');
+        const ctx = canvas?.getContext('2d', { alpha: false });
         const level = {
             x: 0,
             y: 0,
@@ -35,9 +35,20 @@ export default function useLogic({ canvasRef, setScores }) {
         const animationtimetotal = 0.3;
         let currentmove = { column1: 0, row1: 0, column2: 0, row2: 0 };
         let drag = false;
+        const size = 325;
+        const scale = window.devicePixelRatio;
 
-        canvas.width = 325;
-        canvas.height = 325;
+        canvas.style.width = `${size}px`;
+        canvas.style.height = `${size}px`;
+
+        canvas.width = Math.floor(size * scale);
+        canvas.height = Math.floor(size * scale);
+
+        ctx.mozImageSmoothingEnabled = false;
+        ctx.webkitImageSmoothingEnabled = false;
+        ctx.msImageSmoothingEnabled = false;
+        ctx.imageSmoothingEnabled = false;
+        ctx.scale(scale, scale);
 
         const newGame = () => {
             setScores(0);
@@ -330,14 +341,6 @@ export default function useLogic({ canvasRef, setScores }) {
         };
 
         const render = () => {
-            ctx.fillStyle = '#ffffff';
-            ctx.font = '24px Verdana';
-
-            const levelwidth = level.columns * level.tileWidth;
-            const levelheight = level.rows * level.tileHeight;
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(level.x - 4, level.y - 4, levelwidth + 8, levelheight + 8);
-
             renderTiles();
         };
 

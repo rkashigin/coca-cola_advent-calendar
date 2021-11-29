@@ -50,9 +50,6 @@ export default function useLogic({ canvasRef, image, gameConfig, setResult, isDe
                 yStart: Math.floor(coords.yStart / ratio.height),
                 yEnd: Math.floor(coords.yEnd / ratio.height)
             };
-            console.log(`COORDS TO TEST x: ${x}, y: ${y}`);
-            console.log('CONFIG COORDS', coords);
-            console.log('COORDS WITH RATIO', compareCoords);
 
             return (
                 x >= compareCoords.xStart &&
