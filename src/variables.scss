@@ -1,0 +1,34 @@
+@import "./app/assets/fonts/fonts";
+$width-mobile: 768px;
+
+:root{
+
+    --font_Roboto: "Roboto", sans-serif;
+    --font_Montserrat: "Montserrat", sans-serif;
+
+    --color_red: hsl(1, 75%, 41%);
+    --color_light_green: hsl(133, 51%, 69%);
+    --color_light_grey: hsl(0, 0%, 97%);
+    --color_dark_olive_green: hsl(112, 33%, 33%);
+    --color_alabaster_grey: hsl(216, 14%, 93%);
+    --color_dim_gray: hsl(210, 2%, 37%);
+    --color_ligth_pink: hsla(1, 75%, 41%, 0.08);
+
+    --font_size_h1: 4.8rem;
+    --font_size_h3: 2.4rem;
+    --font_size_text: 1.6rem;
+
+    --section_padding: 3.2rem;
+
+    @media screen and (max-width: $width-mobile){
+        --section_padding: 1.6rem;
+    }
+
+    // Games config
+    --memoryBoardVerticalGap: 1.6rem;
+    --memoryBoardHorizontalGap: 0.8rem;
+    --memoryBoardWidth: 36rem;
+    --memoryBoardHeight: calc(32rem + 4 * 1.6rem);
+    --memoryBoardHorizontalLength: 5;
+    --memoryBoardVerticalLength: 4;
+}

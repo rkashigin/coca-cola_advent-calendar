@@ -1,0 +1,107 @@
+/* eslint-disable max-classes-per-file */
+import Axios, { AxiosRequestConfig, AxiosError, AxiosInstance } from 'axios';
+import './typedef';
+import router from './router';
+ 
+class ApiRequests {
+	/**
+   * @param {AxiosInstance} axiosInstance
+   */
+	constructor(axiosInstance) {
+		this.auth = new AuthService(axiosInstance);
+		this.axiosInstance = axiosInstance;
+	}
+ 
+	/**
+   * @returns {Promise.<UserStatsResponse>}
+   */
+	getStat() {
+		return new Promise((resolve) => {
+			this.axiosInstance.get('/landing/advent-2020/stats')
+				.then((response) => resolve(response.data))
+				.catch(console.log);
+		});
+	}
+ 
+	/**
+   * @param {PromocodeRequestParams} params
+   * @returns {Promise.<PromocodeResponse>}
+   */
+	getPromocode(params) {
+		return new Promise((resolve) => {
+			this.axiosInstance.post('/landing/advent-2020/promocode', params)
+				.then((response) => resolve(response.data))
+				.catch(console.log);
+		});
+	}
+}
+ 
+class AuthService {
+	/**
+   * @param {AxiosInstance} axiosInstance
+   */
+	constructor(axiosInstance) {
+		axiosInstance.interceptors.request.use(this.requestInterceptor.bind(this));
+		axiosInstance.interceptors.response.use((response) => {
+			return Promise.resolve(response);
+		}, this.responseErrorInterceptor.bind(this));
+	}
+ 
+	init() {
+		this.token = this.getCookie('x_user_authorization');
+		if (router.currentRoute.query.t) {
+			this.xApiKey = router.currentRoute.query.t;
+		}
+		if (!this.token && !this.xApiKey) {
+			this.authorize();
+		}
+	}
+ 
+	/**
+   * @param {AxiosRequestConfig} request
+   */
+	requestInterceptor(request) {
+		if (this.xApiKey) {
+			request.headers['x-api-key'] = this.xApiKey;
+		} else if (this.token) {
+			request.headers['x-user-authorization'] = this.token;
+		} else {
+			this.authorize();
+		}
+		return request;
+
+		
+	}
+ 
+	/**
+   * @param {AxiosError} error
+   */
+	responseErrorInterceptor(error) {
+		if ([401, 403, 423].includes(error.response.status)) {
+			this.authorize();
+		}
+   
+		return Promise.reject(error);
+	}
+ 
+	authorize() {
+		console.log('redirect');
+		// location.href = 'https://www.delivery-club.ru/auth-advent';
+	}
+ 
+	getCookie(name) {
+		const matches = document.cookie.match(new RegExp(
+			`(?:^|; )${name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1')}=([^;]*)`
+		));
+		return matches ? decodeURIComponent(matches[1]) : undefined;
+	}
+}
+ 
+const baseUrl = 'https://api.delivery-club.ru/api1.2';
+ 
+export const apiRequests = new ApiRequests(
+	Axios.create({
+		baseURL: baseUrl,
+		withCredentials: true
+	})
+);

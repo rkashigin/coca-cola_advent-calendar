@@ -1,0 +1,66 @@
+.gamesWrapper {
+  position: relative;
+  border-radius: 1.6rem;
+  width: max-content;
+  height: max-content;
+
+  &_fullScreen {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.gamesWrapper__content {
+  height: fit-content;
+  position: relative;
+}
+
+.gamesWrapper__exitButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 50;
+
+  border: none;
+
+  color: #5D5F61;
+  background-color: #EBEDF0;
+
+  border-radius: 3.2rem;
+
+  padding: 0.8rem 1.6rem;
+
+  font-size: 1.8rem;
+  line-height: 2.4rem;
+
+  position: absolute;
+  top: 1.6rem;
+  right: 1.6rem;
+
+  &_fixed {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.32);
+
+    color: white;
+
+    .gamesWrapper__closeIcon{
+      --color_icon_close: white;
+    }
+  }
+}
+
+@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+	.gamesWrapper__exitButton_fixed {
+		background-color: rgba(0, 0, 0, 0.32);
+		-webkit-backdrop-filter: blur(32px);
+		backdrop-filter: blur(32px);
+	}
+}
+
+.gamesWrapper__closeIcon {
+  width: 2.4rem;
+  height: 2.4rem;
+  margin-left: 0.4rem;
+
+  --color_icon_close: #5D5F61;
+}

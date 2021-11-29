@@ -3,18 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.6.0",
+    "@emotion/styled": "^11.6.0",
+    "@mui/material": "^5.1.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "classnames": "^2.3.1",
     "cors": "^2.8.5",
+    "lodash": "^4.17.21",
+    "js-cookie": "^3.0.1",
     "mobx": "^6.3.7",
     "mobx-react": "^7.2.1",
     "mobx-react-lite": "^3.2.2",
     "normalize.css": "^8.0.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
+    "react-countdown": "^2.3.2",
     "react-dom": "^17.0.2",
+    "react-google-invisible-recaptcha": "^0.2.12",
     "react-helmet": "^6.1.0",
     "react-responsive": "^9.0.0-beta.4",
     "react-router": "^6.0.2",
@@ -26,7 +33,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "clean": "rm -rf ./node_modules package-lock.json && npm install",
+    "deployDev": "npm run build && scp -o StrictHostKeyChecking=no -i ~/.ssh/pavlikov -r build/* root@94.228.126.19:/var/www/html"
   },
   "eslintConfig": {
     "extends": [
@@ -34,6 +43,7 @@
       "react-app/jest"
     ]
   },
+  "proxy": "https://coca-cola.delivery-club.ru/",
   "browserslist": {
     "production": [
       ">0.2%",
@@ -48,12 +58,14 @@
   },
   "devDependencies": {
     "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-prettier": "^3.4.1",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "json-loader": "^0.5.7",
+    "prettier": "^2.4.1",
     "sass": "^1.43.4"
   }
 }
