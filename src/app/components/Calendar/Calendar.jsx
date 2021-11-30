@@ -32,7 +32,7 @@ const Calendar = () => {
                             img={el.img}
                             className={classNames(styles[`calendarDay_${el.day}`], {
                                 [styles.calendarDay_current]: RootStore.myGamesCompleted === idx,
-                                [styles.calendarDay_pastDay]: isPast(new Date(2021, 11, idx + 1)),
+                                [styles.calendarDay_pastDay]: false /* isPast(new Date(2021, 11, idx + 1)) */,
                                 [styles.calendarDay_futureDay]: isFuture(
                                     new Date(2021, 11, idx + 1)
                                 )
