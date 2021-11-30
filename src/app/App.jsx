@@ -7,6 +7,9 @@ import MainPage from './pages/MainPage';
 
 import { RootStore } from './stores/RootStore';
 import config from '../config';
+import OtpAuth from './components/OtpAuth/OtpAuth';
+
+// const devRoot = 'fa53b91ccc1b78668d5af58e1ed3a485';
 
 const App = () => {
     const recaptchaRef = useRef(null);
@@ -20,6 +23,7 @@ const App = () => {
 
     return (
         <div className="App">
+            <OtpAuth />
             <Routes>
                 <Route exact path="/" element={<MainPage />} />
             </Routes>

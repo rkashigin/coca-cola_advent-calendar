@@ -95,5 +95,33 @@ export const RootStoreApi = {
             );
             return matches ? decodeURIComponent(matches[1]) : undefined;
         }
+    },
+    api: {
+        async auth() {
+            try {
+                const response = await fetch('/api/auth');
+                return response;
+            } catch (error) {
+                throw new Error('api auth error');
+            }
+        },
+        async complete({ game, sign }) {
+            const response = await fetch(`/api/complete?game=${game}&sign=${sign}`, {
+                method: 'POST'
+            });
+            if (response.ok) {
+                return response.json();
+            }
+
+            throw response.status;
+        },
+        async promocodes() {
+            const response = await fetch('/api/promocodes');
+            if (response.ok) {
+                return response.json();
+            }
+
+            throw response.status;
+        }
     }
 };

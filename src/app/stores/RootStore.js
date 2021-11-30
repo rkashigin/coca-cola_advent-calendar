@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import Cookies from 'js-cookie';
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, toJS, when } from 'mobx';
+import sha256 from 'sha256';
 import config from '../../config';
 
 import { RootStoreApi } from './RootStore.api';
@@ -31,9 +32,25 @@ class RootStoreClass {
         phone: null
     };
 
+    oauthOpen = false;
+
+    oauthCodeErr = false;
+
+    colaAuth = false;
+
+    myPromocodes = [];
+
     constructor() {
         makeAutoObservable(this);
         this.init();
+        when(
+            () => !!this.colaAuth,
+            async () => {
+                const promocodes = await RootStoreApi.api.promocodes();
+                console.log(promocodes);
+                this.setMyPromocodes(promocodes);
+            }
+        );
     }
 
     async init() {
@@ -49,48 +66,71 @@ class RootStoreClass {
             this.setXApiKey(query.get('t'));
         }
         if (!this.token && !this.xApiKey) {
+            await this.getAnonymousToken();
+        } else {
+            this.getUserData();
+        }
+    }
+
+    async getAnonymousToken() {
+        try {
             const { secret, token } = await RootStoreApi.dcApi.userLogin({
                 xApiKey: null,
                 token: null
             });
             this.setSecret(secret);
             this.setToken(token, false);
-        } else {
-            this.getUserData();
-        }
-    }
-
-    async userOtp(tel) {
-        try {
-            this.setOtpTel(tel);
-            this.setOtp(await RootStoreApi.dcApi.userOtp(this.token, tel, this.recaptchaToken));
         } catch (error) {
             console.log(error);
         }
     }
 
+    async userOtp(tel) {
+        try {
+            await this.getAnonymousToken();
+            this.setOtpTel(tel);
+            this.setOtp(await RootStoreApi.dcApi.userOtp(this.token, tel, this.recaptchaToken));
+            this.setOauthCodeErr(false);
+        } catch (error) {
+            console.log(error);
+            this.setOauthCodeErr(error);
+        }
+    }
+
     async loginOtp(code) {
         if (code && code.length === 6) {
-            const data = await RootStoreApi.dcApi.loginOtp(this.token, code, this.otp.requestId);
+            try {
+                const data = await RootStoreApi.dcApi.loginOtp(
+                    this.token,
+                    code,
+                    this.otp.requestId
+                );
 
-            const { id, name, phone } = data;
-            this.setUser({ id, name, phone });
-            if (data.refresh_token) {
-                this.setRefreshToken(data.refresh_token);
+                const { id, name, phone } = data;
+                if (id) {
+                    this.setOauthOpen(false);
+                }
+                this.setUser({ id, name, phone });
+                if (data.refresh_token) {
+                    this.setRefreshToken(data.refresh_token);
+                }
+                if (data.secret) {
+                    this.setSecret(data.secret);
+                    data.token += `.${data.secret}`;
+                }
+                this.setToken(data.token);
+                console.log(data);
+            } catch (error) {
+                console.log('loginOtp error');
+                console.log(error);
             }
-            if (data.secret) {
-                this.setSecret(data.secret);
-                data.token += `.${data.secret}`;
-            }
-            this.setToken(data.token);
-            console.log(data);
         } else {
             console.log('code err');
         }
     }
 
     async getUserData(tryIdx = 0) {
-        if (tryIdx < 4) {
+        if (tryIdx < 2) {
             try {
                 if (this.xApiKey || this.token) {
                     const data = await RootStoreApi.dcApi.user({
@@ -108,17 +148,20 @@ class RootStoreClass {
                     }
                     this.setToken(data.token);
                     console.log(data);
+
+                    if (id) {
+                        const colaAuth = await RootStoreApi.api.auth();
+                        this.setColaAuth(colaAuth.ok);
+                    }
                 }
             } catch (error) {
                 if ([401, 403, 423].includes(error)) {
                     console.log('error');
                     console.log(error);
-                    if (error !== 401) {
-                        return;
-                    }
+
                     const data = await RootStoreApi.dcApi.userLogin({
                         xApiKey: this.xApiKey,
-                        token: error === 401 && this.refreshToken ? this.refreshToken : this.token
+                        token: (error === 401 && this.refreshToken) || (error === 423 && this.token)
                     });
                     if (data.secret) {
                         this.setSecret(data.secret);
@@ -131,8 +174,40 @@ class RootStoreClass {
                 }
             }
         } else {
-            console.warn('tryIdx === 4');
+            console.warn('tryIdx === 2');
         }
+    }
+
+    async dayComplete(game) {
+        try {
+            if (game && this.user.id?.primary) {
+                const sign = sha256(`${this.user.id.primary}/${game}`);
+                const data = await RootStoreApi.api.complete({ sign, game });
+                console.log(data);
+                return data;
+            }
+            console.log('no game id or user ID');
+            return null;
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    }
+
+    setMyPromocodes(promocodes) {
+        this.myPromocodes = promocodes;
+    }
+
+    setColaAuth(isAuth) {
+        this.colaAuth = isAuth;
+    }
+
+    setOauthCodeErr(err) {
+        this.oauthCodeErr = err;
+    }
+
+    setOauthOpen(isOpen) {
+        this.oauthOpen = isOpen;
     }
 
     setUser(user) {
