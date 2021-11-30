@@ -10,6 +10,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 
 import PromoCode from '../PromoCode/PromoCode';
+import InfoPromoCode from '../InfoPromoCode/InfoPromoCode';
 import Game from '../Game';
 import { WhereIsGame } from '../../games';
 import { useDay } from '../../hooks';
@@ -56,28 +57,18 @@ const Day2 = ({ setOpenedDay }) => {
                 {result.status ? (
                     <img
                         className={styles.modalResult__img}
-                        src={require('../../assets/images/Games/game_won.png').default}
+                        src={require('../../assets/images/Games/game_win.svg').default}
                         alt=""
                     />
                 ) : (
-                    <>
-                        {result.promoCode ? (
-                            <img
-                                className={styles.modalResult__img}
-                                src={require('../../assets/images/Games/game_lost.png').default}
-                                alt=""
-                            />
-                        ) : (
-                            <img
-                                className={classNames(
-                                    styles.modalResult__img,
-                                    styles.modalResult__img_resize
-                                )}
-                                src={require('../../assets/images/Calendar/3day.svg').default}
-                                alt=""
-                            />
+                    <img
+                        className={classNames(
+                            styles.modalResult__img,
+                            styles.modalResult__img_resize
                         )}
-                    </>
+                        src={require('../../assets/images/Games/game_loss.svg').default}
+                        alt=""
+                    />
                 )}
                 <div className={styles.modal}>
                     {result.status ? (
@@ -156,6 +147,7 @@ const Day2 = ({ setOpenedDay }) => {
                             </>
                         )}
                     </DialogActions>
+                    {result.promoCode && <InfoPromoCode />}
                 </div>
             </Dialog>
         </>

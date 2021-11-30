@@ -61,7 +61,7 @@ const Day5 = ({ setOpenedDay }) => {
             >
                 <img
                     className={styles.modalResult__img_result}
-                    src={require('../../assets/images/Games/game_1_day.png').default}
+                    src={require('../../assets/images/Games/game_win.svg').default}
                     alt=""
                 />
 

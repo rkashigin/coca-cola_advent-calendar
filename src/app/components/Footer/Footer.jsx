@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 
 import { ReactComponent as SnowDecoration } from '../../assets/images/Footer_snow.svg';
+import { ReactComponent as SnowDecorationMobile } from '../../assets/images/Footer_snow_mobile.svg';
 
 import styles from './Footer.module.scss';
 
@@ -78,7 +79,23 @@ const Footer = () => {
                     декабря и 10 января
                 </span>
             </div>
-            <SnowDecoration className={styles.footer__decoration_mobile} />
+            <SnowDecorationMobile className={styles.footer__decoration_mobile} />
+            <div className={styles.footerInfo}>
+                <a
+                    href="https://www.delivery-club.ru/promo_rules/NY%20with%20Coca-Cola.pdf?1638296035"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.footerInfo__rules}
+                >
+                    Правила акции
+                </a>
+                <div className={styles.footerInfo__company}>
+                    <span>ООО &quot;Деливери Клаб&quot; 3+</span>
+                    <span>ОГРН 1097746360568, ИНН/КПП 7705891253/997750001</span>
+                    <span>125315, г. Москва, Ленинградский проспект, д. 70, этаж 3</span>
+                </div>
+                <span className={styles.footerInfo__date}>© 2009–{new Date().getFullYear()}</span>
+            </div>
         </footer>
     );
 };
