@@ -86,7 +86,14 @@ const Day5 = ({ setOpenedDay }) => {
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={handleClose}>Заказать сейчас</Button>
+                        <a
+                            href="https://trk.mail.ru/c/t57ku7?utm_source=coca-cola-land-2021-2&utm_medium=cola-card-2021-2&utm_campaign=ny2021-cola-2&utm_content=cola-land-2021-2"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.calendarModal__button}
+                        >
+                            Заказать сейчас
+                        </a>
                         <Button onClick={handleClose}>В календарь</Button>
                     </DialogActions>
                 </div>

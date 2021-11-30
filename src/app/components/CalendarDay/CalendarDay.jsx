@@ -180,7 +180,7 @@ const CalendarDay = observer(
                             )}
                         {type === 'postCard' && (
                             <DialogActions>
-                                <Button onClick={handleOpenDay}>Узнать</Button>
+                                <Button onClick={handleOpenDay}>Сделать открытку</Button>
                                 <Button onClick={handleClose}>Выполнить позже</Button>
                             </DialogActions>
                         )}

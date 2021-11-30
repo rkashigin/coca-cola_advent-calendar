@@ -222,7 +222,7 @@ div.css-hlj6pa-MuiDialogActions-root, div.MuiDialogActions-root{
 }
 
 button.css-1e6y48t-MuiButtonBase-root-MuiButton-root, button.MuiButtonBase-root, button.MuiLink-button{
-  background-color: var(--color_dark_olive_green);
+  background-color: var(--color_alabaster_grey);
   padding: 1.65rem;
   width: 100%;
 
@@ -232,7 +232,7 @@ button.css-1e6y48t-MuiButtonBase-root-MuiButton-root, button.MuiButtonBase-root,
 
   font-size: 1.6rem;
   line-height: 2.4rem;
-  color: white;
+  color: var(--color_dim_gray);
   font-weight: 700;
 
   border-radius: 1.6rem;
@@ -242,7 +242,7 @@ button.css-1e6y48t-MuiButtonBase-root-MuiButton-root, button.MuiButtonBase-root,
   transition: opacity 0.3s ease-in-out;
 
   &:hover{
-    background-color: var(--color_dark_olive_green);
+    background-color: var(--color_alabaster_grey);
     opacity: 0.7;
   }
 
