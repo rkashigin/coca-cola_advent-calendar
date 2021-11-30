@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
+import { observer } from 'mobx-react-lite';
 
 import { isFuture, isPast, isToday } from 'date-fns';
 import CalendarDay from '../CalendarDay/CalendarDay';
 import { Day2, Day3, Day4, Day5, Day6, Day7, Day8, Day9, Day10, Day11 } from '../Days';
 import config from '../../config';
-
-import styles from './Calendar.module.scss';
 import { RootStore } from '../../stores/RootStore';
 
-const Calendar = () => {
+import styles from './Calendar.module.scss';
+
+const Calendar = observer(() => {
     const [openedDay, setOpenedDay] = React.useState(0);
 
     useEffect(() => {
@@ -67,7 +68,7 @@ const Calendar = () => {
                 )}
         </>
     );
-};
+});
 
 export default Calendar;
 

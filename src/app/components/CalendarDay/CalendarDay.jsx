@@ -45,7 +45,9 @@ const CalendarDay = ({
 }) => {
     const isHorizontal = useMediaQuery(Adaptive.isHorizontal);
     const [open, setOpen] = React.useState(false);
-    const [loadedPromocode, setLoadedPromocode] = React.useState('');
+    const [loadedPromocode, setLoadedPromocode] = React.useState(
+        RootStore.myPromocodes.find(({ Type }) => Type === 0)
+    );
 
     const handleClickOpen = () => {
         if (RootStore.user.id) {
