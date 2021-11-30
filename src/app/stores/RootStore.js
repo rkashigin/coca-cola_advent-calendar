@@ -40,7 +40,7 @@ class RootStoreClass {
 
     myPromocodes = [];
 
-    myGamesCompleted = 0;
+    myGamesCompleted = Number(localStorage.getItem('completedGames')) || 0;
 
     constructor() {
         makeAutoObservable(this);
@@ -216,7 +216,8 @@ class RootStoreClass {
 
     async updateComplitedGames() {
         const { completed } = await RootStoreApi.api.completed();
-        this.setMyGamesCompleted(completed - 1);
+        this.setMyGamesCompleted(completed);
+        localStorage.setItem('completedGames', completed);
     }
 
     setMyGamesCompleted(completed) {
