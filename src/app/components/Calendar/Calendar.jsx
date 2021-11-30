@@ -27,7 +27,7 @@ const Calendar = observer(() => {
                 {DATES.map((el, idx) => (
                     <CalendarDay
                         key={el.day}
-                        id={el.day}
+                        id={`ID: ${idx} - myGamesCompleted: ${RootStore.myGamesCompleted}`}
                         date={el.day}
                         img={el.img}
                         className={classNames(styles[`calendarDay_${el.day}`], {
@@ -41,16 +41,7 @@ const Calendar = observer(() => {
                         intro={el.intro}
                         promoCode={el.promoCode}
                         type={el.type}
-                        handleOpenDay={() => {
-                            if (
-                                idx > RootStore.myGamesCompleted
-                                // || isFuture(new Date(2021, 11, idx + 1))
-                            ) {
-                                return;
-                            }
-
-                            handleOpenDay(el.day);
-                        }}
+                        handleOpenDay={() => handleOpenDay(el.day)}
                         openedDay={openedDay}
                         orderLink={el.orderLink}
                     />
