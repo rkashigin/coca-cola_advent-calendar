@@ -119,6 +119,7 @@ class RootStoreClass {
                     this.setColaAuth(colaAuth.ok);
                 }
                 this.setUser({ id, name, phone });
+                console.log('LOGIN DATA', { id, name, phone });
                 if (data.refresh_token) {
                     this.setRefreshToken(data.refresh_token);
                 }
@@ -193,6 +194,7 @@ class RootStoreClass {
 
     async dayComplete(game) {
         try {
+            console.log('THIS USER AND GAME', this.user, game);
             if (game && this.user.id?.primary) {
                 const sign = sha256(`${this.user.id.primary}/${game}`);
                 const data = await RootStoreApi.api.complete({ sign, game });
@@ -214,7 +216,7 @@ class RootStoreClass {
 
     async updateComplitedGames() {
         const { completed } = await RootStoreApi.api.completed();
-        this.setMyGamesCompleted(completed);
+        this.setMyGamesCompleted(completed - 1);
     }
 
     setMyGamesCompleted(completed) {

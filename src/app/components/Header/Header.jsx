@@ -25,7 +25,9 @@ const Header = observer(() => {
     }, [open]);
 
     const handleClickOpen = () => {
-        setOpen(true);
+        if (RootStore.myPromocodes.length) {
+            setOpen(true);
+        }
     };
 
     const handleClose = () => {

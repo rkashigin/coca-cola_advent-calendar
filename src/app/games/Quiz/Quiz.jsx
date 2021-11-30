@@ -36,7 +36,7 @@ const Quiz = ({ setResult, setScore, quiz, day }) => {
 
                         setResult({
                             status: true,
-                            promoCode: data.value || false
+                            promoCode: data.promocode || false
                         });
                     } catch {
                         setResult({

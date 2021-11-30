@@ -11,7 +11,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
-import { Alert, AlertTitle } from '@mui/material';
+import { Alert, AlertTitle, CircularProgress, Link } from '@mui/material';
 import reactDom from 'react-dom';
 import Adaptive from '../../helpers/Adaptive';
 
@@ -40,24 +40,16 @@ const CalendarDay = ({
     promoCode,
     type,
     openedDay,
-    handleOpenDay
+    handleOpenDay,
+    orderLink
 }) => {
     const isHorizontal = useMediaQuery(Adaptive.isHorizontal);
     const [open, setOpen] = React.useState(false);
-
-    useEffect(() => {
-        const app = document.querySelector('.App');
-        app.style.filter = open ? 'blur(10px)' : '';
-    }, [open]);
-
-    useEffect(() => {
-        if (openedDay) {
-            setOpen(false);
-        }
-    }, [openedDay]);
+    const [loadedPromocode, setLoadedPromocode] = React.useState(
+        RootStore.myPromocodes.find(({ Type }) => Type === 0)
+    );
 
     const handleClickOpen = () => {
-        console.log(RootStore.user.id);
         if (RootStore.user.id) {
             setOpen(true);
         } else {
@@ -68,6 +60,31 @@ const CalendarDay = ({
     const handleClose = () => {
         setOpen(false);
     };
+
+    const handleRequestPromoCode = async () => {
+        try {
+            const data = await RootStore.dayComplete(1);
+
+            setLoadedPromocode(data.promocode);
+        } catch {
+            setLoadedPromocode('');
+        }
+    };
+
+    useEffect(() => {
+        const app = document.querySelector('.App');
+        app.style.filter = open ? 'blur(10px)' : '';
+
+        if (date === 1 && RootStore.user.id && RootStore.myGamesCompleted < 1) {
+            handleRequestPromoCode();
+        }
+    }, [open]);
+
+    useEffect(() => {
+        if (openedDay) {
+            setOpen(false);
+        }
+    }, [openedDay]);
 
     return (
         <>
@@ -80,6 +97,7 @@ const CalendarDay = ({
                 TransitionComponent={Transition}
                 onClose={handleClose}
                 className={styles.popup}
+                onBackdropClick={handleClose}
                 // transitionDuration={...(openedDay && { exit: 0 })}
             >
                 {/* {!isHorizontal && ( */}
@@ -105,12 +123,26 @@ const CalendarDay = ({
                         <DialogContentText id="alert-dialog-slide-description">
                             {intro}
                         </DialogContentText>
-                        {promoCode && (
-                            <PromoCode
-                                type="red"
-                                promoCode={promoCode}
-                                promoCodeText="Срок действия промокода 31.01.2022"
-                            />
+                        {date === 1 ? (
+                            <>
+                                {loadedPromocode ? (
+                                    <PromoCode
+                                        type="red"
+                                        promoCode={loadedPromocode}
+                                        promoCodeText="Срок действия промокода 31.01.2022"
+                                    />
+                                ) : (
+                                    <CircularProgress />
+                                )}
+                            </>
+                        ) : (
+                            promoCode && (
+                                <PromoCode
+                                    type="red"
+                                    promoCode={promoCode}
+                                    promoCodeText="Срок действия промокода 31.01.2022"
+                                />
+                            )
                         )}
                     </DialogContent>
                     {type === 'test' && (
@@ -125,9 +157,11 @@ const CalendarDay = ({
                             <Button onClick={handleClose}>Выполнить позже</Button>
                         </DialogActions>
                     )}
-                    {type === 'promoCode' && (
+                    {type === 'promoCode' && !(date === 1 && !loadedPromocode) && (
                         <DialogActions>
-                            <Button onClick={handleOpenDay}>Заказать сейчас</Button>
+                            <Link component="button" href={orderLink}>
+                                Заказать сейчас
+                            </Link>
                             <Button onClick={handleClose}>В календарь</Button>
                         </DialogActions>
                     )}
@@ -143,18 +177,21 @@ const CalendarDay = ({
     );
 };
 
-CalendarDay.defaultProps = {
-    className: '',
-    classNameImg: '',
-    classNameSpan: ''
-};
-
 CalendarDay.propTypes = {
     date: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     img: PropTypes.string.isRequired,
     className: PropTypes.elementType,
     classNameImg: PropTypes.elementType,
-    classNameSpan: PropTypes.elementType
+    classNameSpan: PropTypes.elementType,
+    orderLink: PropTypes.string
+};
+
+CalendarDay.defaultProps = {
+    className: '',
+    classNameImg: '',
+    classNameSpan: '',
+    orderLink:
+        'https://trk.mail.ru/c/lvg0b5?utm_source=coca-cola-land-2021-5&utm_medium=cola-card-2021-5&utm_campaign=ny2021-cola-5&utm_content=cola-land-2021-5'
 };
 
 export default CalendarDay;

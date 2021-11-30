@@ -25,7 +25,7 @@ const Survey = ({ setResult, survey, day }) => {
 
                     setResult({
                         status: resultsArray[randomResult],
-                        promoCode: data.value || false
+                        promoCode: data.promocode || false
                     });
                 } catch {
                     setResult({
