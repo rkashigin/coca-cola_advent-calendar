@@ -23,37 +23,34 @@ const Calendar = () => {
     return (
         <>
             <div className={styles.calendar}>
-                {DATES.map((el, idx) => {
-                    return (
-                        <CalendarDay
-                            key={el.day}
-                            id={el.day}
-                            date={el.day}
-                            img={el.img}
-                            className={classNames(styles[`calendarDay_${el.day}`], {
-                                [styles.calendarDay_current]: RootStore.myGamesCompleted === idx,
-                                [styles.calendarDay_pastDay]: false /* isPast(new Date(2021, 11, idx + 1)) */,
-                                [styles.calendarDay_futureDay]: isFuture(
-                                    new Date(2021, 11, idx + 1)
-                                )
-                            })}
-                            modalImg={el.modalImg}
-                            classNameImg={classNames(styles[`calendarDay_modalImg_${el.day}`])}
-                            title={el.title}
-                            intro={el.intro}
-                            promoCode={el.promoCode}
-                            type={el.type}
-                            handleOpenDay={() => {
-                                // if (idx > RootStore.myGamesCompleted || isFuture(new Date(2021, 11, idx + 1))) {
-                                //     return;
-                                // }
+                {DATES.map((el, idx) => (
+                    <CalendarDay
+                        key={el.day}
+                        id={el.day}
+                        date={el.day}
+                        img={el.img}
+                        className={classNames(styles[`calendarDay_${el.day}`], {
+                            [styles.calendarDay_current]: RootStore.myGamesCompleted === idx,
+                            [styles.calendarDay_pastDay]: false /* isPast(new Date(2021, 11, idx + 1)) */,
+                            [styles.calendarDay_futureDay]: isFuture(new Date(2021, 11, idx + 1))
+                        })}
+                        modalImg={el.modalImg}
+                        classNameImg={classNames(styles[`calendarDay_modalImg_${el.day}`])}
+                        title={el.title}
+                        intro={el.intro}
+                        promoCode={el.promoCode}
+                        type={el.type}
+                        handleOpenDay={() => {
+                            // if (idx > RootStore.myGamesCompleted || isFuture(new Date(2021, 11, idx + 1))) {
+                            //     return;
+                            // }
 
-                                handleOpenDay(el.day);
-                            }}
-                            openedDay={openedDay}
-                        />
-                    );
-                })}
+                            handleOpenDay(el.day);
+                        }}
+                        openedDay={openedDay}
+                        orderLink={el.orderLink}
+                    />
+                ))}
                 <img
                     className={styles.calendar__bandBottom}
                     src={require('../../assets/images/Calendar/Calendar_band_bottom.png').default}
@@ -92,7 +89,9 @@ const DATES = [
         title: 'Давайте начнем наше новогоднее путешествие!',
         intro: 'Задание этого дня совсем простое: сделайте заказ в Delivery Club на любую сумму с нашим волшебным промокодом на Coca-Cola за 1 ₽',
         promoCode: 'DCCC2022',
-        type: 'promoCode'
+        type: 'promoCode',
+        orderLink:
+            'https://trk.mail.ru/c/msk924?utm_source=coca-cola-land-2021-1&utm_medium=cola-card-2021-1&utm_campaign=ny2021-cola-1&utm_content=cola-land-2021-1'
     },
     {
         day: 2,
@@ -124,7 +123,9 @@ const DATES = [
         modalImg: require('../../assets/images/Calendar/5day.svg').default,
         title: config.references.truthOrMyths.day5.title,
         intro: config.references.truthOrMyths.day5.description,
-        type: 'test'
+        type: 'test',
+        orderLink:
+            'https://trk.mail.ru/c/t57ku7?utm_source=coca-cola-land-2021-2&utm_medium=cola-card-2021-2&utm_campaign=ny2021-cola-2&utm_content=cola-land-2021-2'
     },
     {
         day: 6,
@@ -148,7 +149,9 @@ const DATES = [
         modalImg: require('../../assets/images/Calendar/8day.svg').default,
         title: config.references.surveys.day8.title,
         intro: config.references.surveys.day8.description,
-        type: 'test'
+        type: 'test',
+        orderLink:
+            'https://trk.mail.ru/c/wqq5q0?utm_source=coca-cola-land-2021-3&utm_medium=cola-card-2021-3&utm_campaign=ny2021-cola-3&utm_content=cola-land-2021-3'
     },
     {
         day: 9,
@@ -181,6 +184,8 @@ const DATES = [
         title: 'Наш advent-календарь подходит к концу!',
         intro: 'Спасибо, что прошли его вместе с нами. Вы успешно справлялись со всеми нашими играми и загадками. Вот ваше финальное задание. Закажите три Coca-Cola в ресторанах Delivery Club по нашему особому промокоду до 30 декабря и участвуйте в розыгрыше наших главных призов!',
         promoCode: 'DCCC2022',
-        type: 'promoCode'
+        type: 'promoCode',
+        orderLink:
+            'https://trk.mail.ru/c/exwrq4?utm_source=coca-cola-land-2021-4&utm_medium=cola-card-2021-4&utm_campaign=ny2021-cola-4&utm_content=cola-land-2021-4'
     }
 ];
