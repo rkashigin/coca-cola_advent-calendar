@@ -11,19 +11,19 @@ import Footer from '../components/Footer/Footer';
 // import styles from './MainPage.module.scss';
 
 const MainPage = () => {
-    const [auth, setAuth] = useState(true);
+    // const [auth, setAuth] = useState(true);
 
-    const isMobile = useMediaQuery(Adaptive.isMobile);
+    // const isMobile = useMediaQuery(Adaptive.isMobile);
 
-    useEffect(() => {
-        const app = document.querySelector('.App');
-        app.style.paddingTop = auth && !isMobile ? '4rem' : '0';
-    }, [auth]);
+    // useEffect(() => {
+    //     const app = document.querySelector('.App');
+    //     app.style.paddingTop = auth && !isMobile ? '4rem' : '0';
+    // }, [auth]);
 
     return (
         <>
-            {auth && <ProfileBanner />}
-            <Header auth={auth} />
+            <ProfileBanner />
+            <Header />
             <main>
                 <Calendar />
             </main>

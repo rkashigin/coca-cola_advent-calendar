@@ -12,6 +12,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { Alert, AlertTitle } from '@mui/material';
+import reactDom from 'react-dom';
 import Adaptive from '../../helpers/Adaptive';
 
 import PromoCode from '../PromoCode/PromoCode';
@@ -19,6 +20,9 @@ import PromoCode from '../PromoCode/PromoCode';
 import { ReactComponent as CopyIcon } from '../../assets/icons/Modal_promoCode_button_copy.svg';
 
 import styles from './CalendarDay.module.scss';
+import { RootStore } from '../../stores/RootStore';
+import { RootStoreApi } from '../../stores/RootStore.api';
+// import OtpAuth from '../OtpAuth/OtpAuth';
 
 const Transition = React.forwardRef((props, ref) => {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -55,12 +59,23 @@ const CalendarDay = ({
     }, [openedDay]);
 
     const handleClickOpen = () => {
-        setOpen(true);
+        console.log(RootStore.user.id);
+        if (RootStore.user.id) {
+            setOpen(true);
+        } else {
+            RootStore.setOauthOpen(true);
+        }
     };
 
     const handleClose = () => {
         setOpen(false);
     };
+
+    useEffect(() => {
+        if (open) {
+            // RootStore.dayComplete(date);
+        }
+    }, [date, open]);
 
     return (
         <>

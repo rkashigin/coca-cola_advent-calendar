@@ -1,0 +1,39 @@
+.otpAuth{
+    --color_input_otpAuth: hsl(216, 6%, 84%);
+    h2{
+        
+    }
+}
+
+.otpAuth__input{
+    border: 1px solid var(--color_input_otpAuth);
+    outline: none;
+    background-color: white;
+
+
+    --size: 6.8rem;
+    min-height: var(--size);
+    max-height: var(--size);
+
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+
+    border-radius: 1.6rem;
+
+    padding: 2rem 1.6rem;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    font-size: 2.4rem;
+    line-height: 2.8rem;
+    letter-spacing: 0.1em;
+
+    color: rgba(93, 95, 97, 0.5);
+
+    &:focus{
+        color: #000;
+    }
+
+}

@@ -6,7 +6,7 @@ export const RootStoreApi = {
     // Для получения token и secret нужно дернуть ручку
     // GET /api1.2/user/ и передать x-api-key в заголовке X-Api-Key.
     dcApi: {
-        async user({ apiKey, token }) {
+        async user({ apiKey = null, token = null }) {
             const headers = {};
             if (apiKey) {
                 headers['X-Api-Key'] = apiKey;
@@ -23,9 +23,16 @@ export const RootStoreApi = {
             throw response.status;
         },
         // Получение анонимного токена
-        async userLogin() {
+        async userLogin({ apiKey = null, token = null }) {
+            const headers = {};
+            if (apiKey) {
+                headers['X-Api-Key'] = apiKey;
+            } else if (token) {
+                headers['X-User-Authorization'] = token;
+            }
             const response = await fetch(`${config.server.apiHost}/api1.2/user/login`, {
-                method: 'post'
+                method: 'post',
+                headers
             });
             if (response.ok) {
                 return response.json();
@@ -87,6 +94,34 @@ export const RootStoreApi = {
                 )
             );
             return matches ? decodeURIComponent(matches[1]) : undefined;
+        }
+    },
+    api: {
+        async auth() {
+            try {
+                const response = await fetch('/api/auth');
+                return response;
+            } catch (error) {
+                throw new Error('api auth error');
+            }
+        },
+        async complete({ game, sign }) {
+            const response = await fetch(`/api/complete?game=${game}&sign=${sign}`, {
+                method: 'POST'
+            });
+            if (response.ok) {
+                return response.json();
+            }
+
+            throw response.status;
+        },
+        async promocodes() {
+            const response = await fetch('/api/promocodes');
+            if (response.ok) {
+                return response.json();
+            }
+
+            throw response.status;
         }
     }
 };

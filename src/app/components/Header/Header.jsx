@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 // import Slide from '@mui/material/Slide';
+import { observer } from 'mobx-react-lite';
 import Button from '../Button/Button';
 
 import Modal from '../Modal/Modal';
@@ -13,8 +14,9 @@ import { ReactComponent as Delivery } from '../../assets/icons/Logo_delivery.svg
 import { ReactComponent as Cola } from '../../assets/icons/Logo_cola.svg';
 
 import styles from './Header.module.scss';
+import { RootStore } from '../../stores/RootStore';
 
-const Header = ({ auth }) => {
+const Header = observer(() => {
     const [open, setOpen] = React.useState(false);
 
     useEffect(() => {
@@ -35,7 +37,7 @@ const Header = ({ auth }) => {
                 {/* <div className={styles.header__logoWrap}> */}
                 <div
                     className={classNames(styles.header__logo, {
-                        [styles.header__logo_auth]: auth
+                        [styles.header__logo_auth]: !!RootStore.user.id
                     })}
                 >
                     <div className={styles.header__bandsWrap}>
@@ -76,22 +78,24 @@ const Header = ({ auth }) => {
                 />
             </header>
             <Modal title="Мои промокоды" handleClose={handleClose} open={open}>
-                {PROMOCODES.map((el) => (
-                    <PromoCode
-                        key={el.id}
-                        type="grey"
-                        promoCodeText={el.title}
-                        promoCode={el.code}
-                    />
-                ))}
+                {RootStore.colaAuth &&
+                    !!RootStore.myPromocodes.length &&
+                    RootStore.myPromocodes.map((el) => (
+                        <PromoCode
+                            key={el.ID}
+                            type="grey"
+                            promoCodeText="ОПИСАНИЕ"
+                            promoCode={el.Value}
+                        />
+                    ))}
             </Modal>
         </>
     );
-};
+});
 
-Header.propTypes = {
-    auth: PropTypes.bool.isRequired
-};
+// Header.propTypes = {
+//     auth: PropTypes.bool.isRequired
+// };
 
 export default Header;
 
