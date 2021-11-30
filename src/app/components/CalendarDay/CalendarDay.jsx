@@ -63,7 +63,7 @@ const CalendarDay = ({
         try {
             const data = await RootStore.dayComplete(1);
 
-            setLoadedPromocode(data.value);
+            setLoadedPromocode(data.promocode);
         } catch {
             setLoadedPromocode('');
         }
@@ -73,7 +73,7 @@ const CalendarDay = ({
         const app = document.querySelector('.App');
         app.style.filter = open ? 'blur(10px)' : '';
 
-        if (date === 1 && RootStore.user.id) {
+        if (date === 1 && RootStore.user.id && RootStore.myGamesCompleted < 1) {
             handleRequestPromoCode();
         }
     }, [open]);

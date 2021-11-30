@@ -14,7 +14,7 @@ export default function useLogic({ canvasRef, setScores, setResult, day }) {
 
                 setResult({
                     status: true,
-                    promoCode: data.value || false
+                    promoCode: data.promocode || false
                 });
             } catch {
                 setResult({
