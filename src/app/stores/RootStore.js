@@ -134,7 +134,8 @@ class RootStoreClass {
                     data.token += `.${data.secret}`;
                 }
                 this.setToken(data.token);
-                console.log(data);
+                await this.updateComplitedGames();
+                await this.updatePromocodes();
             } catch (error) {
                 console.log(error);
             }
