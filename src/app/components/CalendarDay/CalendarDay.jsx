@@ -70,14 +70,12 @@ const CalendarDay = ({
     };
 
     useEffect(() => {
-        if (date === 1) {
-            handleRequestPromoCode();
-        }
-    }, []);
-
-    useEffect(() => {
         const app = document.querySelector('.App');
         app.style.filter = open ? 'blur(10px)' : '';
+
+        if (date === 1 && RootStore.user.id) {
+            handleRequestPromoCode();
+        }
     }, [open]);
 
     useEffect(() => {
