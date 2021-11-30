@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import Countdown from 'react-countdown';
+import ReactCodeInput from 'react-code-input';
 
 import { IMask } from 'react-imask';
 import { RootStore } from '../../stores/RootStore';
 import Modal from '../Modal/Modal';
+import Button from '../Button/Button';
 
 import styles from './OtpAuth.module.scss';
 
@@ -40,7 +42,7 @@ const OtpAuth = observer(() => {
 const GetCode = observer(() => {
     const [tel, setTel] = useState('');
     const masked = IMask.createMask({
-        mask: '+7 | (000) 000-00-00'
+        mask: '+7 (000) 000-00-00'
     });
     return (
         <div>
@@ -52,9 +54,11 @@ const GetCode = observer(() => {
                 placeholder={masked.mask}
             />
             {!!RootStore.oauthCodeErr && <p>Не удалось отправить код</p>}
-            <button type="button" onClick={() => RootStore.userOtp(tel)}>
-                Получить код
-            </button>
+            <Button
+                className={styles.otpAuth__button}
+                content="Получить код"
+                onClick={() => RootStore.userOtp(tel)}
+            />
         </div>
     );
 });
@@ -62,34 +66,43 @@ const GetCode = observer(() => {
 const ValidateCode = () => {
     const [code, setCode] = useState('');
     const [isComplite, setIsComplite] = useState(false);
+    const codeInput = '0 0 0 0 0 0';
     return (
         <div>
-            <div>
-                Мы отправили код на номер
-                {RootStore.otpTel}
-            </div>
-            <input
+            <div className={styles.otpAuth__textInfo}>Мы отправили код на номер</div>
+            <div className={styles.otpAuth__textInfo}>{RootStore.otpTel}</div>
+            {/* <input
                 className={styles.otpAuth__input}
                 type="text"
                 value={code}
                 onChange={(ev) => setCode(ev.target.value)}
+            /> */}
+            <ReactCodeInput
+                className={styles.otpAuth__codeInput}
+                type="number"
+                fields={6}
+                placeholder="0"
             />
             {isComplite ? (
-                <button type="button" onClick={() => RootStore.userOtp(RootStore.otpTel)}>
-                    Отправить еще раз
-                </button>
+                <Button
+                    className={styles.otpAuth__button}
+                    content="Отправить еще раз"
+                    onClick={() => RootStore.userOtp(RootStore.otpTel)}
+                />
             ) : (
-                <div>
-                    Получить новый код можно через
+                <div className={styles.otpAuth__textGetCode}>
+                    Получить новый код можно через{' '}
                     <Countdown
                         date={Date.now() + RootStore.otp.expiresIn * 1_000}
                         onComplete={() => setIsComplite(true)}
                     />
                 </div>
             )}
-            <button type="button" onClick={() => RootStore.loginOtp(code)}>
-                Подтвердить
-            </button>
+            <Button
+                className={styles.otpAuth__button}
+                content="Подтвердить"
+                onClick={() => RootStore.loginOtp(code)}
+            />
         </div>
     );
 };
