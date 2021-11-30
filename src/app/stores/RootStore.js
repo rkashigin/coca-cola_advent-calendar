@@ -208,6 +208,8 @@ class RootStoreClass {
         this.setToken(null, false);
         this.setSecret(null);
         this.setColaAuth(false);
+        this.setMyGamesCompleted(0);
+        localStorage.setItem('completedGames', 0);
         when(
             () => !!this.colaAuth,
             () => {
