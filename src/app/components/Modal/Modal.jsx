@@ -25,6 +25,7 @@ const Modal = ({ open, handleClose, title, children, hasDialogActions }) => {
             keepMounted
             onClose={handleClose}
             aria-describedby="alert-dialog-slide-description"
+            onBackdropClick={handleClose}
         >
             <div className={styles.modal}>
                 <Button
