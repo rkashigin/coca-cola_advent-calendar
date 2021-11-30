@@ -4,7 +4,7 @@ class GAUtilsClass {
     sendPageViewEvent = (args = {}) => {
         setTimeout(() => {
             console.log('GA');
-            const arr = ['cola-cola.send', 'event'];
+            const arr = ['colacola.send', 'event'];
             Object.values(args).forEach((el) => {
                 arr.push(el);
             });
@@ -39,7 +39,10 @@ export const GA_MAP = {
     }, // переход по вшешней ссылке
     time: (page, time) => {
         return { event_category: page, event: 'timeleft', event_label: time };
-    } // время на странице и в играх
+    }, // время на странице и в играх
+    buttonClick: (name) => {
+        return { event_category: 'button', event: 'Click', event_label: name };
+    }
 };
 
 const sendEvent = (args = {}) => {

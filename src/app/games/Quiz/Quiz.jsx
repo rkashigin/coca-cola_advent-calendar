@@ -10,6 +10,7 @@ import { ReactComponent as RightAnswer } from '../../assets/icons/icon__good.svg
 
 import styles from './Quiz.module.scss';
 import { RootStore } from '../../stores/RootStore';
+import sendEvent, { GA_MAP } from '../../helpers/analytics';
 
 const Quiz = ({ setResult, setScore, quiz, day }) => {
     const [questionNumber, setQuestionNumber] = React.useState(0);
@@ -66,6 +67,16 @@ const Quiz = ({ setResult, setScore, quiz, day }) => {
 
         return () => clearTimeout(timer);
     }, [selectedAnswer]);
+
+    React.useEffect(() => {
+        sendEvent(GA_MAP.time(`game ${day}`, 0));
+        const d = Date.now();
+        const interval = setInterval(() => {
+            sendEvent(GA_MAP.time(`game ${day}`, 10 * Math.round((Date.now() - d) / 10_000)));
+        }, 10_000);
+
+        return () => clearInterval(interval);
+    }, [day]);
 
     return (
         <div className={styles.quiz}>

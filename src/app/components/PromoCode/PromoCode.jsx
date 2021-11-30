@@ -7,11 +7,13 @@ import { Alert, AlertTitle } from '@mui/material';
 import { ReactComponent as CopyIcon } from '../../assets/icons/Modal_promoCode_button_copy.svg';
 
 import styles from './PromoCode.module.scss';
+import sendEvent, { GA_MAP } from '../../helpers/analytics';
 
 const PromoCode = ({ promoCode, promoCodeText, type, promoCodeName }) => {
     const [copied, setCopied] = React.useState(false);
 
     const copiedHandler = async () => {
+        sendEvent(GA_MAP.buttonClick('promoCode copy'));
         try {
             await navigator.clipboard.writeText(promoCode);
             setCopied(true);

@@ -5,6 +5,7 @@ import useLogic from './useLogic';
 
 import styles from './CatchItemGame.module.scss';
 import { Timer } from '../../components';
+import sendEvent, { GA_MAP } from '../../helpers/analytics';
 
 const CatchItemGame = ({ setResult, day }) => {
     const canvasRef = React.useRef(null);
@@ -40,6 +41,16 @@ const CatchItemGame = ({ setResult, day }) => {
     }, [isCanvasReady]);
 
     React.useEffect(() => checkScores(scores), [scores]);
+
+    React.useEffect(() => {
+        sendEvent(GA_MAP.time(`game ${day}`, 0));
+        const d = Date.now();
+        const interval = setInterval(() => {
+            sendEvent(GA_MAP.time(`game ${day}`, 10 * Math.round((Date.now() - d) / 10_000)));
+        }, 10_000);
+
+        return () => clearInterval(interval);
+    }, [day]);
 
     return (
         <div className={styles.game}>

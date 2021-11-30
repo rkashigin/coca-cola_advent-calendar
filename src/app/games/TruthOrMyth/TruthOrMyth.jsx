@@ -7,6 +7,7 @@ import config from '../../config';
 
 import styles from './TruthOrMyth.module.scss';
 import { RootStore } from '../../stores/RootStore';
+import sendEvent, { GA_MAP } from '../../helpers/analytics';
 
 const TruthOrMyth = ({ setResult, setScore, quiz, day }) => {
     const [questionNumber, setQuestionNumber] = React.useState(0);
@@ -20,6 +21,15 @@ const TruthOrMyth = ({ setResult, setScore, quiz, day }) => {
             rightAnswers.current += 1;
         }
     };
+    React.useEffect(() => {
+        sendEvent(GA_MAP.time(`game ${day}`, 0));
+        const d = Date.now();
+        const interval = setInterval(() => {
+            sendEvent(GA_MAP.time(`game ${day}`, 10 * Math.round((Date.now() - d) / 10_000)));
+        }, 10_000);
+
+        return () => clearInterval(interval);
+    }, [day]);
 
     const game = async () => {
         let timer;

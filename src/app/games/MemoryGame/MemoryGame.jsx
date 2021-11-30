@@ -9,6 +9,7 @@ import { Timer } from '../../components';
 
 import styles from './MemoryGame.module.scss';
 import { RootStore } from '../../stores/RootStore';
+import sendEvent, { GA_MAP } from '../../helpers/analytics';
 
 const MemoryGame = ({ setResult, setScore, day }) => {
     const [cards] = React.useState(shuffle([...Images, ...Images]));
@@ -64,6 +65,16 @@ const MemoryGame = ({ setResult, setScore, day }) => {
             setScore(foundPairs.length);
         }
     }, [foundPairs]);
+
+    React.useEffect(() => {
+        sendEvent(GA_MAP.time(`game ${day}`, 0));
+        const d = Date.now();
+        const interval = setInterval(() => {
+            sendEvent(GA_MAP.time(`game ${day}`, 10 * Math.round((Date.now() - d) / 10_000)));
+        }, 10_000);
+
+        return () => clearInterval(interval);
+    }, [day]);
 
     return (
         <div className={styles.game}>
