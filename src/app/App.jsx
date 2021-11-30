@@ -21,7 +21,7 @@ const App = () => {
 
     return (
         <div className="App">
-            <OtpAuth />
+            {/* <OtpAuth /> */}
             <Routes>
                 <Route exact path="/" element={<MainPage />} />
             </Routes>

@@ -23,7 +23,7 @@ const OtpAuth = observer(() => {
             handleClose={() => RootStore.setOauthOpen(false)}
             hasDialogActions={false}
         >
-            <div>{RootStore.otp.requestId ? <OtpAuth.ValidateCode /> : <OtpAuth.GetCode />}</div>;
+            <div>{RootStore.otp.requestId ? <OtpAuth.ValidateCode /> : <OtpAuth.GetCode />}</div>
         </Modal>
     );
 });
