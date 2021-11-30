@@ -37,7 +37,7 @@ const Day4 = ({ setOpenedDay }) => {
                 <div className="gameWrapper">
                     <Game
                         handleClose={handleClose}
-                        game={<MemoryGame setResult={setResult} setScore={setScore} />}
+                        game={<MemoryGame setResult={setResult} setScore={setScore} day={4} />}
                     />
                 </div>
             </Dialog>

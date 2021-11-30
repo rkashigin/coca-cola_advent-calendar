@@ -121,7 +121,6 @@ class RootStoreClass {
 
                 const { id, name, phone } = data;
                 this.setUser({ id, name, phone });
-                console.log('LOGIN DATA', { id, name, phone });
                 if (data.refresh_token) {
                     this.setRefreshToken(data.refresh_token);
                 }
@@ -135,10 +134,13 @@ class RootStoreClass {
                 if (id) {
                     this.setOauthOpen(false);
                     const colaAuth = await RootStoreApi.api.auth();
-                    this.setColaAuth(colaAuth.ok);
+                    if (colaAuth.ok) {
+                        this.setColaAuth(colaAuth.ok);
+                        await this.updateComplitedGames();
+                        await this.updatePromocodes();
+                    }
                 }
             } catch (error) {
-                console.log('loginOtp error');
                 console.log(error);
             }
         } else {
@@ -201,7 +203,6 @@ class RootStoreClass {
 
     async dayComplete(game) {
         try {
-            console.log('THIS USER AND GAME', this.user, game);
             if (game && this.user.id?.primary) {
                 const sign = sha256(`${this.user.id.primary}/${game}`);
                 const data = await RootStoreApi.api.complete({ sign, game });
@@ -210,7 +211,6 @@ class RootStoreClass {
                 console.log(data);
                 return data;
             }
-            console.log('no game id or user ID');
             return null;
         } catch (error) {
             console.log(error);
