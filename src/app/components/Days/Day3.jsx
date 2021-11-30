@@ -57,7 +57,7 @@ const Day3 = ({ setOpenedDay }) => {
                     <>
                         {result.status ? (
                             <img
-                                className={styles.modalResult__img_result}
+                                className={styles.modalResult__img}
                                 src={require('../../assets/images/Games/game_win.svg').default}
                                 alt=""
                             />

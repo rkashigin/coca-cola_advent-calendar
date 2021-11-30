@@ -168,7 +168,8 @@ div.MuiDialogContent-root {
 
   @media screen and (max-width: $width-mobile){
     margin:0;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 }
 

@@ -37,7 +37,7 @@ const PromoCode = ({ promoCode, promoCodeText, type, promoCodeName }) => {
                 })}
                 // onChange={changeHandler}
             >
-                {promoCode}
+                <span>{promoCode}</span>
                 <button className={styles.promoCode__button} type="button" onClick={copiedHandler}>
                     <CopyIcon
                         className={classNames(styles.promoCode__button_copy, {
