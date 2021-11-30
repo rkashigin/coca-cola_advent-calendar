@@ -53,19 +53,13 @@ const Day5 = ({ setOpenedDay }) => {
                     />
                 </div>
             </Dialog>
-            <Dialog
-                open={resultVisible}
-                TransitionComponent={Transition}
-                className={styles.popup}
-                onBackdropClick={() => {}}
-            >
-                <img
-                    className={styles.modalResult__img_result}
-                    src={require('../../assets/images/Games/game_win.svg').default}
-                    alt=""
-                />
-
+            <Dialog open={resultVisible} TransitionComponent={Transition} className={styles.popup}>
                 <div className={styles.modal}>
+                    <img
+                        className={styles.modalResult__img_result}
+                        src={require('../../assets/images/Games/game_win.svg').default}
+                        alt=""
+                    />
                     {result.status ? (
                         <DialogTitle>Вы настоящий знаток Coca-Cola!</DialogTitle>
                     ) : (

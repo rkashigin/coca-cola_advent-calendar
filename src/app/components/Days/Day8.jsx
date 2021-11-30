@@ -52,18 +52,13 @@ const Day8 = ({ setOpenedDay }) => {
                     />
                 </div>
             </Dialog>
-            <Dialog
-                open={resultVisible}
-                TransitionComponent={Transition}
-                className={styles.popup}
-                onBackdropClick={() => {}}
-            >
-                <img
-                    className={styles.modalResult__img}
-                    src={require('../../assets/images/Games/game_win.svg').default}
-                    alt=""
-                />
+            <Dialog open={resultVisible} TransitionComponent={Transition} className={styles.popup}>
                 <div className={styles.modal}>
+                    <img
+                        className={styles.modalResult__img}
+                        src={require('../../assets/images/Games/game_win.svg').default}
+                        alt=""
+                    />
                     {result.status === 'A' && (
                         <DialogTitle>
                             Вы мечтательны и несете в себе эту черту на протяжении всей жизни

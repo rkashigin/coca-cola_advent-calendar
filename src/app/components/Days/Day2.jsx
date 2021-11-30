@@ -48,29 +48,26 @@ const Day2 = ({ setOpenedDay }) => {
                     disableStyles
                 />
             </Dialog>
-            <Dialog
-                open={resultVisible}
-                TransitionComponent={Transition}
-                className={styles.popup}
-                onBackdropClick={() => {}}
-            >
-                {result.status ? (
-                    <img
-                        className={styles.modalResult__img}
-                        src={require('../../assets/images/Games/game_win.svg').default}
-                        alt=""
-                    />
-                ) : (
-                    <img
-                        className={classNames(
-                            styles.modalResult__img,
-                            styles.modalResult__img_resize
-                        )}
-                        src={require('../../assets/images/Games/game_loss.svg').default}
-                        alt=""
-                    />
-                )}
+            <Dialog open={resultVisible} TransitionComponent={Transition} className={styles.popup}>
                 <div className={styles.modal}>
+                    <>
+                        {result.status ? (
+                            <img
+                                className={styles.modalResult__img}
+                                src={require('../../assets/images/Games/game_win.svg').default}
+                                alt=""
+                            />
+                        ) : (
+                            <img
+                                className={classNames(
+                                    styles.modalResult__img,
+                                    styles.modalResult__img_resize
+                                )}
+                                src={require('../../assets/images/Games/game_loss.svg').default}
+                                alt=""
+                            />
+                        )}
+                    </>
                     {result.status ? (
                         <DialogTitle>Холодильник нашелся, поздравляем!</DialogTitle>
                     ) : (
