@@ -40,6 +40,8 @@ class RootStoreClass {
 
     myPromocodes = [];
 
+    myGamesCompleted = [];
+
     constructor() {
         makeAutoObservable(this);
         this.init();
@@ -47,8 +49,10 @@ class RootStoreClass {
             () => !!this.colaAuth,
             async () => {
                 const promocodes = await RootStoreApi.api.promocodes();
-                console.log(promocodes);
                 this.setMyPromocodes(promocodes);
+
+                const { completed } = await RootStoreApi.api.completed();
+                this.setMyGamesCompleted(completed);
             }
         );
     }
@@ -192,6 +196,10 @@ class RootStoreClass {
             console.log(error);
             return null;
         }
+    }
+
+    setMyGamesCompleted(completed) {
+        this.myGamesCompleted = completed;
     }
 
     setMyPromocodes(promocodes) {

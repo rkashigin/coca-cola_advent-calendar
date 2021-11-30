@@ -16,7 +16,7 @@ const OtpAuth = observer(() => {
         <Modal
             title={
                 RootStore.otp.requestId
-                    ? 'Вве  дите код'
+                    ? 'Введите код'
                     : 'Войдите или зарегитрируйтесь, чтобы продолжить'
             }
             open={RootStore.oauthOpen && !RootStore.user.id}
