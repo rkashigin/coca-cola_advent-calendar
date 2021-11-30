@@ -167,9 +167,9 @@ const CalendarDay = observer(
                         )}
                         {type === 'promoCode' && !(date === 1 && !loadedPromocode) && (
                             <DialogActions>
-                                <Link component="button" href={orderLink}>
+                                <a href={orderLink} target="_blank" rel="noopener noreferrer">
                                     Заказать сейчас
-                                </Link>
+                                </a>
                                 <Button onClick={handleClose}>В календарь</Button>
                             </DialogActions>
                         )}

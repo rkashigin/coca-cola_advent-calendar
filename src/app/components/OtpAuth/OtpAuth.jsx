@@ -47,16 +47,7 @@ const GetCode = observer(() => {
         mask: '+7 (000) 000-00-00'
     });
     const recaptchaRef = useRef(null);
-    // const recaptchaOnLoaded = () => {
-    //     if (recaptchaRef.current) {
-    //         RootStore.setRecaptchaRef(recaptchaRef);
-    //         recaptchaRef.current.execute().then((rtoken) => {
-    //             console.log('rtoken');
-    //             console.log(rtoken);
-    //             RootStore.setRecaptchaToken(rtoken);
-    //         });
-    //     }
-    // };
+
     return (
         <div>
             <input
@@ -72,7 +63,6 @@ const GetCode = observer(() => {
                 content="Получить код"
                 onClick={() => {
                     recaptchaRef.current.execute().then((rtoken) => {
-                        // RootStore.setRecaptchaToken(rtoken);
                         RootStore.userOtp(tel, rtoken);
                     });
                 }}
@@ -99,6 +89,8 @@ const ValidateCode = () => {
         }
     }, [code]);
 
+    const recaptchaRef = useRef(null);
+
     return (
         <div>
             <div className={styles.otpAuth__textInfo}>Мы отправили код на номер</div>
@@ -117,7 +109,11 @@ const ValidateCode = () => {
                 <Button
                     className={styles.otpAuth__button}
                     content="Отправить еще раз"
-                    onClick={() => RootStore.userOtp(RootStore.otpTel)}
+                    onClick={() =>
+                        recaptchaRef.current.execute().then((rtoken) => {
+                            RootStore.userOtp(RootStore.otpTel, rtoken);
+                        })
+                    }
                 />
             ) : (
                 <div className={styles.otpAuth__textGetCode}>
@@ -125,6 +121,7 @@ const ValidateCode = () => {
                     <Countdown date={date} onComplete={() => setIsComplete(true)} />
                 </div>
             )}
+            <Recaptcha ref={recaptchaRef} sitekey={config.recaptchaSiteKey} />
             {/* <Button
                 className={styles.otpAuth__button}
                 content="Подтвердить"

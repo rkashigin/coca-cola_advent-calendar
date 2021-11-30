@@ -47,14 +47,13 @@ const Modal = ({ open, handleClose, title, children, hasDialogActions, className
                 </DialogContent>
                 {hasDialogActions && (
                     <DialogActions>
-                        <Link
-                            component="button"
+                        <a
                             href={config.orderLink}
                             onClick={handleClose}
                             className={styles.modal__button_order}
                         >
                             Заказать сейчас
-                        </Link>
+                        </a>
                     </DialogActions>
                 )}
             </div>
