@@ -40,7 +40,12 @@ const Day7 = ({ setOpenedDay }) => {
                     />
                 </div>
             </Dialog>
-            <Dialog open={resultVisible} TransitionComponent={Transition} className={styles.popup}>
+            <Dialog
+                open={resultVisible}
+                TransitionComponent={Transition}
+                className={styles.popup}
+                onBackdropClick={() => {}}
+            >
                 {result.status ? (
                     <img
                         className={styles.modalResult__img_result}

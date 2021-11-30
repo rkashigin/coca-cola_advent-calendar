@@ -117,7 +117,7 @@ const CalendarDay = observer(
                     TransitionComponent={Transition}
                     onClose={handleClose}
                     className={styles.popup}
-                    onBackdropClick={handleClose}
+                    onBackdropClick={() => {}}
                 >
                     <div className={styles.modal}>
                         <img

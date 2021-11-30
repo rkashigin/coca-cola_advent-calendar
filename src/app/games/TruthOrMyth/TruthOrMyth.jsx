@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import cn from 'classnames';
 
-import config '../../config';
+import config from '../../config';
 
 import styles from './TruthOrMyth.module.scss';
 import { RootStore } from '../../stores/RootStore';
@@ -33,7 +33,7 @@ const TruthOrMyth = ({ setResult, setScore, quiz, day }) => {
                     if (rightAnswers.current >= config.references.testsWinConditions[day]) {
                         try {
                             const data = await RootStore.dayComplete(day);
-    
+
                             setResult({
                                 status: true,
                                 promoCode: data.promocode || false

@@ -48,7 +48,12 @@ const Day8 = ({ setOpenedDay }) => {
                     />
                 </div>
             </Dialog>
-            <Dialog open={resultVisible} TransitionComponent={Transition} className={styles.popup}>
+            <Dialog
+                open={resultVisible}
+                TransitionComponent={Transition}
+                className={styles.popup}
+                onBackdropClick={() => {}}
+            >
                 <img
                     className={styles.modalResult__img}
                     src={require('../../assets/images/Games/game_2_day.png').default}

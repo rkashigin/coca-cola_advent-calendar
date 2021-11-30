@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import cn from 'classnames';
 
-import config '../../config';
+import config from '../../config';
 
 import { ReactComponent as WrongAnswer } from '../../assets/icons/icon__bad.svg';
 import { ReactComponent as RightAnswer } from '../../assets/icons/icon__good.svg';
@@ -36,7 +36,7 @@ const Riddle = ({ setResult, setScore, riddle, day }) => {
                     if (rightAnswers.current >= config.references.testsWinConditions[day]) {
                         try {
                             const data = await RootStore.dayComplete(day);
-    
+
                             setResult({
                                 status: true,
                                 promoCode: data.promocode || false
