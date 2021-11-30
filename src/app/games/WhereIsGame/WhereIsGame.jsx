@@ -2,56 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useMediaQuery } from 'react-responsive';
 
-import cn from 'classnames';
 import config from '../../config';
 import { Timer } from '../../components';
-import useLogic from './useLogic';
 import Adaptive from '../../helpers/Adaptive';
+import useLogic from './useLogic';
 
 import styles from './WhereIsGame.module.scss';
 
 const WhereIsGame = ({ gameVariant, setResult }) => {
-    const isDesktop = useMediaQuery(Adaptive.isDesktop);
+    const isMobile = useMediaQuery(Adaptive.isMobile);
     const gameConfig = config.references.whereIsGame[gameVariant];
-    const canvasRef = React.useRef(null);
-    const [isCanvasReady, setIsCanvasReady] = React.useState(false);
-    const { selectionWindowX, selectionWindowY, selectionColor, handlePerformFindAttempt, game } =
-        useLogic({
-            canvasRef: isCanvasReady,
-            image: config.references.whereIsGame[gameVariant].image,
-            gameConfig,
-            setResult,
-            isDesktop
-        });
-
-    const handleTimerComplete = React.useCallback(
-        () =>
-            setResult({
-                status: false
-            }),
-        []
-    );
-
-    React.useEffect(() => {
-        if (canvasRef.current) {
-            setIsCanvasReady(true);
-        }
-
-        return () => setIsCanvasReady(false);
-    }, []);
-
-    React.useEffect(() => {
-        if (isCanvasReady) {
-            game();
-        }
-    }, [isCanvasReady]);
+    const imageRef = React.useRef(null);
+    const {
+        selectionWindowX,
+        selectionWindowY,
+        selectionColor,
+        handlePerformFindAttempt,
+        handleTimerComplete
+    } = useLogic({ imageRef, gameConfig, setResult, isMobile });
 
     return (
-        <div
-            className={cn(styles.game, {
-                [styles.game_noOverflow]: isDesktop
-            })}
-        >
+        <div className={styles.game}>
             <Timer
                 className={styles.game__timer}
                 givenTime={120_000}
@@ -70,9 +41,12 @@ const WhereIsGame = ({ gameVariant, setResult }) => {
                         : null
                 }
             />
-            <canvas id="canvas" ref={canvasRef} onClick={handlePerformFindAttempt}>
-                Чтобы поиграть в игру, поменяйте браузер
-            </canvas>
+            <img
+                ref={imageRef}
+                src={gameConfig.image}
+                alt="Game"
+                onClick={handlePerformFindAttempt}
+            />
         </div>
     );
 };
