@@ -7,8 +7,9 @@ import { ReactComponent as WrongAnswer } from '../../assets/icons/icon__bad.svg'
 import { ReactComponent as RightAnswer } from '../../assets/icons/icon__good.svg';
 
 import styles from './Quiz.module.scss';
+import { RootStore } from '../../stores/RootStore';
 
-const Quiz = ({ setResult, setScore, quiz }) => {
+const Quiz = ({ setResult, setScore, quiz, day }) => {
     const [questionNumber, setQuestionNumber] = React.useState(0);
     const [selectedAnswer, setSelectedAnswer] = React.useState(null);
     const rightAnswers = React.useRef(0);
@@ -21,23 +22,38 @@ const Quiz = ({ setResult, setScore, quiz }) => {
         }
     };
 
-    React.useEffect(() => {
+    const game = async () => {
         let timer;
 
         if (Number.isInteger(selectedAnswer)) {
-            timer = setTimeout(() => {
+            timer = setTimeout(async () => {
                 if (questionNumber + 1 !== quiz.length) {
                     setSelectedAnswer(null);
                     setQuestionNumber((prevNumber) => prevNumber + 1);
                 } else {
-                    setResult({
-                        status: true,
-                        promoCode: Math.floor(Math.random() * 2) === 0 ? false : 'DCCC2022'
-                    });
+                    try {
+                        const data = await RootStore.dayComplete(day);
+
+                        setResult({
+                            status: true,
+                            promoCode: data.promocode || false
+                        });
+                    } catch {
+                        setResult({
+                            status: true,
+                            promoCode: false
+                        });
+                    }
                     setScore(rightAnswers.current);
                 }
             }, 2500);
         }
+
+        return timer;
+    };
+
+    React.useEffect(() => {
+        const timer = game();
 
         return () => clearTimeout(timer);
     }, [selectedAnswer]);
@@ -105,7 +121,8 @@ Quiz.propTypes = {
         })
     ).isRequired,
     setResult: PropTypes.func.isRequired,
-    setScore: PropTypes.func.isRequired
+    setScore: PropTypes.func.isRequired,
+    day: PropTypes.number.isRequired
 };
 
 export default Quiz;

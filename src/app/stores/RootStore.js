@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import Cookies from 'js-cookie';
-import { makeAutoObservable, toJS, when } from 'mobx';
+import { makeAutoObservable, when } from 'mobx';
 import sha256 from 'sha256';
 import config from '../../config';
 
@@ -40,15 +40,21 @@ class RootStoreClass {
 
     myPromocodes = [];
 
+    myGamesCompleted = Number(localStorage.getItem('completedGames')) || 0;
+
     constructor() {
         makeAutoObservable(this);
         this.init();
         when(
             () => !!this.colaAuth,
-            async () => {
-                const promocodes = await RootStoreApi.api.promocodes();
-                console.log(promocodes);
-                this.setMyPromocodes(promocodes);
+            () => {
+                this.updatePromocodes();
+                this.updateComplitedGames();
+                // const promocodes = await RootStoreApi.api.promocodes();
+                // this.setMyPromocodes(promocodes);
+
+                // const { completed } = await RootStoreApi.api.completed();
+                // this.setMyGamesCompleted(completed);
             }
         );
     }
@@ -109,14 +115,17 @@ class RootStoreClass {
                 const { id, name, phone } = data;
                 if (id) {
                     this.setOauthOpen(false);
+                    const colaAuth = await RootStoreApi.api.auth();
+                    this.setColaAuth(colaAuth.ok);
                 }
                 this.setUser({ id, name, phone });
+                console.log('LOGIN DATA', { id, name, phone });
                 if (data.refresh_token) {
                     this.setRefreshToken(data.refresh_token);
                 }
                 if (data.secret) {
                     this.setSecret(data.secret);
-                    data.token += `.${data.secret}`;
+                    // data.token += `.${data.secret}`;
                 }
                 this.setToken(data.token);
                 console.log(data);
@@ -133,9 +142,13 @@ class RootStoreClass {
         if (tryIdx < 2) {
             try {
                 if (this.xApiKey || this.token) {
+                    let { token } = this;
+                    if (this.secret && !token.split('.')[1]) {
+                        token += `.${this.secret}`;
+                    }
                     const data = await RootStoreApi.dcApi.user({
                         xApiKey: this.xApiKey,
-                        token: this.token
+                        token
                     });
                     const { id, name, phone } = data;
                     this.setUser({ id, name, phone });
@@ -144,7 +157,7 @@ class RootStoreClass {
                     }
                     if (data.secret) {
                         this.setSecret(data.secret);
-                        data.token += `.${data.secret}`;
+                        // data.token += `.${data.secret}`;
                     }
                     this.setToken(data.token);
                     console.log(data);
@@ -161,11 +174,12 @@ class RootStoreClass {
 
                     const data = await RootStoreApi.dcApi.userLogin({
                         xApiKey: this.xApiKey,
-                        token: (error === 401 && this.refreshToken) || (error === 423 && this.token)
+                        // token: (error === 401 && this.refreshToken) || (error === 423 && this.token)
+                        token: this.token
                     });
                     if (data.secret) {
                         this.setSecret(data.secret);
-                        data.token += `.${data.secret}`;
+                        // data.token += `.${data.secret}`;
                     }
                     this.setToken(data.token);
                     console.log(data);
@@ -180,6 +194,7 @@ class RootStoreClass {
 
     async dayComplete(game) {
         try {
+            console.log('THIS USER AND GAME', this.user, game);
             if (game && this.user.id?.primary) {
                 const sign = sha256(`${this.user.id.primary}/${game}`);
                 const data = await RootStoreApi.api.complete({ sign, game });
@@ -192,6 +207,21 @@ class RootStoreClass {
             console.log(error);
             return null;
         }
+    }
+
+    async updatePromocodes() {
+        const promocodes = await RootStoreApi.api.promocodes();
+        this.setMyPromocodes(promocodes);
+    }
+
+    async updateComplitedGames() {
+        const { completed } = await RootStoreApi.api.completed();
+        this.setMyGamesCompleted(completed);
+        localStorage.setItem('completedGames', completed);
+    }
+
+    setMyGamesCompleted(completed) {
+        this.myGamesCompleted = completed;
     }
 
     setMyPromocodes(promocodes) {

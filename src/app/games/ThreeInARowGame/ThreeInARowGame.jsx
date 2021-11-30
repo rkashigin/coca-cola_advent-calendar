@@ -11,14 +11,18 @@ import Penguin from '../../assets/images/Games/Penguin.png';
 
 import styles from './ThreeInARowGame.module.scss';
 
-const ThreeInARowGame = ({ setResult, setScore }) => {
+const ThreeInARowGame = ({ setResult, setScore, day }) => {
     const canvasRef = React.useRef(null);
     const [scores, setScores] = React.useState(0);
     const [isCanvasReady, setIsCanvasReady] = React.useState(false);
-    const { canvas, game, onMouseMove, onMouseDown, onMouseUp, onMouseOut } = useLogic({
-        canvasRef: isCanvasReady,
-        setScores
-    });
+    const { canvas, game, onMouseMove, onMouseDown, onMouseUp, onMouseOut, checkScores } = useLogic(
+        {
+            canvasRef: isCanvasReady,
+            setScores,
+            setResult,
+            day
+        }
+    );
 
     React.useEffect(() => {
         if (canvasRef.current) {
@@ -42,12 +46,7 @@ const ThreeInARowGame = ({ setResult, setScore }) => {
     React.useEffect(() => {
         setScore(scores);
 
-        if (scores >= 300) {
-            setResult({
-                status: true,
-                promoCode: Math.floor(Math.random() * 2) === 0 ? false : 'DCCC2022'
-            });
-        }
+        checkScores(scores);
     }, [scores]);
 
     const handleTimerComplete = React.useCallback(
@@ -93,7 +92,8 @@ const ThreeInARowGame = ({ setResult, setScore }) => {
 
 ThreeInARowGame.propTypes = {
     setResult: PropTypes.func.isRequired,
-    setScore: PropTypes.func.isRequired
+    setScore: PropTypes.func.isRequired,
+    day: PropTypes.number.isRequired
 };
 
 export default ThreeInARowGame;

@@ -36,7 +36,7 @@ const Day7 = ({ setOpenedDay }) => {
                 <div className="gameWrapper">
                     <Game
                         handleClose={handleClose}
-                        game={<ThreeInARowGame setResult={setResult} setScore={setScore} />}
+                        game={<ThreeInARowGame setResult={setResult} setScore={setScore} day={7} />}
                     />
                 </div>
             </Dialog>

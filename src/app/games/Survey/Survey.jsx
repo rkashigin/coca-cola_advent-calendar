@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 
 import styles from './Survey.module.scss';
+import { RootStore } from '../../stores/RootStore';
 
-const Survey = ({ setResult, survey }) => {
+const Survey = ({ setResult, survey, day }) => {
     const [questionNumber, setQuestionNumber] = React.useState(0);
     const [selectedAnswer, setSelectedAnswer] = React.useState(null);
 
     const handleSelectAnswer = (answerIdx) => setSelectedAnswer(answerIdx);
 
-    React.useEffect(() => {
+    const game = async () => {
         if (Number.isInteger(selectedAnswer)) {
             if (questionNumber + 1 !== survey.length) {
                 setSelectedAnswer(null);
@@ -18,9 +19,26 @@ const Survey = ({ setResult, survey }) => {
             } else {
                 const resultsArray = ['A', 'B', 'C', 'D'];
                 const randomResult = Math.floor(Math.random() * 4);
-                setResult({ status: resultsArray[randomResult], promoCode: 'DCCC2022' });
+
+                try {
+                    const data = await RootStore.dayComplete(day);
+
+                    setResult({
+                        status: resultsArray[randomResult],
+                        promoCode: data.promocode || false
+                    });
+                } catch {
+                    setResult({
+                        status: resultsArray[randomResult],
+                        promoCode: false
+                    });
+                }
             }
         }
+    };
+
+    React.useEffect(() => {
+        game();
     }, [selectedAnswer]);
 
     return (
@@ -54,7 +72,8 @@ Survey.propTypes = {
             answers: PropTypes.arrayOf(PropTypes.string)
         })
     ).isRequired,
-    setResult: PropTypes.func.isRequired
+    setResult: PropTypes.func.isRequired,
+    day: PropTypes.number.isRequired
 };
 
 export default Survey;

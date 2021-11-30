@@ -13,9 +13,14 @@ export const RootStoreApi = {
             } else if (token) {
                 headers['X-User-Authorization'] = token;
             }
-            const response = await fetch(`${config.server.apiHost}/api1.2/user`, {
-                headers
-            });
+            const response = await fetch(
+                `${config.server.apiHost}/api1.2/user?cacheBreaker=${Math.floor(
+                    Date.now() / 1_000
+                )}`,
+                {
+                    headers
+                }
+            );
             if (response.ok) {
                 return response.json();
             }
@@ -117,6 +122,14 @@ export const RootStoreApi = {
         },
         async promocodes() {
             const response = await fetch('/api/promocodes');
+            if (response.ok) {
+                return response.json();
+            }
+
+            throw response.status;
+        },
+        async completed() {
+            const response = await fetch('/api/completed');
             if (response.ok) {
                 return response.json();
             }

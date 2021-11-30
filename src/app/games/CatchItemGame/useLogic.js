@@ -1,13 +1,36 @@
+import React from 'react';
 import { useMediaQuery } from 'react-responsive';
+
 import RedHat from '../../assets/images/Games/RedHat.png';
 import GreenHat from '../../assets/images/Games/GreenHat.png';
 import RedGloves from '../../assets/images/Games/RedGloves.png';
 import GreenGloves from '../../assets/images/Games/GreenGloves.png';
 import Penguin from '../../assets/images/Games/Penguin.png';
 import ShoppingCartImage from '../../assets/images/catchItem/cart.png';
+import { RootStore } from '../../stores/RootStore';
 
-export default function useLogic({ canvasRef, cart, setScores }) {
+export default function useLogic({ canvasRef, cart, setScores, setResult, day }) {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
+
+    const checkScores = async (scores) => {
+        if (scores === 300) {
+            try {
+                const data = await RootStore.dayComplete(day);
+
+                setResult({
+                    status: true,
+                    promoCode: data.promocode || false
+                });
+            } catch {
+                setResult({
+                    status: true,
+                    promoCode: false
+                });
+            }
+        }
+    };
+
+    const handleTimerComplete = React.useCallback(() => setResult({ status: false }), []);
 
     if (canvasRef) {
         const canvas = document.getElementById('canvas');
@@ -146,9 +169,11 @@ export default function useLogic({ canvasRef, cart, setScores }) {
         return {
             handleMouseMove,
             handleTouch,
-            game
+            game,
+            checkScores,
+            handleTimerComplete
         };
     }
 
-    return {};
+    return { checkScores, handleTimerComplete };
 }

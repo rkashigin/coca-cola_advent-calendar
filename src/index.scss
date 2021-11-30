@@ -159,6 +159,7 @@ h2.css-bdhsul-MuiTypography-root-MuiDialogTitle-root, h2.MuiDialogTitle-root {
 div.MuiDialogTitle-root,
 div.css-ypiqx9-MuiDialogContent-root,
 div.MuiDialogContent-root {
+  text-align: center;
 	padding: 0;
 	margin: 1.6rem 0 0;
 
@@ -203,7 +204,7 @@ div.css-hlj6pa-MuiDialogActions-root, div.MuiDialogActions-root{
   }
 }
 
-button.css-1e6y48t-MuiButtonBase-root-MuiButton-root, button.MuiButtonBase-root{
+button.css-1e6y48t-MuiButtonBase-root-MuiButton-root, button.MuiButtonBase-root, button.MuiLink-button{
   background-color: var(--color_dark_olive_green);
   padding: 1.65rem;
   width: 100%;
@@ -253,3 +254,8 @@ div.grecaptcha-badge{
   z-index: 500;
 }
 .grecaptcha-badge{right:-9999px !important}
+.grecaptcha-badge{right:-9999px !important}
+
+svg.MuiCircularProgress-svg {
+  color: var(--color_red) !important;
+}
