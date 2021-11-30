@@ -133,6 +133,8 @@ class RootStoreClass {
                 console.log(data);
 
                 if (id) {
+                    this.setOtpTel(null);
+                    this.clearOtp();
                     this.setOauthOpen(false);
                     const colaAuth = await RootStoreApi.api.auth();
                     if (colaAuth.ok) {
