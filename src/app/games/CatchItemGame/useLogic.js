@@ -6,7 +6,7 @@ import GreenHat from '../../assets/images/Games/GreenHat.png';
 import RedGloves from '../../assets/images/Games/RedGloves.png';
 import GreenGloves from '../../assets/images/Games/GreenGloves.png';
 import Penguin from '../../assets/images/Games/Penguin.png';
-import ShoppingCartImage from '../../assets/images/catchItem/cart.png';
+import ShoppingCartImage from '../../assets/images/catchItem/cart.svg';
 import { RootStore } from '../../stores/RootStore';
 
 export default function useLogic({ canvasRef, cart, setScores, setResult, day }) {
@@ -37,12 +37,22 @@ export default function useLogic({ canvasRef, cart, setScores, setResult, day })
         const ctx = canvas?.getContext('2d');
         const products = [];
         const deviceMultiplier = isTabletOrMobile ? 0.6 : 1;
+        const scale = window.devicePixelRatio;
         let gameTimer = 0;
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        canvas.style.width = `${window.innerWidth}px`;
+        canvas.style.height = `${window.innerHeight}px`;
 
-        cart.y = canvas.height - 150 * deviceMultiplier;
+        canvas.width = Math.floor(window.innerWidth * scale);
+        canvas.height = Math.floor(window.innerHeight * scale);
+        ctx.scale(scale, scale);
+
+        if (!cart.x && !cart.y && !cart.prevX && !cart.prevY) {
+            cart.x = canvas.width / (2 * scale);
+            cart.prevX = canvas.width / (2 * scale);
+            cart.y = (canvas.height - 170 * scale * deviceMultiplier) / scale;
+            cart.prevY = (canvas.height - 170 * scale * deviceMultiplier) / scale;
+        }
 
         const shoppingCartImage = new Image();
         shoppingCartImage.src = ShoppingCartImage;
@@ -78,7 +88,7 @@ export default function useLogic({ canvasRef, cart, setScores, setResult, day })
 
                 products.push({
                     img: productsOptions[randomProduct],
-                    x: Math.random() * canvas.width,
+                    x: Math.random() * (canvas.width - 60 * scale * deviceMultiplier),
                     y: -100,
                     dx: Math.random() * 2 - 1,
                     dy: Math.random() * 2 + 2,
@@ -93,17 +103,17 @@ export default function useLogic({ canvasRef, cart, setScores, setResult, day })
                 products[i].y += products[i].dy;
                 products[i].angle += products[i].dangle;
 
-                if (products[i].x >= canvas.width - 60 || products[i].x < 0) {
+                if (products[i].x >= (canvas.width - 60 * scale) / scale || products[i].x < 0) {
                     products[i].dx = -products[i].dx;
                 }
 
-                if (products[i].y >= canvas.height) {
+                if (products[i].y >= canvas.height / scale) {
                     products.splice(i, 1);
                 }
 
                 if (
-                    Math.abs(products[i].x + 30 - cart.x - 75) < 60 &&
-                    Math.abs(products[i].y - cart.y) < 30
+                    Math.abs(products[i].x + 30 - cart.x - 80) * scale < 65 * scale &&
+                    Math.abs(products[i].y - cart.y) * scale < 30 * scale
                 ) {
                     products.splice(i, 1);
                     setScores((prevScores) => prevScores + 10);
@@ -115,12 +125,24 @@ export default function useLogic({ canvasRef, cart, setScores, setResult, day })
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = '#E5E5E5';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // if (isTabletOrMobile) {
+            //     ctx.drawImage(
+            //         shoppingCartImage,
+            //         cart.prevX,
+            //         cart.y,
+            //         160 * deviceMultiplier,
+            //         160 * deviceMultiplier
+            //     );
+            // } else {
+            //
+            // }
             ctx.drawImage(
                 shoppingCartImage,
                 cart.x,
                 cart.y,
-                150 * deviceMultiplier,
-                150 * deviceMultiplier
+                160 * deviceMultiplier,
+                160 * deviceMultiplier
             );
 
             products.forEach((product) => {
@@ -149,7 +171,7 @@ export default function useLogic({ canvasRef, cart, setScores, setResult, day })
                 return;
             }
 
-            if (e.nativeEvent.offsetX + 150 * deviceMultiplier <= canvas.width) {
+            if ((e.nativeEvent.offsetX + 140 * deviceMultiplier) * scale <= canvas.width) {
                 cart.x = e.nativeEvent.offsetX;
             }
         };
@@ -159,10 +181,10 @@ export default function useLogic({ canvasRef, cart, setScores, setResult, day })
                 return;
             }
 
-            if (e.changedTouches[0].clientX + 150 * deviceMultiplier <= canvas.width) {
+            if ((e.changedTouches[0].clientX + 140 * deviceMultiplier) * scale <= canvas.width) {
                 cart.x = e.changedTouches[0].clientX;
             } else {
-                cart.x = canvas.width - 150 * deviceMultiplier;
+                cart.x = (canvas.width - 160 * deviceMultiplier * scale) / scale;
             }
         };
 

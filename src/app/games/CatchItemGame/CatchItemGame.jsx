@@ -11,7 +11,12 @@ const CatchItemGame = ({ setResult, day }) => {
     const [scores, setScores] = React.useState(0);
     const [isCanvasReady, setIsCanvasReady] = React.useState(false);
     const cart = React.useMemo(
-        () => ({ x: canvasRef.current?.width / 2, y: canvasRef.current?.height - 150 }),
+        () => ({
+            x: 0,
+            prevX: 0,
+            y: 0,
+            prevY: 0
+        }),
         [canvasRef.current]
     );
     const { game, handleMouseMove, handleTouch, checkScores, handleTimerComplete } = useLogic({

@@ -45,11 +45,29 @@ export const RootStoreApi = {
 
             throw response.status;
         },
+        async userLogout({ token = null, secret = null }) {
+            const headers = {};
+            if (token) {
+                if (secret) {
+                    token += `.${secret}`;
+                }
+                headers['X-User-Authorization'] = token;
+            }
+            const response = await fetch(`${config.server.apiHost}/api1.2/user/logout`, {
+                method: 'post',
+                headers
+            });
+            if (response.ok) {
+                return response.json();
+            }
+
+            throw response.status;
+        },
         // Авторизация через номер телефона
         // Запрос кода
         async userOtp(token, phone, recaptchaToken) {
             const body = new FormData();
-            body.append('phone', phone);
+            body.append('phone', phone.replace(/\s|\(|\)|\+|-/gi, ''));
             body.append('newotp', 1);
 
             const response = await fetch(

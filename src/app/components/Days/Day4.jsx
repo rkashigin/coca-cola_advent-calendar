@@ -32,13 +32,17 @@ const Day4 = ({ setOpenedDay }) => {
             <Dialog
                 open={open}
                 TransitionComponent={Transition}
-                onClose={handleClose}
+                onClose={(_, reason) => {
+                    if (reason === 'backdropClick') return;
+
+                    handleClose();
+                }}
                 className={styles.popup}
             >
                 <div className="gameWrapper">
                     <Game
                         handleClose={handleClose}
-                        game={<MemoryGame setResult={setResult} setScore={setScore} />}
+                        game={<MemoryGame setResult={setResult} setScore={setScore} day={4} />}
                     />
                 </div>
             </Dialog>

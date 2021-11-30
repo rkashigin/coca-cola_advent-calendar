@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 
 import { Alert, AlertTitle } from '@mui/material';
@@ -30,8 +30,6 @@ const PromoCode = ({ promoCode, promoCodeText, type, promoCodeName }) => {
             )}
             {type === 'grey' && <div className={styles.promoCode__text_grey}>{promoCodeText}</div>}
             <div
-                name="promoCode"
-                value={promoCode}
                 className={classNames(styles.promoCode__input, {
                     [styles.promoCode__input_grey]: type === 'grey'
                 })}

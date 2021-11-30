@@ -15,21 +15,23 @@ class RootStoreClass {
 
     xApiKey = null;
 
-    recaptchaToken = null;
+    // recaptchaToken = null;
+
+    // recaptchaRef = null;
 
     otp = {
         attempts: null,
         expiresIn: null,
-        requestId: true,
+        requestId: null,
         status: null
     };
 
-    otpTel = '7(900) 000-00-00';
+    otpTel = null;
 
     user = {
-        id: { primary: 192 },
-        name: 'knknj',
-        phone: '79642444600'
+        id: null,
+        name: null,
+        phone: null
     };
 
     oauthOpen = false;
@@ -40,7 +42,11 @@ class RootStoreClass {
 
     myPromocodes = [];
 
-    myGamesCompleted = Number(localStorage.getItem('completedGames')) || 0;
+    myGamesCompleted = Number(localStorage.getItem('completedGames'))
+        ? this.user.id
+            ? Number(localStorage.getItem('completedGames'))
+            : 0
+        : 0;
 
     constructor() {
         makeAutoObservable(this);
@@ -69,6 +75,7 @@ class RootStoreClass {
         this.refreshToken = RootStoreApi.dcApi.getCookie('refresh_token');
         const query = new URLSearchParams(window.location.search);
         if (query.get('t')) {
+            console.log(query.get('t'));
             this.setXApiKey(query.get('t'));
         }
         if (!this.token && !this.xApiKey) {
@@ -84,18 +91,23 @@ class RootStoreClass {
                 xApiKey: null,
                 token: null
             });
+
             this.setSecret(secret);
             this.setToken(token, false);
+            return { secret, token };
         } catch (error) {
             console.log(error);
+            return null;
         }
     }
 
-    async userOtp(tel) {
+    async userOtp(tel, recaptchaToken) {
         try {
-            await this.getAnonymousToken();
+            console.log(tel);
+            console.log(recaptchaToken);
+            const { token } = await this.getAnonymousToken();
             this.setOtpTel(tel);
-            this.setOtp(await RootStoreApi.dcApi.userOtp(this.token, tel, this.recaptchaToken));
+            this.setOtp(await RootStoreApi.dcApi.userOtp(token, tel, recaptchaToken));
             this.setOauthCodeErr(false);
         } catch (error) {
             console.log(error);
@@ -113,13 +125,7 @@ class RootStoreClass {
                 );
 
                 const { id, name, phone } = data;
-                if (id) {
-                    this.setOauthOpen(false);
-                    const colaAuth = await RootStoreApi.api.auth();
-                    this.setColaAuth(colaAuth.ok);
-                }
                 this.setUser({ id, name, phone });
-                console.log('LOGIN DATA', { id, name, phone });
                 if (data.refresh_token) {
                     this.setRefreshToken(data.refresh_token);
                 }
@@ -129,8 +135,19 @@ class RootStoreClass {
                 }
                 this.setToken(data.token);
                 console.log(data);
+
+                if (id) {
+                    this.setOtpTel(null);
+                    this.clearOtp();
+                    this.setOauthOpen(false);
+                    const colaAuth = await RootStoreApi.api.auth();
+                    if (colaAuth.ok) {
+                        this.setColaAuth(colaAuth.ok);
+                        await this.updateComplitedGames();
+                        await this.updatePromocodes();
+                    }
+                }
             } catch (error) {
-                console.log('loginOtp error');
                 console.log(error);
             }
         } else {
@@ -174,8 +191,7 @@ class RootStoreClass {
 
                     const data = await RootStoreApi.dcApi.userLogin({
                         xApiKey: this.xApiKey,
-                        // token: (error === 401 && this.refreshToken) || (error === 423 && this.token)
-                        token: this.token
+                        token: this.refreshToken
                     });
                     if (data.secret) {
                         this.setSecret(data.secret);
@@ -192,16 +208,39 @@ class RootStoreClass {
         }
     }
 
+    logout() {
+        // RootStoreApi.dcApi.userLogout({ token: this.token, secret: this.secret });
+        Cookies.remove('x_user_authorization', { path: '/', domain: config.server.domain });
+        this.setUser({ id: null, name: null, phone: null });
+        this.setToken(null, false);
+        this.setSecret(null);
+        this.setColaAuth(false);
+        this.setMyGamesCompleted(0);
+        localStorage.setItem('completedGames', 0);
+        when(
+            () => !!this.colaAuth,
+            () => {
+                this.updatePromocodes();
+                this.updateComplitedGames();
+                // const promocodes = await RootStoreApi.api.promocodes();
+                // this.setMyPromocodes(promocodes);
+
+                // const { completed } = await RootStoreApi.api.completed();
+                // this.setMyGamesCompleted(completed);
+            }
+        );
+    }
+
     async dayComplete(game) {
         try {
-            console.log('THIS USER AND GAME', this.user, game);
             if (game && this.user.id?.primary) {
                 const sign = sha256(`${this.user.id.primary}/${game}`);
                 const data = await RootStoreApi.api.complete({ sign, game });
+                this.updatePromocodes();
+                this.updateComplitedGames();
                 console.log(data);
                 return data;
             }
-            console.log('no game id or user ID');
             return null;
         } catch (error) {
             console.log(error);
@@ -218,6 +257,10 @@ class RootStoreClass {
         const { completed } = await RootStoreApi.api.completed();
         this.setMyGamesCompleted(completed);
         localStorage.setItem('completedGames', completed);
+    }
+
+    setRecaptchaRef(ref) {
+        this.recaptchaRef = ref;
     }
 
     setMyGamesCompleted(completed) {
@@ -260,9 +303,9 @@ class RootStoreClass {
     setSecret(secret) {
         this.secret = secret;
     }
-    setRecaptchaToken(recaptchaToken) {
-        this.recaptchaToken = recaptchaToken;
-    }
+    // setRecaptchaToken(recaptchaToken) {
+    //     this.recaptchaToken = recaptchaToken;
+    // }
 
     setOtpTel(tel) {
         this.otpTel = tel;
@@ -275,10 +318,14 @@ class RootStoreClass {
         this.otp = {
             attempts: null,
             expiresIn: null,
-            requestId: true,
+            requestId: null,
             status: null
         };
     }
+
+    // get recaptchaTokenIsNull() {
+    //     return !this.recaptchaToken;
+    // }
 }
 
 export const RootStore = new RootStoreClass();
