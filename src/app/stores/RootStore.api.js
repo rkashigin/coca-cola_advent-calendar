@@ -49,7 +49,7 @@ export const RootStoreApi = {
         // Запрос кода
         async userOtp(token, phone, recaptchaToken) {
             const body = new FormData();
-            body.append('phone', phone);
+            body.append('phone', phone.replace(/\s|\(|\)|\+|-/gi, ''));
             body.append('newotp', 1);
 
             const response = await fetch(
