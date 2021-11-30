@@ -48,7 +48,7 @@ const Modal = ({ open, handleClose, title, children, hasDialogActions, className
                 {hasDialogActions && (
                     <DialogActions>
                         <a
-                            href={config.orderLink}
+                            href={config.references.orderLink}
                             onClick={handleClose}
                             className={styles.modal__button_order}
                         >
