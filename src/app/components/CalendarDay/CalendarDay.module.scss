@@ -111,7 +111,7 @@
 	position: relative;
 
 	@media screen and (max-width: $width-mobile) {
-		width: 92%;
+		width: 98%;
 
 		padding: 43.5vw 4vw 4vw;
 
@@ -141,25 +141,10 @@
 
 	z-index: 50;
 	@media screen and (max-width: $width-mobile) {
-		top: 0;
+	
 	}
 
 
-}
-
-.modalResult__img_result{
-	position: absolute;
-
-	width: 34.2rem;
-
-	top: -15rem;
-	right: 50%;
-	transform: translateX(50%);
-
-	z-index: 50;
-	@media screen and (max-width: $width-mobile) {
-		top: 0;
-	}
 }
 
 .modal__promoText{
@@ -296,5 +281,12 @@
 button.modalButton_return{
 	background-color: var(--color_alabaster_grey)!important;
 	color: var(--color_dim_gray)!important;
+}
+
+.calendarModal__button{
+	&:hover{
+		text-decoration: none;
+		text-decoration-color: transparent !important;
+	}
 }
 

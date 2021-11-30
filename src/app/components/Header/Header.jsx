@@ -91,6 +91,7 @@ const Header = observer(() => {
                             promoCode={el.Value}
                         />
                     ))}
+                <span className={styles.header__promoInfo}>Срок действия промокода 31.01.2022</span>
             </Modal>
         </>
     );
