@@ -12,6 +12,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { CircularProgress, Link } from '@mui/material';
 
+import { isPast } from 'date-fns';
 import Adaptive from '../../helpers/Adaptive';
 
 import PromoCode from '../PromoCode/PromoCode';
@@ -45,8 +46,9 @@ const CalendarDay = ({
     const handleClickOpen = () => {
         if (RootStore.user.id) {
             if (
-                date > RootStore.myGamesCompleted
-                // || isFuture(new Date(2021, 11, idx + 1))
+                !isPast(new Date(2021, 11, date - 1)) &&
+                date > RootStore.myGamesCompleted - 1
+                // || isFuture(new Date(2021, 11, idx + 1)))
             ) {
                 return;
             }
