@@ -82,7 +82,7 @@ const DATES = [
         img: require('../../assets/images/Calendar/1day.svg').default,
         modalImg: require('../../assets/images/Calendar/1day.svg').default,
         title: 'Давайте начнем наше новогоднее путешествие!',
-        intro: 'Задание этого дня совсем простое: сделайте заказ в Delivery Club на любую сумму с нашим волшебным промокодом на Coca-Cola за 1 ₽',
+        intro: 'Сделайте заказ в ресторанах Delivery Club на любую сумму с нашим волшебным промокодом и получите Coca-Cola в подарок',
         promoCode: 'DCCC2022',
         type: 'promoCode',
         orderLink:

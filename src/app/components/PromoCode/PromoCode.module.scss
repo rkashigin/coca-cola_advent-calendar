@@ -162,3 +162,27 @@ div.promoCode__alertInfo{
 
 	margin: 0.2rem 0 0;
 }
+
+.infoPromoCode{
+	font-size: 1.2rem;
+	line-height: 1.6rem;
+	font-weight: 400;
+	color: hsl(210, 2%, 37%);
+
+	margin-top: 3.2rem;
+
+	text-align: left;
+
+	@media screen and (max-width: $width-mobile) {
+		margin-top: 1.6rem;
+	}
+}
+
+.infoPromoCode__link{
+	color: #000;
+	transition: color 0.3s ease-in-out;
+
+	&:hover{
+		color: rgba(0, 0, 0, 0.7);
+	}
+}

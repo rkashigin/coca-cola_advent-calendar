@@ -16,6 +16,7 @@ import { isPast } from 'date-fns';
 import Adaptive from '../../helpers/Adaptive';
 
 import PromoCode from '../PromoCode/PromoCode';
+import InfoPromoCode from '../InfoPromoCode/InfoPromoCode';
 
 import styles from './CalendarDay.module.scss';
 import { RootStore } from '../../stores/RootStore';
