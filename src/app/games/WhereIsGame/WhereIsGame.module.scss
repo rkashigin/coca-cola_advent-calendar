@@ -4,10 +4,6 @@
   height: fit-content;
   overflow: auto;
   position: relative;
-
-  &_noOverflow {
-    overflow: hidden;
-  }
 }
 
 .game__timer {
@@ -30,3 +26,42 @@
   height: 5rem;
   display: none;
 }
+
+.image {
+  width: 100%;
+  height: 100%;
+}
+
+
+//.game {
+//  font-family: var(--font_Montserrat);
+//  width: 100%;
+//  height: fit-content;
+//  overflow: auto;
+//  position: relative;
+//
+//  &_noOverflow {
+//    overflow: hidden;
+//  }
+//}
+//
+//.game__timer {
+//  position: fixed;
+//  background-color: white;
+//  padding: 1rem 2.5rem;
+//  border-radius: 3.2rem;
+//  top: 1.6rem;
+//  left: 1.6rem;
+//  font-weight: 500;
+//  font-size: 1.8rem;
+//  line-height: 2.4rem;
+//  text-align: center;
+//}
+//
+//.selectionWindow {
+//  border: 2px solid #fff;
+//  position: absolute;
+//  width: 5rem;
+//  height: 5rem;
+//  display: none;
+//}
