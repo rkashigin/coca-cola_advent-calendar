@@ -24,7 +24,7 @@ class RootStoreClass {
         status: null
     };
 
-    otpTel = '7(900) 000-00-00';
+    otpTel = null;
 
     user = {
         id: null,
