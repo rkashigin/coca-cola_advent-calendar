@@ -46,12 +46,13 @@ const Calendar = () => {
                         promoCode={el.promoCode}
                         type={el.type}
                         handleOpenDay={() => {
-                            if (
-                                !RootStore.myGamesCompleted[idx] ||
-                                isFuture(new Date(2021, 11, idx + 1))
-                            ) {
-                                return;
-                            }
+                            // Получаем строку до текущего индекса
+                            // const prevDays = RootStore.myGamesCompleted.slice(0, idx).slice(0, -1);
+
+                            // Если есть хоть один 0, раньше индека текущего дня или день в будущем, то кликаем
+                            // if (/0/g.test(prevDays) || isFuture(new Date(2021, 11, idx + 1))) {
+                            //     return;
+                            // }
 
                             handleOpenDay(el.day);
                         }}
