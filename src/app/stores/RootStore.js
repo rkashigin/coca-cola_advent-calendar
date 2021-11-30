@@ -47,12 +47,14 @@ class RootStoreClass {
         this.init();
         when(
             () => !!this.colaAuth,
-            async () => {
-                const promocodes = await RootStoreApi.api.promocodes();
-                this.setMyPromocodes(promocodes);
+            () => {
+                this.updatePromocodes();
+                this.updateComplitedGames();
+                // const promocodes = await RootStoreApi.api.promocodes();
+                // this.setMyPromocodes(promocodes);
 
-                const { completed } = await RootStoreApi.api.completed();
-                this.setMyGamesCompleted(completed);
+                // const { completed } = await RootStoreApi.api.completed();
+                // this.setMyGamesCompleted(completed);
             }
         );
     }
@@ -137,9 +139,13 @@ class RootStoreClass {
         if (tryIdx < 2) {
             try {
                 if (this.xApiKey || this.token) {
+                    let { token } = this;
+                    if (this.secret && !token.split('.')[1]) {
+                        token += `.${this.secret}`;
+                    }
                     const data = await RootStoreApi.dcApi.user({
                         xApiKey: this.xApiKey,
-                        token: this.token
+                        token
                     });
                     const { id, name, phone } = data;
                     this.setUser({ id, name, phone });
@@ -169,7 +175,7 @@ class RootStoreClass {
                     });
                     if (data.secret) {
                         this.setSecret(data.secret);
-                        data.token += `.${data.secret}`;
+                        // data.token += `.${data.secret}`;
                     }
                     this.setToken(data.token);
                     console.log(data);
@@ -196,6 +202,16 @@ class RootStoreClass {
             console.log(error);
             return null;
         }
+    }
+
+    async updatePromocodes() {
+        const promocodes = await RootStoreApi.api.promocodes();
+        this.setMyPromocodes(promocodes);
+    }
+
+    async updateComplitedGames() {
+        const { completed } = await RootStoreApi.api.completed();
+        this.setMyGamesCompleted(completed);
     }
 
     setMyGamesCompleted(completed) {
