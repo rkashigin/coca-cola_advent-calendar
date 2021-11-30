@@ -47,12 +47,14 @@ class RootStoreClass {
         this.init();
         when(
             () => !!this.colaAuth,
-            async () => {
-                const promocodes = await RootStoreApi.api.promocodes();
-                this.setMyPromocodes(promocodes);
+            () => {
+                this.updatePromocodes();
+                this.updateComplitedGames();
+                // const promocodes = await RootStoreApi.api.promocodes();
+                // this.setMyPromocodes(promocodes);
 
-                const { completed } = await RootStoreApi.api.completed();
-                this.setMyGamesCompleted(completed);
+                // const { completed } = await RootStoreApi.api.completed();
+                // this.setMyGamesCompleted(completed);
             }
         );
     }
@@ -196,6 +198,16 @@ class RootStoreClass {
             console.log(error);
             return null;
         }
+    }
+
+    async updatePromocodes() {
+        const promocodes = await RootStoreApi.api.promocodes();
+        this.setMyPromocodes(promocodes);
+    }
+
+    async updateComplitedGames() {
+        const { completed } = await RootStoreApi.api.completed();
+        this.setMyGamesCompleted(completed);
     }
 
     setMyGamesCompleted(completed) {
