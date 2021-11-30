@@ -27,9 +27,9 @@ class RootStoreClass {
     otpTel = '7(900) 000-00-00';
 
     user = {
-        id: { primary: 192 },
-        name: 'vhv',
-        phone: '787878788787877'
+        id: null,
+        name: null,
+        phone: null
     };
 
     oauthOpen = false;
