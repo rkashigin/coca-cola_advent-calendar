@@ -20,16 +20,16 @@ class RootStoreClass {
     otp = {
         attempts: null,
         expiresIn: null,
-        requestId: null,
+        requestId: true,
         status: null
     };
 
-    otpTel = null;
+    otpTel = '7(900) 000-00-00';
 
     user = {
-        id: null,
-        name: null,
-        phone: null
+        id: { primary: 192 },
+        name: 'vhv',
+        phone: '787878788787877'
     };
 
     oauthOpen = false;
@@ -40,7 +40,7 @@ class RootStoreClass {
 
     myPromocodes = [];
 
-    myGamesCompleted = 0;
+    myGamesCompleted = Number(localStorage.getItem('completedGames')) || 0;
 
     constructor() {
         makeAutoObservable(this);
@@ -216,7 +216,8 @@ class RootStoreClass {
 
     async updateComplitedGames() {
         const { completed } = await RootStoreApi.api.completed();
-        this.setMyGamesCompleted(completed - 1);
+        this.setMyGamesCompleted(completed);
+        localStorage.setItem('completedGames', completed);
     }
 
     setMyGamesCompleted(completed) {
@@ -274,7 +275,7 @@ class RootStoreClass {
         this.otp = {
             attempts: null,
             expiresIn: null,
-            requestId: null,
+            requestId: true,
             status: null
         };
     }

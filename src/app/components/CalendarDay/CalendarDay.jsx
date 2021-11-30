@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useMediaQuery } from 'react-responsive';
-
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -11,18 +10,15 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
-import { Alert, AlertTitle, CircularProgress, Link } from '@mui/material';
-import reactDom from 'react-dom';
+import { CircularProgress, Link } from '@mui/material';
+
+import { isPast } from 'date-fns';
 import Adaptive from '../../helpers/Adaptive';
 
 import PromoCode from '../PromoCode/PromoCode';
 
-import { ReactComponent as CopyIcon } from '../../assets/icons/Modal_promoCode_button_copy.svg';
-
 import styles from './CalendarDay.module.scss';
 import { RootStore } from '../../stores/RootStore';
-import { RootStoreApi } from '../../stores/RootStore.api';
-// import OtpAuth from '../OtpAuth/OtpAuth';
 
 const Transition = React.forwardRef((props, ref) => {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -45,12 +41,18 @@ const CalendarDay = ({
 }) => {
     const isHorizontal = useMediaQuery(Adaptive.isHorizontal);
     const [open, setOpen] = React.useState(false);
-    const [loadedPromocode, setLoadedPromocode] = React.useState(
-        RootStore.myPromocodes.find(({ Type }) => Type === 0)
-    );
+    const [loadedPromocode, setLoadedPromocode] = React.useState('');
 
     const handleClickOpen = () => {
         if (RootStore.user.id) {
+            if (
+                !isPast(new Date(2021, 11, date - 1)) &&
+                date > RootStore.myGamesCompleted - 1
+                // || isFuture(new Date(2021, 11, idx + 1)))
+            ) {
+                return;
+            }
+
             setOpen(true);
         } else {
             RootStore.setOauthOpen(true);
@@ -70,6 +72,14 @@ const CalendarDay = ({
             setLoadedPromocode('');
         }
     };
+
+    useEffect(() => {
+        if (RootStore.myPromocodes.length) {
+            const firstCode = RootStore.myPromocodes.find(({ Type }) => Type === 0);
+
+            setLoadedPromocode(firstCode);
+        }
+    }, [RootStore.myPromocodes]);
 
     useEffect(() => {
         const app = document.querySelector('.App');
@@ -98,15 +108,7 @@ const CalendarDay = ({
                 onClose={handleClose}
                 className={styles.popup}
                 onBackdropClick={handleClose}
-                // transitionDuration={...(openedDay && { exit: 0 })}
             >
-                {/* {!isHorizontal && ( */}
-                {/* <img
-                    className={classNames(classNameImg, styles.calendarModal__img)}
-                    src={modalImg}
-                    alt=""
-                /> */}
-                {/* )} */}
                 <div className={styles.modal}>
                     <img
                         className={classNames(
