@@ -20,7 +20,7 @@ class RootStoreClass {
     otp = {
         attempts: null,
         expiresIn: null,
-        requestId: true,
+        requestId: null,
         status: null
     };
 
@@ -198,6 +198,8 @@ class RootStoreClass {
             if (game && this.user.id?.primary) {
                 const sign = sha256(`${this.user.id.primary}/${game}`);
                 const data = await RootStoreApi.api.complete({ sign, game });
+                this.updatePromocodes();
+                this.updateComplitedGames();
                 console.log(data);
                 return data;
             }
@@ -275,7 +277,7 @@ class RootStoreClass {
         this.otp = {
             attempts: null,
             expiresIn: null,
-            requestId: true,
+            requestId: null,
             status: null
         };
     }
