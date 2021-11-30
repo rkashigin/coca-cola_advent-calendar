@@ -19,6 +19,7 @@ import PromoCode from '../PromoCode/PromoCode';
 
 import styles from './CalendarDay.module.scss';
 import { RootStore } from '../../stores/RootStore';
+import sendEvent, { GA_MAP } from '../../helpers/analytics';
 
 const Transition = React.forwardRef((props, ref) => {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -172,6 +173,7 @@ const CalendarDay = observer(
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className={styles.calendarModal__button}
+                                    onClick={() => sendEvent(GA_MAP.externalLink(orderLink))}
                                 >
                                     Заказать сейчас
                                 </a>

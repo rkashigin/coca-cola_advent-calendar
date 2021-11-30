@@ -14,6 +14,7 @@ import Button from '../Button/Button';
 import { ReactComponent as CloseIcon } from '../../assets/icons/Modal_close_icon.svg';
 
 import styles from './Modal.module.scss';
+import sendEvent, { GA_MAP } from '../../helpers/analytics';
 
 const Transition = React.forwardRef((props, ref) => {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -49,7 +50,10 @@ const Modal = ({ open, handleClose, title, children, hasDialogActions, className
                     <DialogActions>
                         <a
                             href={config.references.orderLink}
-                            onClick={handleClose}
+                            onClick={() => {
+                                handleClose();
+                                sendEvent(GA_MAP.externalLink(config.references.orderLink));
+                            }}
                             className={styles.modal__button_order}
                         >
                             Заказать сейчас

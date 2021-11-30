@@ -11,6 +11,7 @@ import { RootStore } from '../../stores/RootStore';
 
 import styles from './Calendar.module.scss';
 import isDayCurrent from '../../helpers/isDayCurrent';
+import sendEvent, { GA_MAP } from '../../helpers/analytics';
 
 const Calendar = observer(() => {
     const [openedDay, setOpenedDay] = React.useState(0);
@@ -20,7 +21,10 @@ const Calendar = observer(() => {
         app.style.filter = openedDay ? 'blur(10px)' : '';
     }, [openedDay]);
 
-    const handleOpenDay = (day) => setOpenedDay(day);
+    const handleOpenDay = (day) => {
+        setOpenedDay(day);
+        sendEvent(GA_MAP.buttonClick(`start game ${day}`));
+    };
 
     return (
         <>

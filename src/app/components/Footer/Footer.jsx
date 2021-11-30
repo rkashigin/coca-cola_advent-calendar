@@ -5,6 +5,7 @@ import { ReactComponent as SnowDecoration } from '../../assets/images/Footer_sno
 import { ReactComponent as SnowDecorationMobile } from '../../assets/images/Footer_snow_mobile.svg';
 
 import styles from './Footer.module.scss';
+import sendEvent, { GA_MAP } from '../../helpers/analytics';
 
 const Footer = () => {
     return (
@@ -86,6 +87,13 @@ const Footer = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={styles.footerInfo__rules}
+                    onClick={() =>
+                        sendEvent(
+                            GA_MAP.externalLink(
+                                'https://www.delivery-club.ru/promo_rules/NY%20with%20Coca-Cola.pdf?1638296035'
+                            )
+                        )
+                    }
                 >
                     Правила акции
                 </a>
