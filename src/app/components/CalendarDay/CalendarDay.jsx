@@ -47,7 +47,7 @@ const CalendarDay = ({
         if (RootStore.user.id) {
             if (
                 !isPast(new Date(2021, 11, date - 1)) &&
-                date > RootStore.myGamesCompleted - 1
+                date > RootStore.myGamesCompleted
                 // || isFuture(new Date(2021, 11, idx + 1)))
             ) {
                 return;
