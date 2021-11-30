@@ -29,7 +29,6 @@ build:
     paths:
       - build
   only:
-    - development
     - main
 
 deploy_dev:
