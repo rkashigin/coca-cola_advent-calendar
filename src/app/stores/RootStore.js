@@ -20,7 +20,7 @@ class RootStoreClass {
     otp = {
         attempts: null,
         expiresIn: null,
-        requestId: true,
+        requestId: null,
         status: null
     };
 
@@ -275,7 +275,7 @@ class RootStoreClass {
         this.otp = {
             attempts: null,
             expiresIn: null,
-            requestId: true,
+            requestId: null,
             status: null
         };
     }
