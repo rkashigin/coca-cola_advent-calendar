@@ -50,13 +50,12 @@ const Day5 = ({ setOpenedDay }) => {
                 </div>
             </Dialog>
             <Dialog open={resultVisible} TransitionComponent={Transition} className={styles.popup}>
-                <img
-                    className={styles.modalResult__img_result}
-                    src={require('../../assets/images/Games/game_win.svg').default}
-                    alt=""
-                />
-
                 <div className={styles.modal}>
+                    <img
+                        className={styles.modalResult__img_result}
+                        src={require('../../assets/images/Games/game_win.svg').default}
+                        alt=""
+                    />
                     {result.status ? (
                         <DialogTitle>Вы настоящий знаток Coca-Cola!</DialogTitle>
                     ) : (

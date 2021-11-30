@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import classNames from 'classnames';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -52,23 +53,25 @@ const Day3 = ({ setOpenedDay }) => {
                 </div>
             </Dialog>
             <Dialog open={resultVisible} TransitionComponent={Transition} className={styles.popup}>
-                {result.status ? (
-                    <img
-                        className={styles.modalResult__img_result}
-                        src={require('../../assets/images/Games/game_win.svg').default}
-                        alt=""
-                    />
-                ) : (
-                    <img
-                        className={styles.modalResult__img}
-                        src={require('../../assets/images/Games/game_loss.svg').default}
-                        alt=""
-                    />
-                )}
                 <div className={styles.modal}>
-                    {/* <DialogTitle>
-                        {score} из {config.references.quizes.day3.quiz.length}
-                    </DialogTitle> */}
+                    <>
+                        {result.status ? (
+                            <img
+                                className={styles.modalResult__img_result}
+                                src={require('../../assets/images/Games/game_win.svg').default}
+                                alt=""
+                            />
+                        ) : (
+                            <img
+                                className={classNames(
+                                    styles.modalResult__img,
+                                    styles.modalResult__img_resize
+                                )}
+                                src={require('../../assets/images/Games/game_loss.svg').default}
+                                alt=""
+                            />
+                        )}
+                    </>
                     {result.status ? (
                         <DialogTitle>Вы настоящий знаток Деда Мороза!</DialogTitle>
                     ) : (
