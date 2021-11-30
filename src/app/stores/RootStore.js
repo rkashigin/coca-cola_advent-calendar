@@ -40,7 +40,11 @@ class RootStoreClass {
 
     myPromocodes = [];
 
-    myGamesCompleted = Number(localStorage.getItem('completedGames')) || 0;
+    myGamesCompleted = Number(localStorage.getItem('completedGames'))
+        ? this.user.id
+            ? Number(localStorage.getItem('completedGames'))
+            : 0
+        : 0;
 
     constructor() {
         makeAutoObservable(this);
