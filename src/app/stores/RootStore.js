@@ -213,7 +213,7 @@ class RootStoreClass {
 
     async updateComplitedGames() {
         const { completed } = await RootStoreApi.api.completed();
-        this.setMyGamesCompleted(completed);
+        this.setMyGamesCompleted(completed - 1);
     }
 
     setMyGamesCompleted(completed) {
