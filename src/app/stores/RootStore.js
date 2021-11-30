@@ -40,7 +40,7 @@ class RootStoreClass {
 
     myPromocodes = [];
 
-    myGamesCompleted = [];
+    myGamesCompleted = 0;
 
     constructor() {
         makeAutoObservable(this);

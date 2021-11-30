@@ -43,6 +43,7 @@ const Day10 = ({ setOpenedDay }) => {
                                 riddle={config.references.riddles.day10.riddle}
                                 setResult={setResult}
                                 setScore={setScore}
+                                day={10}
                             />
                         }
                         setResult={setResult}

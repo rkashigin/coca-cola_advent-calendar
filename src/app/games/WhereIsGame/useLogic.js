@@ -1,9 +1,7 @@
 import React from 'react';
+import { RootStore } from '../../stores/RootStore';
 
-export default function useLogic({ imageRef, gameConfig, setResult, isMobile }) {
-    const [selectionWindowX, setSelectionWindowX] = React.useState('');
-    const [selectionWindowY, setSelectionWindowY] = React.useState('');
-    const [selectionColor, setSelectionColor] = React.useState('');
+export default function useLogic({ imageRef, gameConfig, setResult, day }) {
     const [ratio, setRatio] = React.useState({});
 
     const confirmFind = (x, y) => {
@@ -24,21 +22,24 @@ export default function useLogic({ imageRef, gameConfig, setResult, isMobile }) 
         );
     };
 
-    const generateSelectionWindow = ({ x, y }) => {
+    const performFindAttempt = async ({ x, y }) => {
         const isFindSuccess = confirmFind(x, y);
 
         if (isFindSuccess) {
-            setResult({
-                status: true,
-                promoCode: Math.floor(Math.random() * 2) === 0 ? false : 'DCCC2022'
-            });
-            setSelectionColor('green');
-        } else {
-            setSelectionColor('red');
-        }
+            try {
+                const data = await RootStore.dayComplete(day);
 
-        setSelectionWindowX(x);
-        setSelectionWindowY(y);
+                setResult({
+                    status: true,
+                    promoCode: data.value || false
+                });
+            } catch {
+                setResult({
+                    status: true,
+                    promoCode: false
+                });
+            }
+        }
     };
 
     const handlePerformFindAttempt = (e) => {
@@ -47,7 +48,7 @@ export default function useLogic({ imageRef, gameConfig, setResult, isMobile }) 
             x: e.clientX - rect.left,
             y: e.clientY - rect.top
         };
-        generateSelectionWindow({ x: mousePosition.x, y: mousePosition.y });
+        performFindAttempt({ x: mousePosition.x, y: mousePosition.y });
     };
 
     const handleTimerComplete = React.useCallback(
@@ -62,13 +63,8 @@ export default function useLogic({ imageRef, gameConfig, setResult, isMobile }) 
         const gameImage = new Image();
 
         gameImage.onload = () => {
-            if (isMobile) {
-                imageRef.current.width = gameImage.width;
-                imageRef.current.height = gameImage.height;
-            } else {
-                imageRef.current.width = window.innerWidth;
-                imageRef.current.height = window.innerHeight;
-            }
+            imageRef.current.width = gameImage.width;
+            imageRef.current.height = gameImage.height;
 
             const ratio = {
                 width: gameImage.width / imageRef.current.width,
@@ -82,9 +78,6 @@ export default function useLogic({ imageRef, gameConfig, setResult, isMobile }) 
     }, [imageRef.current]);
 
     return {
-        selectionWindowX,
-        selectionWindowY,
-        selectionColor,
         handlePerformFindAttempt,
         handleTimerComplete
     };

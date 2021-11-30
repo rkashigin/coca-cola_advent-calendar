@@ -37,8 +37,6 @@ const CalendarDay = ({
     modalImg,
     title,
     intro,
-    promoCodeImg,
-    promoCodeText,
     promoCode,
     type,
     openedDay,
@@ -70,12 +68,6 @@ const CalendarDay = ({
     const handleClose = () => {
         setOpen(false);
     };
-
-    useEffect(() => {
-        if (open) {
-            // RootStore.dayComplete(date);
-        }
-    }, [date, open]);
 
     return (
         <>

@@ -124,13 +124,12 @@ export const RootStoreApi = {
             throw response.status;
         },
         async completed() {
-            return { completed: 111000000000 };
-            // const response = await fetch('/api/completed');
-            // if (response.ok) {
-            //     return response.json();
-            // }
+            const response = await fetch('/api/completed');
+            if (response.ok) {
+                return response.json();
+            }
 
-            // throw response.status;
+            throw response.status;
         }
     }
 };
