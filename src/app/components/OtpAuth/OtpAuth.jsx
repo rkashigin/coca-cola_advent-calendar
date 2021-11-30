@@ -65,18 +65,12 @@ const GetCode = observer(() => {
 
 const ValidateCode = () => {
     const [code, setCode] = useState('');
-    const [isComplite, setIsComplite] = useState(false);
-    const codeInput = '0 0 0 0 0 0';
+    const [isComplete, setIsComplete] = useState(false);
+
     return (
         <div>
             <div className={styles.otpAuth__textInfo}>Мы отправили код на номер</div>
             <div className={styles.otpAuth__textInfo}>{RootStore.otpTel}</div>
-            {/* <input
-                className={styles.otpAuth__input}
-                type="text"
-                value={code}
-                onChange={(ev) => setCode(ev.target.value)}
-            /> */}
             <ReactCodeInput
                 name="code"
                 className={styles.otpAuth__codeInput}
@@ -84,8 +78,10 @@ const ValidateCode = () => {
                 fields={6}
                 placeholder="0"
                 inputMode="numeric"
+                value={code}
+                onChange={setCode}
             />
-            {isComplite ? (
+            {isComplete ? (
                 <Button
                     className={styles.otpAuth__button}
                     content="Отправить еще раз"
@@ -96,7 +92,7 @@ const ValidateCode = () => {
                     Получить новый код можно через{' '}
                     <Countdown
                         date={Date.now() + RootStore.otp.expiresIn * 1_000}
-                        onComplete={() => setIsComplite(true)}
+                        onComplete={() => setIsComplete(true)}
                     />
                 </div>
             )}
