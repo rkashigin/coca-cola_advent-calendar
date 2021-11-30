@@ -30,10 +30,10 @@ export default {
             hard: {
                 image: WhereIsGameSecondLevel,
                 coords: {
-                    xStart: 1560,
-                    xEnd: 1590,
-                    yStart: 350,
-                    yEnd: 370
+                    xStart: 1550,
+                    xEnd: 1600,
+                    yStart: 340,
+                    yEnd: 380
                 }
             }
         },
