@@ -158,7 +158,8 @@ const Day2 = ({ setOpenedDay }) => {
                             </>
                         )}
                     </DialogActions>
-                    {result.promoCode && <InfoPromoCode />}
+                    {/* {result.promoCode && <InfoPromoCode />} */}
+                    <InfoPromoCode />
                 </div>
             </Dialog>
         </>
