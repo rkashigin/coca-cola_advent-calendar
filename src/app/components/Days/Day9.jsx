@@ -33,14 +33,13 @@ const Day9 = ({ setOpenedDay }) => {
                 fullScreen
                 fullWidth
             >
-                <div className="gameWrapper">
-                    <Game
-                        handleClose={handleClose}
-                        game={<WhereIsGame gameVariant="hard" setResult={setResult} />}
-                        setResult={setResult}
-                        fullScreen
-                    />
-                </div>
+                <Game
+                    handleClose={handleClose}
+                    game={<WhereIsGame gameVariant="hard" setResult={setResult} />}
+                    setResult={setResult}
+                    fullScreen
+                    disableStyles
+                />
             </Dialog>
             <Dialog open={resultVisible} TransitionComponent={Transition} className={styles.popup}>
                 {result.status ? (

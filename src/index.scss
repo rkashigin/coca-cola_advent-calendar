@@ -99,9 +99,11 @@ div.css-1t1j96h-MuiPaper-root-MuiDialog-paper, div.MuiDialog-paper {
 
   background-color: transparent;
 
-	padding: 0;
-	width: max-content;
+  position: relative;
 
+	padding: 0;
+
+	width: max-content;
   height: max-content;
 
   display: flex;
@@ -114,8 +116,7 @@ div.css-1t1j96h-MuiPaper-root-MuiDialog-paper, div.MuiDialog-paper {
 
   @media screen and (max-width: $width-mobile) {
     margin: 2vw;
-    width: 100%;
-
+    width: auto;
     // max-height: 100%;
     // overflow-y: auto;
     // overflow-x: hidden;
@@ -125,6 +126,16 @@ div.css-1t1j96h-MuiPaper-root-MuiDialog-paper, div.MuiDialog-paper {
     // padding-top: 42rem;
   }
 }
+
+div.MuiDialog-paperFullScreen {
+  width: inherit !important;
+  height: inherit !important;
+
+  @media screen and (max-width: $width-mobile) {
+    margin: 0 !important;
+  }
+}
+
 div.css-ypiqx9-MuiDialogContent-root, div.MuiDialogContent-root {
 	overflow-x: hidden;
   position: relative;
