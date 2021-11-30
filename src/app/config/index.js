@@ -17,6 +17,11 @@ export default {
         HOME: '/'
     },
     references: {
+        testsWinConditions: {
+            3: 5,
+            5: 3,
+            10: 6
+        },
         orderLink:
             'https://trk.mail.ru/c/lvg0b5?utm_source=coca-cola-land-2021-5&utm_medium=cola-card-2021-5&utm_campaign=ny2021-cola-5&utm_content=cola-land-2021-5',
         promocodesDescriptions: {
