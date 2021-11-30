@@ -78,10 +78,12 @@ const ValidateCode = () => {
                 onChange={(ev) => setCode(ev.target.value)}
             /> */}
             <ReactCodeInput
+                name="code"
                 className={styles.otpAuth__codeInput}
                 type="number"
                 fields={6}
                 placeholder="0"
+                inputMode="numeric"
             />
             {isComplite ? (
                 <Button
