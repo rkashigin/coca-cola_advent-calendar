@@ -53,7 +53,9 @@ const GetCode = observer(() => {
                 onChange={(ev) => setTel(ev.target.value)}
                 placeholder={masked.mask}
             />
-            {!!RootStore.oauthCodeErr && <p>Не удалось отправить код</p>}
+            {!!RootStore.oauthCodeErr && (
+                <p className={styles.otpAuth__infoError}>Не удалось отправить код</p>
+            )}
             <Button
                 className={styles.otpAuth__button}
                 content="Получить код"
