@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import Cookies from 'js-cookie';
-import { makeAutoObservable, toJS, when } from 'mobx';
+import { makeAutoObservable, when } from 'mobx';
 import sha256 from 'sha256';
 import config from '../../config';
 

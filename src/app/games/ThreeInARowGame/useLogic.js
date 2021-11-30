@@ -2,9 +2,28 @@ import { useMediaQuery } from 'react-responsive';
 
 import TileImages from './images';
 import drawRoundRect from '../../helpers/drawRoundRect';
+import { RootStore } from '../../stores/RootStore';
 
-export default function useLogic({ canvasRef, setScores }) {
+export default function useLogic({ canvasRef, setScores, setResult, day }) {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
+
+    const checkScores = async (scores) => {
+        if (scores >= 300) {
+            try {
+                const data = await RootStore.dayComplete(day);
+
+                setResult({
+                    status: true,
+                    promoCode: data.value || false
+                });
+            } catch {
+                setResult({
+                    status: true,
+                    promoCode: false
+                });
+            }
+        }
+    };
 
     if (canvasRef) {
         const canvas = document.getElementById('canvas');
@@ -587,9 +606,10 @@ export default function useLogic({ canvasRef, setScores }) {
             onMouseMove,
             onMouseDown,
             onMouseUp,
-            onMouseOut
+            onMouseOut,
+            checkScores
         };
     }
 
-    return {};
+    return { checkScores };
 }

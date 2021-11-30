@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 
+import { isFuture, isPast, isToday } from 'date-fns';
 import CalendarDay from '../CalendarDay/CalendarDay';
 import { Day2, Day3, Day4, Day5, Day6, Day7, Day8, Day9, Day10, Day11 } from '../Days';
 import config from '../../config';
@@ -26,15 +27,16 @@ const Calendar = () => {
     return (
         <>
             <div className={styles.calendar}>
-                {DATES.map((el) => (
+                {DATES.map((el, idx) => (
                     <CalendarDay
                         key={el.day}
                         id={el.day}
                         date={el.day}
                         img={el.img}
                         className={classNames(styles[`calendarDay_${el.day}`], {
-                            [styles.calendarDay_current]: currentDay,
-                            [styles.calendarDay_pastDay]: pastDay
+                            [styles.calendarDay_current]: isToday(new Date(2021, 11, idx + 1)),
+                            [styles.calendarDay_pastDay]: isPast(new Date(2021, 11, idx + 1)),
+                            [styles.calendarDay_futureDay]: isFuture(new Date(2021, 11, idx + 1))
                         })}
                         modalImg={el.modalImg}
                         classNameImg={classNames(styles[`calendarDay_modalImg_${el.day}`])}
@@ -42,7 +44,13 @@ const Calendar = () => {
                         intro={el.intro}
                         promoCode={el.promoCode}
                         type={el.type}
-                        handleOpenDay={() => handleOpenDay(el.day)}
+                        handleOpenDay={() => {
+                            if (isFuture(new Date(2021, 11, idx + 1))) {
+                                return;
+                            }
+
+                            handleOpenDay(el.day);
+                        }}
                         openedDay={openedDay}
                     />
                 ))}

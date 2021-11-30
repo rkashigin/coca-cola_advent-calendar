@@ -37,7 +37,7 @@ const Day6 = ({ setOpenedDay }) => {
                 <div className="gameWrapper">
                     <Game
                         handleClose={handleClose}
-                        game={<CatchItemGame setResult={setResult} />}
+                        game={<CatchItemGame setResult={setResult} day={6} />}
                         fullScreen
                     />
                 </div>

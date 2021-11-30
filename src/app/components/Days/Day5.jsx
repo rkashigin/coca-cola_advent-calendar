@@ -41,6 +41,7 @@ const Day5 = ({ setOpenedDay }) => {
                                 quiz={config.references.truthOrMyths.day5.quiz}
                                 setResult={setResult}
                                 setScore={setScore}
+                                day={5}
                             />
                         }
                         setResult={setResult}

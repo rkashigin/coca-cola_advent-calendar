@@ -43,6 +43,7 @@ const Day3 = ({ setOpenedDay }) => {
                                 quiz={config.references.quizes.day3.quiz}
                                 setResult={setResult}
                                 setScore={setScore}
+                                day={3}
                             />
                         }
                         setResult={setResult}

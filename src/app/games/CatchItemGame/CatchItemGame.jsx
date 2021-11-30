@@ -6,7 +6,7 @@ import useLogic from './useLogic';
 import styles from './CatchItemGame.module.scss';
 import { Timer } from '../../components';
 
-const CatchItemGame = ({ setResult }) => {
+const CatchItemGame = ({ setResult, day }) => {
     const canvasRef = React.useRef(null);
     const [scores, setScores] = React.useState(0);
     const [isCanvasReady, setIsCanvasReady] = React.useState(false);
@@ -14,12 +14,13 @@ const CatchItemGame = ({ setResult }) => {
         () => ({ x: canvasRef.current?.width / 2, y: canvasRef.current?.height - 150 }),
         [canvasRef.current]
     );
-    const { game, handleMouseMove, handleTouch } = useLogic({
+    const { game, handleMouseMove, handleTouch, checkScores, handleTimerComplete } = useLogic({
         canvasRef: isCanvasReady,
         cart,
-        setScores
+        setScores,
+        setResult,
+        day
     });
-    const handleTimerComplete = React.useCallback(() => setResult({ status: false }), []);
 
     React.useEffect(() => {
         if (canvasRef.current) {
@@ -33,14 +34,7 @@ const CatchItemGame = ({ setResult }) => {
         }
     }, [isCanvasReady]);
 
-    React.useEffect(() => {
-        if (scores === 300) {
-            setResult({
-                status: true,
-                promoCode: Math.floor(Math.random() * 2) === 0 ? false : 'DCCC2022'
-            });
-        }
-    }, [scores]);
+    React.useEffect(() => checkScores(scores), [scores]);
 
     return (
         <div className={styles.game}>
@@ -64,7 +58,8 @@ const CatchItemGame = ({ setResult }) => {
 };
 
 CatchItemGame.propTypes = {
-    setResult: PropTypes.func.isRequired
+    setResult: PropTypes.func.isRequired,
+    day: PropTypes.number.isRequired
 };
 
 export default CatchItemGame;
