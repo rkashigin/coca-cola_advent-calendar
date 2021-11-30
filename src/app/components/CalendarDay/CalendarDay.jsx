@@ -12,7 +12,6 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { CircularProgress, Link } from '@mui/material';
 
-import { isPast } from 'date-fns';
 import { observer } from 'mobx-react-lite';
 import Adaptive from '../../helpers/Adaptive';
 
@@ -49,15 +48,9 @@ const CalendarDay = observer(
 
         const handleClickOpen = () => {
             if (RootStore.user.id) {
-                // if (
-                //     !isPast(new Date(2021, 11, date - 1)) &&
-                //     date > RootStore.myGamesCompleted
-                //     || isFuture(new Date(2021, 11, idx + 1)))
-                // ) {
-                //     return;
-                // }
-                //
+                // if (isDayActive(date)) {
                 setOpen(true);
+                // }
             } else {
                 RootStore.setOauthOpen(true);
             }
@@ -114,7 +107,11 @@ const CalendarDay = observer(
                 <Dialog
                     open={open}
                     TransitionComponent={Transition}
-                    onClose={handleClose}
+                    onClose={(_, reason) => {
+                        if (reason === 'backdropClick') return;
+
+                        handleClose();
+                    }}
                     className={styles.popup}
                     onBackdropClick={() => {}}
                 >

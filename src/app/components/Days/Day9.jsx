@@ -28,7 +28,11 @@ const Day9 = ({ setOpenedDay }) => {
             <Dialog
                 open={open}
                 TransitionComponent={Transition}
-                onClose={handleClose}
+                onClose={(_, reason) => {
+                    if (reason === 'backdropClick') return;
+
+                    handleClose();
+                }}
                 className={styles.popup}
                 fullScreen
                 fullWidth

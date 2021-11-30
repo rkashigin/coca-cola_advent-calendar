@@ -25,7 +25,11 @@ const Modal = ({ open, handleClose, title, children, hasDialogActions, className
             open={open}
             TransitionComponent={Transition}
             keepMounted
-            onClose={handleClose}
+            onClose={(_, reason) => {
+                if (reason === 'backdropClick') return;
+
+                handleClose();
+            }}
             aria-describedby="alert-dialog-slide-description"
             onBackdropClick={() => {}}
         >
