@@ -126,7 +126,6 @@ class RootStoreClass {
                     this.setColaAuth(colaAuth.ok);
                 }
                 this.setUser({ id, name, phone });
-                console.log('LOGIN DATA', { id, name, phone });
                 if (data.refresh_token) {
                     this.setRefreshToken(data.refresh_token);
                 }
@@ -137,7 +136,6 @@ class RootStoreClass {
                 this.setToken(data.token);
                 console.log(data);
             } catch (error) {
-                console.log('loginOtp error');
                 console.log(error);
             }
         } else {
@@ -200,7 +198,6 @@ class RootStoreClass {
 
     async dayComplete(game) {
         try {
-            console.log('THIS USER AND GAME', this.user, game);
             if (game && this.user.id?.primary) {
                 const sign = sha256(`${this.user.id.primary}/${game}`);
                 const data = await RootStoreApi.api.complete({ sign, game });
@@ -209,7 +206,6 @@ class RootStoreClass {
                 console.log(data);
                 return data;
             }
-            console.log('no game id or user ID');
             return null;
         } catch (error) {
             console.log(error);

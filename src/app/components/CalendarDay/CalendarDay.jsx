@@ -76,7 +76,6 @@ const CalendarDay = ({
     useEffect(() => {
         if (RootStore.myPromocodes.length) {
             const firstCode = RootStore.myPromocodes.find(({ Type }) => Type === 0).Value;
-            console.log('FIRST CODE', firstCode);
 
             setLoadedPromocode(firstCode);
         }
