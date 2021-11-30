@@ -25,6 +25,8 @@ const Transition = React.forwardRef((props, ref) => {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
+// TODO: Посмотреть 6 день на мобилке, нужно, чтобы корзина перемещалась более плавно и легко вставала в углы
+
 const CalendarDay = observer(
     ({
         date,
@@ -46,19 +48,20 @@ const CalendarDay = observer(
         const [loadedPromocode, setLoadedPromocode] = React.useState('');
 
         const handleClickOpen = () => {
-            if (RootStore.user.id) {
-                if (
-                    !isPast(new Date(2021, 11, date - 1)) &&
-                    date > RootStore.myGamesCompleted - 1
-                    // || isFuture(new Date(2021, 11, idx + 1)))
-                ) {
-                    return;
-                }
-
-                setOpen(true);
-            } else {
-                RootStore.setOauthOpen(true);
-            }
+            setOpen(true);
+            // if (RootStore.user.id) {
+            //     // if (
+            //     //     !isPast(new Date(2021, 11, date - 1)) &&
+            //     //     date > RootStore.myGamesCompleted
+            //     //     || isFuture(new Date(2021, 11, idx + 1)))
+            //     // ) {
+            //     //     return;
+            //     // }
+            //
+            //     setOpen(true);
+            // } else {
+            //     RootStore.setOauthOpen(true);
+            // }
         };
 
         const handleClose = () => {
@@ -66,7 +69,6 @@ const CalendarDay = observer(
         };
 
         const handleRequestPromoCode = async () => {
-            console.log('handleRequestPromoCode');
             try {
                 const data = await RootStore.dayComplete(1);
 
@@ -79,7 +81,6 @@ const CalendarDay = observer(
         useEffect(() => {
             if (RootStore.myPromocodes.length) {
                 const firstCode = RootStore.myPromocodes.find(({ Type }) => Type === 0).Value;
-                console.log('FIRST CODE', firstCode);
 
                 setLoadedPromocode(firstCode);
             }

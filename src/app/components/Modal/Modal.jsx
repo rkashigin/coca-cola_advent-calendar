@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
-// import { DialogContentText } from '@mui/material';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
+import { Link } from '@mui/material';
+
+import config from '../../config';
 import Button from '../Button/Button';
 
 import { ReactComponent as CloseIcon } from '../../assets/icons/Modal_close_icon.svg';
@@ -42,11 +43,14 @@ const Modal = ({ open, handleClose, title, children, hasDialogActions, className
                 </DialogContent>
                 {hasDialogActions && (
                     <DialogActions>
-                        <Button
+                        <Link
+                            component="button"
+                            href={config.orderLink}
                             onClick={handleClose}
                             className={styles.modal__button_order}
-                            content="Заказать сейчас"
-                        />
+                        >
+                            Заказать сейчас
+                        </Link>
                     </DialogActions>
                 )}
             </div>

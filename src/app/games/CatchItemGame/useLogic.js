@@ -78,7 +78,7 @@ export default function useLogic({ canvasRef, cart, setScores, setResult, day })
 
                 products.push({
                     img: productsOptions[randomProduct],
-                    x: Math.random() * canvas.width,
+                    x: Math.random() * (canvas.width - 60 * deviceMultiplier),
                     y: -100,
                     dx: Math.random() * 2 - 1,
                     dy: Math.random() * 2 + 2,

@@ -18,7 +18,6 @@ const App = () => {
             });
         }
     };
-    window.rStore = RootStore;
 
     return (
         <div className="App">

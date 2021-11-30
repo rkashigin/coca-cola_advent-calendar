@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react';
-// import PropTypes from 'prop-types';
 import classNames from 'classnames';
-
-// import Slide from '@mui/material/Slide';
 import { observer } from 'mobx-react-lite';
-import Button from '../Button/Button';
 
+import Button from '../Button/Button';
 import Modal from '../Modal/Modal';
 import PromoCode from '../PromoCode/PromoCode';
+import config from '../../config';
 
 import { ReactComponent as Feat } from '../../assets/icons/Logo_ft.svg';
 import { ReactComponent as Delivery } from '../../assets/icons/Logo_delivery.svg';
@@ -87,7 +85,7 @@ const Header = observer(() => {
                         <PromoCode
                             key={el.ID}
                             type="grey"
-                            promoCodeText="ОПИСАНИЕ"
+                            promoCodeText={config.references.promocodesDescriptions[el.Type]}
                             promoCode={el.Value}
                         />
                     ))}
@@ -101,41 +99,3 @@ const Header = observer(() => {
 // };
 
 export default Header;
-
-const PROMOCODES = [
-    {
-        id: 1,
-        title: '100 ₽ на доставку Delivery Club',
-        code: 'DCCC20223'
-    },
-    {
-        id: 2,
-        title: '100 ₽ на доставку Delivery Club',
-        code: 'SD1233131'
-    },
-    {
-        id: 3,
-        title: '100 ₽ на доставку Delivery Club',
-        code: 'SD1233131'
-    },
-    {
-        id: 4,
-        title: '100 ₽ на доставку Delivery Club',
-        code: 'SD1233131'
-    },
-    {
-        id: 5,
-        title: '100 ₽ на доставку Delivery Club',
-        code: 'SD1233131'
-    },
-    {
-        id: 6,
-        title: '100 ₽ на доставку Delivery Club',
-        code: 'SD1233131'
-    },
-    {
-        id: 7,
-        title: '100 ₽ на доставку Delivery Club',
-        code: 'SD1233131'
-    }
-];
