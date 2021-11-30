@@ -115,6 +115,8 @@ class RootStoreClass {
                 const { id, name, phone } = data;
                 if (id) {
                     this.setOauthOpen(false);
+                    const colaAuth = await RootStoreApi.api.auth();
+                    this.setColaAuth(colaAuth.ok);
                 }
                 this.setUser({ id, name, phone });
                 if (data.refresh_token) {
@@ -122,7 +124,7 @@ class RootStoreClass {
                 }
                 if (data.secret) {
                     this.setSecret(data.secret);
-                    data.token += `.${data.secret}`;
+                    // data.token += `.${data.secret}`;
                 }
                 this.setToken(data.token);
                 console.log(data);
@@ -154,7 +156,7 @@ class RootStoreClass {
                     }
                     if (data.secret) {
                         this.setSecret(data.secret);
-                        data.token += `.${data.secret}`;
+                        // data.token += `.${data.secret}`;
                     }
                     this.setToken(data.token);
                     console.log(data);
@@ -171,7 +173,8 @@ class RootStoreClass {
 
                     const data = await RootStoreApi.dcApi.userLogin({
                         xApiKey: this.xApiKey,
-                        token: (error === 401 && this.refreshToken) || (error === 423 && this.token)
+                        // token: (error === 401 && this.refreshToken) || (error === 423 && this.token)
+                        token: this.token
                     });
                     if (data.secret) {
                         this.setSecret(data.secret);
