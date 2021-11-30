@@ -167,7 +167,12 @@ const CalendarDay = observer(
                         )}
                         {type === 'promoCode' && !(date === 1 && !loadedPromocode) && (
                             <DialogActions>
-                                <a href={orderLink} target="_blank" rel="noopener noreferrer">
+                                <a
+                                    href={orderLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={styles.calendarModal__button}
+                                >
                                     Заказать сейчас
                                 </a>
                                 <Button onClick={handleClose}>В календарь</Button>

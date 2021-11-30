@@ -56,7 +56,7 @@ const Day5 = ({ setOpenedDay }) => {
             <Dialog open={resultVisible} TransitionComponent={Transition} className={styles.popup}>
                 <div className={styles.modal}>
                     <img
-                        className={styles.modalResult__img_result}
+                        className={styles.modalResult__img}
                         src={require('../../assets/images/Games/game_win.svg').default}
                         alt=""
                     />
