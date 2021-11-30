@@ -7,7 +7,7 @@ import { Day2, Day3, Day4, Day5, Day6, Day7, Day8, Day9, Day10, Day11 } from '..
 import config from '../../config';
 
 import styles from './Calendar.module.scss';
-import { RootStore } from '../../stores/RootStore';
+// import { RootStore } from '../../stores/RootStore';
 
 const Calendar = () => {
     const [openedDay, setOpenedDay] = React.useState(0);
