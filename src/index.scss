@@ -71,7 +71,8 @@ button {
 }
 
 .App {
-	overflow: auto;
+	overflow-x: hidden;
+  overflow-y: auto;
 }
 
 div.css-yiavyu-MuiBackdrop-root-MuiDialog-backdrop, div.MuiDialog-backdrop {
