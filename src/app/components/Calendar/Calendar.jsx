@@ -12,7 +12,6 @@ import { RootStore } from '../../stores/RootStore';
 
 const Calendar = () => {
     const [openedDay, setOpenedDay] = React.useState(0);
-    const prevDays = RootStore.myGamesCompleted;
 
     useEffect(() => {
         const app = document.querySelector('.App');
@@ -20,25 +19,6 @@ const Calendar = () => {
     }, [openedDay]);
 
     const handleOpenDay = (day) => setOpenedDay(day);
-
-    const isCurrentDay = (dayIdx) => {
-        // Получаем статусы дней до текущего
-        const prevDaysUntilToday = prevDays.slice(0, dayIdx).slice(0, -1);
-
-        if (isToday(new Date(2021, 11, dayIdx + 1)) && prevDaysUntilToday.indexOf('0') === -1) {
-            return true;
-        }
-
-        if (
-            isPast(new Date(2021, 11, dayIdx + 1)) &&
-            prevDaysUntilToday.indexOf('0') !== -1 &&
-            prevDaysUntilToday.indexOf('0') === dayIdx
-        ) {
-            return true;
-        }
-
-        return false;
-    };
 
     return (
         <>
@@ -51,7 +31,7 @@ const Calendar = () => {
                             date={el.day}
                             img={el.img}
                             className={classNames(styles[`calendarDay_${el.day}`], {
-                                [styles.calendarDay_current]: isCurrentDay(idx),
+                                [styles.calendarDay_current]: RootStore.myGamesCompleted === idx,
                                 [styles.calendarDay_pastDay]: isPast(new Date(2021, 11, idx + 1)),
                                 [styles.calendarDay_futureDay]: isFuture(
                                     new Date(2021, 11, idx + 1)
@@ -64,11 +44,7 @@ const Calendar = () => {
                             promoCode={el.promoCode}
                             type={el.type}
                             handleOpenDay={() => {
-                                // Получаем статусы дней до текущего
-                                // const prevDaysUntilToday = prevDays.slice(0, idx).slice(0, -1);
-
-                                // Если есть хоть один 0, раньше индека текущего дня или день в будущем, то кликаем
-                                // if (/0/g.test(prevDays) || isFuture(new Date(2021, 11, idx + 1))) {
+                                // if (idx > RootStore.myGamesCompleted || isFuture(new Date(2021, 11, idx + 1))) {
                                 //     return;
                                 // }
 
