@@ -81,7 +81,12 @@ const Footer = () => {
             </div>
             <SnowDecorationMobile className={styles.footer__decoration_mobile} />
             <div className={styles.footerInfo}>
-                <a href="/" className={styles.footerInfo__rules}>
+                <a
+                    href="https://www.delivery-club.ru/promo_rules/NY%20with%20Coca-Cola.pdf?1638296035"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.footerInfo__rules}
+                >
                     Правила акции
                 </a>
                 <div className={styles.footerInfo__company}>

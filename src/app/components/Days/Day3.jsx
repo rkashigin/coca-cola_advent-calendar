@@ -55,13 +55,13 @@ const Day3 = ({ setOpenedDay }) => {
                 {result.status ? (
                     <img
                         className={styles.modalResult__img_result}
-                        src={require('../../assets/images/Games/game_1_day.png').default}
+                        src={require('../../assets/images/Games/game_win.svg').default}
                         alt=""
                     />
                 ) : (
                     <img
                         className={styles.modalResult__img}
-                        src={require('../../assets/images/Games/game_2_day.png').default}
+                        src={require('../../assets/images/Games/game_loss.svg').default}
                         alt=""
                     />
                 )}
