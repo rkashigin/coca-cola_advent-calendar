@@ -45,23 +45,25 @@ const Day2 = ({ setOpenedDay }) => {
                 />
             </Dialog>
             <Dialog open={resultVisible} TransitionComponent={Transition} className={styles.popup}>
-                {result.status ? (
-                    <img
-                        className={styles.modalResult__img}
-                        src={require('../../assets/images/Games/game_win.svg').default}
-                        alt=""
-                    />
-                ) : (
-                    <img
-                        className={classNames(
-                            styles.modalResult__img,
-                            styles.modalResult__img_resize
-                        )}
-                        src={require('../../assets/images/Games/game_loss.svg').default}
-                        alt=""
-                    />
-                )}
                 <div className={styles.modal}>
+                    <>
+                        {result.status ? (
+                            <img
+                                className={styles.modalResult__img}
+                                src={require('../../assets/images/Games/game_win.svg').default}
+                                alt=""
+                            />
+                        ) : (
+                            <img
+                                className={classNames(
+                                    styles.modalResult__img,
+                                    styles.modalResult__img_resize
+                                )}
+                                src={require('../../assets/images/Games/game_loss.svg').default}
+                                alt=""
+                            />
+                        )}
+                    </>
                     {result.status ? (
                         <DialogTitle>Холодильник нашелся, поздравляем!</DialogTitle>
                     ) : (
