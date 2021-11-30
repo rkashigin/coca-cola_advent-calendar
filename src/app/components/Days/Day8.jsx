@@ -40,6 +40,7 @@ const Day8 = ({ setOpenedDay }) => {
                             <Survey
                                 survey={config.references.surveys.day8.survey}
                                 setResult={setResult}
+                                day={8}
                             />
                         }
                         setResult={setResult}

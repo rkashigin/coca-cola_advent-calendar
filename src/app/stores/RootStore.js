@@ -40,7 +40,7 @@ class RootStoreClass {
 
     myPromocodes = [];
 
-    myGamesCompleted = [];
+    myGamesCompleted = '';
 
     constructor() {
         makeAutoObservable(this);
@@ -52,7 +52,7 @@ class RootStoreClass {
                 this.setMyPromocodes(promocodes);
 
                 const { completed } = await RootStoreApi.api.completed();
-                this.setMyGamesCompleted(completed);
+                this.setMyGamesCompleted(completed.toString());
             }
         );
     }

@@ -9,17 +9,15 @@ import useLogic from './useLogic';
 
 import styles from './WhereIsGame.module.scss';
 
-const WhereIsGame = ({ gameVariant, setResult }) => {
-    const isMobile = useMediaQuery(Adaptive.isMobile);
+const WhereIsGame = ({ gameVariant, setResult, day }) => {
     const gameConfig = config.references.whereIsGame[gameVariant];
     const imageRef = React.useRef(null);
-    const {
-        selectionWindowX,
-        selectionWindowY,
-        selectionColor,
-        handlePerformFindAttempt,
-        handleTimerComplete
-    } = useLogic({ imageRef, gameConfig, setResult, isMobile });
+    const { handlePerformFindAttempt, handleTimerComplete } = useLogic({
+        imageRef,
+        gameConfig,
+        setResult,
+        day
+    });
 
     return (
         <div className={styles.game}>
@@ -27,19 +25,6 @@ const WhereIsGame = ({ gameVariant, setResult }) => {
                 className={styles.game__timer}
                 givenTime={120_000}
                 onComplete={handleTimerComplete}
-            />
-            <div
-                className={styles.selectionWindow}
-                style={
-                    selectionWindowX && selectionWindowY
-                        ? {
-                              left: selectionWindowX - 25,
-                              top: selectionWindowY - 25,
-                              display: 'block',
-                              borderColor: selectionColor
-                          }
-                        : null
-                }
             />
             <img
                 ref={imageRef}
@@ -53,7 +38,8 @@ const WhereIsGame = ({ gameVariant, setResult }) => {
 
 WhereIsGame.propTypes = {
     gameVariant: PropTypes.oneOf(['easy', 'hard']).isRequired,
-    setResult: PropTypes.func.isRequired
+    setResult: PropTypes.func.isRequired,
+    day: PropTypes.number.isRequired
 };
 
 export default WhereIsGame;
