@@ -64,13 +64,15 @@ const Header = observer(() => {
                     C advent-календарем, мини-играми и приятными подарками
                 </p>
                 <div className={styles.header__buttonsWrap}>
-                    <Button content="Победители" className={styles.header__button_winners} />
-                    <Button
-                        content="Мои промокоды"
-                        onClick={handleClickOpen}
-                        className={styles.header__button_promoCodes}
-                        disabled={!RootStore.myPromocodes.length}
-                    />
+                    {/* <Button content="Победители" className={styles.header__button_winners} /> */}
+                    {!!RootStore.myPromocodes.length && (
+                        <Button
+                            content="Мои промокоды"
+                            onClick={handleClickOpen}
+                            className={styles.header__button_promoCodes}
+                            disabled={!RootStore.myPromocodes.length}
+                        />
+                    )}
                 </div>
                 <img
                     className={styles.header__band_bottom}

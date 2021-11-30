@@ -48,20 +48,19 @@ const CalendarDay = observer(
         const [loadedPromocode, setLoadedPromocode] = React.useState('');
 
         const handleClickOpen = () => {
-            setOpen(true);
-            // if (RootStore.user.id) {
-            //     // if (
-            //     //     !isPast(new Date(2021, 11, date - 1)) &&
-            //     //     date > RootStore.myGamesCompleted
-            //     //     || isFuture(new Date(2021, 11, idx + 1)))
-            //     // ) {
-            //     //     return;
-            //     // }
-            //
-            //     setOpen(true);
-            // } else {
-            //     RootStore.setOauthOpen(true);
-            // }
+            if (RootStore.user.id) {
+                // if (
+                //     !isPast(new Date(2021, 11, date - 1)) &&
+                //     date > RootStore.myGamesCompleted
+                //     || isFuture(new Date(2021, 11, idx + 1)))
+                // ) {
+                //     return;
+                // }
+                //
+                setOpen(true);
+            } else {
+                RootStore.setOauthOpen(true);
+            }
         };
 
         const handleClose = () => {

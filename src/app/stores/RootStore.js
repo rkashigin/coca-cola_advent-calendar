@@ -73,6 +73,7 @@ class RootStoreClass {
         this.refreshToken = RootStoreApi.dcApi.getCookie('refresh_token');
         const query = new URLSearchParams(window.location.search);
         if (query.get('t')) {
+            console.log(query.get('t'));
             this.setXApiKey(query.get('t'));
         }
         if (!this.token && !this.xApiKey) {
@@ -199,6 +200,26 @@ class RootStoreClass {
         } else {
             console.warn('tryIdx === 2');
         }
+    }
+
+    logout() {
+        Cookies.remove('x_user_authorization', { path: '/', domain: config.server.domain });
+        this.setUser({ id: null, name: null, phone: null });
+        this.setToken(null, false);
+        this.setSecret(null);
+        this.setColaAuth(false);
+        when(
+            () => !!this.colaAuth,
+            () => {
+                this.updatePromocodes();
+                this.updateComplitedGames();
+                // const promocodes = await RootStoreApi.api.promocodes();
+                // this.setMyPromocodes(promocodes);
+
+                // const { completed } = await RootStoreApi.api.completed();
+                // this.setMyGamesCompleted(completed);
+            }
+        );
     }
 
     async dayComplete(game) {
