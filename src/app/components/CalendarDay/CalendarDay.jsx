@@ -13,6 +13,7 @@ import Slide from '@mui/material/Slide';
 import { CircularProgress, Link } from '@mui/material';
 
 import { isPast } from 'date-fns';
+import { observer } from 'mobx-react-lite';
 import Adaptive from '../../helpers/Adaptive';
 
 import PromoCode from '../PromoCode/PromoCode';
@@ -24,161 +25,169 @@ const Transition = React.forwardRef((props, ref) => {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const CalendarDay = ({
-    date,
-    img,
-    className,
-    classNameImg,
-    classNameSpan,
-    modalImg,
-    title,
-    intro,
-    promoCode,
-    type,
-    openedDay,
-    handleOpenDay,
-    orderLink
-}) => {
-    const isHorizontal = useMediaQuery(Adaptive.isHorizontal);
-    const [open, setOpen] = React.useState(false);
-    const [loadedPromocode, setLoadedPromocode] = React.useState('');
+const CalendarDay = observer(
+    ({
+        date,
+        img,
+        className,
+        classNameImg,
+        classNameSpan,
+        modalImg,
+        title,
+        intro,
+        promoCode,
+        type,
+        openedDay,
+        handleOpenDay,
+        orderLink
+    }) => {
+        const isHorizontal = useMediaQuery(Adaptive.isHorizontal);
+        const [open, setOpen] = React.useState(false);
+        const [loadedPromocode, setLoadedPromocode] = React.useState('');
 
-    const handleClickOpen = () => {
-        if (RootStore.user.id) {
-            if (
-                !isPast(new Date(2021, 11, date - 1)) &&
-                date > RootStore.myGamesCompleted - 1
-                // || isFuture(new Date(2021, 11, idx + 1)))
-            ) {
-                return;
+        const handleClickOpen = () => {
+            if (RootStore.user.id) {
+                if (
+                    !isPast(new Date(2021, 11, date - 1)) &&
+                    date > RootStore.myGamesCompleted - 1
+                    // || isFuture(new Date(2021, 11, idx + 1)))
+                ) {
+                    return;
+                }
+
+                setOpen(true);
+            } else {
+                RootStore.setOauthOpen(true);
             }
+        };
 
-            setOpen(true);
-        } else {
-            RootStore.setOauthOpen(true);
-        }
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-
-    const handleRequestPromoCode = async () => {
-        try {
-            const data = await RootStore.dayComplete(1);
-
-            setLoadedPromocode(data.promocode);
-        } catch {
-            setLoadedPromocode('');
-        }
-    };
-
-    useEffect(() => {
-        if (RootStore.myPromocodes.length) {
-            const firstCode = RootStore.myPromocodes.find(({ Type }) => Type === 0).Value;
-            console.log('FIRST CODE', firstCode);
-
-            setLoadedPromocode(firstCode);
-        }
-    }, [RootStore.myPromocodes]);
-
-    useEffect(() => {
-        const app = document.querySelector('.App');
-        app.style.filter = open ? 'blur(10px)' : '';
-
-        if (date === 1 && RootStore.user.id && RootStore.myGamesCompleted < 1) {
-            handleRequestPromoCode();
-        }
-    }, [open]);
-
-    useEffect(() => {
-        if (openedDay) {
+        const handleClose = () => {
             setOpen(false);
-        }
-    }, [openedDay]);
+        };
 
-    return (
-        <>
-            <div className={classNames(className, styles.calendarDay)} onClick={handleClickOpen}>
-                <span className={classNames(classNameSpan, styles.calendarDay__date)}>{date}</span>
-                <img className={styles.calendarDay__img} src={img} alt="" />
-            </div>
-            <Dialog
-                open={open}
-                TransitionComponent={Transition}
-                onClose={handleClose}
-                className={styles.popup}
-                onBackdropClick={handleClose}
-            >
-                <div className={styles.modal}>
-                    <img
-                        className={classNames(
-                            classNameImg,
-                            isHorizontal
-                                ? styles.calendarModal__img_horizontalMedia
-                                : styles.calendarModal__img
-                        )}
-                        src={modalImg}
-                        alt=""
-                    />
-                    <DialogTitle>{title}</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText id="alert-dialog-slide-description">
-                            {intro}
-                        </DialogContentText>
-                        {date === 1 ? (
-                            <>
-                                {loadedPromocode ? (
+        const handleRequestPromoCode = async () => {
+            console.log('handleRequestPromoCode');
+            try {
+                const data = await RootStore.dayComplete(1);
+
+                setLoadedPromocode(data.promocode);
+            } catch {
+                setLoadedPromocode('');
+            }
+        };
+
+        useEffect(() => {
+            if (RootStore.myPromocodes.length) {
+                const firstCode = RootStore.myPromocodes.find(({ Type }) => Type === 0).Value;
+                console.log('FIRST CODE', firstCode);
+
+                setLoadedPromocode(firstCode);
+            }
+        }, [RootStore.myPromocodes]);
+
+        useEffect(() => {
+            const app = document.querySelector('.App');
+            app.style.filter = open ? 'blur(10px)' : '';
+
+            if (open && date === 1 && RootStore.user.id && RootStore.myGamesCompleted < 1) {
+                handleRequestPromoCode();
+            }
+        }, [date, open, RootStore.user.id, RootStore.myGamesCompleted]);
+
+        useEffect(() => {
+            if (openedDay) {
+                setOpen(false);
+            }
+        }, [openedDay]);
+
+        return (
+            <>
+                <div
+                    className={classNames(className, styles.calendarDay)}
+                    onClick={handleClickOpen}
+                >
+                    <span className={classNames(classNameSpan, styles.calendarDay__date)}>
+                        {date}
+                    </span>
+                    <img className={styles.calendarDay__img} src={img} alt="" />
+                </div>
+                <Dialog
+                    open={open}
+                    TransitionComponent={Transition}
+                    onClose={handleClose}
+                    className={styles.popup}
+                    onBackdropClick={handleClose}
+                >
+                    <div className={styles.modal}>
+                        <img
+                            className={classNames(
+                                classNameImg,
+                                isHorizontal
+                                    ? styles.calendarModal__img_horizontalMedia
+                                    : styles.calendarModal__img
+                            )}
+                            src={modalImg}
+                            alt=""
+                        />
+                        <DialogTitle>{title}</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText id="alert-dialog-slide-description">
+                                {intro}
+                            </DialogContentText>
+                            {date === 1 ? (
+                                <>
+                                    {loadedPromocode ? (
+                                        <PromoCode
+                                            type="red"
+                                            promoCode={loadedPromocode}
+                                            promoCodeText="Срок действия промокода 31.01.2022"
+                                        />
+                                    ) : (
+                                        <CircularProgress />
+                                    )}
+                                </>
+                            ) : (
+                                promoCode && (
                                     <PromoCode
                                         type="red"
-                                        promoCode={loadedPromocode}
+                                        promoCode={promoCode}
                                         promoCodeText="Срок действия промокода 31.01.2022"
                                     />
-                                ) : (
-                                    <CircularProgress />
-                                )}
-                            </>
-                        ) : (
-                            promoCode && (
-                                <PromoCode
-                                    type="red"
-                                    promoCode={promoCode}
-                                    promoCodeText="Срок действия промокода 31.01.2022"
-                                />
-                            )
+                                )
+                            )}
+                        </DialogContent>
+                        {type === 'test' && (
+                            <DialogActions>
+                                <Button onClick={handleOpenDay}>Начать тест</Button>
+                                <Button onClick={handleClose}>Выполнить позже</Button>
+                            </DialogActions>
                         )}
-                    </DialogContent>
-                    {type === 'test' && (
-                        <DialogActions>
-                            <Button onClick={handleOpenDay}>Начать тест</Button>
-                            <Button onClick={handleClose}>Выполнить позже</Button>
-                        </DialogActions>
-                    )}
-                    {type === 'game' && (
-                        <DialogActions>
-                            <Button onClick={handleOpenDay}>Начать игру</Button>
-                            <Button onClick={handleClose}>Выполнить позже</Button>
-                        </DialogActions>
-                    )}
-                    {type === 'promoCode' && !(date === 1 && !loadedPromocode) && (
-                        <DialogActions>
-                            <Link component="button" href={orderLink}>
-                                Заказать сейчас
-                            </Link>
-                            <Button onClick={handleClose}>В календарь</Button>
-                        </DialogActions>
-                    )}
-                    {type === 'postCard' && (
-                        <DialogActions>
-                            <Button onClick={handleOpenDay}>Узнать</Button>
-                            <Button onClick={handleClose}>Выполнить позже</Button>
-                        </DialogActions>
-                    )}
-                </div>
-            </Dialog>
-        </>
-    );
-};
+                        {type === 'game' && (
+                            <DialogActions>
+                                <Button onClick={handleOpenDay}>Начать игру</Button>
+                                <Button onClick={handleClose}>Выполнить позже</Button>
+                            </DialogActions>
+                        )}
+                        {type === 'promoCode' && !(date === 1 && !loadedPromocode) && (
+                            <DialogActions>
+                                <Link component="button" href={orderLink}>
+                                    Заказать сейчас
+                                </Link>
+                                <Button onClick={handleClose}>В календарь</Button>
+                            </DialogActions>
+                        )}
+                        {type === 'postCard' && (
+                            <DialogActions>
+                                <Button onClick={handleOpenDay}>Узнать</Button>
+                                <Button onClick={handleClose}>Выполнить позже</Button>
+                            </DialogActions>
+                        )}
+                    </div>
+                </Dialog>
+            </>
+        );
+    }
+);
 
 CalendarDay.propTypes = {
     date: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,

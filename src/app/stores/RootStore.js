@@ -120,11 +120,6 @@ class RootStoreClass {
                 );
 
                 const { id, name, phone } = data;
-                if (id) {
-                    this.setOauthOpen(false);
-                    const colaAuth = await RootStoreApi.api.auth();
-                    this.setColaAuth(colaAuth.ok);
-                }
                 this.setUser({ id, name, phone });
                 console.log('LOGIN DATA', { id, name, phone });
                 if (data.refresh_token) {
@@ -136,6 +131,12 @@ class RootStoreClass {
                 }
                 this.setToken(data.token);
                 console.log(data);
+
+                if (id) {
+                    this.setOauthOpen(false);
+                    const colaAuth = await RootStoreApi.api.auth();
+                    this.setColaAuth(colaAuth.ok);
+                }
             } catch (error) {
                 console.log('loginOtp error');
                 console.log(error);
