@@ -9,14 +9,10 @@ import config from '../../config';
 
 import styles from './Calendar.module.scss';
 import { RootStore } from '../../stores/RootStore';
-// import { RootStore } from '../../stores/RootStore';
 
 const Calendar = () => {
     const [openedDay, setOpenedDay] = React.useState(0);
-    // состояние для активного дня
-    const [currentDay, setCurrentDay] = React.useState(false);
-    // состояние для дня, который прошел
-    const [pastDay, setPastDay] = React.useState(false);
+    const prevDays = RootStore.myGamesCompleted;
 
     useEffect(() => {
         const app = document.querySelector('.App');
@@ -25,40 +21,63 @@ const Calendar = () => {
 
     const handleOpenDay = (day) => setOpenedDay(day);
 
+    const isCurrentDay = (dayIdx) => {
+        // Получаем статусы дней до текущего
+        const prevDaysUntilToday = prevDays.slice(0, dayIdx).slice(0, -1);
+
+        if (isToday(new Date(2021, 11, dayIdx + 1)) && prevDaysUntilToday.indexOf('0') === -1) {
+            return true;
+        }
+
+        if (
+            isPast(new Date(2021, 11, dayIdx + 1)) &&
+            prevDaysUntilToday.indexOf('0') !== -1 &&
+            prevDaysUntilToday.indexOf('0') === dayIdx
+        ) {
+            return true;
+        }
+
+        return false;
+    };
+
     return (
         <>
             <div className={styles.calendar}>
-                {DATES.map((el, idx) => (
-                    <CalendarDay
-                        key={el.day}
-                        id={el.day}
-                        date={el.day}
-                        img={el.img}
-                        className={classNames(styles[`calendarDay_${el.day}`], {
-                            [styles.calendarDay_current]: isToday(new Date(2021, 11, idx + 1)),
-                            [styles.calendarDay_pastDay]: isPast(new Date(2021, 11, idx + 1)),
-                            [styles.calendarDay_futureDay]: isFuture(new Date(2021, 11, idx + 1))
-                        })}
-                        modalImg={el.modalImg}
-                        classNameImg={classNames(styles[`calendarDay_modalImg_${el.day}`])}
-                        title={el.title}
-                        intro={el.intro}
-                        promoCode={el.promoCode}
-                        type={el.type}
-                        handleOpenDay={() => {
-                            // Получаем строку до текущего индекса
-                            // const prevDays = RootStore.myGamesCompleted.slice(0, idx).slice(0, -1);
+                {DATES.map((el, idx) => {
+                    return (
+                        <CalendarDay
+                            key={el.day}
+                            id={el.day}
+                            date={el.day}
+                            img={el.img}
+                            className={classNames(styles[`calendarDay_${el.day}`], {
+                                [styles.calendarDay_current]: isCurrentDay(idx),
+                                [styles.calendarDay_pastDay]: isPast(new Date(2021, 11, idx + 1)),
+                                [styles.calendarDay_futureDay]: isFuture(
+                                    new Date(2021, 11, idx + 1)
+                                )
+                            })}
+                            modalImg={el.modalImg}
+                            classNameImg={classNames(styles[`calendarDay_modalImg_${el.day}`])}
+                            title={el.title}
+                            intro={el.intro}
+                            promoCode={el.promoCode}
+                            type={el.type}
+                            handleOpenDay={() => {
+                                // Получаем статусы дней до текущего
+                                // const prevDaysUntilToday = prevDays.slice(0, idx).slice(0, -1);
 
-                            // Если есть хоть один 0, раньше индека текущего дня или день в будущем, то кликаем
-                            // if (/0/g.test(prevDays) || isFuture(new Date(2021, 11, idx + 1))) {
-                            //     return;
-                            // }
+                                // Если есть хоть один 0, раньше индека текущего дня или день в будущем, то кликаем
+                                // if (/0/g.test(prevDays) || isFuture(new Date(2021, 11, idx + 1))) {
+                                //     return;
+                                // }
 
-                            handleOpenDay(el.day);
-                        }}
-                        openedDay={openedDay}
-                    />
-                ))}
+                                handleOpenDay(el.day);
+                            }}
+                            openedDay={openedDay}
+                        />
+                    );
+                })}
                 <img
                     className={styles.calendar__bandBottom}
                     src={require('../../assets/images/Calendar/Calendar_band_bottom.png').default}
