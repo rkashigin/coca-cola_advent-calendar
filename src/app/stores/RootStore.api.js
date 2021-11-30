@@ -45,6 +45,24 @@ export const RootStoreApi = {
 
             throw response.status;
         },
+        async userLogout({ token = null, secret = null }) {
+            const headers = {};
+            if (token) {
+                if (secret) {
+                    token += `.${secret}`;
+                }
+                headers['X-User-Authorization'] = token;
+            }
+            const response = await fetch(`${config.server.apiHost}/api1.2/user/logout`, {
+                method: 'post',
+                headers
+            });
+            if (response.ok) {
+                return response.json();
+            }
+
+            throw response.status;
+        },
         // Авторизация через номер телефона
         // Запрос кода
         async userOtp(token, phone, recaptchaToken) {

@@ -15,7 +15,9 @@ class RootStoreClass {
 
     xApiKey = null;
 
-    recaptchaToken = null;
+    // recaptchaToken = null;
+
+    // recaptchaRef = null;
 
     otp = {
         attempts: null,
@@ -99,11 +101,13 @@ class RootStoreClass {
         }
     }
 
-    async userOtp(tel) {
+    async userOtp(tel, recaptchaToken) {
         try {
+            console.log(tel);
+            console.log(recaptchaToken);
             const { token } = await this.getAnonymousToken();
             this.setOtpTel(tel);
-            this.setOtp(await RootStoreApi.dcApi.userOtp(token, tel, this.recaptchaToken));
+            this.setOtp(await RootStoreApi.dcApi.userOtp(token, tel, recaptchaToken));
             this.setOauthCodeErr(false);
         } catch (error) {
             console.log(error);
@@ -205,6 +209,7 @@ class RootStoreClass {
     }
 
     logout() {
+        // RootStoreApi.dcApi.userLogout({ token: this.token, secret: this.secret });
         Cookies.remove('x_user_authorization', { path: '/', domain: config.server.domain });
         this.setUser({ id: null, name: null, phone: null });
         this.setToken(null, false);
@@ -254,6 +259,10 @@ class RootStoreClass {
         localStorage.setItem('completedGames', completed);
     }
 
+    setRecaptchaRef(ref) {
+        this.recaptchaRef = ref;
+    }
+
     setMyGamesCompleted(completed) {
         this.myGamesCompleted = completed;
     }
@@ -294,9 +303,9 @@ class RootStoreClass {
     setSecret(secret) {
         this.secret = secret;
     }
-    setRecaptchaToken(recaptchaToken) {
-        this.recaptchaToken = recaptchaToken;
-    }
+    // setRecaptchaToken(recaptchaToken) {
+    //     this.recaptchaToken = recaptchaToken;
+    // }
 
     setOtpTel(tel) {
         this.otpTel = tel;
@@ -313,6 +322,10 @@ class RootStoreClass {
             status: null
         };
     }
+
+    // get recaptchaTokenIsNull() {
+    //     return !this.recaptchaToken;
+    // }
 }
 
 export const RootStore = new RootStoreClass();

@@ -25,13 +25,13 @@ export default {
         orderLink:
             'https://trk.mail.ru/c/lvg0b5?utm_source=coca-cola-land-2021-5&utm_medium=cola-card-2021-5&utm_campaign=ny2021-cola-5&utm_content=cola-land-2021-5',
         promocodesDescriptions: {
-            0: 'Промокод на Coca-Cola в подарок',
-            1: '45 дней подписки онлайн-кинотеатра IVI',
+            0: 'Промокод на бесплатную Coca-Cola',
+            1: '5 дней подписки на онлайн-кинотеатр IVI',
             2: '100 ₽ на доставку Delivery Club',
             3: '200 ₽ на доставку Delivery Club',
-            4: '',
-            5: '',
-            6: ''
+            4: 'Для заказа в Delivery Club и прохождения календаря',
+            5: 'Для заказа в Delivery Club и прохождения календаря',
+            6: 'Для заказа в Delivery Club и прохождения календаря'
         },
         whereIsGame: {
             easy: {
