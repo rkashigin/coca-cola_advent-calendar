@@ -20,16 +20,16 @@ class RootStoreClass {
     otp = {
         attempts: null,
         expiresIn: null,
-        requestId: null,
+        requestId: true,
         status: null
     };
 
-    otpTel = null;
+    otpTel = '7(900) 000-00-00';
 
     user = {
-        id: null,
-        name: null,
-        phone: null
+        id: { primary: 192 },
+        name: 'vhv',
+        phone: '787878788787877'
     };
 
     oauthOpen = false;
@@ -275,7 +275,7 @@ class RootStoreClass {
         this.otp = {
             attempts: null,
             expiresIn: null,
-            requestId: null,
+            requestId: true,
             status: null
         };
     }

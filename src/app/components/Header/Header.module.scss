@@ -23,6 +23,7 @@
 	justify-content: flex-end;
 
 	overflow-x: clip;
+	overflow: hidden;
 
 	&:after {
 		content: "";
@@ -93,7 +94,7 @@
 }
 
 .header__logo {
-	position: fixed;
+	position: absolute;
 	top: 0;
 	left: 0;
 
@@ -110,7 +111,7 @@
 }
 
 .header__logo_auth{
-	top: 4rem;
+	top: 0;
 
 }
 
