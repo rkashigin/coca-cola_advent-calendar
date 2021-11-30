@@ -125,7 +125,7 @@ class RootStoreClass {
                 }
                 if (data.secret) {
                     this.setSecret(data.secret);
-                    // data.token += `.${data.secret}`;
+                    data.token += `.${data.secret}`;
                 }
                 this.setToken(data.token);
                 console.log(data);
@@ -157,7 +157,7 @@ class RootStoreClass {
                     }
                     if (data.secret) {
                         this.setSecret(data.secret);
-                        // data.token += `.${data.secret}`;
+                        data.token += `.${data.secret}`;
                     }
                     this.setToken(data.token);
                     console.log(data);
@@ -179,7 +179,7 @@ class RootStoreClass {
                     });
                     if (data.secret) {
                         this.setSecret(data.secret);
-                        // data.token += `.${data.secret}`;
+                        data.token += `.${data.secret}`;
                     }
                     this.setToken(data.token);
                     console.log(data);
