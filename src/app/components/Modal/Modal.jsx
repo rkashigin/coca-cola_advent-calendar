@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -17,7 +17,7 @@ const Transition = React.forwardRef((props, ref) => {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const Modal = ({ open, handleClose, title, children }) => {
+const Modal = ({ open, handleClose, title, children, hasDialogActions }) => {
     return (
         <Dialog
             open={open}
@@ -38,16 +38,32 @@ const Modal = ({ open, handleClose, title, children }) => {
                 <DialogContent className={styles.modal__contentWrap}>
                     <div>{children}</div>
                 </DialogContent>
-                <DialogActions>
-                    <Button
-                        onClick={handleClose}
-                        className={styles.modal__button_order}
-                        content="Заказать сейчас"
-                    />
-                </DialogActions>
+                {hasDialogActions && (
+                    <DialogActions>
+                        <Button
+                            onClick={handleClose}
+                            className={styles.modal__button_order}
+                            content="Заказать сейчас"
+                        />
+                    </DialogActions>
+                )}
             </div>
         </Dialog>
     );
+};
+
+Modal.defaultProps = {
+    title: '',
+    children: <></>,
+    hasDialogActions: true
+};
+
+Modal.propTypes = {
+    open: PropTypes.bool.isRequired,
+    handleClose: PropTypes.func.isRequired,
+    title: PropTypes.string,
+    children: PropTypes.node,
+    hasDialogActions: PropTypes.bool
 };
 
 export default Modal;
