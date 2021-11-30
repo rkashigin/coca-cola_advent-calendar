@@ -36,7 +36,7 @@ const Riddle = ({ setResult, setScore, riddle, day }) => {
 
                         setResult({
                             status: true,
-                            promoCode: data.value || false
+                            promoCode: data.promocode || false
                         });
                     } catch {
                         setResult({

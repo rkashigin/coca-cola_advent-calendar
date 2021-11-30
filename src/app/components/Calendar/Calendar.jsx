@@ -41,9 +41,12 @@ const Calendar = () => {
                         promoCode={el.promoCode}
                         type={el.type}
                         handleOpenDay={() => {
-                            // if (idx > RootStore.myGamesCompleted || isFuture(new Date(2021, 11, idx + 1))) {
-                            //     return;
-                            // }
+                            if (
+                                idx > RootStore.myGamesCompleted
+                                // || isFuture(new Date(2021, 11, idx + 1))
+                            ) {
+                                return;
+                            }
 
                             handleOpenDay(el.day);
                         }}
