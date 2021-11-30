@@ -88,18 +88,21 @@ class RootStoreClass {
                 xApiKey: null,
                 token: null
             });
+
             this.setSecret(secret);
             this.setToken(token, false);
+            return { secret, token };
         } catch (error) {
             console.log(error);
+            return null;
         }
     }
 
     async userOtp(tel) {
         try {
-            await this.getAnonymousToken();
+            const { token } = await this.getAnonymousToken();
             this.setOtpTel(tel);
-            this.setOtp(await RootStoreApi.dcApi.userOtp(this.token, tel, this.recaptchaToken));
+            this.setOtp(await RootStoreApi.dcApi.userOtp(token, tel, this.recaptchaToken));
             this.setOauthCodeErr(false);
         } catch (error) {
             console.log(error);
@@ -178,8 +181,7 @@ class RootStoreClass {
 
                     const data = await RootStoreApi.dcApi.userLogin({
                         xApiKey: this.xApiKey,
-                        // token: (error === 401 && this.refreshToken) || (error === 423 && this.token)
-                        token: this.token
+                        token: this.refreshToken
                     });
                     if (data.secret) {
                         this.setSecret(data.secret);
