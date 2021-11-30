@@ -69,6 +69,7 @@ const Header = observer(() => {
                         content="Мои промокоды"
                         onClick={handleClickOpen}
                         className={styles.header__button_promoCodes}
+                        disabled={!RootStore.myPromocodes.length}
                     />
                 </div>
                 <img

@@ -37,7 +37,7 @@ const Day2 = ({ setOpenedDay }) => {
             >
                 <Game
                     handleClose={handleClose}
-                    game={<WhereIsGame gameVariant="easy" setResult={setResult} />}
+                    game={<WhereIsGame gameVariant="easy" setResult={setResult} day={2} />}
                     setResult={setResult}
                     fullScreen
                     disableStyles
