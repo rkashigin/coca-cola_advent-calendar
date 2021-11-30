@@ -431,10 +431,11 @@
 }
 
 img.calendarDay_modalImg_1{
-	top: -9rem;
+	top: -7rem;
+	width: 29rem;
 
 	@media screen and (max-width: $width-mobile) {
-		top: -7rem;
+		width: 32rem;
 	}
 }
 

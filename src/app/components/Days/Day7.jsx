@@ -99,7 +99,14 @@ const Day7 = ({ setOpenedDay }) => {
                             <>
                                 {result.promoCode ? (
                                     <>
-                                        <Button onClick={handleClose}>Заказать сейчас</Button>
+                                        <a
+                                            href="https://trk.mail.ru/c/lvg0b5?utm_source=coca-cola-land-2021-5&utm_medium=cola-card-2021-5&utm_campaign=ny2021-cola-5&utm_content=cola-land-2021-5"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className={styles.calendarModal__button}
+                                        >
+                                            Заказать сейчас
+                                        </a>
                                         <Button onClick={handleClose}>В календарь</Button>
                                     </>
                                 ) : (
