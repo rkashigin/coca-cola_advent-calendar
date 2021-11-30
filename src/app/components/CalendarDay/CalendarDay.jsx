@@ -25,8 +25,6 @@ const Transition = React.forwardRef((props, ref) => {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-// TODO: Посмотреть 6 день на мобилке, нужно, чтобы корзина перемещалась более плавно и легко вставала в углы
-
 const CalendarDay = observer(
     ({
         date,
@@ -63,7 +61,7 @@ const CalendarDay = observer(
 
         const handleRequestPromoCode = async () => {
             try {
-                const data = await RootStore.dayComplete(1);
+                const data = await RootStore.dayComplete(date);
 
                 setLoadedPromocode(data.promocode);
             } catch {
@@ -166,20 +164,20 @@ const CalendarDay = observer(
                                 <Button onClick={handleClose}>Выполнить позже</Button>
                             </DialogActions>
                         )}
-                        {type === 'promoCode' && !(date === 1 && !loadedPromocode) && (
-                            <DialogActions>
-                                <a
-                                    href={orderLink}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className={styles.calendarModal__button}
-                                    onClick={() => sendEvent(GA_MAP.externalLink(orderLink))}
-                                >
-                                    Заказать сейчас
-                                </a>
-                                <Button onClick={handleClose}>В календарь</Button>
-                            </DialogActions>
-                        )}
+                        {type === 'promoCode' &&
+                            !((date === 1 || date === 12) && !loadedPromocode) && (
+                                <DialogActions>
+                                    <a
+                                        href={orderLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={styles.calendarModal__button}
+                                    >
+                                        Заказать сейчас
+                                    </a>
+                                    <Button onClick={handleClose}>В календарь</Button>
+                                </DialogActions>
+                            )}
                         {type === 'postCard' && (
                             <DialogActions>
                                 <Button onClick={handleOpenDay}>Узнать</Button>

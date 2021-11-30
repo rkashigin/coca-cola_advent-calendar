@@ -9,7 +9,7 @@ import Penguin from '../../assets/images/Games/Penguin.png';
 import ShoppingCartImage from '../../assets/images/catchItem/cart.svg';
 import { RootStore } from '../../stores/RootStore';
 
-export default function useLogic({ canvasRef, cart, setScores, setResult, day }) {
+export default function useLogic({ canvasRef, cart, setScores, animationRef, setResult, day }) {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
     const checkScores = async (scores) => {
@@ -32,6 +32,14 @@ export default function useLogic({ canvasRef, cart, setScores, setResult, day })
 
     const handleTimerComplete = React.useCallback(() => setResult({ status: false }), []);
 
+    const mouse = React.useMemo(
+        () => ({
+            x: 0,
+            y: 0
+        }),
+        []
+    );
+
     if (canvasRef) {
         const canvas = document.getElementById('canvas');
         const ctx = canvas?.getContext('2d');
@@ -39,6 +47,7 @@ export default function useLogic({ canvasRef, cart, setScores, setResult, day })
         const deviceMultiplier = isTabletOrMobile ? 0.6 : 1;
         const scale = window.devicePixelRatio;
         let gameTimer = 0;
+        let lastStep = 0;
 
         canvas.style.width = `${window.innerWidth}px`;
         canvas.style.height = `${window.innerHeight}px`;
@@ -47,11 +56,12 @@ export default function useLogic({ canvasRef, cart, setScores, setResult, day })
         canvas.height = Math.floor(window.innerHeight * scale);
         ctx.scale(scale, scale);
 
-        if (!cart.x && !cart.y && !cart.prevX && !cart.prevY) {
+        if (!cart.x && !cart.y) {
             cart.x = canvas.width / (2 * scale);
-            cart.prevX = canvas.width / (2 * scale);
             cart.y = (canvas.height - 170 * scale * deviceMultiplier) / scale;
-            cart.prevY = (canvas.height - 170 * scale * deviceMultiplier) / scale;
+
+            mouse.x = canvas.width / (2 * scale);
+            mouse.y = (canvas.height - 170 * scale * deviceMultiplier) / scale;
         }
 
         const shoppingCartImage = new Image();
@@ -121,29 +131,49 @@ export default function useLogic({ canvasRef, cart, setScores, setResult, day })
             }
         };
 
-        const render = () => {
+        const distanceAndAngleBetweenTwoPoints = (x1, y1, x2, y2) => {
+            const x = x2 - x1;
+            const y = y2 - y1;
+
+            return {
+                distance: Math.sqrt(x * x + y * y),
+
+                angle: (Math.atan2(y, x) * 180) / Math.PI
+            };
+        };
+
+        const getVector = (magnitude, angle) => {
+            const angleRadians = (angle * Math.PI) / 180;
+
+            return {
+                magnitudeX: magnitude * Math.cos(angleRadians),
+                magnitudeY: magnitude * Math.sin(angleRadians)
+            };
+        };
+
+        const moveCart = (milliseconds) => {
+            const data = distanceAndAngleBetweenTwoPoints(cart.x, cart.y, mouse.x, mouse.y);
+            const velocity = data.distance / 0.5;
+            const toMouseVector = getVector(velocity, data.angle);
+            const elapsedSeconds = milliseconds / 1000;
+
+            cart.x += toMouseVector.magnitudeX * elapsedSeconds;
+            cart.y += toMouseVector.magnitudeY * elapsedSeconds;
+        };
+
+        const renderCart = () => {
+            ctx.save();
+            ctx.translate(cart.x, cart.y);
+            ctx.drawImage(shoppingCartImage, 0, 0, 160 * deviceMultiplier, 160 * deviceMultiplier);
+            ctx.restore();
+        };
+
+        const render = (elapsed) => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = '#E5E5E5';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // if (isTabletOrMobile) {
-            //     ctx.drawImage(
-            //         shoppingCartImage,
-            //         cart.prevX,
-            //         cart.y,
-            //         160 * deviceMultiplier,
-            //         160 * deviceMultiplier
-            //     );
-            // } else {
-            //
-            // }
-            ctx.drawImage(
-                shoppingCartImage,
-                cart.x,
-                cart.y,
-                160 * deviceMultiplier,
-                160 * deviceMultiplier
-            );
+            moveCart(elapsed);
+            renderCart();
 
             products.forEach((product) => {
                 ctx.save();
@@ -160,10 +190,13 @@ export default function useLogic({ canvasRef, cart, setScores, setResult, day })
             });
         };
 
-        const game = () => {
+        const game = (milliseconds = 0) => {
+            const elapsed = milliseconds - lastStep;
+            lastStep = milliseconds;
+
             update();
-            render();
-            requestAnimationFrame(game);
+            render(elapsed);
+            animationRef = requestAnimationFrame(game);
         };
 
         const handleMouseMove = (e) => {
@@ -172,7 +205,7 @@ export default function useLogic({ canvasRef, cart, setScores, setResult, day })
             }
 
             if ((e.nativeEvent.offsetX + 140 * deviceMultiplier) * scale <= canvas.width) {
-                cart.x = e.nativeEvent.offsetX;
+                mouse.x = e.nativeEvent.offsetX;
             }
         };
 
@@ -182,9 +215,9 @@ export default function useLogic({ canvasRef, cart, setScores, setResult, day })
             }
 
             if ((e.changedTouches[0].clientX + 140 * deviceMultiplier) * scale <= canvas.width) {
-                cart.x = e.changedTouches[0].clientX;
+                mouse.x = e.changedTouches[0].clientX;
             } else {
-                cart.x = (canvas.width - 160 * deviceMultiplier * scale) / scale;
+                mouse.x = (canvas.width - 160 * deviceMultiplier * scale) / scale;
             }
         };
 

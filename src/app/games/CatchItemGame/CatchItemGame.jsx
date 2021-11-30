@@ -14,14 +14,14 @@ const CatchItemGame = ({ setResult, day }) => {
     const cart = React.useMemo(
         () => ({
             x: 0,
-            prevX: 0,
-            y: 0,
-            prevY: 0
+            y: 0
         }),
         [canvasRef.current]
     );
+    const animationRef = React.useRef(0);
     const { game, handleMouseMove, handleTouch, checkScores, handleTimerComplete } = useLogic({
         canvasRef: isCanvasReady,
+        animationRef: animationRef.current,
         cart,
         setScores,
         setResult,
@@ -36,8 +36,10 @@ const CatchItemGame = ({ setResult, day }) => {
 
     React.useEffect(() => {
         if (isCanvasReady) {
-            game();
+            animationRef.current = requestAnimationFrame(game);
         }
+
+        return () => cancelAnimationFrame(animationRef.current);
     }, [isCanvasReady]);
 
     React.useEffect(() => checkScores(scores), [scores]);
