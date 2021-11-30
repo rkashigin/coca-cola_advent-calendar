@@ -28,8 +28,8 @@ class RootStoreClass {
 
     user = {
         id: { primary: 192 },
-        name: 'vhv',
-        phone: '787878788787877'
+        name: 'knknj',
+        phone: '79642444600'
     };
 
     oauthOpen = false;

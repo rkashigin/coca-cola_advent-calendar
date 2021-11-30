@@ -104,7 +104,8 @@
 }
 
 .modal__contentWrap {
-	max-height: calc(100vh - 30vw);
+	// max-height: calc(100vh - 30vw);
+	max-height: max-content;
 	// min-height: 20rem;
 	overflow-y: auto;
 

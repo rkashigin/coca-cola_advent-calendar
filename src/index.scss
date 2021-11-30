@@ -138,6 +138,8 @@ div.MuiDialog-paperFullScreen {
 
 div.css-ypiqx9-MuiDialogContent-root, div.MuiDialogContent-root {
 	overflow-x: hidden;
+  overflow-y: hidden;
+  height: max-content;
   position: relative;
 }
 h2.css-bdhsul-MuiTypography-root-MuiDialogTitle-root, h2.MuiDialogTitle-root {
@@ -258,4 +260,16 @@ div.grecaptcha-badge{
 
 svg.MuiCircularProgress-svg {
   color: var(--color_red) !important;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }

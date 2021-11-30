@@ -82,6 +82,8 @@ const ValidateCode = () => {
                 type="number"
                 fields={6}
                 placeholder="0"
+                value={code}
+                onChange={(ev) => setCode(ev.target.value)}
             />
             {isComplite ? (
                 <Button
