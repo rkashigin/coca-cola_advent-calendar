@@ -13,9 +13,14 @@ export const RootStoreApi = {
             } else if (token) {
                 headers['X-User-Authorization'] = token;
             }
-            const response = await fetch(`${config.server.apiHost}/api1.2/user`, {
-                headers
-            });
+            const response = await fetch(
+                `${config.server.apiHost}/api1.2/user?cacheBreaker=${Math.floor(
+                    Date.now() / 1_000
+                )}`,
+                {
+                    headers
+                }
+            );
             if (response.ok) {
                 return response.json();
             }
