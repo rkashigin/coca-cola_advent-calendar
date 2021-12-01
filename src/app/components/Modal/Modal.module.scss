@@ -107,10 +107,11 @@
 }
 
 .modal__contentWrap {
-	// max-height: calc(100vh - 30vw);
-	max-height: max-content;
 	// min-height: 20rem;
 	overflow-y: auto;
+	max-height: 40rem !important;
+	overflow-y: auto !important;
+	overflow-x: hidden !important;
 
 	// position: relative;
 
@@ -124,7 +125,7 @@
 	}
 
 	@media screen and (max-width: $width-mobile) {
-		max-height: calc(100vh - 70vw);
+		max-height: calc(100vh - 70vw) !important;
 	}
 }
 
