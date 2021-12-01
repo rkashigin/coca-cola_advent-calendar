@@ -71,24 +71,16 @@ const Day5 = observer(({ setOpenedDay }) => {
                         </DialogTitle>
                     )}
                     <DialogContent>
-                        {result.status ? (
-                            <DialogContentText id="alert-dialog-slide-description">
-                                Чтобы продвинуться дальше по календарю, закажите Coca-Cola в
-                                ресторанах Delivery Club за 1 ₽ по нашему специальному промокоду
-                            </DialogContentText>
-                        ) : (
-                            <DialogContentText id="alert-dialog-slide-description">
-                                Чтобы продвинуться дальше по календарю, закажите Coca-Cola в
-                                ресторанах Delivery Club за 1 ₽ по нашему специальному промокоду
-                            </DialogContentText>
-                        )}
-                        {(recievedPromocode || result.promoCode) && (
-                            <PromoCode
-                                type="red"
-                                promoCode={recievedPromocode || result.promoCode}
-                                promoCodeText="Срок действия промокода 31.01.2022"
-                            />
-                        )}
+                        <DialogContentText id="alert-dialog-slide-description">
+                            Чтобы продвинуться дальше по календарю, закажите Coca-Cola в ресторанах
+                            Delivery Club за 1 ₽ по нашему специальному промокоду
+                        </DialogContentText>
+
+                        <PromoCode
+                            type="red"
+                            promoCode={result.promoCode}
+                            promoCodeText="Срок действия промокода 31.01.2022"
+                        />
                     </DialogContent>
                     <DialogActions>
                         {(recievedPromocode || result.promoCode) && (
