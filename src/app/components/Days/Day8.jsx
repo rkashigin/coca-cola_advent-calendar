@@ -121,8 +121,8 @@ const Day8 = ({ setOpenedDay }) => {
                         <a
                             href={
                                 isDesktop
-                                    ? config.references.defaultOrderLinkDesktop
-                                    : config.references.defaultOrderLinkMobile
+                                    ? config.references.orderLinks[8].orderLinkDesktop
+                                    : config.references.orderLinks[8].orderLinkMobile
                             }
                             target="_blank"
                             rel="noopener noreferrer"

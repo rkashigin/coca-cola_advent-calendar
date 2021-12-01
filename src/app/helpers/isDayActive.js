@@ -8,5 +8,6 @@ export default function isDayActive(date) {
     // if (isFuture(dateToCheck)) return false;
     //
     // return date <= RootStore.myGamesCompleted;
-    return true;
+
+    return date === 1;
 }

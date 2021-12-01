@@ -91,8 +91,8 @@ const Day5 = observer(({ setOpenedDay }) => {
                             <a
                                 href={
                                     isDesktop
-                                        ? config.references.defaultOrderLinkDesktop
-                                        : config.references.defaultOrderLinkMobile
+                                        ? config.references.orderLinks[5].orderLinkDesktop
+                                        : config.references.orderLinks[5].orderLinkMobile
                                 }
                                 target="_blank"
                                 rel="noopener noreferrer"
