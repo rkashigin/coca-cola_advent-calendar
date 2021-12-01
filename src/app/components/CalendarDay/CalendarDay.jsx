@@ -199,24 +199,25 @@ const CalendarDay = observer(
                                 </Button>
                             </DialogActions>
                         )}
-                        {type === 'promoCode' && !(date === 1 && !loadedPromocode) && (
-                            <DialogActions>
-                                <a
-                                    href={orderLink}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className={styles.calendarModal__button}
-                                >
-                                    Заказать сейчас
-                                </a>
-                                <Button
-                                    className={styles.calendarDay__button}
-                                    onClick={handleClose}
-                                >
-                                    В календарь
-                                </Button>
-                            </DialogActions>
-                        )}
+                        {type === 'promoCode' &&
+                            !((date === 1 || date === 12) && !loadedPromocode[date]) && (
+                                <DialogActions>
+                                    <a
+                                        href={orderLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={styles.calendarModal__button}
+                                    >
+                                        Заказать сейчас
+                                    </a>
+                                    <Button
+                                        className={styles.calendarDay__button}
+                                        onClick={handleClose}
+                                    >
+                                        В календарь
+                                    </Button>
+                                </DialogActions>
+                            )}
                         {type === 'postCard' && (
                             <DialogActions>
                                 <Button
