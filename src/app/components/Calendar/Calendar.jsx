@@ -16,7 +16,7 @@ import Adaptive from '../../helpers/Adaptive';
 import styles from './Calendar.module.scss';
 
 const Calendar = observer(() => {
-    const isDesktop = useMediaQuery(Adaptive.isDesktop);
+    const isMobile = useMediaQuery(Adaptive.isMobile);
     const [openedDay, setOpenedDay] = React.useState(0);
 
     useEffect(() => {
@@ -51,7 +51,7 @@ const Calendar = observer(() => {
                         type={el.type}
                         handleOpenDay={() => handleOpenDay(el.day)}
                         openedDay={openedDay}
-                        orderLink={isDesktop ? el.orderLinkDesktop : el.orderLinkMobile}
+                        orderLink={!isMobile ? el.orderLinkDesktop : el.orderLinkMobile}
                     />
                 ))}
                 <img
