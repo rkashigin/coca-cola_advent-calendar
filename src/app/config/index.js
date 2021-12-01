@@ -17,6 +17,9 @@ export default {
         HOME: '/'
     },
     references: {
+        defaultOrderLinkDesktop:
+            'https://trk.mail.ru/c/lvg0b5?utm_source=coca-cola-land-2021-5&utm_medium=cola-card-2021-5&utm_campaign=ny2021-cola-5&utm_content=cola-land-2021-5',
+        defaultOrderLinkMobile: 'dclub://&mt_link_id=vg0b5',
         testsWinConditions: {
             3: 5,
             5: 3,

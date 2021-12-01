@@ -7,9 +7,11 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
+import { useMediaQuery } from 'react-responsive';
 
+import config from '../../config';
+import Adaptive from '../../helpers/Adaptive';
 import Button from '../Button/Button';
-
 import PromoCode from '../PromoCode/PromoCode';
 import { useDay } from '../../hooks';
 import Game from '../Game';
@@ -22,6 +24,7 @@ const Transition = React.forwardRef((props, ref) => {
 });
 
 const Day6 = ({ setOpenedDay }) => {
+    const isDesktop = useMediaQuery(Adaptive.isDesktop);
     const { open, result, resultVisible, setResult, handleClose, handleRestart } = useDay({
         setOpenedDay
     });
@@ -107,7 +110,11 @@ const Day6 = ({ setOpenedDay }) => {
                                 {result.promoCode ? (
                                     <>
                                         <a
-                                            href="https://trk.mail.ru/c/lvg0b5?utm_source=coca-cola-land-2021-5&utm_medium=cola-card-2021-5&utm_campaign=ny2021-cola-5&utm_content=cola-land-2021-5"
+                                            href={
+                                                isDesktop
+                                                    ? config.references.defaultOrderLinkDesktop
+                                                    : config.references.defaultOrderLinkMobile
+                                            }
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className={styles.calendarModal__button}

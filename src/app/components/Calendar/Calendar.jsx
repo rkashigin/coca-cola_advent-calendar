@@ -4,16 +4,19 @@ import classNames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { isFuture, isPast, isToday } from 'date-fns';
+import { useMediaQuery } from 'react-responsive';
 import CalendarDay from '../CalendarDay/CalendarDay';
 import { Day2, Day3, Day4, Day5, Day6, Day7, Day8, Day9, Day10, Day11 } from '../Days';
 import config from '../../config';
 import { RootStore } from '../../stores/RootStore';
-
-import styles from './Calendar.module.scss';
 import isDayCurrent from '../../helpers/isDayCurrent';
 import sendEvent, { GA_MAP } from '../../helpers/analytics';
+import Adaptive from '../../helpers/Adaptive';
+
+import styles from './Calendar.module.scss';
 
 const Calendar = observer(() => {
+    const isDesktop = useMediaQuery(Adaptive.isDesktop);
     const [openedDay, setOpenedDay] = React.useState(0);
 
     useEffect(() => {
@@ -48,7 +51,7 @@ const Calendar = observer(() => {
                         type={el.type}
                         handleOpenDay={() => handleOpenDay(el.day)}
                         openedDay={openedDay}
-                        orderLink={el.orderLink}
+                        orderLink={isDesktop ? el.orderLinkDesktop : el.orderLinkMobile}
                     />
                 ))}
                 <img
@@ -90,8 +93,9 @@ const DATES = [
         intro: 'Сделайте заказ в ресторанах Delivery Club на любую сумму с нашим волшебным промокодом и получите Coca-Cola в подарок',
         promoCode: 'DCCC2022',
         type: 'promoCode',
-        orderLink:
-            'https://trk.mail.ru/c/msk924?utm_source=coca-cola-land-2021-1&utm_medium=cola-card-2021-1&utm_campaign=ny2021-cola-1&utm_content=cola-land-2021-1'
+        orderLinkDesktop:
+            'https://trk.mail.ru/c/msk924?utm_source=coca-cola-land-2021-1&utm_medium=cola-card-2021-1&utm_campaign=ny2021-cola-1&utm_content=cola-land-2021-1',
+        orderLinkMobile: 'dclub://&mt_link_id=msk924'
     },
     {
         day: 2,
@@ -99,7 +103,9 @@ const DATES = [
         modalImg: require('../../assets/images/Calendar/2day.svg').default,
         title: 'Двигаемся дальше!',
         intro: 'Чтобы поближе познакомиться с главным призом нашего календаря, нужно сначала его найти. Отыщите наш волшебный холодильник за пять минут в этой предпраздничной суматохе',
-        type: 'game'
+        type: 'game',
+        orderLinkDesktop: config.references.defaultOrderLinkDesktop,
+        orderLinkMobile: config.references.defaultOrderLinkMobile
     },
     {
         day: 3,
@@ -107,7 +113,9 @@ const DATES = [
         modalImg: require('../../assets/images/Calendar/3day.svg').default,
         title: config.references.quizes.day3.title,
         intro: config.references.quizes.day3.description,
-        type: 'test'
+        type: 'test',
+        orderLinkDesktop: config.references.defaultOrderLinkDesktop,
+        orderLinkMobile: config.references.defaultOrderLinkMobile
     },
     {
         day: 4,
@@ -115,7 +123,9 @@ const DATES = [
         modalImg: require('../../assets/images/Calendar/4day.svg').default,
         title: 'Подготовка к праздникам может быть не только приятной, но и полезной!',
         intro: 'Прокачайте память с нашей новогодней мини-игрой. Найдите пару для каждой картинки, но помните — карточки закрываются при открытии новых, а время поиска ограничено',
-        type: 'game'
+        type: 'game',
+        orderLinkDesktop: config.references.defaultOrderLinkDesktop,
+        orderLinkMobile: config.references.defaultOrderLinkMobile
     },
     {
         day: 5,
@@ -124,8 +134,9 @@ const DATES = [
         title: config.references.truthOrMyths.day5.title,
         intro: config.references.truthOrMyths.day5.description,
         type: 'test',
-        orderLink:
-            'https://trk.mail.ru/c/t57ku7?utm_source=coca-cola-land-2021-2&utm_medium=cola-card-2021-2&utm_campaign=ny2021-cola-2&utm_content=cola-land-2021-2'
+        orderLinkDesktop:
+            'https://trk.mail.ru/c/t57ku7?utm_source=coca-cola-land-2021-2&utm_medium=cola-card-2021-2&utm_campaign=ny2021-cola-2&utm_content=cola-land-2021-2',
+        orderLinkMobile: 'dclub://&mt_link_id=t57ku7'
     },
     {
         day: 6,
@@ -133,7 +144,9 @@ const DATES = [
         modalImg: require('../../assets/images/Calendar/6day.svg').default,
         title: 'В предновогодней суете сложно все успеть, но можно потренироваться у нас в мини-игре',
         intro: 'Поймайте тележкой как можно больше подарков за одну минуту',
-        type: 'game'
+        type: 'game',
+        orderLinkDesktop: config.references.defaultOrderLinkDesktop,
+        orderLinkMobile: config.references.defaultOrderLinkMobile
     },
     {
         day: 7,
@@ -141,7 +154,9 @@ const DATES = [
         modalImg: require('../../assets/images/Calendar/7day.svg').default,
         title: 'Порядок важен даже во время праздников, хотя за ним и непросто уследить',
         intro: 'Собирайте новогодние атрибуты по три в ряд, но помните — время ограничено, а нужно столько всего сделать!',
-        type: 'game'
+        type: 'game',
+        orderLinkDesktop: config.references.defaultOrderLinkDesktop,
+        orderLinkMobile: config.references.defaultOrderLinkMobile
     },
     {
         day: 8,
@@ -150,8 +165,9 @@ const DATES = [
         title: config.references.surveys.day8.title,
         intro: config.references.surveys.day8.description,
         type: 'test',
-        orderLink:
-            'https://trk.mail.ru/c/wqq5q0?utm_source=coca-cola-land-2021-3&utm_medium=cola-card-2021-3&utm_campaign=ny2021-cola-3&utm_content=cola-land-2021-3'
+        orderLinkDesktop:
+            'https://trk.mail.ru/c/wqq5q0?utm_source=coca-cola-land-2021-3&utm_medium=cola-card-2021-3&utm_campaign=ny2021-cola-3&utm_content=cola-land-2021-3',
+        orderLinkMobile: 'dclub://&mt_link_id=wqq5q0'
     },
     {
         day: 9,
@@ -159,7 +175,9 @@ const DATES = [
         modalImg: require('../../assets/images/Calendar/9day.svg').default,
         title: 'Кажется, наш главный приз снова потерялся!',
         intro: 'Помогите найти наш волшебный холодильник, но помните, что время ограничено, а сделать это теперь гораздо сложнее',
-        type: 'game'
+        type: 'game',
+        orderLinkDesktop: config.references.defaultOrderLinkDesktop,
+        orderLinkMobile: config.references.defaultOrderLinkMobile
     },
     {
         day: 10,
@@ -167,7 +185,9 @@ const DATES = [
         modalImg: require('../../assets/images/Calendar/10day.svg').default,
         title: 'Помните детские утренники, ёлку и загадки от Деда Мороза?',
         intro: 'Вот мы и решили проверить, справитесь ли вы с ними сейчас. Каждая загадка имеет четыре вариант ответов, но только один правильный. И не все так просто, как может показаться на первый взгляд',
-        type: 'test'
+        type: 'test',
+        orderLinkDesktop: config.references.defaultOrderLinkDesktop,
+        orderLinkMobile: config.references.defaultOrderLinkMobile
     },
     {
         day: 11,
@@ -175,7 +195,9 @@ const DATES = [
         modalImg: require('../../assets/images/Calendar/11day.svg').default,
         title: 'Праздничными открытками сложно кого-то удивить',
         intro: 'Они могут даже казаться пережитком прошлого. Но наши открытки наполнены только самыми теплыми и полезными пожеланиями. Отправьте их своим друзьям и близким, чтобы передать им кусочек новогоднего настроения',
-        type: 'postCard'
+        type: 'postCard',
+        orderLinkDesktop: config.references.defaultOrderLinkDesktop,
+        orderLinkMobile: config.references.defaultOrderLinkMobile
     },
     {
         day: 12,
@@ -185,7 +207,8 @@ const DATES = [
         intro: 'Спасибо, что прошли его вместе с нами. Вы успешно справлялись со всеми нашими играми и загадками. Вот ваше финальное задание. Закажите три Coca-Cola в ресторанах Delivery Club по нашему особому промокоду до 30 декабря и участвуйте в розыгрыше наших главных призов!',
         promoCode: 'DCCC2022',
         type: 'promoCode',
-        orderLink:
-            'https://trk.mail.ru/c/exwrq4?utm_source=coca-cola-land-2021-4&utm_medium=cola-card-2021-4&utm_campaign=ny2021-cola-4&utm_content=cola-land-2021-4'
+        orderLinkDesktop:
+            'https://trk.mail.ru/c/exwrq4?utm_source=coca-cola-land-2021-4&utm_medium=cola-card-2021-4&utm_campaign=ny2021-cola-4&utm_content=cola-land-2021-4',
+        orderLinkMobile: 'dclub://&mt_link_id=exwrq4'
     }
 ];

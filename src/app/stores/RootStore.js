@@ -48,6 +48,8 @@ class RootStoreClass {
             : 0
         : 0;
 
+    date = null;
+
     constructor() {
         makeAutoObservable(this);
         this.init();
@@ -82,6 +84,14 @@ class RootStoreClass {
             await this.getAnonymousToken();
         } else {
             this.getUserData();
+        }
+
+        const response = await fetch('http://worldtimeapi.org/api/timezone/Europe/Moscow');
+
+        if (response.ok) {
+            const data = await response.json();
+
+            this.date = data.utc_datetime;
         }
     }
 
