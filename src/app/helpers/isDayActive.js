@@ -1,8 +1,8 @@
-import { isFuture, isPast } from 'date-fns';
+import { isFuture } from 'date-fns';
 import { RootStore } from '../stores/RootStore';
 
 export default function isDayActive(date) {
-    if (isPast(new Date(2021, 11, date))) return true;
+    if (isFuture(new Date(2021, 11, date))) return false;
 
-    return !(date > RootStore.myGamesCompleted || isFuture(new Date(2021, 11, date)));
+    return date <= RootStore.myGamesCompleted;
 }

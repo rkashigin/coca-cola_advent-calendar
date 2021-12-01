@@ -20,6 +20,7 @@ import PromoCode from '../PromoCode/PromoCode';
 import styles from './CalendarDay.module.scss';
 import { RootStore } from '../../stores/RootStore';
 import sendEvent, { GA_MAP } from '../../helpers/analytics';
+import isDayActive from '../../helpers/isDayActive';
 
 const Transition = React.forwardRef((props, ref) => {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -47,9 +48,9 @@ const CalendarDay = observer(
 
         const handleClickOpen = () => {
             if (RootStore.user.id) {
-                // if (isDayActive(date)) {
-                setOpen(true);
-                // }
+                if (isDayActive(date)) {
+                    setOpen(true);
+                }
             } else {
                 RootStore.setOauthOpen(true);
             }
