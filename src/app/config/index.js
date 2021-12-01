@@ -17,6 +17,31 @@ export default {
         HOME: '/'
     },
     references: {
+        orderLinks: {
+            1: {
+                orderLinkDesktop:
+                    'https://trk.mail.ru/c/msk924?utm_source=coca-cola-land-2021-1&utm_medium=cola-card-2021-1&utm_campaign=ny2021-cola-1&utm_content=cola-land-2021-1',
+                orderLinkMobile: 'dclub://&mt_link_id=msk924'
+            },
+            5: {
+                orderLinkDesktop:
+                    'https://trk.mail.ru/c/t57ku7?utm_source=coca-cola-land-2021-2&utm_medium=cola-card-2021-2&utm_campaign=ny2021-cola-2&utm_content=cola-land-2021-2',
+                orderLinkMobile: 'dclub://&mt_link_id=t57ku7'
+            },
+            8: {
+                orderLinkDesktop:
+                    'https://trk.mail.ru/c/wqq5q0?utm_source=coca-cola-land-2021-3&utm_medium=cola-card-2021-3&utm_campaign=ny2021-cola-3&utm_content=cola-land-2021-3',
+                orderLinkMobile: 'dclub://&mt_link_id=wqq5q0'
+            },
+            12: {
+                orderLinkDesktop:
+                    'https://trk.mail.ru/c/exwrq4?utm_source=coca-cola-land-2021-4&utm_medium=cola-card-2021-4&utm_campaign=ny2021-cola-4&utm_content=cola-land-2021-4',
+                orderLinkMobile: 'dclub://&mt_link_id=exwrq4'
+            }
+        },
+        defaultOrderLinkDesktop:
+            'https://trk.mail.ru/c/lvg0b5?utm_source=coca-cola-land-2021-5&utm_medium=cola-card-2021-5&utm_campaign=ny2021-cola-5&utm_content=cola-land-2021-5',
+        defaultOrderLinkMobile: 'dclub://&mt_link_id=vg0b5',
         testsWinConditions: {
             3: 5,
             5: 3,

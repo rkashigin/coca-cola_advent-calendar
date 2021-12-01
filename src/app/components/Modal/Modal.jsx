@@ -6,7 +6,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
-import { Link } from '@mui/material';
+import { useMediaQuery } from 'react-responsive';
+import Adaptive from '../../helpers/Adaptive';
 
 import config from '../../config';
 import Button from '../Button/Button';
@@ -21,6 +22,7 @@ const Transition = React.forwardRef((props, ref) => {
 });
 
 const Modal = ({ open, handleClose, title, children, hasDialogActions, className }) => {
+    const isDesktop = useMediaQuery(Adaptive.isDesktop);
     return (
         <Dialog
             open={open}
@@ -49,7 +51,11 @@ const Modal = ({ open, handleClose, title, children, hasDialogActions, className
                 {hasDialogActions && (
                     <DialogActions>
                         <a
-                            href={config.references.orderLink}
+                            href={
+                                isDesktop
+                                    ? config.references.defaultOrderLinkDesktop
+                                    : config.references.defaultOrderLinkMobile
+                            }
                             onClick={() => {
                                 handleClose();
                                 sendEvent(GA_MAP.externalLink(config.references.orderLink));

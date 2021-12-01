@@ -47,13 +47,13 @@ const CalendarDay = observer(
         const [loadedPromocode, setLoadedPromocode] = React.useState({ 1: '', 12: '' });
 
         const handleClickOpen = () => {
-            if (RootStore.user.id) {
-                if (isDayActive(date)) {
-                    setOpen(true);
-                }
-            } else {
-                RootStore.setOauthOpen(true);
+            // if (RootStore.user.id) {
+            if (isDayActive(date)) {
+                setOpen(true);
             }
+            // } else {
+            //     RootStore.setOauthOpen(true);
+            // }
         };
         const handleClose = () => {
             setOpen(false);
@@ -252,19 +252,17 @@ const CalendarDay = observer(
 
 CalendarDay.propTypes = {
     date: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    orderLink: PropTypes.string.isRequired,
     img: PropTypes.string.isRequired,
     className: PropTypes.elementType,
     classNameImg: PropTypes.elementType,
-    classNameSpan: PropTypes.elementType,
-    orderLink: PropTypes.string
+    classNameSpan: PropTypes.elementType
 };
 
 CalendarDay.defaultProps = {
     className: '',
     classNameImg: '',
-    classNameSpan: '',
-    orderLink:
-        'https://trk.mail.ru/c/lvg0b5?utm_source=coca-cola-land-2021-5&utm_medium=cola-card-2021-5&utm_campaign=ny2021-cola-5&utm_content=cola-land-2021-5'
+    classNameSpan: ''
 };
 
 export default CalendarDay;
