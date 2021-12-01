@@ -36,14 +36,14 @@ export const GA_MAP = {
     // ok: { event_category: 'social media', event: 'Click', event_label: 'OK' },
     externalLink: (link) => {
         return { event_category: 'link', event: 'Click', event_label: link };
-    }, // переход по вшешней ссылке
+    }, // переход по внешней ссылке
     time: (page, time) => {
         return { event_category: page, event: 'timeleft', event_label: time };
     }, // время на странице и в играх
     buttonClick: (name) => {
         return { event_category: 'button', event: 'Click', event_label: name };
-    },
-    userLogin: { event_category: 'user', event: 'login', event_label: 'authorization' },
+    }, // нажатие на кнопку
+    userLogin: { event_category: 'user', event: 'login', event_label: 'authorization' }, // авторизация
     userLogout: { event_category: 'user', event: 'logout', event_label: 'authorization' }
 };
 
