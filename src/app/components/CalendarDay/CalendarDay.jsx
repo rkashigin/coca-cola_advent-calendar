@@ -46,13 +46,13 @@ const CalendarDay = observer(
         const [loadedPromocode, setLoadedPromocode] = React.useState({ 1: '', 12: '' });
 
         const handleClickOpen = () => {
-            // if (RootStore.user.id) {
-            // if (isDayActive(date)) {
-            setOpen(true);
-            // }
-            // } else {
-            //     RootStore.setOauthOpen(true);
-            // }
+            if (RootStore.user.id) {
+                // if (isDayActive(date)) {
+                setOpen(true);
+                // }
+            } else {
+                RootStore.setOauthOpen(true);
+            }
         };
         const handleClose = () => {
             setOpen(false);
@@ -176,7 +176,10 @@ const CalendarDay = observer(
                                 </Button>
                                 <Button
                                     className={styles.calendarDay__button}
-                                    onClick={handleClose}
+                                    onClick={() => {
+                                        handleClose();
+                                        sendEvent(GA_MAP.buttonClick(`start game ${date}`));
+                                    }}
                                 >
                                     Выполнить позже
                                 </Button>
@@ -192,7 +195,10 @@ const CalendarDay = observer(
                                 </Button>
                                 <Button
                                     className={styles.calendarDay__button}
-                                    onClick={handleClose}
+                                    onClick={() => {
+                                        handleClose();
+                                        sendEvent(GA_MAP.buttonClick(`start game ${date}`));
+                                    }}
                                 >
                                     Выполнить позже
                                 </Button>

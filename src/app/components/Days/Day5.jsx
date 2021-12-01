@@ -75,12 +75,13 @@ const Day5 = observer(({ setOpenedDay }) => {
                             Чтобы продвинуться дальше по календарю, закажите Coca-Cola в ресторанах
                             Delivery Club за 1 ₽ по нашему специальному промокоду
                         </DialogContentText>
-
-                        <PromoCode
-                            type="red"
-                            promoCode={result.promoCode}
-                            promoCodeText="Срок действия промокода 31.01.2022"
-                        />
+                        {(recievedPromocode || result.promoCode) && (
+                            <PromoCode
+                                type="red"
+                                promoCode={recievedPromocode || result.promoCode}
+                                promoCodeText="Срок действия промокода 31.01.2022"
+                            />
+                        )}
                     </DialogContent>
                     <DialogActions>
                         {(recievedPromocode || result.promoCode) && (
