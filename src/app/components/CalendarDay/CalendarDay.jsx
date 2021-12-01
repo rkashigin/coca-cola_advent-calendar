@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useMediaQuery } from 'react-responsive';
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -13,6 +12,7 @@ import Slide from '@mui/material/Slide';
 import { CircularProgress, Link } from '@mui/material';
 
 import { observer } from 'mobx-react-lite';
+import Button from '../Button/Button';
 import Adaptive from '../../helpers/Adaptive';
 
 import PromoCode from '../PromoCode/PromoCode';
@@ -169,34 +169,68 @@ const CalendarDay = observer(
                         </DialogContent>
                         {type === 'test' && (
                             <DialogActions>
-                                <Button onClick={handleOpenDay}>Начать тест</Button>
-                                <Button onClick={handleClose}>Выполнить позже</Button>
+                                <Button
+                                    className={styles.calendarDay__button_green}
+                                    onClick={handleOpenDay}
+                                >
+                                    Начать тест
+                                </Button>
+                                <Button
+                                    className={styles.calendarDay__button}
+                                    onClick={handleClose}
+                                >
+                                    Выполнить позже
+                                </Button>
                             </DialogActions>
                         )}
                         {type === 'game' && (
                             <DialogActions>
-                                <Button onClick={handleOpenDay}>Начать игру</Button>
-                                <Button onClick={handleClose}>Выполнить позже</Button>
+                                <Button
+                                    className={styles.calendarDay__button_green}
+                                    onClick={handleOpenDay}
+                                >
+                                    Начать игру
+                                </Button>
+                                <Button
+                                    className={styles.calendarDay__button}
+                                    onClick={handleClose}
+                                >
+                                    Выполнить позже
+                                </Button>
                             </DialogActions>
                         )}
-                        {type === 'promoCode' &&
-                            !((date === 1 || date === 12) && !loadedPromocode) && (
-                                <DialogActions>
-                                    <a
-                                        href={orderLink}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className={styles.calendarModal__button}
-                                    >
-                                        Заказать сейчас
-                                    </a>
-                                    <Button onClick={handleClose}>В календарь</Button>
-                                </DialogActions>
-                            )}
+                        {type === 'promoCode' && !(date === 1 && !loadedPromocode) && (
+                            <DialogActions>
+                                <a
+                                    href={orderLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={styles.calendarModal__button}
+                                >
+                                    Заказать сейчас
+                                </a>
+                                <Button
+                                    className={styles.calendarDay__button}
+                                    onClick={handleClose}
+                                >
+                                    В календарь
+                                </Button>
+                            </DialogActions>
+                        )}
                         {type === 'postCard' && (
                             <DialogActions>
-                                <Button onClick={handleOpenDay}>Сделать открытку</Button>
-                                <Button onClick={handleClose}>Выполнить позже</Button>
+                                <Button
+                                    className={styles.calendarDay__button_green}
+                                    onClick={handleOpenDay}
+                                >
+                                    Сделать открытку
+                                </Button>
+                                <Button
+                                    className={styles.calendarDay__button}
+                                    onClick={handleClose}
+                                >
+                                    Выполнить позже
+                                </Button>
                             </DialogActions>
                         )}
                     </div>
