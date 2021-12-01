@@ -94,7 +94,7 @@ const CalendarDay = observer(
                 open &&
                 (date === 1 || date === 12) &&
                 RootStore.user.id &&
-                (RootStore.myGamesCompleted < 1 || RootStore.myGamesCompleted > 11)
+                (RootStore.myGamesCompleted < 2 || RootStore.myGamesCompleted > 11)
             ) {
                 handleRequestPromoCode();
             }
