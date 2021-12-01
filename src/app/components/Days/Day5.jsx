@@ -68,17 +68,11 @@ const Day5 = ({ setOpenedDay }) => {
                         </DialogTitle>
                     )}
                     <DialogContent>
-                        {result.status ? (
-                            <DialogContentText id="alert-dialog-slide-description">
-                                Чтобы продвинуться дальше по календарю, закажите Coca-Cola в
-                                ресторанах Delivery Club за 1 ₽ по нашему специальному промокоду
-                            </DialogContentText>
-                        ) : (
-                            <DialogContentText id="alert-dialog-slide-description">
-                                Чтобы продвинуться дальше по календарю, закажите Coca-Cola в
-                                ресторанах Delivery Club за 1 ₽ по нашему специальному промокоду
-                            </DialogContentText>
-                        )}
+                        <DialogContentText id="alert-dialog-slide-description">
+                            Чтобы продвинуться дальше по календарю, закажите Coca-Cola в ресторанах
+                            Delivery Club за 1 ₽ по нашему специальному промокоду
+                        </DialogContentText>
+
                         <PromoCode
                             type="red"
                             promoCode={result.promoCode}
