@@ -47,13 +47,13 @@ const CalendarDay = observer(
         const [loadedPromocode, setLoadedPromocode] = React.useState({ 1: '', 12: '' });
 
         const handleClickOpen = () => {
-            // if (RootStore.user.id) {
-            if (isDayActive(date)) {
-                setOpen(true);
+            if (RootStore.user.id) {
+                if (isDayActive(date)) {
+                    setOpen(true);
+                }
+            } else {
+                RootStore.setOauthOpen(true);
             }
-            // } else {
-            //     RootStore.setOauthOpen(true);
-            // }
         };
         const handleClose = () => {
             setOpen(false);
