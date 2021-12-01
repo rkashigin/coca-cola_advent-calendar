@@ -123,18 +123,22 @@ const Day4 = ({ setOpenedDay }) => {
                                 <>
                                     {result.promoCode ? (
                                         <>
-                                            <a
-                                                href={
-                                                    isDesktop
-                                                        ? config.references.defaultOrderLinkDesktop
-                                                        : config.references.defaultOrderLinkMobile
-                                                }
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className={styles.calendarModal__button}
-                                            >
-                                                Заказать сейчас
-                                            </a>
+                                            {isDesktop && (
+                                                <a
+                                                    href={
+                                                        isDesktop
+                                                            ? config.references
+                                                                  .defaultOrderLinkDesktop
+                                                            : config.references
+                                                                  .defaultOrderLinkMobile
+                                                    }
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className={styles.calendarModal__button}
+                                                >
+                                                    Заказать сейчас
+                                                </a>
+                                            )}
                                             <Button
                                                 className={styles.calendarDay__button}
                                                 onClick={handleClose}
@@ -155,18 +159,22 @@ const Day4 = ({ setOpenedDay }) => {
                                 <>
                                     {result.promoCode ? (
                                         <>
-                                            <a
-                                                href={
-                                                    isDesktop
-                                                        ? config.references.defaultOrderLinkDesktop
-                                                        : config.references.defaultOrderLinkMobile
-                                                }
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className={styles.calendarModal__button}
-                                            >
-                                                Заказать сейчас
-                                            </a>
+                                            {isDesktop && (
+                                                <a
+                                                    href={
+                                                        isDesktop
+                                                            ? config.references
+                                                                  .defaultOrderLinkDesktop
+                                                            : config.references
+                                                                  .defaultOrderLinkMobile
+                                                    }
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className={styles.calendarModal__button}
+                                                >
+                                                    Заказать сейчас
+                                                </a>
+                                            )}
                                             <Button
                                                 className={styles.calendarDay__button}
                                                 onClick={handleClose}

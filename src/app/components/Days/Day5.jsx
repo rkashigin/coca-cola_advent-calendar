@@ -87,7 +87,7 @@ const Day5 = observer(({ setOpenedDay }) => {
                         )}
                     </DialogContent>
                     <DialogActions>
-                        {(recievedPromocode || result.promoCode) && (
+                        {isDesktop && (recievedPromocode || result.promoCode) && (
                             <a
                                 href={
                                     isDesktop

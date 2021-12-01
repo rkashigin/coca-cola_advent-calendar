@@ -42,18 +42,19 @@ const CalendarDay = observer(
         handleOpenDay,
         orderLink
     }) => {
+        const isDesktop = useMediaQuery(Adaptive.isDesktop);
         const isHorizontal = useMediaQuery(Adaptive.isHorizontal);
         const [open, setOpen] = React.useState(false);
         const [loadedPromocode, setLoadedPromocode] = React.useState({ 1: '', 12: '' });
 
         const handleClickOpen = () => {
-            // if (RootStore.user.id) {
-            if (isDayActive(date)) {
-                setOpen(true);
+            if (RootStore.user.id) {
+                if (isDayActive(date)) {
+                    setOpen(true);
+                }
+            } else {
+                RootStore.setOauthOpen(true);
             }
-            // } else {
-            //     RootStore.setOauthOpen(true);
-            // }
         };
         const handleClose = () => {
             setOpen(false);
@@ -211,14 +212,16 @@ const CalendarDay = observer(
                         {type === 'promoCode' &&
                             !((date === 1 || date === 12) && !loadedPromocode[date]) && (
                                 <DialogActions>
-                                    <a
-                                        href={orderLink}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className={styles.calendarModal__button}
-                                    >
-                                        Заказать сейчас
-                                    </a>
+                                    {isDesktop && (
+                                        <a
+                                            href={orderLink}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className={styles.calendarModal__button}
+                                        >
+                                            Заказать сейчас
+                                        </a>
+                                    )}
                                     <Button
                                         className={styles.calendarDay__button}
                                         onClick={handleClose}
