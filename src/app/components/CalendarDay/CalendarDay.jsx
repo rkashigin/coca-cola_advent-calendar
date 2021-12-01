@@ -58,31 +58,34 @@ const CalendarDay = observer(
             setOpen(false);
         };
 
+        const findPromocodes = () => {
+            if (date === 1) {
+                const firstCode =
+                    RootStore.myPromocodes.find(({ Type }) => Type === 0)?.Value || '';
+
+                setLoadedPromocode({ ...loadedPromocode, 1: firstCode });
+            }
+
+            if (date === 12) {
+                const lastCode = RootStore.myPromocodes.find(({ Type }) => Type === 6)?.Value || '';
+
+                setLoadedPromocode({ ...loadedPromocode, 12: lastCode });
+            }
+        };
+
         const handleRequestPromoCode = async () => {
             try {
                 const data = await RootStore.dayComplete(date);
 
                 setLoadedPromocode({ ...loadedPromocode, [date]: data.promocode });
             } catch {
-                setLoadedPromocode({ ...loadedPromocode, [date]: '' });
+                findPromocodes();
             }
         };
 
         useEffect(() => {
             if (RootStore.myPromocodes.length) {
-                if (date === 1) {
-                    const firstCode =
-                        RootStore.myPromocodes.find(({ Type }) => Type === 0)?.Value || '';
-
-                    setLoadedPromocode({ ...loadedPromocode, 1: firstCode });
-                }
-
-                if (date === 12) {
-                    const lastCode =
-                        RootStore.myPromocodes.find(({ Type }) => Type === 6)?.Value || '';
-
-                    setLoadedPromocode({ ...loadedPromocode, 12: lastCode });
-                }
+                findPromocodes();
             }
         }, [RootStore.myPromocodes]);
 
