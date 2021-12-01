@@ -72,13 +72,15 @@ const CalendarDay = observer(
         useEffect(() => {
             if (RootStore.myPromocodes.length) {
                 if (date === 1) {
-                    const firstCode = RootStore.myPromocodes.find(({ Type }) => Type === 0).Value;
+                    const firstCode =
+                        RootStore.myPromocodes.find(({ Type }) => Type === 0)?.Value || '';
 
                     setLoadedPromocode({ ...loadedPromocode, 1: firstCode });
                 }
 
                 if (date === 12) {
-                    const lastCode = RootStore.myPromocodes.find(({ Type }) => Type === 6).Value;
+                    const lastCode =
+                        RootStore.myPromocodes.find(({ Type }) => Type === 6)?.Value || '';
 
                     setLoadedPromocode({ ...loadedPromocode, 12: lastCode });
                 }
