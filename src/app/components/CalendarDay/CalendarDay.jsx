@@ -154,13 +154,27 @@ const CalendarDay = observer(
                         </DialogContent>
                         {type === 'test' && (
                             <DialogActions>
-                                <Button onClick={handleOpenDay}>Начать тест</Button>
+                                <Button
+                                    onClick={() => {
+                                        handleOpenDay();
+                                        sendEvent(GA_MAP.buttonClick(`start game ${date}`));
+                                    }}
+                                >
+                                    Начать тест
+                                </Button>
                                 <Button onClick={handleClose}>Выполнить позже</Button>
                             </DialogActions>
                         )}
                         {type === 'game' && (
                             <DialogActions>
-                                <Button onClick={handleOpenDay}>Начать игру</Button>
+                                <Button
+                                    onClick={() => {
+                                        handleOpenDay();
+                                        sendEvent(GA_MAP.buttonClick(`start game ${date}`));
+                                    }}
+                                >
+                                    Начать игру
+                                </Button>
                                 <Button onClick={handleClose}>Выполнить позже</Button>
                             </DialogActions>
                         )}
