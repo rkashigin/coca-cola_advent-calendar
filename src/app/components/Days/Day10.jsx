@@ -114,7 +114,7 @@ const Day10 = ({ setOpenedDay }) => {
                     <DialogActions>
                         {result.status ? (
                             <>
-                                {result.promoCode && (
+                                {isDesktop && result.promoCode && (
                                     <a
                                         href={
                                             isDesktop

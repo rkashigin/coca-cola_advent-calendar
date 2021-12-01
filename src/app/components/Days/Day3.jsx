@@ -121,7 +121,7 @@ const Day3 = ({ setOpenedDay }) => {
                     <DialogActions>
                         {result.status ? (
                             <>
-                                {result.promoCode && (
+                                {isDesktop && result.promoCode && (
                                     <a
                                         href={
                                             isDesktop
@@ -145,18 +145,22 @@ const Day3 = ({ setOpenedDay }) => {
                         ) : (
                             <>
                                 {result.promoCode ? (
-                                    <a
-                                        href={
-                                            isDesktop
-                                                ? config.references.defaultOrderLinkDesktop
-                                                : config.references.defaultOrderLinkMobile
-                                        }
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className={styles.calendarModal__button}
-                                    >
-                                        Заказать сейчас
-                                    </a>
+                                    <>
+                                        {isDesktop && (
+                                            <a
+                                                href={
+                                                    isDesktop
+                                                        ? config.references.defaultOrderLinkDesktop
+                                                        : config.references.defaultOrderLinkMobile
+                                                }
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className={styles.calendarModal__button}
+                                            >
+                                                Заказать сейчас
+                                            </a>
+                                        )}
+                                    </>
                                 ) : (
                                     <Button
                                         className={styles.calendarDay__button_green}
