@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 
 import styles from './Survey.module.scss';
 import { RootStore } from '../../stores/RootStore';
+import sendEvent, { GA_MAP } from '../../helpers/analytics';
 
 const Survey = ({ setResult, survey, day }) => {
     const [questionNumber, setQuestionNumber] = React.useState(0);
@@ -40,6 +41,16 @@ const Survey = ({ setResult, survey, day }) => {
     React.useEffect(() => {
         game();
     }, [selectedAnswer]);
+
+    React.useEffect(() => {
+        sendEvent(GA_MAP.time(`game ${day}`, 0));
+        const d = Date.now();
+        const interval = setInterval(() => {
+            sendEvent(GA_MAP.time(`game ${day}`, 10 * Math.round((Date.now() - d) / 10_000)));
+        }, 10_000);
+
+        return () => clearInterval(interval);
+    }, [day]);
 
     return (
         <div className={styles.survey}>

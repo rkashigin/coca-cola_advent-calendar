@@ -431,10 +431,11 @@
 }
 
 img.calendarDay_modalImg_1{
-	top: -9rem;
+	top: -7rem;
+	width: 29rem;
 
 	@media screen and (max-width: $width-mobile) {
-		top: -7rem;
+
 	}
 }
 
@@ -446,11 +447,12 @@ img.calendarDay_modalImg_2{
 }
 
 img.calendarDay_modalImg_3{
-	width: 25rem;
-	top: -17.5rem;
+	width: 20rem;
+	top: -11rem;
 
 	@media screen and (max-width: $width-mobile) {
-		top: -18rem;
+		width: 20rem;
+		top: -11rem;
 	}
 }
 
@@ -473,26 +475,32 @@ img.calendarDay_modalImg_5{
 }
 
 img.calendarDay_modalImg_6{
-	width: 30rem;
-	top: -14.5rem;
+	width: 25rem;
+	top: -9.5rem;
 
 	@media screen and (max-width: $width-mobile) {
+		width: 30rem;
+		top: -14.5rem;
 	}
 }
 
 img.calendarDay_modalImg_7{
-	width: 30rem;
+	width: 25rem;
+    top: -8rem;
 
 	@media screen and (max-width: $width-mobile) {
-		top: -14rem;
+		width: 25rem;
+		top: -9rem;
 	}
 }
 
 img.calendarDay_modalImg_8{
-	width: 31rem;
+	width: 28rem;
+    top: -11rem;
 
 	@media screen and (max-width: $width-mobile) {
-		top: -14rem;
+		width: 26rem;
+		top: -9rem;
 	}
 }
 
@@ -505,26 +513,34 @@ img.calendarDay_modalImg_9{
 }
 
 img.calendarDay_modalImg_10{
+	width: 28rem;
+    top: -8rem;
 
 	@media screen and (max-width: $width-mobile) {
-		top: -9rem;
+		width: 25rem;
+		top: -6rem;
 	}
 	
 }
 
 img.calendarDay_modalImg_11{
-	top: -15rem;
+	top: -8rem;
+    width: 26rem;
 
 	@media screen and (max-width: $width-mobile) {
-		top: -10rem;
+		width: 24rem;
+		top: -6rem;
 	}
 }
 
 img.calendarDay_modalImg_12{
-	width: 32rem;
-	top: -11rem;
+	width: 23rem;
+    top: -3rem;
 
 	@media screen and (max-width: $width-mobile) {
+		width: 25rem;
+		top: -6rem;
+
 	}
 }
 

@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import cn from 'classnames';
 
+import config from '../../config';
+
 import styles from './TruthOrMyth.module.scss';
 import { RootStore } from '../../stores/RootStore';
+import sendEvent, { GA_MAP } from '../../helpers/analytics';
 
 const TruthOrMyth = ({ setResult, setScore, quiz, day }) => {
     const [questionNumber, setQuestionNumber] = React.useState(0);
@@ -18,6 +21,15 @@ const TruthOrMyth = ({ setResult, setScore, quiz, day }) => {
             rightAnswers.current += 1;
         }
     };
+    React.useEffect(() => {
+        sendEvent(GA_MAP.time(`game ${day}`, 0));
+        const d = Date.now();
+        const interval = setInterval(() => {
+            sendEvent(GA_MAP.time(`game ${day}`, 10 * Math.round((Date.now() - d) / 10_000)));
+        }, 10_000);
+
+        return () => clearInterval(interval);
+    }, [day]);
 
     const game = async () => {
         let timer;
@@ -28,19 +40,26 @@ const TruthOrMyth = ({ setResult, setScore, quiz, day }) => {
                     setSelectedAnswer(null);
                     setQuestionNumber((prevNumber) => prevNumber + 1);
                 } else {
-                    try {
-                        const data = await RootStore.dayComplete(day);
+                    if (rightAnswers.current >= config.references.testsWinConditions[day]) {
+                        try {
+                            const data = await RootStore.dayComplete(day);
 
+                            setResult({
+                                status: true,
+                                promoCode: data.promocode || false
+                            });
+                        } catch {
+                            setResult({
+                                status: true,
+                                promoCode: false
+                            });
+                        }
+                    } else {
                         setResult({
-                            status: true,
-                            promoCode: data.promocode || false
-                        });
-                    } catch {
-                        setResult({
-                            status: true,
-                            promoCode: false
+                            status: false
                         });
                     }
+
                     setScore(rightAnswers.current);
                 }
             }, 2500);

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 
 import { Alert, AlertTitle } from '@mui/material';
@@ -7,11 +7,13 @@ import { Alert, AlertTitle } from '@mui/material';
 import { ReactComponent as CopyIcon } from '../../assets/icons/Modal_promoCode_button_copy.svg';
 
 import styles from './PromoCode.module.scss';
+import sendEvent, { GA_MAP } from '../../helpers/analytics';
 
 const PromoCode = ({ promoCode, promoCodeText, type, promoCodeName }) => {
     const [copied, setCopied] = React.useState(false);
 
     const copiedHandler = async () => {
+        sendEvent(GA_MAP.buttonClick('promoCode copy'));
         try {
             await navigator.clipboard.writeText(promoCode);
             setCopied(true);
@@ -30,14 +32,12 @@ const PromoCode = ({ promoCode, promoCodeText, type, promoCodeName }) => {
             )}
             {type === 'grey' && <div className={styles.promoCode__text_grey}>{promoCodeText}</div>}
             <div
-                name="promoCode"
-                value={promoCode}
                 className={classNames(styles.promoCode__input, {
                     [styles.promoCode__input_grey]: type === 'grey'
                 })}
                 // onChange={changeHandler}
             >
-                {promoCode}
+                <span>{promoCode}</span>
                 <button className={styles.promoCode__button} type="button" onClick={copiedHandler}>
                     <CopyIcon
                         className={classNames(styles.promoCode__button_copy, {

@@ -51,7 +51,7 @@ const Day11 = () => {
                 </DialogContent>
                 <DialogActions>
                     <Button
-                        className={styles.modalResult__button}
+                        className={styles.calendarDay__button}
                         onClick={handleClose}
                         content="В календарь"
                     />

@@ -8,6 +8,7 @@ import Adaptive from '../../helpers/Adaptive';
 import useLogic from './useLogic';
 
 import styles from './WhereIsGame.module.scss';
+import sendEvent, { GA_MAP } from '../../helpers/analytics';
 
 const WhereIsGame = ({ gameVariant, setResult, day }) => {
     const gameConfig = config.references.whereIsGame[gameVariant];
@@ -18,6 +19,16 @@ const WhereIsGame = ({ gameVariant, setResult, day }) => {
         setResult,
         day
     });
+
+    React.useEffect(() => {
+        sendEvent(GA_MAP.time(`game ${day}`, 0));
+        const d = Date.now();
+        const interval = setInterval(() => {
+            sendEvent(GA_MAP.time(`game ${day}`, 10 * Math.round((Date.now() - d) / 10_000)));
+        }, 10_000);
+
+        return () => clearInterval(interval);
+    }, [day]);
 
     return (
         <div className={styles.game}>

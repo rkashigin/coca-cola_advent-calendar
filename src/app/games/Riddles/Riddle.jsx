@@ -3,11 +3,14 @@ import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import cn from 'classnames';
 
+import config from '../../config/index';
+
 import { ReactComponent as WrongAnswer } from '../../assets/icons/icon__bad.svg';
 import { ReactComponent as RightAnswer } from '../../assets/icons/icon__good.svg';
 
 import styles from '../Quiz/Quiz.module.scss';
 import { RootStore } from '../../stores/RootStore';
+import sendEvent, { GA_MAP } from '../../helpers/analytics';
 
 const Riddle = ({ setResult, setScore, riddle, day }) => {
     const [questionNumber, setQuestionNumber] = React.useState(0);
@@ -31,19 +34,26 @@ const Riddle = ({ setResult, setScore, riddle, day }) => {
                     setSelectedAnswer(null);
                     setQuestionNumber((prevNumber) => prevNumber + 1);
                 } else {
-                    try {
-                        const data = await RootStore.dayComplete(day);
+                    if (rightAnswers.current >= config.references.testsWinConditions[day]) {
+                        try {
+                            const data = await RootStore.dayComplete(day);
 
+                            setResult({
+                                status: true,
+                                promoCode: data.promocode || false
+                            });
+                        } catch {
+                            setResult({
+                                status: true,
+                                promoCode: false
+                            });
+                        }
+                    } else {
                         setResult({
-                            status: true,
-                            promoCode: data.promocode || false
-                        });
-                    } catch {
-                        setResult({
-                            status: true,
-                            promoCode: false
+                            status: false
                         });
                     }
+
                     setScore(rightAnswers.current);
                 }
             }, 2500);
@@ -57,6 +67,16 @@ const Riddle = ({ setResult, setScore, riddle, day }) => {
 
         return () => clearTimeout(timer);
     }, [selectedAnswer]);
+
+    React.useEffect(() => {
+        sendEvent(GA_MAP.time(`game ${day}`, 0));
+        const d = Date.now();
+        const interval = setInterval(() => {
+            sendEvent(GA_MAP.time(`game ${day}`, 10 * Math.round((Date.now() - d) / 10_000)));
+        }, 10_000);
+
+        return () => clearInterval(interval);
+    }, [day]);
 
     return (
         <div className={styles.quiz}>

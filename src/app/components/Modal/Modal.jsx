@@ -1,18 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
-// import { DialogContentText } from '@mui/material';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
+import { Link } from '@mui/material';
+
+import config from '../../config';
 import Button from '../Button/Button';
 
 import { ReactComponent as CloseIcon } from '../../assets/icons/Modal_close_icon.svg';
 
 import styles from './Modal.module.scss';
+import sendEvent, { GA_MAP } from '../../helpers/analytics';
 
 const Transition = React.forwardRef((props, ref) => {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -24,9 +26,13 @@ const Modal = ({ open, handleClose, title, children, hasDialogActions, className
             open={open}
             TransitionComponent={Transition}
             keepMounted
-            onClose={handleClose}
+            onClose={(_, reason) => {
+                if (reason === 'backdropClick') return;
+
+                handleClose();
+            }}
             aria-describedby="alert-dialog-slide-description"
-            onBackdropClick={handleClose}
+            onBackdropClick={() => {}}
         >
             <div className={classNames(className, styles.modal)}>
                 <Button
@@ -42,11 +48,18 @@ const Modal = ({ open, handleClose, title, children, hasDialogActions, className
                 </DialogContent>
                 {hasDialogActions && (
                     <DialogActions>
-                        <Button
-                            onClick={handleClose}
+                        <a
+                            href={config.references.orderLink}
+                            onClick={() => {
+                                handleClose();
+                                sendEvent(GA_MAP.externalLink(config.references.orderLink));
+                            }}
                             className={styles.modal__button_order}
-                            content="Заказать сейчас"
-                        />
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Заказать сейчас
+                        </a>
                     </DialogActions>
                 )}
             </div>

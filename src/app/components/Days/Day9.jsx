@@ -1,12 +1,13 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import Button from '@mui/material/Button';
+import classNames from 'classnames';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 
+import Button from '../Button/Button';
 import Game from '../Game';
 import { WhereIsGame } from '../../games';
 import { useDay } from '../../hooks';
@@ -28,7 +29,11 @@ const Day9 = ({ setOpenedDay }) => {
             <Dialog
                 open={open}
                 TransitionComponent={Transition}
-                onClose={handleClose}
+                onClose={(_, reason) => {
+                    if (reason === 'backdropClick') return;
+
+                    handleClose();
+                }}
                 className={styles.popup}
                 fullScreen
                 fullWidth
@@ -42,20 +47,25 @@ const Day9 = ({ setOpenedDay }) => {
                 />
             </Dialog>
             <Dialog open={resultVisible} TransitionComponent={Transition} className={styles.popup}>
-                {result.status ? (
-                    <img
-                        className={styles.modalResult__img_result}
-                        src={require('../../assets/images/Games/game_1_day.png').default}
-                        alt=""
-                    />
-                ) : (
-                    <img
-                        className={styles.modalResult__img}
-                        src={require('../../assets/images/Games/game_2_day.png').default}
-                        alt=""
-                    />
-                )}
                 <div className={styles.modal}>
+                    <>
+                        {result.status ? (
+                            <img
+                                className={styles.modalResult__img}
+                                src={require('../../assets/images/Games/game_win.svg').default}
+                                alt=""
+                            />
+                        ) : (
+                            <img
+                                className={classNames(
+                                    styles.modalResult__img,
+                                    styles.modalResult__img_resize
+                                )}
+                                src={require('../../assets/images/Games/game_loss.svg').default}
+                                alt=""
+                            />
+                        )}
+                    </>
                     {result.status ? (
                         <>
                             {result.promoCode ? (
@@ -92,12 +102,24 @@ const Day9 = ({ setOpenedDay }) => {
                             <>
                                 {result.promoCode ? (
                                     <>
-                                        <Button onClick={handleClose}>Заказать сейчас</Button>
-                                        <Button onClick={handleClose}>В календарь</Button>
+                                        <a
+                                            href="https://trk.mail.ru/c/lvg0b5?utm_source=coca-cola-land-2021-5&utm_medium=cola-card-2021-5&utm_campaign=ny2021-cola-5&utm_content=cola-land-2021-5"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className={styles.calendarModal__button}
+                                        >
+                                            Заказать сейчас
+                                        </a>
+                                        <Button
+                                            className={styles.calendarDay__button}
+                                            onClick={handleClose}
+                                        >
+                                            В календарь
+                                        </Button>
                                     </>
                                 ) : (
                                     <Button
-                                        className={styles.modalButton_return}
+                                        className={styles.calendarDay__button}
                                         onClick={handleClose}
                                     >
                                         В календарь
@@ -106,8 +128,18 @@ const Day9 = ({ setOpenedDay }) => {
                             </>
                         ) : (
                             <>
-                                <Button onClick={handleRestart}>Играть ещё раз</Button>
-                                <Button onClick={handleClose}>В календарь</Button>
+                                <Button
+                                    className={styles.calendarDay__button_green}
+                                    onClick={handleRestart}
+                                >
+                                    Играть ещё раз
+                                </Button>
+                                <Button
+                                    className={styles.calendarDay__button}
+                                    onClick={handleClose}
+                                >
+                                    В календарь
+                                </Button>
                             </>
                         )}
                     </DialogActions>

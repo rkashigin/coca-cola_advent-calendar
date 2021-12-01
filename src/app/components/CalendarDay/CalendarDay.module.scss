@@ -106,12 +106,13 @@
 	border-radius: 1.6rem;
 
 	padding: 17rem 1.6rem 1.6rem;
-	width: 45rem;
+	width: 50rem;
 
 	position: relative;
 
 	@media screen and (max-width: $width-mobile) {
-		width: 92%;
+		width: 98%;
+		box-sizing: border-box;
 
 		padding: 43.5vw 4vw 4vw;
 
@@ -133,33 +134,18 @@
 .modalResult__img {
 	position: absolute;
 
-	width: 34rem;
+	width: 28rem;
 
-	top: -13rem;
+	top: -16rem;
 	right: 50%;
 	transform: translateX(50%);
 
 	z-index: 50;
 	@media screen and (max-width: $width-mobile) {
-		top: 0;
+	
 	}
 
 
-}
-
-.modalResult__img_result{
-	position: absolute;
-
-	width: 34.2rem;
-
-	top: -15rem;
-	right: 50%;
-	transform: translateX(50%);
-
-	z-index: 50;
-	@media screen and (max-width: $width-mobile) {
-		top: 0;
-	}
 }
 
 .modal__promoText{
@@ -230,7 +216,7 @@
 	@media screen and (max-width: $width-mobile) {
 		width: 100%;
 
-		padding: 6.8rem 1.6rem 1.6rem;
+		padding: 2rem 1.6rem 1.6rem;
 	}
 
 }
@@ -276,25 +262,99 @@
 
 	&:hover{
 		opacity: 0.7;
-		background-color: var(--color_alabaster_grey);
-		color: var(--color_dim_gray);
-	}
-
-	@media screen and (max-width: $width-mobile) {
-		font-size: 4.1vw;
-		line-height: 6.1vw;
-
-		padding: 4.2vw;
 	}
 }
 
 .modalResult__img_resize{
-	width: 28rem;
-	top: -16rem;
+	width: 20rem;
+    top: -9rem;
 }
 
-button.modalButton_return{
-	background-color: var(--color_alabaster_grey)!important;
-	color: var(--color_dim_gray)!important;
+.calendarModal__button{
+	display: block;
+
+	text-decoration: none;
+	outline: none;
+    border: none;
+
+    border-radius: 1.6rem;
+
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+	font-weight: 700;
+
+    padding: 1.65rem;
+
+    color: white;
+
+    cursor: pointer;
+
+	background-color: var(--color_dark_olive_green);
+	width: 100%;
+	position: relative;
+	box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+	margin-bottom: 0.7rem;
+
+	transition: opacity 0.3s ease-in-out;
+
+	&:hover{
+		opacity: 0.7;
+	}
+}
+
+.calendarDay__button_green{
+	color: white;
+	background-color: var(--color_dark_olive_green);
+
+	padding: 1.65rem;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  font-weight: 700;
+
+  border-radius: 1.6rem;
+
+  margin-bottom: 0.7rem;
+
+  transition: opacity 0.3s ease-in-out;
+
+  &:hover{
+	opacity: 0.7;
+  }
+
+}
+
+.calendarDay__button{
+	background-color: var(--color_alabaster_grey);
+	color: var(--color_dim_gray);
+
+	padding: 1.65rem;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  font-weight: 700;
+
+  border-radius: 1.6rem;
+
+  transition: opacity 0.3s ease-in-out;
+
+  &:hover{
+	opacity: 0.7;
+  }
 }
 

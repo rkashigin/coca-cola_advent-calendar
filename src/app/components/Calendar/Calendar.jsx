@@ -10,6 +10,8 @@ import config from '../../config';
 import { RootStore } from '../../stores/RootStore';
 
 import styles from './Calendar.module.scss';
+import isDayCurrent from '../../helpers/isDayCurrent';
+import sendEvent, { GA_MAP } from '../../helpers/analytics';
 
 const Calendar = observer(() => {
     const [openedDay, setOpenedDay] = React.useState(0);
@@ -19,7 +21,10 @@ const Calendar = observer(() => {
         app.style.filter = openedDay ? 'blur(10px)' : '';
     }, [openedDay]);
 
-    const handleOpenDay = (day) => setOpenedDay(day);
+    const handleOpenDay = (day) => {
+        setOpenedDay(day);
+        sendEvent(GA_MAP.buttonClick(`start game ${day}`));
+    };
 
     return (
         <>
@@ -31,7 +36,7 @@ const Calendar = observer(() => {
                         date={el.day}
                         img={el.img}
                         className={classNames(styles[`calendarDay_${el.day}`], {
-                            [styles.calendarDay_current]: RootStore.myGamesCompleted === idx,
+                            [styles.calendarDay_current]: isDayCurrent(idx),
                             [styles.calendarDay_pastDay]: false /* isPast(new Date(2021, 11, idx + 1)) */,
                             [styles.calendarDay_futureDay]: isFuture(new Date(2021, 11, idx + 1))
                         })}
@@ -82,7 +87,7 @@ const DATES = [
         img: require('../../assets/images/Calendar/1day.svg').default,
         modalImg: require('../../assets/images/Calendar/1day.svg').default,
         title: 'Давайте начнем наше новогоднее путешествие!',
-        intro: 'Задание этого дня совсем простое: сделайте заказ в Delivery Club на любую сумму с нашим волшебным промокодом на Coca-Cola за 1 ₽',
+        intro: 'Сделайте заказ в ресторанах Delivery Club на любую сумму с нашим волшебным промокодом и получите Coca-Cola в подарок',
         promoCode: 'DCCC2022',
         type: 'promoCode',
         orderLink:

@@ -5,17 +5,23 @@ import useLogic from './useLogic';
 
 import styles from './CatchItemGame.module.scss';
 import { Timer } from '../../components';
+import sendEvent, { GA_MAP } from '../../helpers/analytics';
 
 const CatchItemGame = ({ setResult, day }) => {
     const canvasRef = React.useRef(null);
     const [scores, setScores] = React.useState(0);
     const [isCanvasReady, setIsCanvasReady] = React.useState(false);
     const cart = React.useMemo(
-        () => ({ x: canvasRef.current?.width / 2, y: canvasRef.current?.height - 150 }),
+        () => ({
+            x: 0,
+            y: 0
+        }),
         [canvasRef.current]
     );
+    const animationRef = React.useRef(0);
     const { game, handleMouseMove, handleTouch, checkScores, handleTimerComplete } = useLogic({
         canvasRef: isCanvasReady,
+        animationRef: animationRef.current,
         cart,
         setScores,
         setResult,
@@ -30,11 +36,23 @@ const CatchItemGame = ({ setResult, day }) => {
 
     React.useEffect(() => {
         if (isCanvasReady) {
-            game();
+            animationRef.current = requestAnimationFrame(game);
         }
+
+        return () => cancelAnimationFrame(animationRef.current);
     }, [isCanvasReady]);
 
     React.useEffect(() => checkScores(scores), [scores]);
+
+    React.useEffect(() => {
+        sendEvent(GA_MAP.time(`game ${day}`, 0));
+        const d = Date.now();
+        const interval = setInterval(() => {
+            sendEvent(GA_MAP.time(`game ${day}`, 10 * Math.round((Date.now() - d) / 10_000)));
+        }, 10_000);
+
+        return () => clearInterval(interval);
+    }, [day]);
 
     return (
         <div className={styles.game}>

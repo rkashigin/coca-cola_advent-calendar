@@ -21,7 +21,11 @@ const ProfileBanner = observer(({ className }) => {
                     <span className={styles.profileBanner__number}>
                         {masked.resolve(String(RootStore.user.phone))}
                     </span>
-                    <Button className={styles.profileBanner__button} content="Выйти из профиля" />
+                    <Button
+                        className={styles.profileBanner__button}
+                        content="Выйти из профиля"
+                        onClick={() => RootStore.logout()}
+                    />
                 </div>
             )}
         </>

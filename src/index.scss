@@ -28,6 +28,19 @@ input[type="search"] {
 	-webkit-appearance: textfield; // 1
 }
 
+// Removes arrows on number inputs
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 // Removes inner padding and search cancel button in S5, Chrome on OS X
 input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button {
@@ -71,7 +84,8 @@ button {
 }
 
 .App {
-	overflow: auto;
+	overflow-x: hidden;
+  overflow-y: auto;
 }
 
 div.css-yiavyu-MuiBackdrop-root-MuiDialog-backdrop, div.MuiDialog-backdrop {
@@ -138,6 +152,8 @@ div.MuiDialog-paperFullScreen {
 
 div.css-ypiqx9-MuiDialogContent-root, div.MuiDialogContent-root {
 	overflow-x: hidden;
+  overflow-y: hidden;
+  height: max-content;
   position: relative;
 }
 h2.css-bdhsul-MuiTypography-root-MuiDialogTitle-root, h2.MuiDialogTitle-root {
@@ -165,7 +181,8 @@ div.MuiDialogContent-root {
 
   @media screen and (max-width: $width-mobile){
     margin:0;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 }
 
@@ -176,7 +193,7 @@ p.css-qfso29-MuiTypography-root-MuiDialogContentText-root, p.MuiDialogContentTex
   line-height: 2.2rem;
   text-align: center;
 
-  margin: 2rem 0 1.5rem;
+  margin: 0 0 1.5rem;
 
   color: #000;
 
@@ -205,7 +222,7 @@ div.css-hlj6pa-MuiDialogActions-root, div.MuiDialogActions-root{
 }
 
 button.css-1e6y48t-MuiButtonBase-root-MuiButton-root, button.MuiButtonBase-root, button.MuiLink-button{
-  background-color: var(--color_dark_olive_green);
+  background-color: var(--color_alabaster_grey);
   padding: 1.65rem;
   width: 100%;
 
@@ -215,7 +232,7 @@ button.css-1e6y48t-MuiButtonBase-root-MuiButton-root, button.MuiButtonBase-root,
 
   font-size: 1.6rem;
   line-height: 2.4rem;
-  color: white;
+  color: var(--color_dim_gray);
   font-weight: 700;
 
   border-radius: 1.6rem;
@@ -225,7 +242,7 @@ button.css-1e6y48t-MuiButtonBase-root-MuiButton-root, button.MuiButtonBase-root,
   transition: opacity 0.3s ease-in-out;
 
   &:hover{
-    background-color: var(--color_dark_olive_green);
+    background-color: var(--color_alabaster_grey);
     opacity: 0.7;
   }
 
@@ -258,4 +275,24 @@ div.grecaptcha-badge{
 
 svg.MuiCircularProgress-svg {
   color: var(--color_red) !important;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+div.MuiDialog-container{
+  div.css{
+    @media screen and (max-width: $width-mobile){
+      max-height: calc(100% - 4rem) !important;
+    }
+  }
 }

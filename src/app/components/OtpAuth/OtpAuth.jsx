@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { observer } from 'mobx-react-lite';
 import Countdown from 'react-countdown';
 import ReactCodeInput from 'react-code-input';
+import Recaptcha from 'react-google-invisible-recaptcha';
 
 import { IMask } from 'react-imask';
 import { RootStore } from '../../stores/RootStore';
@@ -9,6 +10,7 @@ import Modal from '../Modal/Modal';
 import Button from '../Button/Button';
 
 import styles from './OtpAuth.module.scss';
+import config from '../../../config';
 
 const OtpAuth = observer(() => {
     useEffect(() => {
@@ -44,6 +46,8 @@ const GetCode = observer(() => {
     const masked = IMask.createMask({
         mask: '+7 (000) 000-00-00'
     });
+    const recaptchaRef = useRef(null);
+
     return (
         <div>
             <input
@@ -53,56 +57,78 @@ const GetCode = observer(() => {
                 onChange={(ev) => setTel(ev.target.value)}
                 placeholder={masked.mask}
             />
-            {!!RootStore.oauthCodeErr && <p>Не удалось отправить код</p>}
+            {!!RootStore.oauthCodeErr && (
+                <p className={styles.otpAuth__infoError}>Не удалось отправить код</p>
+            )}
             <Button
                 className={styles.otpAuth__button}
                 content="Получить код"
-                onClick={() => RootStore.userOtp(tel)}
+                onClick={() => {
+                    recaptchaRef.current.execute().then((rtoken) => {
+                        RootStore.userOtp(tel, rtoken);
+                    });
+                }}
             />
+            <Recaptcha ref={recaptchaRef} sitekey={config.recaptchaSiteKey} />
         </div>
     );
 });
 
 const ValidateCode = () => {
     const [code, setCode] = useState('');
-    const [isComplite, setIsComplite] = useState(false);
-    const codeInput = '0 0 0 0 0 0';
+    const [isComplete, setIsComplete] = useState(false);
+
+    const date = useMemo(() => {
+        if (RootStore.otp.expiresIn) {
+            return Date.now() + RootStore.otp.expiresIn * 1_000;
+        }
+        return 0;
+    }, []);
+
+    useEffect(() => {
+        if (code.length === 6) {
+            RootStore.loginOtp(code);
+        }
+    }, [code]);
+
+    const recaptchaRef = useRef(null);
+
     return (
         <div>
             <div className={styles.otpAuth__textInfo}>Мы отправили код на номер</div>
             <div className={styles.otpAuth__textInfo}>{RootStore.otpTel}</div>
-            {/* <input
-                className={styles.otpAuth__input}
-                type="text"
-                value={code}
-                onChange={(ev) => setCode(ev.target.value)}
-            /> */}
             <ReactCodeInput
+                name="code"
                 className={styles.otpAuth__codeInput}
                 type="number"
                 fields={6}
                 placeholder="0"
+                inputMode="numeric"
+                value={code}
+                onChange={setCode}
             />
-            {isComplite ? (
+            {isComplete ? (
                 <Button
                     className={styles.otpAuth__button}
                     content="Отправить еще раз"
-                    onClick={() => RootStore.userOtp(RootStore.otpTel)}
+                    onClick={() =>
+                        recaptchaRef.current.execute().then((rtoken) => {
+                            RootStore.userOtp(RootStore.otpTel, rtoken);
+                        })
+                    }
                 />
             ) : (
                 <div className={styles.otpAuth__textGetCode}>
                     Получить новый код можно через{' '}
-                    <Countdown
-                        date={Date.now() + RootStore.otp.expiresIn * 1_000}
-                        onComplete={() => setIsComplite(true)}
-                    />
+                    <Countdown date={date} onComplete={() => setIsComplete(true)} />
                 </div>
             )}
-            <Button
+            <Recaptcha ref={recaptchaRef} sitekey={config.recaptchaSiteKey} />
+            {/* <Button
                 className={styles.otpAuth__button}
                 content="Подтвердить"
                 onClick={() => RootStore.loginOtp(code)}
-            />
+            /> */}
         </div>
     );
 };

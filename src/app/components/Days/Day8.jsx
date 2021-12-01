@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -8,6 +7,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 
+import Button from '../Button/Button';
 import PromoCode from '../PromoCode/PromoCode';
 import Game from '../Game';
 import { Survey } from '../../games';
@@ -30,7 +30,11 @@ const Day8 = ({ setOpenedDay }) => {
             <Dialog
                 open={open}
                 TransitionComponent={Transition}
-                onClose={handleClose}
+                onClose={(_, reason) => {
+                    if (reason === 'backdropClick') return;
+
+                    handleClose();
+                }}
                 className={styles.popup}
             >
                 <div className="gameWrapper">
@@ -49,12 +53,12 @@ const Day8 = ({ setOpenedDay }) => {
                 </div>
             </Dialog>
             <Dialog open={resultVisible} TransitionComponent={Transition} className={styles.popup}>
-                <img
-                    className={styles.modalResult__img}
-                    src={require('../../assets/images/Games/game_2_day.png').default}
-                    alt=""
-                />
                 <div className={styles.modal}>
+                    <img
+                        className={styles.modalResult__img}
+                        src={require('../../assets/images/Games/game_win.svg').default}
+                        alt=""
+                    />
                     {result.status === 'A' && (
                         <DialogTitle>
                             Вы мечтательны и несете в себе эту черту на протяжении всей жизни
@@ -111,8 +115,17 @@ const Day8 = ({ setOpenedDay }) => {
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={handleClose}>Заказать сейчас</Button>
-                        <Button onClick={handleClose}>В календарь</Button>
+                        <a
+                            href="https://trk.mail.ru/c/wqq5q0?utm_source=coca-cola-land-2021-3&utm_medium=cola-card-2021-3&utm_campaign=ny2021-cola-3&utm_content=cola-land-2021-3"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.calendarModal__button}
+                        >
+                            Заказать сейчас
+                        </a>
+                        <Button className={styles.calendarDay__button} onClick={handleClose}>
+                            В календарь
+                        </Button>
                     </DialogActions>
                 </div>
             </Dialog>

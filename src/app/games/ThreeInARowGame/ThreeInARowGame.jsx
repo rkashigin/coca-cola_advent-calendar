@@ -10,6 +10,7 @@ import RedGloves from '../../assets/images/Games/RedGloves.png';
 import Penguin from '../../assets/images/Games/Penguin.png';
 
 import styles from './ThreeInARowGame.module.scss';
+import sendEvent, { GA_MAP } from '../../helpers/analytics';
 
 const ThreeInARowGame = ({ setResult, setScore, day }) => {
     const canvasRef = React.useRef(null);
@@ -56,6 +57,16 @@ const ThreeInARowGame = ({ setResult, setScore, day }) => {
             }),
         []
     );
+
+    React.useEffect(() => {
+        sendEvent(GA_MAP.time(`game ${day}`, 0));
+        const d = Date.now();
+        const interval = setInterval(() => {
+            sendEvent(GA_MAP.time(`game ${day}`, 10 * Math.round((Date.now() - d) / 10_000)));
+        }, 10_000);
+
+        return () => clearInterval(interval);
+    }, [day]);
 
     return (
         <div className={styles.game}>

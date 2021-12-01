@@ -23,7 +23,7 @@
 	justify-content: flex-end;
 
 	overflow-x: clip;
-	overflow: hidden;
+	// overflow: hidden;
 
 	&:after {
 		content: "";
@@ -46,7 +46,7 @@
 	}
 
 	@media screen and (max-width: $width-mobile) {
-		--height: 114vw;
+		--height: max-content;
 		padding: var(--section_padding) var(--section_padding) 3.2rem;
 
 		&:after {
@@ -74,6 +74,8 @@
 		line-height: 10.2vw;
 
 		max-width: 85%;
+
+		margin-top: 12rem;
 	}
 }
 
@@ -90,6 +92,7 @@
 		line-height: 6.1vw;
 
 		margin: 4.1vw 0 0;
+		z-index: 100;
 	}
 }
 
@@ -312,4 +315,16 @@
 		bottom: 5.6vw;
 		right: -92.3vw;
 	}
+}
+
+.header__promoInfo{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 1.6rem auto 0;
+
+	color: var(--color_red);
+	font-size: 1.6rem;
+	line-height: 2.2rem;
+	font-weight: 400;
 }

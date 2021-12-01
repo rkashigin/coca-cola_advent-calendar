@@ -8,13 +8,15 @@ import Images from './images';
 import { Timer } from '../../components';
 
 import styles from './MemoryGame.module.scss';
+import { RootStore } from '../../stores/RootStore';
+import sendEvent, { GA_MAP } from '../../helpers/analytics';
 
-const MemoryGame = ({ setResult, setScore }) => {
+const MemoryGame = ({ setResult, setScore, day }) => {
     const [cards] = React.useState(shuffle([...Images, ...Images]));
     const [activeCards, setActiveCards] = React.useState([]);
     const [foundPairs, setFoundPairs] = React.useState([]);
 
-    const flipCard = (index) => {
+    const flipCard = async (index) => {
         if (activeCards.indexOf(index) !== -1 || foundPairs.indexOf(index) !== -1) return;
 
         if (activeCards.length === 2) return;
@@ -24,10 +26,19 @@ const MemoryGame = ({ setResult, setScore }) => {
             const secondsIndex = index;
             if (cards[firstIndex] === cards[secondsIndex]) {
                 if (foundPairs.length + 2 === cards.length) {
-                    setResult({
-                        status: true,
-                        promoCode: Math.floor(Math.random() * 2) === 0 ? false : 'DCCC2022'
-                    });
+                    try {
+                        const data = await RootStore.dayComplete(day);
+
+                        setResult({
+                            status: true,
+                            promoCode: data.promocode || false
+                        });
+                    } catch {
+                        setResult({
+                            status: true,
+                            promoCode: false
+                        });
+                    }
                 }
                 setFoundPairs([...foundPairs, firstIndex, secondsIndex]);
             }
@@ -54,6 +65,16 @@ const MemoryGame = ({ setResult, setScore }) => {
             setScore(foundPairs.length);
         }
     }, [foundPairs]);
+
+    React.useEffect(() => {
+        sendEvent(GA_MAP.time(`game ${day}`, 0));
+        const d = Date.now();
+        const interval = setInterval(() => {
+            sendEvent(GA_MAP.time(`game ${day}`, 10 * Math.round((Date.now() - d) / 10_000)));
+        }, 10_000);
+
+        return () => clearInterval(interval);
+    }, [day]);
 
     return (
         <div className={styles.game}>
@@ -94,7 +115,8 @@ const MemoryGame = ({ setResult, setScore }) => {
 
 MemoryGame.propTypes = {
     setResult: PropTypes.func.isRequired,
-    setScore: PropTypes.func.isRequired
+    setScore: PropTypes.func.isRequired,
+    day: PropTypes.number.isRequired
 };
 
 export default MemoryGame;

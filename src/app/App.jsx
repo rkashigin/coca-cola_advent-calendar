@@ -1,36 +1,24 @@
-import React, { useRef } from 'react';
+import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
-import Recaptcha from 'react-google-invisible-recaptcha';
 
 import { Routes } from 'react-router';
 import MainPage from './pages/MainPage';
 
-import { RootStore } from './stores/RootStore';
-import config from '../config';
 import OtpAuth from './components/OtpAuth/OtpAuth';
+import sendEvent, { GA_MAP } from './helpers/analytics';
 
 const App = () => {
-    const recaptchaRef = useRef(null);
-    const recaptchaOnLoaded = () => {
-        if (recaptchaRef.current) {
-            recaptchaRef.current.execute().then((rtoken) => {
-                RootStore.setRecaptchaToken(rtoken);
-            });
-        }
-    };
-    window.rStore = RootStore;
-
+    useEffect(() => {
+        setTimeout(() => {
+            sendEvent(GA_MAP.time('calendar page', 15));
+        }, 15_000);
+    }, []);
     return (
         <div className="App">
             <OtpAuth />
             <Routes>
                 <Route exact path="/" element={<MainPage />} />
             </Routes>
-            <Recaptcha
-                ref={recaptchaRef}
-                sitekey={config.recaptchaSiteKey}
-                onLoaded={recaptchaOnLoaded}
-            />
         </div>
     );
 };
