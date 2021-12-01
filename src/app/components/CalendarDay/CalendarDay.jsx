@@ -43,7 +43,7 @@ const CalendarDay = observer(
     }) => {
         const isHorizontal = useMediaQuery(Adaptive.isHorizontal);
         const [open, setOpen] = React.useState(false);
-        const [loadedPromocode, setLoadedPromocode] = React.useState('');
+        const [loadedPromocode, setLoadedPromocode] = React.useState({ 1: '', 12: '' });
 
         const handleClickOpen = () => {
             if (RootStore.user.id) {
@@ -63,17 +63,25 @@ const CalendarDay = observer(
             try {
                 const data = await RootStore.dayComplete(date);
 
-                setLoadedPromocode(data.promocode);
+                setLoadedPromocode({ ...loadedPromocode, [date]: data.promocode });
             } catch {
-                setLoadedPromocode('');
+                setLoadedPromocode({ ...loadedPromocode, [date]: '' });
             }
         };
 
         useEffect(() => {
             if (RootStore.myPromocodes.length) {
-                const firstCode = RootStore.myPromocodes.find(({ Type }) => Type === 0).Value;
+                if (date === 1) {
+                    const firstCode = RootStore.myPromocodes.find(({ Type }) => Type === 0).Value;
 
-                setLoadedPromocode(firstCode);
+                    setLoadedPromocode({ ...loadedPromocode, 1: firstCode });
+                }
+
+                if (date === 12) {
+                    const lastCode = RootStore.myPromocodes.find(({ Type }) => Type === 6).Value;
+
+                    setLoadedPromocode({ ...loadedPromocode, 12: lastCode });
+                }
             }
         }, [RootStore.myPromocodes]);
 
@@ -81,7 +89,12 @@ const CalendarDay = observer(
             const app = document.querySelector('.App');
             app.style.filter = open ? 'blur(10px)' : '';
 
-            if (open && date === 1 && RootStore.user.id && RootStore.myGamesCompleted < 1) {
+            if (
+                open &&
+                (date === 1 || date === 12) &&
+                RootStore.user.id &&
+                (RootStore.myGamesCompleted < 1 || RootStore.myGamesCompleted > 11)
+            ) {
                 handleRequestPromoCode();
             }
         }, [date, open, RootStore.user.id, RootStore.myGamesCompleted]);
@@ -130,12 +143,12 @@ const CalendarDay = observer(
                             <DialogContentText id="alert-dialog-slide-description">
                                 {intro}
                             </DialogContentText>
-                            {date === 1 ? (
+                            {date === 1 || date === 12 ? (
                                 <>
-                                    {loadedPromocode ? (
+                                    {loadedPromocode[date] ? (
                                         <PromoCode
                                             type="red"
-                                            promoCode={loadedPromocode}
+                                            promoCode={loadedPromocode[date]}
                                             promoCodeText="Срок действия промокода 31.01.2022"
                                         />
                                     ) : (
