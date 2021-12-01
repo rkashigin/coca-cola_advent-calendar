@@ -55,6 +55,8 @@ const Modal = ({ open, handleClose, title, children, hasDialogActions, className
                                 sendEvent(GA_MAP.externalLink(config.references.orderLink));
                             }}
                             className={styles.modal__button_order}
+                            target="_blank"
+                            rel="noopener noreferrer"
                         >
                             Заказать сейчас
                         </a>

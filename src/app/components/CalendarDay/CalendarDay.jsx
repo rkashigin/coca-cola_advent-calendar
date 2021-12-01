@@ -176,7 +176,10 @@ const CalendarDay = observer(
                                 </Button>
                                 <Button
                                     className={styles.calendarDay__button}
-                                    onClick={handleClose}
+                                    onClick={() => {
+                                        handleClose();
+                                        sendEvent(GA_MAP.buttonClick(`start game ${date}`));
+                                    }}
                                 >
                                     Выполнить позже
                                 </Button>
@@ -192,7 +195,10 @@ const CalendarDay = observer(
                                 </Button>
                                 <Button
                                     className={styles.calendarDay__button}
-                                    onClick={handleClose}
+                                    onClick={() => {
+                                        handleClose();
+                                        sendEvent(GA_MAP.buttonClick(`start game ${date}`));
+                                    }}
                                 >
                                     Выполнить позже
                                 </Button>

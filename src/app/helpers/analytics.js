@@ -42,7 +42,9 @@ export const GA_MAP = {
     }, // время на странице и в играх
     buttonClick: (name) => {
         return { event_category: 'button', event: 'Click', event_label: name };
-    }
+    },
+    userLogin: { event_category: 'user', event: 'login', event_label: 'authorization' },
+    userLogout: { event_category: 'user', event: 'logout', event_label: 'authorization' }
 };
 
 const sendEvent = (args = {}) => {
