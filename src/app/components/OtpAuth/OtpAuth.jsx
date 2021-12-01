@@ -30,7 +30,7 @@ const OtpAuth = observer(() => {
             title={
                 RootStore.otp.requestId
                     ? 'Введите код'
-                    : 'Войдите или зарегитрируйтесь, чтобы продолжить'
+                    : 'Войдите или зарегистрируйтесь, чтобы продолжить'
             }
             open={RootStore.oauthOpen && !RootStore.user.id}
             handleClose={() => RootStore.setOauthOpen(false)}
