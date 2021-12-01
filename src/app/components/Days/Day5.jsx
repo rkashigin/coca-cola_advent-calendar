@@ -6,6 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
+import { observer } from 'mobx-react-lite';
 
 import Button from '../Button/Button';
 import Game from '../Game';
@@ -13,6 +14,7 @@ import { TruthOrMyth } from '../../games';
 import config from '../../config';
 import { useDay } from '../../hooks';
 import PromoCode from '../PromoCode/PromoCode';
+import { RootStore } from '../../stores/RootStore';
 
 import styles from '../CalendarDay/CalendarDay.module.scss';
 
@@ -20,10 +22,11 @@ const Transition = React.forwardRef((props, ref) => {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const Day5 = ({ setOpenedDay }) => {
+const Day5 = observer(({ setOpenedDay }) => {
     const { open, result, resultVisible, setScore, setResult, handleClose } = useDay({
         setOpenedDay
     });
+    const recievedPromocode = RootStore.myPromocodes.find(({ Type }) => Type === 4)?.Value || '';
 
     return (
         <>
@@ -79,21 +82,25 @@ const Day5 = ({ setOpenedDay }) => {
                                 ресторанах Delivery Club за 1 ₽ по нашему специальному промокоду
                             </DialogContentText>
                         )}
-                        <PromoCode
-                            type="red"
-                            promoCode={result.promoCode}
-                            promoCodeText="Срок действия промокода 31.01.2022"
-                        />
+                        {(recievedPromocode || result.promoCode) && (
+                            <PromoCode
+                                type="red"
+                                promoCode={recievedPromocode || result.promoCode}
+                                promoCodeText="Срок действия промокода 31.01.2022"
+                            />
+                        )}
                     </DialogContent>
                     <DialogActions>
-                        <a
-                            href="https://trk.mail.ru/c/t57ku7?utm_source=coca-cola-land-2021-2&utm_medium=cola-card-2021-2&utm_campaign=ny2021-cola-2&utm_content=cola-land-2021-2"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={styles.calendarModal__button}
-                        >
-                            Заказать сейчас
-                        </a>
+                        {(recievedPromocode || result.promoCode) && (
+                            <a
+                                href="https://trk.mail.ru/c/t57ku7?utm_source=coca-cola-land-2021-2&utm_medium=cola-card-2021-2&utm_campaign=ny2021-cola-2&utm_content=cola-land-2021-2"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={styles.calendarModal__button}
+                            >
+                                Заказать сейчас
+                            </a>
+                        )}
                         <Button className={styles.calendarDay__button} onClick={handleClose}>
                             В календарь
                         </Button>
@@ -102,6 +109,6 @@ const Day5 = ({ setOpenedDay }) => {
             </Dialog>
         </>
     );
-};
+});
 
 export default Day5;
