@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import classNames from 'classnames';
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
+import Button from '../Button/Button';
 
 import PromoCode from '../PromoCode/PromoCode';
 import InfoPromoCode from '../InfoPromoCode/InfoPromoCode';
@@ -129,10 +129,20 @@ const Day2 = ({ setOpenedDay }) => {
                                         >
                                             Заказать сейчас
                                         </a>
-                                        <Button onClick={handleClose}>В календарь</Button>
+                                        <Button
+                                            className={styles.calendarDay__button}
+                                            onClick={handleClose}
+                                        >
+                                            В календарь
+                                        </Button>
                                     </>
                                 ) : (
-                                    <Button onClick={handleClose}>Увидимся завтра!</Button>
+                                    <Button
+                                        className={styles.calendarDay__button_green}
+                                        onClick={handleClose}
+                                    >
+                                        Увидимся завтра!
+                                    </Button>
                                 )}
                             </>
                         ) : (
@@ -147,12 +157,27 @@ const Day2 = ({ setOpenedDay }) => {
                                         >
                                             Заказать сейчас
                                         </a>
-                                        <Button onClick={handleClose}>В календарь</Button>
+                                        <Button
+                                            className={styles.calendarDay__button}
+                                            onClick={handleClose}
+                                        >
+                                            В календарь
+                                        </Button>
                                     </>
                                 ) : (
                                     <>
-                                        <Button onClick={handleRestart}>Попробовать еще раз</Button>
-                                        <Button onClick={handleClose}>В календарь</Button>
+                                        <Button
+                                            className={styles.calendarDay__button_green}
+                                            onClick={handleRestart}
+                                        >
+                                            Попробовать еще раз
+                                        </Button>
+                                        <Button
+                                            className={styles.calendarDay__button}
+                                            onClick={handleClose}
+                                        >
+                                            В календарь
+                                        </Button>
                                     </>
                                 )}
                             </>
