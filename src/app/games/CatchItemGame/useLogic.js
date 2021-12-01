@@ -98,7 +98,7 @@ export default function useLogic({ canvasRef, cart, setScores, animationRef, set
 
                 products.push({
                     img: productsOptions[randomProduct],
-                    x: Math.random() * (canvas.width - 60 * scale * deviceMultiplier),
+                    x: (Math.random() * (canvas.width - 60 * scale * deviceMultiplier)) / scale,
                     y: -100,
                     dx: Math.random() * 2 - 1,
                     dy: Math.random() * 2 + 2,
@@ -122,8 +122,8 @@ export default function useLogic({ canvasRef, cart, setScores, animationRef, set
                 }
 
                 if (
-                    Math.abs(products[i].x + 30 - cart.x - 80) * scale < 65 * scale &&
-                    Math.abs(products[i].y - cart.y) * scale < 30 * scale
+                    Math.abs(products[i].x + 30 - cart.x - 80) * scale < 60 * scale &&
+                    Math.abs(products[i].y - cart.y) * scale < 45 * scale
                 ) {
                     products.splice(i, 1);
                     setScores((prevScores) => prevScores + 10);
@@ -206,6 +206,8 @@ export default function useLogic({ canvasRef, cart, setScores, animationRef, set
 
             if ((e.nativeEvent.offsetX + 140 * deviceMultiplier) * scale <= canvas.width) {
                 mouse.x = e.nativeEvent.offsetX;
+            } else {
+                mouse.x = (canvas.width - 160 * deviceMultiplier * scale) / scale;
             }
         };
 

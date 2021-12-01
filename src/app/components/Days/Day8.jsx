@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -8,6 +7,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 
+import Button from '../Button/Button';
 import PromoCode from '../PromoCode/PromoCode';
 import Game from '../Game';
 import { Survey } from '../../games';
@@ -123,7 +123,9 @@ const Day8 = ({ setOpenedDay }) => {
                         >
                             Заказать сейчас
                         </a>
-                        <Button onClick={handleClose}>В календарь</Button>
+                        <Button className={styles.calendarDay__button} onClick={handleClose}>
+                            В календарь
+                        </Button>
                     </DialogActions>
                 </div>
             </Dialog>

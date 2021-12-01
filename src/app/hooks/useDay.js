@@ -9,7 +9,8 @@ export default function useDay({ setOpenedDay }) {
     const handleClose = () => {
         setOpen(false);
         setResultVisible(false);
-        setOpenedDay(0);
+
+        setTimeout(() => setOpenedDay(0), 1000);
     };
 
     const handleRestart = () => {

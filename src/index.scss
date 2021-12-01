@@ -288,3 +288,11 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+div.MuiDialog-container{
+  div.css-uhb5lpz{
+    @media screen and (max-width: $width-mobile){
+      max-height: calc(100% - 4rem) !important;
+    }
+  }
+}

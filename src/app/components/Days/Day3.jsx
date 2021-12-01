@@ -1,13 +1,14 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import classNames from 'classnames';
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
+
+import Button from '../Button/Button';
 
 import PromoCode from '../PromoCode/PromoCode';
 import Game from '../Game';
@@ -128,7 +129,10 @@ const Day3 = ({ setOpenedDay }) => {
                                         Заказать сейчас
                                     </a>
                                 )}
-                                <Button className={styles.modalButton_return} onClick={handleClose}>
+                                <Button
+                                    className={styles.calendarDay__button}
+                                    onClick={handleClose}
+                                >
                                     В календарь
                                 </Button>
                             </>
@@ -144,9 +148,19 @@ const Day3 = ({ setOpenedDay }) => {
                                         Заказать сейчас
                                     </a>
                                 ) : (
-                                    <Button onClick={handleRestart}>Пройти тест еще раз</Button>
+                                    <Button
+                                        className={styles.calendarDay__button_green}
+                                        onClick={handleRestart}
+                                    >
+                                        Пройти тест еще раз
+                                    </Button>
                                 )}
-                                <Button onClick={handleClose}>В календарь</Button>
+                                <Button
+                                    className={styles.calendarDay__button}
+                                    onClick={handleClose}
+                                >
+                                    В календарь
+                                </Button>
                             </>
                         )}
                     </DialogActions>

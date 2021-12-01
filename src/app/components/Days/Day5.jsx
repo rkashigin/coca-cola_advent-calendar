@@ -1,18 +1,20 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
+import { observer } from 'mobx-react-lite';
 
+import Button from '../Button/Button';
 import Game from '../Game';
 import { TruthOrMyth } from '../../games';
 import config from '../../config';
 import { useDay } from '../../hooks';
 import PromoCode from '../PromoCode/PromoCode';
+import { RootStore } from '../../stores/RootStore';
 
 import styles from '../CalendarDay/CalendarDay.module.scss';
 
@@ -20,10 +22,11 @@ const Transition = React.forwardRef((props, ref) => {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const Day5 = ({ setOpenedDay }) => {
+const Day5 = observer(({ setOpenedDay }) => {
     const { open, result, resultVisible, setScore, setResult, handleClose } = useDay({
         setOpenedDay
     });
+    const recievedPromocode = RootStore.myPromocodes.find(({ Type }) => Type === 4)?.Value || '';
 
     return (
         <>
@@ -68,17 +71,11 @@ const Day5 = ({ setOpenedDay }) => {
                         </DialogTitle>
                     )}
                     <DialogContent>
-                        {result.status ? (
-                            <DialogContentText id="alert-dialog-slide-description">
-                                Чтобы продвинуться дальше по календарю, закажите Coca-Cola в
-                                ресторанах Delivery Club за 1 ₽ по нашему специальному промокоду
-                            </DialogContentText>
-                        ) : (
-                            <DialogContentText id="alert-dialog-slide-description">
-                                Чтобы продвинуться дальше по календарю, закажите Coca-Cola в
-                                ресторанах Delivery Club за 1 ₽ по нашему специальному промокоду
-                            </DialogContentText>
-                        )}
+                        <DialogContentText id="alert-dialog-slide-description">
+                            Чтобы продвинуться дальше по календарю, закажите Coca-Cola в ресторанах
+                            Delivery Club за 1 ₽ по нашему специальному промокоду
+                        </DialogContentText>
+
                         <PromoCode
                             type="red"
                             promoCode={result.promoCode}
@@ -86,20 +83,24 @@ const Day5 = ({ setOpenedDay }) => {
                         />
                     </DialogContent>
                     <DialogActions>
-                        <a
-                            href="https://trk.mail.ru/c/t57ku7?utm_source=coca-cola-land-2021-2&utm_medium=cola-card-2021-2&utm_campaign=ny2021-cola-2&utm_content=cola-land-2021-2"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={styles.calendarModal__button}
-                        >
-                            Заказать сейчас
-                        </a>
-                        <Button onClick={handleClose}>В календарь</Button>
+                        {(recievedPromocode || result.promoCode) && (
+                            <a
+                                href="https://trk.mail.ru/c/t57ku7?utm_source=coca-cola-land-2021-2&utm_medium=cola-card-2021-2&utm_campaign=ny2021-cola-2&utm_content=cola-land-2021-2"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={styles.calendarModal__button}
+                            >
+                                Заказать сейчас
+                            </a>
+                        )}
+                        <Button className={styles.calendarDay__button} onClick={handleClose}>
+                            В календарь
+                        </Button>
                     </DialogActions>
                 </div>
             </Dialog>
         </>
     );
-};
+});
 
 export default Day5;
