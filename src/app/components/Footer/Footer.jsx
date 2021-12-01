@@ -51,10 +51,17 @@ const Footer = () => {
                         }
                         media="(max-width: 725px)"
                     />
-                    <img
+                    {/* <img
                         className={styles.footer__cardPrize_multiple}
                         src={
                             require('../../assets/images/Footer_card_cola_and_delivery.svg').default
+                        }
+                        alt="Delivery and Coca-Cola"
+                    /> */}
+                    <img
+                        className={styles.footer__cardPrize_multiple}
+                        src={
+                            require('../../assets/images/Footer_card_cola_and_delivery.png').default
                         }
                         alt="Delivery and Coca-Cola"
                     />
