@@ -103,7 +103,7 @@ class RootStoreClass {
             });
 
             this.setSecret(secret);
-            this.setToken(token, false);
+            this.setToken(token);
             return { secret, token };
         } catch (error) {
             console.log(error);
@@ -115,9 +115,11 @@ class RootStoreClass {
         try {
             console.log(tel);
             console.log(recaptchaToken);
-            const { token } = await this.getAnonymousToken();
+            const { token, secret } = await this.getAnonymousToken();
             this.setOtpTel(tel);
-            this.setOtp(await RootStoreApi.dcApi.userOtp(token, tel, recaptchaToken));
+            this.setOtp(
+                await RootStoreApi.dcApi.userOtp(`${token}.${secret}`, tel, recaptchaToken)
+            );
             this.setOauthCodeErr(false);
         } catch (error) {
             console.log(error);
@@ -129,7 +131,7 @@ class RootStoreClass {
         if (code && code.length === 6) {
             try {
                 const data = await RootStoreApi.dcApi.loginOtp(
-                    this.token,
+                    `${this.token}.${this.secret}`,
                     code,
                     this.otp.requestId
                 );
@@ -201,7 +203,7 @@ class RootStoreClass {
 
                     const data = await RootStoreApi.dcApi.userLogin({
                         xApiKey: this.xApiKey,
-                        token: this.refreshToken
+                        token: error === 401 ? this.refreshToken : this.token
                     });
                     if (data.secret) {
                         this.setSecret(data.secret);
