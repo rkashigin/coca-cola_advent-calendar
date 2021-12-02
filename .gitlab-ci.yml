@@ -52,7 +52,7 @@ deploy_dev:
   only:
     - development
   dependencies:
-    - build
+    - build_dev
 
 deploy_prod:
   stage: deploy
