@@ -210,6 +210,9 @@ class RootStoreClass {
                         this.setSecret(data.secret);
                         data.token += `.${data.secret}`;
                     }
+                    if (data.refresh_token) {
+                        this.setRefreshToken(data.refresh_token);
+                    }
                     this.setToken(data.token);
                     console.log(data);
 
