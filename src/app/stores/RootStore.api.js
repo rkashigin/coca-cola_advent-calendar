@@ -122,7 +122,7 @@ export const RootStoreApi = {
     api: {
         async auth() {
             try {
-                const response = await fetch('/api/auth');
+                const response = await fetch(`${process.env.PUBLIC_URL}/api/auth`);
                 return response;
             } catch (error) {
                 throw new Error('api auth error');
@@ -130,7 +130,7 @@ export const RootStoreApi = {
         },
         async complete({ game, sign }) {
             const response = await fetch(
-                `${process.env.PUBLIC_URL}api/complete?game=${game}&sign=${sign}`,
+                `${process.env.PUBLIC_URL}/api/complete?game=${game}&sign=${sign}`,
                 {
                     method: 'POST'
                 }
@@ -142,7 +142,7 @@ export const RootStoreApi = {
             throw response.status;
         },
         async promocodes() {
-            const response = await fetch(`${process.env.PUBLIC_URL}api/promocodes`);
+            const response = await fetch(`${process.env.PUBLIC_URL}/api/promocodes`);
             if (response.ok) {
                 return response.json();
             }
@@ -150,7 +150,7 @@ export const RootStoreApi = {
             throw response.status;
         },
         async completed() {
-            const response = await fetch(`${process.env.PUBLIC_URL}api/completed`);
+            const response = await fetch(`${process.env.PUBLIC_URL}/api/completed`);
             if (response.ok) {
                 return response.json();
             }
