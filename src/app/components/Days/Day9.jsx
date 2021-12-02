@@ -119,7 +119,7 @@ const Day9 = ({ setOpenedDay }) => {
                                         >
                                             Заказать сейчас
                                         </a>
-                                        // )}
+                                        {/* )} */}
                                         <Button
                                             className={styles.calendarDay__button}
                                             onClick={handleClose}
