@@ -14,9 +14,10 @@ import sendEvent, { GA_MAP } from '../../helpers/analytics';
 import Adaptive from '../../helpers/Adaptive';
 
 import styles from './Calendar.module.scss';
+import isDayPast from '../../helpers/isDayPast';
 
 const Calendar = observer(() => {
-    const isDesktop = useMediaQuery(Adaptive.isDesktop);
+    const isMobile = useMediaQuery(Adaptive.isMobile);
     const [openedDay, setOpenedDay] = React.useState(0);
 
     useEffect(() => {
@@ -40,8 +41,7 @@ const Calendar = observer(() => {
                         img={el.img}
                         className={classNames(styles[`calendarDay_${el.day}`], {
                             [styles.calendarDay_current]: isDayCurrent(idx),
-                            [styles.calendarDay_pastDay]: false /* isPast(new Date(2021, 11, idx + 1)) */,
-                            [styles.calendarDay_futureDay]: isFuture(new Date(2021, 11, idx + 1))
+                            [styles.calendarDay_pastDay]: isDayPast(idx + 1)
                         })}
                         modalImg={el.modalImg}
                         classNameImg={classNames(styles[`calendarDay_modalImg_${el.day}`])}
@@ -51,7 +51,7 @@ const Calendar = observer(() => {
                         type={el.type}
                         handleOpenDay={() => handleOpenDay(el.day)}
                         openedDay={openedDay}
-                        orderLink={isDesktop ? el.orderLinkDesktop : el.orderLinkMobile}
+                        orderLink={!isMobile ? el.orderLinkDesktop : el.orderLinkMobile}
                     />
                 ))}
                 <img

@@ -25,7 +25,7 @@ const Transition = React.forwardRef((props, ref) => {
 });
 
 const Day5 = observer(({ setOpenedDay }) => {
-    const isDesktop = useMediaQuery(Adaptive.isDesktop);
+    const isMobile = useMediaQuery(Adaptive.isMobile);
     const { open, result, resultVisible, setScore, setResult, handleClose } = useDay({
         setOpenedDay
     });
@@ -87,10 +87,10 @@ const Day5 = observer(({ setOpenedDay }) => {
                         )}
                     </DialogContent>
                     <DialogActions>
-                        {isDesktop && (recievedPromocode || result.promoCode) && (
+                        {!isMobile && (recievedPromocode || result.promoCode) && (
                             <a
                                 href={
-                                    isDesktop
+                                    !isMobile
                                         ? config.references.orderLinks[5].orderLinkDesktop
                                         : config.references.orderLinks[5].orderLinkMobile
                                 }

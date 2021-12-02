@@ -23,7 +23,7 @@ const Transition = React.forwardRef((props, ref) => {
 });
 
 const Day8 = ({ setOpenedDay }) => {
-    const isDesktop = useMediaQuery(Adaptive.isDesktop);
+    const isMobile = useMediaQuery(Adaptive.isMobile);
     const { open, result, resultVisible, setResult, handleClose } = useDay({
         setOpenedDay
     });
@@ -118,10 +118,10 @@ const Day8 = ({ setOpenedDay }) => {
                         />
                     </DialogContent>
                     <DialogActions>
-                        {isDesktop && (
+                        {!isMobile && (
                             <a
                                 href={
-                                    isDesktop
+                                    !isMobile
                                         ? config.references.orderLinks[8].orderLinkDesktop
                                         : config.references.orderLinks[8].orderLinkMobile
                                 }

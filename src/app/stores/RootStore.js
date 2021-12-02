@@ -58,11 +58,6 @@ class RootStoreClass {
             () => {
                 this.updatePromocodes();
                 this.updateComplitedGames();
-                // const promocodes = await RootStoreApi.api.promocodes();
-                // this.setMyPromocodes(promocodes);
-
-                // const { completed } = await RootStoreApi.api.completed();
-                // this.setMyGamesCompleted(completed);
             }
         );
     }
@@ -86,12 +81,17 @@ class RootStoreClass {
             this.getUserData();
         }
 
-        const response = await fetch('http://worldtimeapi.org/api/timezone/Europe/Moscow');
+        const response = await fetch('https://world-clock.p.rapidapi.com/json/utc/now', {
+            headers: {
+                'x-rapidapi-host': 'world-clock.p.rapidapi.com',
+                'x-rapidapi-key': '4448b2214fmsh71926ea0ccd6790p1fb7f4jsnf43f826de7ec'
+            }
+        });
 
         if (response.ok) {
             const data = await response.json();
 
-            this.date = data.utc_datetime;
+            this.date = data.currentDateTime;
         }
     }
 

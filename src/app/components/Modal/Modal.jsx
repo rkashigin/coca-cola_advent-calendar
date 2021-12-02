@@ -22,7 +22,8 @@ const Transition = React.forwardRef((props, ref) => {
 });
 
 const Modal = ({ open, handleClose, title, children, hasDialogActions, className }) => {
-    const isDesktop = useMediaQuery(Adaptive.isDesktop);
+    const isMobile = useMediaQuery(Adaptive.isMobile);
+
     return (
         <Dialog
             open={open}
@@ -48,11 +49,11 @@ const Modal = ({ open, handleClose, title, children, hasDialogActions, className
                 <DialogContent className={styles.modal__contentWrap}>
                     <div>{children}</div>
                 </DialogContent>
-                {isDesktop && hasDialogActions && (
+                {!isMobile && hasDialogActions && (
                     <DialogActions>
                         <a
                             href={
-                                isDesktop
+                                !isMobile
                                     ? config.references.defaultOrderLinkDesktop
                                     : config.references.defaultOrderLinkMobile
                             }
