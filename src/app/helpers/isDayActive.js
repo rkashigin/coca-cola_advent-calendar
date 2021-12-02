@@ -5,7 +5,7 @@ export default function isDayActive(date) {
     const dateToCheck = new Date(RootStore.date);
     dateToCheck.setDate(date);
 
-    if (dateToCheck > currentDate) return false;
+    if (process.env.PUBLIC_URL === '' && dateToCheck > currentDate) return false;
 
     return date <= RootStore.myGamesCompleted;
 }

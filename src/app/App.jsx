@@ -8,6 +8,7 @@ import OtpAuth from './components/OtpAuth/OtpAuth';
 import sendEvent, { GA_MAP } from './helpers/analytics';
 
 const App = () => {
+    console.log(process.env);
     useEffect(() => {
         setTimeout(() => {
             sendEvent(GA_MAP.time('calendar page', 15));
