@@ -1,8 +1,6 @@
 /* eslint-disable max-len */
 import config from '../../config';
 
-const API_PATH = process.env.PUBLIC_URL === '/xQGwrf6YFk826mLS/' ? '/devapi' : '/api';
-
 export const RootStoreApi = {
     // Авторизация через X-API-KEY
     // Для получения token и secret нужно дернуть ручку
@@ -131,9 +129,12 @@ export const RootStoreApi = {
             }
         },
         async complete({ game, sign }) {
-            const response = await fetch(`${API_PATH}/complete?game=${game}&sign=${sign}`, {
-                method: 'POST'
-            });
+            const response = await fetch(
+                `${process.env.PUBLIC_URL}api/complete?game=${game}&sign=${sign}`,
+                {
+                    method: 'POST'
+                }
+            );
             if (response.ok) {
                 return response.json();
             }
@@ -141,7 +142,7 @@ export const RootStoreApi = {
             throw response.status;
         },
         async promocodes() {
-            const response = await fetch(`${API_PATH}/promocodes`);
+            const response = await fetch(`${process.env.PUBLIC_URL}api/promocodes`);
             if (response.ok) {
                 return response.json();
             }
@@ -149,7 +150,7 @@ export const RootStoreApi = {
             throw response.status;
         },
         async completed() {
-            const response = await fetch(`${API_PATH}/completed`);
+            const response = await fetch(`${process.env.PUBLIC_URL}api/completed`);
             if (response.ok) {
                 return response.json();
             }
