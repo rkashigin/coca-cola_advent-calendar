@@ -27,17 +27,23 @@ export const RootStoreApi = {
 
             throw response.status;
         },
-        // Получение анонимного токена
-        async userLogin({ apiKey = null, token = null }) {
+        // Получение анонимного токена || логин
+        async userLogin({ apiKey = null, token = null, refresh_token = null }) {
             const headers = {};
             if (apiKey) {
                 headers['X-Api-Key'] = apiKey;
             } else if (token) {
                 headers['X-User-Authorization'] = token;
             }
+
+            const body = new FormData();
+            if (refresh_token) {
+                body.append('refresh_token', refresh_token);
+            }
             const response = await fetch(`${config.server.apiHost}/api1.2/user/login`, {
                 method: 'post',
-                headers
+                headers,
+                body
             });
             if (response.ok) {
                 return response.json();

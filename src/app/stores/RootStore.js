@@ -203,7 +203,8 @@ class RootStoreClass {
 
                     const data = await RootStoreApi.dcApi.userLogin({
                         xApiKey: this.xApiKey,
-                        token: error === 401 ? this.refreshToken : this.token
+                        token: this.token,
+                        refresh_token: this.refreshToken
                     });
                     if (data.secret) {
                         this.setSecret(data.secret);
