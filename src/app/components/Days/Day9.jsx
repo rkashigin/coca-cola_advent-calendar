@@ -106,20 +106,20 @@ const Day9 = ({ setOpenedDay }) => {
                             <>
                                 {result.promoCode ? (
                                     <>
-                                        {!isMobile && (
-                                            <a
-                                                href={
-                                                    !isMobile
-                                                        ? config.references.defaultOrderLinkDesktop
-                                                        : config.references.defaultOrderLinkMobile
-                                                }
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className={styles.calendarModal__button}
-                                            >
-                                                Заказать сейчас
-                                            </a>
-                                        )}
+                                        {/* {!isMobile && ( */}
+                                        <a
+                                            href={
+                                                !isMobile
+                                                    ? config.references.defaultOrderLinkDesktop
+                                                    : config.references.defaultOrderLinkMobile
+                                            }
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className={styles.calendarModal__button}
+                                        >
+                                            Заказать сейчас
+                                        </a>
+                                        // )}
                                         <Button
                                             className={styles.calendarDay__button}
                                             onClick={handleClose}

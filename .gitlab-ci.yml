@@ -31,6 +31,29 @@ build:
   only:
     - main
 
+build_dev:
+  stage: build
+  script:
+    - npm i
+    - unset CI
+    - npm run buildDev
+  artifacts:
+    paths:
+      - build
+  only:
+    - development
+
+deploy_dev:
+  stage: deploy
+  environment: development
+  script:
+    - scp -i $PRIVATE_KEY_PATH -o StrictHostKeyChecking=no -r build/* root@$HOST:$DEV_TARGET_DIR_ON_HOST
+    - sh tg_notify.sh ✅
+  only:
+    - development
+  dependencies:
+    - build
+
 deploy_prod:
   stage: deploy
   environment: production

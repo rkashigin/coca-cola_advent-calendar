@@ -49,7 +49,8 @@ const Modal = ({ open, handleClose, title, children, hasDialogActions, className
                 <DialogContent className={styles.modal__contentWrap}>
                     <div>{children}</div>
                 </DialogContent>
-                {!isMobile && hasDialogActions && (
+                {/* {!isMobile && hasDialogActions && ( */}
+                {hasDialogActions && (
                     <DialogActions>
                         <a
                             href={

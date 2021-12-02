@@ -87,7 +87,8 @@ const Day5 = observer(({ setOpenedDay }) => {
                         )}
                     </DialogContent>
                     <DialogActions>
-                        {!isMobile && (recievedPromocode || result.promoCode) && (
+                        {/* {!isMobile && (recievedPromocode || result.promoCode) && ( */}
+                        {(recievedPromocode || result.promoCode) && (
                             <a
                                 href={
                                     !isMobile

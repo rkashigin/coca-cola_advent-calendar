@@ -114,7 +114,8 @@ const Day10 = ({ setOpenedDay }) => {
                     <DialogActions>
                         {result.status ? (
                             <>
-                                {!isMobile && result.promoCode && (
+                                {/* {!isMobile && result.promoCode && ( */}
+                                {!!result.promoCode && (
                                     <a
                                         href={
                                             !isMobile

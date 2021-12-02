@@ -35,7 +35,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "startDev": "PUBLIC_URL=/xQGwrf6YFk826mLS/ react-scripts start",
     "build": "react-scripts build",
+    "buildDev": "PUBLIC_URL=/xQGwrf6YFk826mLS/ react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "clean": "rm -rf ./node_modules package-lock.json && npm install",

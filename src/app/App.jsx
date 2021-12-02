@@ -17,7 +17,7 @@ const App = () => {
         <div className="App">
             <OtpAuth />
             <Routes>
-                <Route exact path="/" element={<MainPage />} />
+                <Route exact path={process.env.PUBLIC_URL} element={<MainPage />} />
             </Routes>
         </div>
     );

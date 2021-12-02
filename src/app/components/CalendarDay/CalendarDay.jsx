@@ -212,16 +212,16 @@ const CalendarDay = observer(
                         {type === 'promoCode' &&
                             !((date === 1 || date === 12) && !loadedPromocode[date]) && (
                                 <DialogActions>
-                                    {!isMobile && (
-                                        <a
-                                            href={orderLink}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className={styles.calendarModal__button}
-                                        >
-                                            Заказать сейчас
-                                        </a>
-                                    )}
+                                    {/* {!isMobile && ( */}
+                                    <a
+                                        href={orderLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={styles.calendarModal__button}
+                                    >
+                                        Заказать сейчас
+                                    </a>
+                                    {/* )} */}
                                     <Button
                                         className={styles.calendarDay__button}
                                         onClick={handleClose}

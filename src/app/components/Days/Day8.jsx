@@ -118,20 +118,20 @@ const Day8 = ({ setOpenedDay }) => {
                         />
                     </DialogContent>
                     <DialogActions>
-                        {!isMobile && (
-                            <a
-                                href={
-                                    !isMobile
-                                        ? config.references.orderLinks[8].orderLinkDesktop
-                                        : config.references.orderLinks[8].orderLinkMobile
-                                }
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={styles.calendarModal__button}
-                            >
-                                Заказать сейчас
-                            </a>
-                        )}
+                        {/* {!isMobile && ( */}
+                        <a
+                            href={
+                                !isMobile
+                                    ? config.references.orderLinks[8].orderLinkDesktop
+                                    : config.references.orderLinks[8].orderLinkMobile
+                            }
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.calendarModal__button}
+                        >
+                            Заказать сейчас
+                        </a>
+                        {/* )} */}
                         <Button className={styles.calendarDay__button} onClick={handleClose}>
                             В календарь
                         </Button>

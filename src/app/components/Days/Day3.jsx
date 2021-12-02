@@ -121,7 +121,8 @@ const Day3 = ({ setOpenedDay }) => {
                     <DialogActions>
                         {result.status ? (
                             <>
-                                {!isMobile && result.promoCode && (
+                                {/* {!isMobile && result.promoCode && ( */}
+                                {!!result.promoCode && (
                                     <a
                                         href={
                                             !isMobile
@@ -146,20 +147,20 @@ const Day3 = ({ setOpenedDay }) => {
                             <>
                                 {result.promoCode ? (
                                     <>
-                                        {!isMobile && (
-                                            <a
-                                                href={
-                                                    !isMobile
-                                                        ? config.references.defaultOrderLinkDesktop
-                                                        : config.references.defaultOrderLinkMobile
-                                                }
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className={styles.calendarModal__button}
-                                            >
-                                                Заказать сейчас
-                                            </a>
-                                        )}
+                                        {/* {!isMobile && ( */}
+                                        <a
+                                            href={
+                                                !isMobile
+                                                    ? config.references.defaultOrderLinkDesktop
+                                                    : config.references.defaultOrderLinkMobile
+                                            }
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className={styles.calendarModal__button}
+                                        >
+                                            Заказать сейчас
+                                        </a>
+                                        {/* )} */}
                                     </>
                                 ) : (
                                     <Button
