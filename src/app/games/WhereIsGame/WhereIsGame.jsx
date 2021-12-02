@@ -34,7 +34,7 @@ const WhereIsGame = ({ gameVariant, setResult, day }) => {
         <div className={styles.game}>
             <Timer
                 className={styles.game__timer}
-                givenTime={120_000}
+                givenTime={300_000}
                 onComplete={handleTimerComplete}
             />
             <img

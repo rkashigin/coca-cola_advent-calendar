@@ -10,7 +10,7 @@ const InfoPromoCode = () => {
             отношении подписки в предыдущие 180 дней. Необходимо указать данные банковской карты
             Пользователя. Услуги предоставляются в соответствии с{' '}
             <a
-                href="/"
+                href="https://www.ivi.ru/info/agreement"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.infoPromoCode__link}
@@ -19,7 +19,7 @@ const InfoPromoCode = () => {
             </a>{' '}
             IVI и{' '}
             <a
-                href="/"
+                href="https://www.ivi.ru/info/certificate"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.infoPromoCode__link}
