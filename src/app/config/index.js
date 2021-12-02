@@ -92,7 +92,7 @@ export default {
                             },
                             {
                                 text: 'Леденец',
-                                isCorrect: false
+                                isCorrect: true
                             },
                             {
                                 text: 'Трескунец',
@@ -100,10 +100,10 @@ export default {
                             },
                             {
                                 text: 'Морозко',
-                                isCorrect: true
+                                isCorrect: false
                             }
                         ],
-                        correctExplanation: 'У Деда Мороза прозвище - Морозко'
+                        correctExplanation: 'У Деда Мороза не бывает прозвища Леденец'
                     },
                     {
                         question: 'Где в России находится зимняя родина Деда Мороза?',
@@ -218,7 +218,7 @@ export default {
                                 isCorrect: true
                             }
                         ],
-                        correctExplanation: 'Правильный ответ'
+                        correctExplanation: 'Дед Мороз предпочитает появляться в конце праздника'
                     },
                     {
                         question: 'Какой из этих фактов про Деда Мороза — вымысел?',
@@ -264,7 +264,7 @@ export default {
                                 isCorrect: true
                             }
                         ],
-                        correctExplanation: 'Правильный ответ'
+                        correctExplanation: 'Помощников Деда Мороза зовут трескунами'
                     }
                 ]
             }

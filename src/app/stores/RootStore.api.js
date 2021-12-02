@@ -27,18 +27,27 @@ export const RootStoreApi = {
 
             throw response.status;
         },
-        // Получение анонимного токена
-        async userLogin({ apiKey = null, token = null }) {
+        // Получение анонимного токена || логин
+        async userLogin({ apiKey = null, token = null, refresh_token = null }) {
             const headers = {};
             if (apiKey) {
                 headers['X-Api-Key'] = apiKey;
             } else if (token) {
                 headers['X-User-Authorization'] = token;
             }
-            const response = await fetch(`${config.server.apiHost}/api1.2/user/login`, {
+
+            const options = {
                 method: 'post',
                 headers
-            });
+            };
+
+            if (refresh_token) {
+                const body = new FormData();
+                body.append('refresh_token', refresh_token);
+
+                options.body = body;
+            }
+            const response = await fetch(`${config.server.apiHost}/api1.2/user/login`, options);
             if (response.ok) {
                 return response.json();
             }
@@ -122,16 +131,19 @@ export const RootStoreApi = {
     api: {
         async auth() {
             try {
-                const response = await fetch('/api/auth');
+                const response = await fetch(`${process.env.PUBLIC_URL}/api/auth`);
                 return response;
             } catch (error) {
                 throw new Error('api auth error');
             }
         },
         async complete({ game, sign }) {
-            const response = await fetch(`/api/complete?game=${game}&sign=${sign}`, {
-                method: 'POST'
-            });
+            const response = await fetch(
+                `${process.env.PUBLIC_URL}/api/complete?game=${game}&sign=${sign}`,
+                {
+                    method: 'POST'
+                }
+            );
             if (response.ok) {
                 return response.json();
             }
@@ -139,7 +151,7 @@ export const RootStoreApi = {
             throw response.status;
         },
         async promocodes() {
-            const response = await fetch('/api/promocodes');
+            const response = await fetch(`${process.env.PUBLIC_URL}/api/promocodes`);
             if (response.ok) {
                 return response.json();
             }
@@ -147,7 +159,7 @@ export const RootStoreApi = {
             throw response.status;
         },
         async completed() {
-            const response = await fetch('/api/completed');
+            const response = await fetch(`${process.env.PUBLIC_URL}/api/completed`);
             if (response.ok) {
                 return response.json();
             }
