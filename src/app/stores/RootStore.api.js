@@ -36,15 +36,18 @@ export const RootStoreApi = {
                 headers['X-User-Authorization'] = token;
             }
 
-            const body = new FormData();
-            if (refresh_token) {
-                body.append('refresh_token', refresh_token);
-            }
-            const response = await fetch(`${config.server.apiHost}/api1.2/user/login`, {
+            const options = {
                 method: 'post',
-                headers,
-                body
-            });
+                headers
+            };
+
+            if (refresh_token) {
+                const body = new FormData();
+                body.append('refresh_token', refresh_token);
+
+                options.body = body;
+            }
+            const response = await fetch(`${config.server.apiHost}/api1.2/user/login`, options);
             if (response.ok) {
                 return response.json();
             }

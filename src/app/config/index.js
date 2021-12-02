@@ -103,7 +103,7 @@ export default {
                                 isCorrect: false
                             }
                         ],
-                        correctExplanation: 'У Деда Мороза прозвище - Морозко'
+                        correctExplanation: 'У Деда Мороза не бывает прозвища Леденец'
                     },
                     {
                         question: 'Где в России находится зимняя родина Деда Мороза?',
