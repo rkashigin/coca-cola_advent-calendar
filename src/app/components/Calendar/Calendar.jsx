@@ -41,7 +41,7 @@ const Calendar = observer(() => {
                         img={el.img}
                         className={classNames(styles[`calendarDay_${el.day}`], {
                             [styles.calendarDay_current]: isDayCurrent(idx),
-                            [styles.calendarDay_pastDay]: isDayPast(idx + 1)
+                            [styles.calendarDay_pastDay]: RootStore.colaAuth && isDayPast(idx + 1)
                         })}
                         modalImg={el.modalImg}
                         classNameImg={classNames(styles[`calendarDay_modalImg_${el.day}`])}

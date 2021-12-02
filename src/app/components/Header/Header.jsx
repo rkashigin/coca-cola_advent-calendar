@@ -65,7 +65,7 @@ const Header = observer(() => {
                 </p>
                 <div className={styles.header__buttonsWrap}>
                     {/* <Button content="Победители" className={styles.header__button_winners} /> */}
-                    {!!RootStore.myPromocodes.length && (
+                    {RootStore.colaAuth && !!RootStore.myPromocodes.length && (
                         <Button
                             content="Мои промокоды"
                             onClick={handleClickOpen}
