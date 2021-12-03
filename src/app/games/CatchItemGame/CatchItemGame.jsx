@@ -58,7 +58,7 @@ const CatchItemGame = ({ setResult, day }) => {
         <div className={styles.game}>
             <Timer
                 className={styles.game__timer}
-                givenTime={120_000}
+                givenTime={60_000}
                 onComplete={handleTimerComplete}
             />
             <div className={styles.game__score}>{scores}</div>
