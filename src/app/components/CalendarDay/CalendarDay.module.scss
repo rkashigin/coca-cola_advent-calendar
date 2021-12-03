@@ -141,7 +141,7 @@
 	transform: translateX(50%);
 
 	z-index: 50;
-	@media screen and (max-width: $width-mobile) {
+	@media screen and (max-height: 464px) {
 		position: static;
 		transform: unset;
 	}
