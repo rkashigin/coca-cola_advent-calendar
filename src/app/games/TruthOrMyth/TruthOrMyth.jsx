@@ -99,7 +99,8 @@ const TruthOrMyth = ({ setResult, setScore, quiz, day }) => {
                 {Number.isInteger(selectedAnswer) && (
                     <>
                         <h2 className={styles.quiz__questionText}>
-                            {!!quiz[questionNumber].pre && quiz[questionNumber].pre[selectedAnswer]}
+                            {!!quiz[questionNumber].pre &&
+                                `${quiz[questionNumber].pre[selectedAnswer]} `}
                             {quiz[questionNumber].explanation}
                         </h2>
                     </>
