@@ -143,7 +143,7 @@ const DATES = [
         img: require('../../assets/images/Calendar/6day.svg').default,
         modalImg: require('../../assets/images/Calendar/6day.svg').default,
         title: 'В предновогодней суете сложно все успеть, но можно потренироваться у нас в мини-игре',
-        intro: 'Поймайте тележкой как можно больше подарков за одну минуту',
+        intro: 'Поймайте как можно больше подарков за одну минуту',
         type: 'game',
         orderLinkDesktop: config.references.defaultOrderLinkDesktop,
         orderLinkMobile: config.references.defaultOrderLinkMobile

@@ -62,7 +62,7 @@ const TruthOrMyth = ({ setResult, setScore, quiz, day }) => {
 
                     setScore(rightAnswers.current);
                 }
-            }, 2500);
+            }, 4_500);
         }
 
         return timer;
