@@ -83,7 +83,7 @@ const MemoryGame = ({ setResult, setScore, day }) => {
             </div>
             <Timer
                 className={styles.game__timer}
-                givenTime={120_000}
+                givenTime={90_000}
                 onComplete={handleTimerComplete}
             />
             <div className={styles.game__board}>
