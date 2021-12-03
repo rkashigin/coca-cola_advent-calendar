@@ -141,11 +141,15 @@
 	transform: translateX(50%);
 
 	z-index: 50;
+
+	@media screen and (max-width: $width-mobile) {
+		width: 25rem;
+		top: -13rem;
+	}
 	@media screen and (max-height: 464px) {
 		position: static;
 		transform: unset;
 	}
-
 
 }
 
