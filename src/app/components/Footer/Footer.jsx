@@ -41,13 +41,13 @@ const Footer = () => {
                     Пройдите календарь и участвуйте в розыгрыше главного приза!
                 </h3>
                 <span className={styles.footer__cardSubTitle}>
-                    Уникальный холодильник с запасом Coca-Cola и промокод 3 500 ₽ на заказы в
+                    4 уникальных холодильника с запасом Coca-Cola и промокоды 3 500 ₽ на заказы в
                     ресторанах!
                 </span>
                 <picture>
                     <source
                         srcSet={
-                            require('../../assets/images/Footer_prize_cards_mobile.svg').default
+                            require('../../assets/images/Footer_prize_cards_mobile.png').default
                         }
                         media="(max-width: 725px)"
                     />

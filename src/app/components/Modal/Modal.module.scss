@@ -127,6 +127,9 @@
 	@media screen and (max-width: $width-mobile) {
 		max-height: calc(100vh - 70vw) !important;
 	}
+	@media screen and (max-height: 464px) {
+		max-height: 100% !important;
+	}
 }
 
 .modal__buttonIcon_close{
