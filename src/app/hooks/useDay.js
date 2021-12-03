@@ -10,7 +10,7 @@ export default function useDay({ setOpenedDay }) {
         setOpen(false);
         setResultVisible(false);
 
-        setTimeout(() => setOpenedDay(0), 1000);
+        setTimeout(() => setOpenedDay(0), 500);
     };
 
     const handleRestart = () => {
@@ -26,7 +26,7 @@ export default function useDay({ setOpenedDay }) {
         app.style.filter = open ? 'blur(10px)' : '';
 
         if (!open && !resultVisible) {
-            timer = setTimeout(() => setOpenedDay(0), 1000);
+            timer = setTimeout(() => setOpenedDay(0), 500);
         }
 
         return () => {

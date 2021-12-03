@@ -7,6 +7,15 @@ import { ReactComponent as CloseIcon } from '../../assets/icons/icon__close.svg'
 import styles from './Game.module.scss';
 
 const Game = ({ game, fullScreen, test, handleClose, disableStyles }) => {
+    React.useEffect(() => {
+        const app = document.querySelector('.App');
+        app.style.filter = 'blur(10px)';
+
+        return () => {
+            app.style.filter = '';
+        };
+    }, []);
+
     return disableStyles ? (
         <>
             <button
