@@ -90,14 +90,14 @@ const Footer = () => {
             <SnowDecorationMobile className={styles.footer__decoration_mobile} />
             <div className={styles.footerInfo}>
                 <a
-                    href="https://www.delivery-club.ru/promo_rules/NY%20with%20Coca-Cola.pdf?1638296035"
+                    href="https://www.delivery-club.ru/promo_rules/NY%20witth%20Coca-Cola.pdf?1638543011"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={styles.footerInfo__rules}
                     onClick={() =>
                         sendEvent(
                             GA_MAP.externalLink(
-                                'https://www.delivery-club.ru/promo_rules/NY%20with%20Coca-Cola.pdf?1638296035'
+                                'https://www.delivery-club.ru/promo_rules/NY%20witth%20Coca-Cola.pdf?1638543011'
                             )
                         )
                     }
