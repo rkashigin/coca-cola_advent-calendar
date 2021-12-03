@@ -12,25 +12,21 @@ import { RootStore } from '../../stores/RootStore';
 export default function useLogic({ canvasRef, cart, setScores, animationRef, setResult, day }) {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
-    const checkScores = async (scores) => {
-        if (scores === 300) {
-            try {
-                const data = await RootStore.dayComplete(day);
+    const handleTimerComplete = React.useCallback(async () => {
+        try {
+            const data = await RootStore.dayComplete(day);
 
-                setResult({
-                    status: true,
-                    promoCode: data.promocode || false
-                });
-            } catch {
-                setResult({
-                    status: true,
-                    promoCode: false
-                });
-            }
+            setResult({
+                status: true,
+                promoCode: data.promocode || false
+            });
+        } catch {
+            setResult({
+                status: true,
+                promoCode: false
+            });
         }
-    };
-
-    const handleTimerComplete = React.useCallback(() => setResult({ status: false }), []);
+    }, []);
 
     const mouse = React.useMemo(
         () => ({
@@ -93,7 +89,7 @@ export default function useLogic({ canvasRef, cart, setScores, animationRef, set
         const update = () => {
             gameTimer += 1;
 
-            if (gameTimer % 30 === 0) {
+            if (gameTimer % 38 === 0) {
                 const randomProduct = Math.floor(Math.random() * 4);
 
                 products.push({
@@ -227,10 +223,9 @@ export default function useLogic({ canvasRef, cart, setScores, animationRef, set
             handleMouseMove,
             handleTouch,
             game,
-            checkScores,
             handleTimerComplete
         };
     }
 
-    return { checkScores, handleTimerComplete };
+    return { handleTimerComplete };
 }
