@@ -329,14 +329,15 @@ export default {
                         answers: [
                             {
                                 text: 'Правда',
-                                isCorrect: true
+                                isCorrect: false
                             },
                             {
                                 text: 'Миф',
-                                isCorrect: false
+                                isCorrect: true
                             }
                         ],
-                        explanation: 'Но было бы здорово иметь такую возможность, правда?'
+                        pre: ['Увы, это миф', 'Вы правы, это миф'],
+                        explanation: 'о было бы здорово иметь такую возможность, правда?'
                     },
                     {
                         question: 'Coca-Cola выпускала бутылки для слабовидящих со шрифтом Брайля',

@@ -132,10 +132,10 @@ const Day6 = ({ setOpenedDay }) => {
                                     </>
                                 ) : (
                                     <Button
-                                        className={styles.calendarDay__button}
+                                        className={styles.calendarDay__button_green}
                                         onClick={handleClose}
                                     >
-                                        В календарь
+                                        Увидимся завтра!
                                     </Button>
                                 )}
                             </>

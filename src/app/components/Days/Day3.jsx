@@ -121,27 +121,37 @@ const Day3 = ({ setOpenedDay }) => {
                     <DialogActions>
                         {result.status ? (
                             <>
-                                {/* {!isMobile && result.promoCode && ( */}
-                                {!!result.promoCode && (
-                                    <a
-                                        href={
-                                            !isMobile
-                                                ? config.references.defaultOrderLinkDesktop
-                                                : config.references.defaultOrderLinkMobile
-                                        }
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className={styles.calendarModal__button}
+                                {result.promoCode ? (
+                                    <>
+                                        {!isMobile && (
+                                            <a
+                                                href={
+                                                    !isMobile
+                                                        ? config.references.defaultOrderLinkDesktop
+                                                        : config.references.defaultOrderLinkMobile
+                                                }
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className={styles.calendarModal__button}
+                                            >
+                                                Заказать сейчас
+                                            </a>
+                                        )}
+                                        <Button
+                                            className={styles.calendarDay__button}
+                                            onClick={handleClose}
+                                        >
+                                            В календарь
+                                        </Button>
+                                    </>
+                                ) : (
+                                    <Button
+                                        className={styles.calendarDay__button_green}
+                                        onClick={handleClose}
                                     >
-                                        Заказать сейчас
-                                    </a>
+                                        Увидимся завтра!
+                                    </Button>
                                 )}
-                                <Button
-                                    className={styles.calendarDay__button}
-                                    onClick={handleClose}
-                                >
-                                    В календарь
-                                </Button>
                             </>
                         ) : (
                             <>
