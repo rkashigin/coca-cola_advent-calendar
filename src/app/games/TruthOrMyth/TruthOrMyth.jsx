@@ -99,6 +99,8 @@ const TruthOrMyth = ({ setResult, setScore, quiz, day }) => {
                 {Number.isInteger(selectedAnswer) && (
                     <>
                         <h2 className={styles.quiz__questionText}>
+                            {!!quiz[questionNumber].pre &&
+                                `${quiz[questionNumber].pre[selectedAnswer]} `}
                             {quiz[questionNumber].explanation}
                         </h2>
                     </>
@@ -133,7 +135,8 @@ TruthOrMyth.propTypes = {
                     isCorrect: PropTypes.bool
                 })
             ),
-            explanation: PropTypes.string
+            explanation: PropTypes.string,
+            pre: PropTypes.arrayOf(PropTypes.string)
         })
     ).isRequired,
     setResult: PropTypes.func.isRequired,

@@ -75,8 +75,8 @@ const Day5 = observer(({ setOpenedDay }) => {
                     )}
                     <DialogContent>
                         <DialogContentText id="alert-dialog-slide-description">
-                            Чтобы продвинуться дальше по календарю, закажите Coca-Cola в ресторанах
-                            Delivery Club за 1 ₽ по нашему специальному промокоду
+                            Чтобы продвинуться дальше по календарю, сделайте заказ в ресторанах
+                            Delivery Club с Coca-Cola в чеке по нашему специальному промокоду.
                         </DialogContentText>
                         {(recievedPromocode || result.promoCode) && (
                             <PromoCode

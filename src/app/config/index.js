@@ -329,13 +329,14 @@ export default {
                         answers: [
                             {
                                 text: 'Правда',
-                                isCorrect: true
+                                isCorrect: false
                             },
                             {
                                 text: 'Миф',
-                                isCorrect: false
+                                isCorrect: true
                             }
                         ],
+                        pre: ['Увы, это миф.', 'Вы правы, это миф.'],
                         explanation: 'Но было бы здорово иметь такую возможность, правда?'
                     },
                     {
