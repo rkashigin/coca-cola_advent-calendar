@@ -19,7 +19,7 @@ const CatchItemGame = ({ setResult, day }) => {
         [canvasRef.current]
     );
     const animationRef = React.useRef(0);
-    const { game, handleMouseMove, handleTouch, checkScores, handleTimerComplete } = useLogic({
+    const { game, handleMouseMove, handleTouch, handleTimerComplete } = useLogic({
         canvasRef: isCanvasReady,
         animationRef: animationRef.current,
         cart,
@@ -41,8 +41,6 @@ const CatchItemGame = ({ setResult, day }) => {
 
         return () => cancelAnimationFrame(animationRef.current);
     }, [isCanvasReady]);
-
-    React.useEffect(() => checkScores(scores), [scores]);
 
     React.useEffect(() => {
         sendEvent(GA_MAP.time(`game ${day}`, 0));
