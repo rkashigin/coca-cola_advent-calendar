@@ -42,7 +42,7 @@ const CalendarDay = observer(
         handleOpenDay,
         orderLink
     }) => {
-        // const isMobile = useMediaQuery(Adaptive.isMobile);
+        const isMobile = useMediaQuery(Adaptive.isMobile);
         const isHorizontal = useMediaQuery(Adaptive.isHorizontal);
         const [open, setOpen] = React.useState(false);
         const [loadedPromocode, setLoadedPromocode] = React.useState({ 1: '', 12: '' });

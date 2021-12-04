@@ -18,16 +18,16 @@ const Transition = React.forwardRef((props, ref) => {
 
 const Day11 = () => {
     const [open, setOpen] = React.useState(true);
-    const [result, setResult] = React.useState(true);
+    // const [result, setResult] = React.useState(true);
 
     useEffect(() => {
         const app = document.querySelector('.App');
         app.style.filter = open ? 'blur(10px)' : '';
     }, [open]);
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+    // const handleClickOpen = () => {
+    //     setOpen(true);
+    // };
 
     const handleClose = () => {
         setOpen(false);

@@ -16,6 +16,7 @@ const CatchItemGame = ({ setResult, day }) => {
             x: 0,
             y: 0
         }),
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         [canvasRef.current]
     );
     const animationRef = React.useRef(0);

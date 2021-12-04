@@ -19,7 +19,8 @@ const PromoCode = ({ promoCode, promoCodeText, type, promoCodeName }) => {
             setCopied(true);
             setTimeout(() => setCopied(false), 1500);
         } catch (e) {
-            console.log(e);
+            // eslint-disable-next-line no-console
+            console.warn(e);
         }
     };
 

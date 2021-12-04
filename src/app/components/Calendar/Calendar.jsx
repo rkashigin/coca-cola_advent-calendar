@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { isFuture, isPast, isToday } from 'date-fns';
+// import { isFuture, isPast, isToday } from 'date-fns';
 import { useMediaQuery } from 'react-responsive';
 import CalendarDay from '../CalendarDay/CalendarDay';
 import { Day2, Day3, Day4, Day5, Day6, Day7, Day8, Day9, Day10, Day11 } from '../Days';

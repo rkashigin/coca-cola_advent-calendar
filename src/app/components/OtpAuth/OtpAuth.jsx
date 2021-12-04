@@ -16,6 +16,7 @@ const OtpAuth = observer(() => {
     useEffect(() => {
         const app = document.querySelector('.App');
         app.style.filter = RootStore.oauthOpen ? 'blur(10px)' : '';
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [RootStore.oauthOpen]);
 
     useEffect(() => {
