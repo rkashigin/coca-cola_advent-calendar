@@ -252,8 +252,6 @@ class RootStoreClass {
             if (game && this.user.id?.primary) {
                 const sign = sha256(`${this.user.id.primary}/${game}`);
                 const data = await RootStoreApi.api.complete({ sign, game });
-                this.updatePromocodes();
-                this.updateComplitedGames();
                 console.log(data);
                 return data;
             }
@@ -261,6 +259,9 @@ class RootStoreClass {
         } catch (error) {
             console.log(error);
             return null;
+        } finally {
+            this.updatePromocodes();
+            this.updateComplitedGames();
         }
     }
 

@@ -40,6 +40,7 @@ const Survey = ({ setResult, survey, day }) => {
 
     React.useEffect(() => {
         game();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedAnswer]);
 
     React.useEffect(() => {

@@ -9,7 +9,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
-import { CircularProgress, Link } from '@mui/material';
+import { CircularProgress } from '@mui/material';
 
 import { observer } from 'mobx-react-lite';
 import Button from '../Button/Button';
@@ -42,7 +42,7 @@ const CalendarDay = observer(
         handleOpenDay,
         orderLink
     }) => {
-        const isMobile = useMediaQuery(Adaptive.isMobile);
+        // const isMobile = useMediaQuery(Adaptive.isMobile);
         const isHorizontal = useMediaQuery(Adaptive.isHorizontal);
         const [open, setOpen] = React.useState(false);
         const [loadedPromocode, setLoadedPromocode] = React.useState({ 1: '', 12: '' });
@@ -89,6 +89,7 @@ const CalendarDay = observer(
             if (RootStore.myPromocodes.length) {
                 findPromocodes();
             }
+            // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [RootStore.myPromocodes]);
 
         useEffect(() => {
@@ -103,6 +104,7 @@ const CalendarDay = observer(
             ) {
                 handleRequestPromoCode();
             }
+            // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [date, open, RootStore.user.id, RootStore.myGamesCompleted]);
 
         useEffect(() => {

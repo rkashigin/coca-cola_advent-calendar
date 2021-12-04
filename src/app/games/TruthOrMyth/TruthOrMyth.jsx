@@ -72,6 +72,7 @@ const TruthOrMyth = ({ setResult, setScore, quiz, day }) => {
         const timer = game();
 
         return () => clearTimeout(timer);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedAnswer]);
 
     return (

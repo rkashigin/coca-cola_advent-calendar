@@ -40,9 +40,7 @@
     "buildDev": "PUBLIC_URL=/xQGwrf6YFk826mLS/ react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "clean": "rm -rf ./node_modules package-lock.json && npm install",
-    "deployDev": "npm run build && scp -o StrictHostKeyChecking=no -i ~/.ssh/pavlikov -r build/* root@94.228.126.19:/var/www/html",
-    "deployDevRmn": "npm run build && scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -r build/* root@94.228.126.19:/var/www/html"
+    "clean": "rm -rf ./node_modules package-lock.json && npm install"
   },
   "eslintConfig": {
     "extends": [
